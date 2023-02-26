@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         categoryId: {
             type: DataTypes.INTEGER,
+        },
+        bidId:{
+            type: DataTypes.INTEGER,
         }
     },{timestamps:true});
     
