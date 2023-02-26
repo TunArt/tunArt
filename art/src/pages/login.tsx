@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Alert } from 'antd';
-
+import {signInWithEmailAndPassword} from 'firebase/auth'
+import { auth } from "../../server/firebase/config"
 interface FormValues {
   email: string;
   password: string;
@@ -31,6 +32,20 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (values: FormValues) => {
     console.log('Success:', values);
+    if(values){
+      try {
+        const{email,password}=values
+        const result=await signInWithEmailAndPassword(auth ,email,
+          password).then((res)=>{
+            console.log(res)
+          })
+      } catch (error) {
+        
+        setInvalidCredentials(true)
+        return false
+      }
+      
+    }
   };
 
   const handleFinishFailed = (error: any) => {

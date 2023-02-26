@@ -6,7 +6,8 @@ import {
   PhoneOutlined,
   LockOutlined,
 } from "@ant-design/icons";
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../server/firebase/config"
 interface SignUpState {
     username: string;
     email: string;
@@ -16,6 +17,9 @@ interface SignUpState {
     errors: {
       [key: string]: string;
     };
+    event: {
+      [key: string]: string;
+    }
   }
   
 const SignUp: React.FC = () => {
@@ -72,12 +76,23 @@ const SignUp: React.FC = () => {
     return isValid;
   };
 
-  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const isValid = validateForm();
 
     if (isValid) {
-      console.log("Valid form submitted");
+      try {
+        const {user}= await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        )
+        if(user){
+          console.log('added ')
+        }
+      } catch (error) {
+        console.log(error)
+      }
       // Add your form submission logic here
     }
   };
@@ -129,7 +144,7 @@ const SignUp: React.FC = () => {
         <Space>
          
 
-          <Button type="primary" htmlType="submit" onClick={(event)=>{handleSubmit(event)}}>
+          <Button type="primary" htmlType="submit" onClick={(event)=>{handleSubmit(event )}}>
           Sign up
           </Button>
           
