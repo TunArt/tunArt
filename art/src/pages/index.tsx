@@ -2,13 +2,13 @@ import Head from "next/head";
 import { Button } from "antd";
 import Image from "next/image";
 import {useState} from 'react'
+import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import SinUp from './sinUp'
 import Login from './login'
 interface Props {}
 const inter: any = Inter({ subsets: ["latin"] });
-
 
 const Home: React.FC<Props> = () => {
   const [popUp,setPopUp]=useState(false)
