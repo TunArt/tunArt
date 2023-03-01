@@ -30,7 +30,7 @@ const addArtist = (req: Request, res: Response) => {
       res.status(201).send("artist created successfully");
     } catch (err) {
       console.log(err);
-      res.status(400).send({ error: err.message });
+      res.status(400).send(err);
     }
   };
 
@@ -57,7 +57,7 @@ const addArtist = (req: Request, res: Response) => {
 }
 catch (err) {
     console.log(err);
-    res.status(400).send({ error: err.message });
+    res.status(400).send(err);
   }
 }
 
@@ -75,7 +75,7 @@ const deleteArtist= (req:Request, res:Response)=> {
     }
     catch (err) {
         console.log(err);
-        res.status(400).send({ error: err.message });
+        res.status(400).send(err);
       }
     }
   
