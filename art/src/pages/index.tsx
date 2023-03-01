@@ -1,12 +1,23 @@
 import Head from "next/head";
+import { Button } from "antd";
+import {useState} from 'react'
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
-
-const inter: any = Inter({ subsets: ["latin"] });
+import styles from "src/styles/Home.module.css";
+import SinUp from './sinUp'
+import Login from './login'
 interface Props {}
+const inter: any = Inter({ subsets: ["latin"] });
+
 const Home: React.FC<Props> = () => {
-  
+  const [popUp,setPopUp]=useState(false)
+  const [popUpLogin,setPopUpLogin]=useState(false)
+  const togglePopup = () => {
+    setPopUp(!popUp);
+  };
+  const togglePopupLogin = () => {
+    setPopUpLogin(!popUpLogin);
+  };
   return (
     <>
       <Head>
@@ -16,13 +27,12 @@ const Home: React.FC<Props> = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.container}>
+        <Button onClick={togglePopupLogin}> Login</Button>
+        {popUpLogin && <div className="overlay" ><Login/></div>}
+        <Button onClick={togglePopup}> Signup</Button>
+        {popUp && <div className="overlay"><SinUp /></div>}
+        <div>
           <h1>ART is the work of god</h1>
-          <Image className={styles.art1}
-           src="/art1.jpg"
-           alt=""
-          width={500}
-          height={500} />
         </div>
       </main>
     </>
