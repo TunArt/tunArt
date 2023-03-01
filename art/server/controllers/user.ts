@@ -1,33 +1,34 @@
 import db from '../models/index';
 import express, { Express, Request, Response } from 'express';
-const Artist = db.artist
+const User = db.user
 
-//methods to get all the artists
-const getAllArtists = (req:Request ,res:Response) =>{
+//methods to get all the users
+
+const getAllUsers = (req:Request ,res:Response) =>{
     try {
-        let  artists= Artist.findAll()
-        res.status(200).send(artists)
+        let  users= User.findAll()
+        res.status(200).send(users)
 }
 catch (err){
     console.log(err)
 }
 }
 
-//  method to add  a new artist
-const addArtist = (req: Request, res: Response) => {
+//  method to add  a new user
+const addUser = (req: Request, res: Response) => {
     try {
       if (!req.body) {
         throw new Error("Request body is missing required properties.");
       }
-      const artist = Artist.create({
-        name: req.body.name,
-        bio: req.body.bio,
+      const user = User.create({
+        userName: req.body.userName,
         email: req.body.email,
         password: req.body.password,
-        picture: req.body.picture,
-        phoneNumber: req.body.phoneNumber
+        birthDate: req.body.birthDate,
+        phoneNumber: req.body.phoneNumber,
+        picture: req.body.picture
       });
-      res.status(201).send("artist created successfully");
+      res.status(201).send("user created successfully");
     } catch (err) {
       console.log(err);
       res.status(400).send({ error: err.message });
@@ -35,25 +36,25 @@ const addArtist = (req: Request, res: Response) => {
   };
 
    // update User information in database
-   const updateArtist= (req:Request, res:Response)=> {
+   const updateUser= (req:Request, res:Response)=> {
     try {
         if (!req.body) {
           throw new Error("Request body is missing required properties.");
         }
 
-    const artist =  Artist.update({
-        name: req.body.name,
-        bio: req.body.bio,
+    const user =  User.update({
+        userName: req.body.userName,
         email: req.body.email,
         password: req.body.password,
-        picture: req.body.picture,
-        phoneNumber: req.body.phoneNumber
+        birthDate: req.body.birthDate,
+        phoneNumber: req.body.phoneNumber,
+        picture: req.body.picture
     }, {
         where: {
             id: req.params.id
         }
     })
-    res.status(200).send("artist updated successfully")
+    res.status(200).send("user updated successfully")
 }
 catch (err) {
     console.log(err);
@@ -61,17 +62,17 @@ catch (err) {
   }
 }
 
-const deleteArtist= (req:Request, res:Response)=> {
+const deleteUser= (req:Request, res:Response)=> {
     try {
         if (!req.body) {
           throw new Error("Request body is missing required properties.");
         }
-   const artist =  Artist.destroy({
+   const user =  User.destroy({
             where: {
                 id: req.params.id
             }
         })
-        res.status(200).send("artist deleted successfully")
+        res.status(200).send("user deleted successfully")
     }
     catch (err) {
         console.log(err);
@@ -80,6 +81,6 @@ const deleteArtist= (req:Request, res:Response)=> {
     }
   
 
-export default {getAllArtists,addArtist,updateArtist,deleteArtist};
+export default {getAllUsers,addUser,updateUser,deleteUser};
 
 
