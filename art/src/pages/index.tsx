@@ -3,7 +3,7 @@ import { Button } from "antd";
 import Image from "next/image";
 import {useState} from 'react'
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
+import styles from "src/styles/Home.module.css";
 import SinUp from './sinUp'
 import Login from './login'
 interface Props {}

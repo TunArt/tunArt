@@ -1,12 +1,17 @@
 import { useState} from "react";
 import axios from 'axios';
-import {useNavigate } from 'react-router-dom'
 import styles from "../../styles/Event.module.css";
 import { Button } from 'antd';
 import { useRouter } from 'next/router';
-import Link from "next/link";
-import { query } from "express";
-
+import Image from "next/image";
+interface EventData {
+  localName: string;
+  date: string;
+  // add other properties as needed
+}
+interface EventProps {
+  events: EventData[];
+}
 
 export async function getServerSideProps(){
   const options = {
@@ -28,10 +33,9 @@ export async function getServerSideProps(){
   };
 }
 
-function Event({ events }) {
+function Event({ events }:any) {
   const router = useRouter();
-console.log(events)
-  const handleClick = async (i: number, data) => {
+  const handleClick = async (i: number, data:any) => {
     router.push({
       pathname:`/event/${i}`,
       query:data,
@@ -41,7 +45,7 @@ console.log(events)
   return (
     <section className={styles.section}>
       <div className={styles.leftBox}>
-        {events?.map((data, i: number) => (
+        {events?.map((data:any, i: number) => (
           <div key={i} className={styles.content}>
             <h1>{data.localName}</h1>
             <h3>{data.date}</h3>

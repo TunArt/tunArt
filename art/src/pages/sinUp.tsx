@@ -90,7 +90,7 @@ const SignUp: React.FC = () => {
     return isValid;
   };
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async(event:any) => {
     event.preventDefault();
     const isValid = validateForm();
 
