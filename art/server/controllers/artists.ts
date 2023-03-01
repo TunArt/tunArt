@@ -30,11 +30,11 @@ const addArtist = (req: Request, res: Response) => {
       res.status(201).send("artist created successfully");
     } catch (err) {
       console.log(err);
-      res.status(400).send({ error: err.message });
+      res.status(400).send(err);
     }
   };
 
-   // update User information in database
+   // update artist information in database
    const updateArtist= (req:Request, res:Response)=> {
     try {
         if (!req.body) {
@@ -57,9 +57,11 @@ const addArtist = (req: Request, res: Response) => {
 }
 catch (err) {
     console.log(err);
-    res.status(400).send({ error: err.message });
+    res.status(400).send(err);
   }
 }
+
+   // delete artist information in database
 
 const deleteArtist= (req:Request, res:Response)=> {
     try {
@@ -75,7 +77,7 @@ const deleteArtist= (req:Request, res:Response)=> {
     }
     catch (err) {
         console.log(err);
-        res.status(400).send({ error: err.message });
+        res.status(400).send(err);
       }
     }
   

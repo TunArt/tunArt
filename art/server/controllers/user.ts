@@ -62,6 +62,8 @@ catch (err) {
   }
 }
 
+   // delete User information in database
+
 const deleteUser= (req:Request, res:Response)=> {
     try {
         if (!req.body) {
