@@ -37,7 +37,7 @@ const addArtist = (req: Request, res: Response) => {
   };
 
    // update User information in database
-   const updateArtist= (req:Request, res:Response)=> {
+   const updateArtist= async(req:Request, res:Response)=> {
     try {
         if (!req.body) {
           throw new Error("Request body is missing required properties.");
