@@ -3,14 +3,10 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
-
-const inter = Inter({ subsets: ["latin"] });
-
-interface MyProps {
-  text: string;
-}
-
-const Home: React.FC<MyProps> = ({ text }) => {
+const inter: any = Inter({ subsets: ["latin"] });
+interface Props {}
+const Home: React.FC<Props> = () => {
+  
   return (
     <>
       <Head>
@@ -20,13 +16,16 @@ const Home: React.FC<MyProps> = ({ text }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className="">
-        <h1>ART is the work of god</h1>
-        <img className={styles.art1} src="/art1.jpg" alt="" srcset="" />
+        <div className={styles.container}>
+          <h1>ART is the work of god</h1>
+          <Image className={styles.art1}
+           src="/art1.jpg"
+           alt=""
+          width={500}
+          height={500} />
         </div>
       </main>
     </>
   );
 };
-
 export default Home;

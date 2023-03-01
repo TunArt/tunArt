@@ -1,6 +1,7 @@
 const {Sequelize , DataTypes} = require ("sequelize");
 const config = require('../config/default.ts');
 
+
 //Created a Sequelize instance and passed the appropriate parameters separately,
 //database, user and password fields coming from the config files.
 const sequelize = new Sequelize(config.DATABASE, config.USER,config.PASSWORD, {
@@ -100,3 +101,4 @@ sequelize.authenticate()
 .catch((err) => {console.log(err)})
 
 module.exports = db;
+export {};

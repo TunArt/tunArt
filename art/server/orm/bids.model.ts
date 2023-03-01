@@ -36,3 +36,4 @@ artWorkCategoryId:{
   
     return Bid;
   }
+  export {};
