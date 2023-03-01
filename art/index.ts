@@ -4,6 +4,7 @@ dotenv.config()
 // console.log(process.env);
 
 const app: Application = express();
+
 const port = process.env.PORT || 3000;
 import cors from 'cors';
 app.use(express.static(__dirname + "/art"));
