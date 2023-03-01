@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Alert } from 'antd';
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import { auth } from "../../server/firebase/config"
+import Styles from "../styles/Login.module.css"
 interface FormValues {
   email: string;
   password: string;
@@ -64,8 +65,8 @@ const Login: React.FC = () => {
   };
 
   return (
-    <>
-      <Form
+    <div className={Styles.overlay}>
+      <Form 
         form={form}
         name="login"
         labelCol={{ span: 8 }}
@@ -122,7 +123,7 @@ const Login: React.FC = () => {
           <Alert message="Invalid email or password" type="error" showIcon />
         )}
       </Form>
-    </>
+    </div>
   );
 };
 

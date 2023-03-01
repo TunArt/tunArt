@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "noImplicitAny": false,
     "target": "es5",
     "lib": [
       "dom",
@@ -29,8 +33,11 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "server/firebase/config.js"  ],
-  "exclude": [
-    "node_modules"
-  ]
+, "server/firebase/config.js", "server/orm/index.js", "server/index.js"  ],
+"exclude": [
+  "node_modules",
+  "dist",
+  "server"
+
+],
 }

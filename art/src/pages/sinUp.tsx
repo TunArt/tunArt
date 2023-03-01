@@ -6,8 +6,12 @@ import {
   PhoneOutlined,
   LockOutlined,
 } from "@ant-design/icons";
+import styles from "../styles/SingUp.module.css"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../server/firebase/config"
+import { Switch } from 'antd';
+
+
 interface SignUpState {
     username: string;
     email: string;
@@ -20,6 +24,9 @@ interface SignUpState {
     event: {
       [key: string]: string;
     }
+    age:{
+      [key: string]: string;
+    }
   }
   
 const SignUp: React.FC = () => {
@@ -30,7 +37,10 @@ const SignUp: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
+  const[age,setAge]=useState("");
+  const onChange = (checked: boolean) => {
+    console.log(`switch to ${checked}`);
+  };
   const validateForm = () => {
     let errors: { [key: string]: string } = {};
     let isValid = true;
@@ -70,6 +80,10 @@ const SignUp: React.FC = () => {
       errors.confirmPassword = "Passwords do not match";
       isValid = false;
     }
+    if(age<"18"){
+      errors.age = "age must be over 18 ";
+      isValid=false;
+    }
 
     setErrors(errors);
 
@@ -98,9 +112,9 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div>
-      <Form form={form}>
-        <Input
+    <div className={styles.overlay}>
+      <Form form={form}  className={styles.input}>
+        <Input className={styles.input}
           type="text"
           placeholder="Full Name"
           prefix={<UserOutlined />}
@@ -108,7 +122,8 @@ const SignUp: React.FC = () => {
           onChange={(e) => setUsername(e.target.value)}
         />
         {errors.username && <Alert message={errors.username} type="error" />}
-        <Input
+        <Input className={styles.input}
+
           type="email"
           placeholder="Email"
           prefix={<MailOutlined />}
@@ -116,7 +131,8 @@ const SignUp: React.FC = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         {errors.email && <Alert message={errors.email} type="error" />}
-        <Input
+        <Input className={styles.input}
+
           type="text"
           placeholder="Phone Number"
           prefix={<PhoneOutlined />}
@@ -124,7 +140,8 @@ const SignUp: React.FC = () => {
           onChange={(e) => setPhone(e.target.value)}
         />
         {errors.phone && <Alert message={errors.phone} type="error" />}
-        <Input
+        <Input className={styles.input}
+
           type="password"
           placeholder="Password"
           prefix={<LockOutlined />}
@@ -132,7 +149,8 @@ const SignUp: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         {errors.password && <Alert message={errors.password} type="error" />}
-        <Input
+        <Input className={styles.input}
+
           type="password"
           placeholder="Confirm Password"
           value={confirmPassword}
@@ -142,8 +160,22 @@ const SignUp: React.FC = () => {
           <Alert message={errors.confirmPassword} type="error" />
         )}
         <Space>
-         
+        <Input className={styles.input}
 
+          type="text"
+          placeholder="Age"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        />
+        {errors.age && <Alert message={errors.age} type="error" />}
+        <div className={styles.switch}>
+         <Space>
+          User
+        <Switch defaultChecked onChange={onChange} />
+          Artiste
+        </Space>
+        </div>
+        <br />
           <Button type="primary" htmlType="submit" onClick={(event)=>{handleSubmit(event )}}>
           Sign up
           </Button>
