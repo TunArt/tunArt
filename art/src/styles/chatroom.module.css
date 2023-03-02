@@ -1,0 +1,35 @@
+.app{
+    margin-left: 20%;
+    margin-right: 20%;
+    height: 50rem;
+    /* background-color: black; */
+}
+
+.room{
+    margin-left: 0%
+
+}
+.join{
+    margin-left: 0%
+}
+
+.discussion{
+    background-color: aqua;
+height: 90%;
+padding-top: 4%;
+    padding-left: 10%;
+}
+.message{
+  ;
+}
+.send{
+    margin-left: 0%
+}
+.footer{
+    margin-top : 1%;
+    height: 5%;
+    width: auto;
+    background-color: green;
+    /* margin-left :10%; */
+    padding-left: 10%;
+}

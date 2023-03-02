@@ -1,8 +1,9 @@
-// import "./App.css";
+import styles from "../styles/chatroom.module.css";
+
 import io, { Socket } from "socket.io-client";
 import react,{ useEffect, useState } from "react";
 
-const socket: Socket = io("http://localhost:4001");
+const socket: Socket = io("http://localhost:3001");
 
 function App(): JSX.Element {
   //Room State
@@ -34,25 +35,32 @@ function App(): JSX.Element {
   }, [socket]);
 
  return (
-    <div className="App">
-      <input
+   <div className={styles.app}>
+      <h1 > Messages:</h1>
+     <div className={styles.discussion}> {messageReceived.map((e: string) => {
+        return <p>{e}</p>;
+      })}
+      </div>
+      <div className={styles.footer}>
+      <input className={styles.room}
         placeholder="Room Number..."
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setRoom(event.target.value);
         }}
       />
-      <button onClick={joinRoom}> Join Room</button>
+      <button className={styles.join} onClick={joinRoom}> Join Room</button>
       <input
+      className={styles.message} 
         placeholder="Message..."
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setMessage(event.target.value);
         }}
       />
-      <button onClick={sendMessage}> Send Message</button>
-      <h1> Message:</h1>
-      {messageReceived.map((e: string) => {
-        return <p>{e}</p>;
-      })}
+      <button 
+      className={styles.send}
+      onClick={sendMessage}> Send Message</button>
+      </div>
+    
     </div>
   );
 }
