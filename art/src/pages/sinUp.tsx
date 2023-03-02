@@ -102,7 +102,7 @@ const SignUp: React.FC = () => {
           password
         )
         if(user){
-          console.log('added ')
+          console.log(user.getIdToken())
         }
       } catch (error) {
         console.log(error)
