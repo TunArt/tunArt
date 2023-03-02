@@ -1,6 +1,6 @@
 .art1{
-  max-width: 558.451px;
-    max-height: 372.301px;
+  max-width: 50vh;
+    height: 50vh;
     transition: none 0s ease 0s;
     text-align: inherit;
     line-height: 0px;
@@ -12,6 +12,7 @@
     font-size: 14px;
 }
 .container{
+  display: flex;
   background: rgb(245, 245, 245);
     width: 100%;
     height: 100%;

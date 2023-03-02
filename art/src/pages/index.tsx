@@ -1,18 +1,26 @@
 import Head from "next/head";
+import { Button } from "antd";
+import {useState} from 'react'
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
+import styles from "src/styles/Home.module.css";
+import SinUp from './sinUp'
+import Login from './login'
+interface Props {}
+const inter: any = Inter({ subsets: ["latin"] });
 
 
-
-const inter = Inter({ subsets: ["latin"] });
-
-interface MyProps {
-  text: string;
-}
-
-const Home: React.FC<MyProps> = ({ text }) => {
+const Home: React.FC<Props> = () => {
+  const [popUp,setPopUp]=useState(false)
+  const [popUpLogin,setPopUpLogin]=useState(false)
+  const togglePopup = () => {
+    setPopUp(!popUp);
+  };
+  const togglePopupLogin = () => {
+    setPopUpLogin(!popUpLogin);
+  };
   return (
     <>
       <Head>
@@ -43,17 +51,18 @@ const Home: React.FC<MyProps> = ({ text }) => {
                     <li>SERVICES</li>
                     <li>ABOUT</li>
                     <li>CONTACT</li>
-                    <Link href="/login"><li>login</li></Link>
+                    <Button onClick={togglePopupLogin} ><li>login</li></Button>
+                    <Button onClick={togglePopup} ><li>signup</li></Button>
                 </ul>
+                  {popUpLogin && <div className="overlay" ><Login/></div>}
+        {popUp && <div className="overlay"><SinUp /></div>}
               </div>
             </div>
         </div>
-      
         </div>
         </div>
       </main>
     </>
   );
 };
-
 export default Home;
