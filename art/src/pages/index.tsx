@@ -3,12 +3,11 @@ import { Button } from "antd";
 import {useState} from 'react'
 import Image from "next/image";
 import { Inter } from "next/font/google";
-//import styles from "@/styles/Home.module.css";
+
 import Link from "next/link";
 import styles from "src/styles/Home.module.css";
 import SinUp from './sinUp'
 import Login from './login'
-import NavBar from "./MainPage/navBar"
 
 
 interface Props { }
@@ -50,6 +49,7 @@ const Home: React.FC<Props> = () => {
       <main id={styles.body}>
         <div >
 
+
         <div id={styles.box2}>
             <div id={styles.text}>
             ART is the <br/>work of God
@@ -64,6 +64,7 @@ const Home: React.FC<Props> = () => {
               <div id={styles.menu}>
                 <ul>
                   <Link href={"../MainPage"}><li>HOME</li></Link>
+
                     <li>SERVICES</li>
                     <Link href={"../MainPage/aboutUs"}><li>ABOUT</li></Link>
                     <Link href={"../MainPage/contactUs"}><li>CONTACT</li></Link>
