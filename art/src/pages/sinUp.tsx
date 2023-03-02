@@ -90,7 +90,9 @@ const SignUp: React.FC = () => {
     return isValid;
   };
 
-  const handleSubmit = async(event) => {
+
+  const handleSubmit = async(event:any) => {
+
     event.preventDefault();
     const isValid = validateForm();
 
@@ -102,7 +104,9 @@ const SignUp: React.FC = () => {
           password
         )
         if(user){
-          console.log('added ')
+
+          console.log(user.getIdToken())
+
         }
       } catch (error) {
         console.log(error)

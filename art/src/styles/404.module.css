@@ -1,0 +1,11 @@
+.error{
+    
+    text-align: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+.errorImage{
+    margin-left: 30%;
+    width: 100vh;
+    height: 100vh;
+}

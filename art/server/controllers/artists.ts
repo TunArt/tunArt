@@ -1,5 +1,5 @@
 import db from '../models/index';
-import express, { Express, Request, Response } from 'express';
+import express, { Express, Request, Response } from "express";
 const Artist = db.artist
 
 //methods to get all the artists
@@ -30,6 +30,7 @@ const addArtist = async (req: Request, res: Response) => {
         picture: req.body.picture,
         phoneNumber: req.body.phoneNumber
       });
+      console.log(artist);
       res.status(201).send("artist created successfully");
     } catch (err) {
       console.log(err);

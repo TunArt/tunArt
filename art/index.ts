@@ -1,11 +1,11 @@
 import express, { Application } from 'express';
 import * as dotenv from 'dotenv'
+import cors from 'cors';
 dotenv.config()
 
 const app: Application = express();
 
 const port = process.env.PORT || 3000;
-import cors from 'cors';
 app.use(express.static(__dirname + "/art"));
 app.use(express.json({limit:'50mb'}));
 app.use(cors());
@@ -21,15 +21,17 @@ import productRoute from "./server/routes/product"
 import paymentRoute from "./server/routes/payment";
 import bidRoute from "./server/routes/bid";
 import categoryRoute from "./server/routes/category";
-
+import eventRoute from './server/routes/events'
 //Add Routes to the middleware handling path, specifying the respective URL path
 app.use('/api/artists',artistRoute)
+app.use('/api/event',eventRoute)
 app.use('/api/users',userRoute)
 app.use('/api/artworks',artworkRoute)
 app.use('/api/products',productRoute)
 app.use('/api/payments',paymentRoute)
 app.use('/api/bids',bidRoute)
 app.use('/api/categories',categoryRoute)
+
 
 
 
