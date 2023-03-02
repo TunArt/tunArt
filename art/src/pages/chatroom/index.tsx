@@ -1,4 +1,3 @@
-// import "./App.css";
 import io, { Socket } from "socket.io-client";
 import react,{ useEffect, useState } from "react";
 

@@ -4,10 +4,12 @@ import {useState} from 'react'
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "src/styles/Home.module.css";
+import Link from "next/link";
 import SinUp from './sinUp'
 import Login from './login'
 interface Props {}
 const inter: any = Inter({ subsets: ["latin"] });
+
 
 const Home: React.FC<Props> = () => {
   const [popUp,setPopUp]=useState(false)
@@ -26,13 +28,37 @@ const Home: React.FC<Props> = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <Button onClick={togglePopupLogin}> Login</Button>
-        {popUpLogin && <div className="overlay" ><Login/></div>}
-        <Button onClick={togglePopup}> Signup</Button>
+      <main id={styles.body}>
+        <div >
+        <div id={styles.main}>
+        <div id={styles.box1}></div>
+
+        <div id={styles.box2}>
+            <div id={styles.text}>
+            ART is the <br/>work of god
+
+            </div>
+        </div>
+        <div id={styles.box3}>
+            <div id={styles.container}>
+              <div id={styles.logo}>
+                <b>ART</b>
+              </div>  
+              <div id={styles.menu}>
+                <ul>
+                    <li>HOME</li>
+                    <li>SERVICES</li>
+                    <li>ABOUT</li>
+                    <li>CONTACT</li>
+                    <Button onClick={togglePopupLogin} ><li>login</li></Button>
+                    <Button onClick={togglePopup} ><li>signup</li></Button>
+                </ul>
+                  {popUpLogin && <div className="overlay" ><Login/></div>}
         {popUp && <div className="overlay"><SinUp /></div>}
-        <div>
-          <h1>ART is the work of god</h1>
+              </div>
+            </div>
+        </div>
+        </div>
         </div>
       </main>
     </>
