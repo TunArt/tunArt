@@ -2,7 +2,7 @@
 import io, { Socket } from "socket.io-client";
 import react,{ useEffect, useState } from "react";
 
-const socket: Socket = io("http://localhost:4001");
+const socket: Socket = io("http://localhost:3001");
 
 function App(): JSX.Element {
   //Room State

@@ -17,6 +17,7 @@ Sequelize.sync();
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+
 db.artist = require("./artist.js")(Sequelize, sequelize);
 db.user = require("./user.js")(Sequelize, sequelize);
 db.category = require("./category.js")(Sequelize, sequelize);
@@ -28,25 +29,24 @@ db.product = require("./product.js")(Sequelize, sequelize);
 
 //Join tables 
 db.user_bid = require("./user_bid.js")(Sequelize, sequelize);
-db.user_artwork = require("./user_artwork.js")(Sequelize, sequelize);
 db.user_event = require("./user_event.js")(Sequelize, sequelize);
 db.user_product = require("./user_product.js")(Sequelize, sequelize);
 
 //user and bid association (many-to-many)
-db.user.belongsToMany(db.bid, { through: 'user_bid', foreignKey: 'userId'});
-db.bid.belongsToMany(db.user, { through: 'user_bid', foreignKey: 'bidId' });
+db.user.belongsToMany(db.bid, { through: 'userbids', foreignKey: 'userId'});
+db.bid.belongsToMany(db.user, { through: 'userbids', foreignKey: 'bidId' });
 
-//user and artwork association (many-to-many)
-db.user.belongsToMany(db.artwork, { through: 'user_artwork', foreignKey: 'userId' });
-db.artwork.belongsToMany(db.user, { through: 'user_artwork',foreignKey: 'artworkId' });
+// //user and artwork association (many-to-many)
+// db.user.belongsToMany(db.artwork, { through: 'userartworks', foreignKey: 'userId' });
+// db.artwork.belongsToMany(db.user, { through: 'userartworks',foreignKey: 'artworkId' });
 
 //user and event association (many-to-many)
-db.user.belongsToMany(db.event, { through: 'user_event', foreignKey: 'userId' });
-db.event.belongsToMany(db.user, { through: 'user_event',foreignKey: 'eventId' });
+db.user.belongsToMany(db.event, { through: 'userevents', foreignKey: 'userId' });
+db.event.belongsToMany(db.user, { through: 'userevents',foreignKey: 'eventId' });
 
 //user and product association (many-to-many)
-db.user.belongsToMany(db.product, { through: 'user_product', foreignKey: 'userId' });
-db.product.belongsToMany(db.user, { through: 'user_product', foreignKey: 'productId' });
+db.user.belongsToMany(db.product, { through: 'userproducts', foreignKey: 'userId' });
+db.product.belongsToMany(db.user, { through: 'userproducts', foreignKey: 'productId' });
 
 //artist and artwork association (one-to-many)
 db.artwork.belongsTo(db.artist, {
@@ -55,6 +55,15 @@ db.artwork.belongsTo(db.artist, {
 db.artist.hasMany(db.artwork,{
   foreignKey: "artistId"
 })
+
+//user and artwork association (one-to-many)
+db.artwork.belongsTo(db.user, {
+  foreignKey: "userId"
+})
+db.user.hasMany(db.artwork,{
+  foreignKey: "userId"
+})
+
 
 //category and artwork association (one-to-many)
 db.artwork.belongsTo(db.category, {
@@ -73,4 +82,3 @@ db.user.hasMany(db.payment,{
 })
 
 module.exports = db;
-// console.log(db);
