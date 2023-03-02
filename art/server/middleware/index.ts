@@ -4,7 +4,7 @@ import * as admin from 'firebase-admin';
 interface CunstomRequest extends Request {
     user?:any
 }
- export function authMiddleware(req: CunstomRequest, res: Response, next: NextFunction) {
+ export default function authMiddleware(req: CunstomRequest, res: Response, next: NextFunction) {
   const token = req.headers.authorization;
 
   if (typeof token === 'string') {
@@ -20,3 +20,4 @@ interface CunstomRequest extends Request {
     res.status(401).send('Unauthorized');
   }
 }
+

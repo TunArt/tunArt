@@ -23,6 +23,9 @@
 #body{
   margin: 0px;
   background-color: #1E242A;
+
+  height: 100%;
+
 }
 #main{
   width: 100%;
@@ -132,4 +135,12 @@
   to{
       top:0%;
   }
+
+}
+.info{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom:-230px ;
+
 }

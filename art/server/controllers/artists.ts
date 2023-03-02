@@ -19,6 +19,7 @@ const addArtist = (req: Request, res: Response) => {
       if (!req.body) {
         throw new Error("Request body is missing required properties.");
       }
+
       const artist = Artist.create({
         name: req.body.name,
         bio: req.body.bio,
@@ -27,15 +28,16 @@ const addArtist = (req: Request, res: Response) => {
         picture: req.body.picture,
         phoneNumber: req.body.phoneNumber
       });
+      console.log(artist);
       res.status(201).send("artist created successfully");
     } catch (err) {
       console.log(err);
-      res.status(400).send({ error: err.message });
+      res.status(400).send(err)
     }
   };
 
    // update User information in database
-   const updateArtist= (req:Request, res:Response)=> {
+   const updateArtist= async(req:Request, res:Response)=> {
     try {
         if (!req.body) {
           throw new Error("Request body is missing required properties.");
@@ -57,7 +59,7 @@ const addArtist = (req: Request, res: Response) => {
 }
 catch (err) {
     console.log(err);
-    res.status(400).send({ error: err.message });
+    res.status(400).send(err);
   }
 }
 
@@ -75,7 +77,7 @@ const deleteArtist= (req:Request, res:Response)=> {
     }
     catch (err) {
         console.log(err);
-        res.status(400).send({ error: err.message });
+        res.status(400).send(err);
       }
     }
   

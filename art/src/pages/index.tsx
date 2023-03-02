@@ -3,18 +3,23 @@ import { Button } from "antd";
 import {useState} from 'react'
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import styles from "src/styles/Home.module.css";
 import SinUp from './sinUp'
 import Login from './login'
-interface Props {}
-const inter: any = Inter({ subsets: ["latin"] });
 
+interface Props { }
+const inter: any = Inter({ subsets: ["latin"] });
+const stats = [
+  { id: 1, name: 'Transactions every 24 hours', value: '44 million' },
+  { id: 2, name: 'Assets under holding', value: '$119 trillion' },
+  { id: 3, name: 'New users annually', value: '46,000' },
+]
 
 const Home: React.FC<Props> = () => {
-  const [popUp,setPopUp]=useState(false)
-  const [popUpLogin,setPopUpLogin]=useState(false)
+  const [popUp, setPopUp] = useState(false)
+  const [popUpLogin, setPopUpLogin] = useState(false)
+
   const togglePopup = () => {
     setPopUp(!popUp);
   };
@@ -31,37 +36,61 @@ const Home: React.FC<Props> = () => {
       </Head>
       <main id={styles.body}>
         <div >
-        <div id={styles.main}>
-        <div id={styles.box1}></div>
 
-        <div id={styles.box2}>
-            <div id={styles.text}>
-            ART is the <br/>work of god
+          <div id={styles.main}>
+            <div id={styles.box1}></div>
 
+            <div id={styles.box2}>
+              <div id={styles.text}>
+                ART is the <br />work of god
+
+              </div>
             </div>
-        </div>
-        <div id={styles.box3}>
-            <div id={styles.container}>
-              <div id={styles.logo}>
-                <b>ART</b>
-              </div>  
-              <div id={styles.menu}>
-                <ul>
+            <div id={styles.box3}>
+              <div id={styles.container}>
+                <div id={styles.logo}>
+                  <b>ART</b>
+                </div>
+                <div id={styles.menu}>
+                  <ul>
+
                     <li>HOME</li>
                     <li>SERVICES</li>
                     <li>ABOUT</li>
                     <li>CONTACT</li>
                     <Button onClick={togglePopupLogin} ><li>login</li></Button>
                     <Button onClick={togglePopup} ><li>signup</li></Button>
-                </ul>
-                  {popUpLogin && <div className="overlay" ><Login/></div>}
-        {popUp && <div className="overlay"><SinUp /></div>}
+
+                  </ul>
+                  {popUpLogin && <div className="overlay" ><Login /></div>}
+                  {popUp && <div className="overlay"><SinUp /></div>}
+                </div>
               </div>
             </div>
+          </div>
+
         </div>
-        </div>
-        </div>
+
+
+
       </main>
+
+      <div className={styles.info}>
+        <div className="bg-white py-24 sm:py-32">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <dl className="grid grid-cols-1 gap-y-16 gap-x-8 text-center lg:grid-cols-3">
+              {stats.map((stat) => (
+                <div key={stat.id} className="mx-auto flex max-w-xs flex-col gap-y-4">
+                  <dt className="text-base leading-7 text-gray-600">{stat.name}</dt>
+                  <dd className="order-first text-3xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+                    {stat.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
