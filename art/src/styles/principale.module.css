@@ -1,0 +1,129 @@
+.all{
+  margin-top: 60px;
+    background-color: beige;
+    height: 100%;
+    min-height: 100vh;
+  }
+  
+  .main{
+    
+    text-align: left;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: medium;
+    background-size:auto;
+  }
+  
+  .mainNavBar{
+    width: 100%;
+    display:flex;
+    color: navy;
+    border: 1px solid #e7e7e7;
+    float: right;
+    padding: 5px;
+    background-color: rgb(170, 211, 170);
+    margin-right: 20px;
+    margin-left: 0px;
+    margin-top: 0px;
+     
+    position: fixed;
+    top:0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .mainNavBar a{
+    text-align: center;
+    display: block;
+    padding: 8px;
+  }
+  
+  .mainNavBar a:hover{
+    background-color: gray;
+    
+  }
+  
+  /* .shop {
+    box-sizing: border-box;
+  }
+  
+  .gallery::after {
+      content: "";
+      clear: both;
+      display: grid;
+    }
+  
+    .images-shop {
+      float: left;
+      width: 33.33%;
+      padding: 5px;
+    } */
+  
+  /* .search{
+   
+    margin-right: 0px;
+    
+    position: sticky;
+  
+  } */
+  
+  /* ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 0;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+  
+  .active {
+    background-color: #4CAF50;
+  } */
+  
+  form.search input[type=text] {
+    padding: 5px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    position: sticky;
+    background: #f1f1f1;
+    margin-left:150px;
+  }
+  
+  form.search button {
+    float: left;
+    width: 6%;
+    padding: 5px;
+    background: rgb(219, 77, 77);
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+  
+  form.search button:hover {
+    background: #0b7dda;
+  }
+  
+  form.search::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
