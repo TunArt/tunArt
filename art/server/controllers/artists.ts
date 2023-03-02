@@ -3,9 +3,12 @@ import express, { Express, Request, Response } from 'express';
 const Artist = db.artist
 
 //methods to get all the artists
-const getAllArtists = (req:Request ,res:Response) =>{
+const getAllArtists =async (req:Request ,res:Response) =>{
     try {
-        let  artists= Artist.findAll()
+        let artists= await Artist.findAll({
+          include : ['artworks']
+        })
+      console.log(artists)
         res.status(200).send(artists)
 }
 catch (err){
@@ -14,12 +17,12 @@ catch (err){
 }
 
 //  method to add  a new artist
-const addArtist = (req: Request, res: Response) => {
+const addArtist = async (req: Request, res: Response) => {
     try {
       if (!req.body) {
         throw new Error("Request body is missing required properties.");
       }
-      const artist = Artist.create({
+      const artist = await Artist.create({
         name: req.body.name,
         bio: req.body.bio,
         email: req.body.email,
@@ -35,13 +38,13 @@ const addArtist = (req: Request, res: Response) => {
   };
 
    // update artist information in database
-   const updateArtist= (req:Request, res:Response)=> {
+   const updateArtist= async (req:Request, res:Response)=> {
     try {
         if (!req.body) {
           throw new Error("Request body is missing required properties.");
         }
 
-    const artist =  Artist.update({
+    const artist =  await Artist.update({
         name: req.body.name,
         bio: req.body.bio,
         email: req.body.email,
@@ -63,12 +66,12 @@ catch (err) {
 
    // delete artist information in database
 
-const deleteArtist= (req:Request, res:Response)=> {
+const deleteArtist= async (req:Request, res:Response)=> {
     try {
         if (!req.body) {
           throw new Error("Request body is missing required properties.");
         }
-   const artist =  Artist.destroy({
+   const artist = await Artist.destroy({
             where: {
                 id: req.params.id
             }

@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 const app: Application = express();
+
 const port = process.env.PORT || 3000;
 import cors from 'cors';
 app.use(express.static(__dirname + "/art"));
@@ -14,7 +15,7 @@ app.use(express.static(__dirname + "/../client/dist"));
 
 //Require application Route modules
 import artistRoute from "./server/routes/artists"
-import userRoute from "./server/routes/artists"
+import userRoute from "./server/routes/user"
 import artworkRoute from "./server/routes/artwork"
 import productRoute from "./server/routes/product"
 import paymentRoute from "./server/routes/payment";

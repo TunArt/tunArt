@@ -1,21 +1,48 @@
 {
   "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "es6",
     "noImplicitAny": true,
-    "strict":true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
       "*": [
         "node_modules/*"
       ]
-    }
+    },
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noEmit": true
   },
   "include": [
-    "*"
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "server/firebase/config.js",
+    "server/orm/index.js",
+    "server/index.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "server",
+    "lib"
   ]
 }
