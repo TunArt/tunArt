@@ -42,8 +42,10 @@
   "exclude": [
     "node_modules",
     "dist",
+
     "server",
     "lib"
     
+
   ]
 }

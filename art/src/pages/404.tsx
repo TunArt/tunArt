@@ -1,3 +1,4 @@
+
 import Link from 'next/link'
 
 export default function Example() {
@@ -37,3 +38,6 @@ export default function Example() {
     </>
   )
 }
+
+
+
