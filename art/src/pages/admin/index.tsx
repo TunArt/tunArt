@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import  'material-icons/iconfont/material-icons.css';
-import styles from "@/styles/SideBar.module.css";
+import styles from "src/styles/SideBar.module.css";
 import Link from "next/link";
 import ChartBar from "./chartBar";
 
@@ -23,7 +23,6 @@ const[view,setView]=useState("")
       <div className={styles.top}>
         <div className={styles.logo}>
           <img src="logo.png"/>
-          jjj
         </div>
         <div className={styles.close} id="close-btn">
           <span  className="material-icons-sharp">close</span>

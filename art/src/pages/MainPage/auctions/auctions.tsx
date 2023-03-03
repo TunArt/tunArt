@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../navBar";
+import NavBar from "../../../components/navBar";
 import Search from "../search";
 import styles from "../../../styles/principale.module.css";
 

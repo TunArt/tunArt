@@ -6,7 +6,9 @@
         email: {type:DataTypes.STRING},
         password: {type:DataTypes.STRING},
         picture: {type:DataTypes.STRING},
-        phoneNumber: {type:DataTypes.INTEGER}
+        phoneNumber: {type:DataTypes.INTEGER},
+        birthDate:{type:DataTypes.STRING}
+
       }  ,{timestamps:true});
       return artist;
     };

@@ -6,22 +6,22 @@ export const navLinks = [
     },
     {
       name: "Art Gallery",
-      path: "../MainPage/art/art",
+      path: "/MainPage/art/art",
     },
     {
       name: "Shop",
-      path: "../MainPage/shop/shop",
+      path: "/MainPage/shop/shop",
     },
     {
       name: "Auctions",
-      path: "../MainPage/auctions/auctions",
+      path: "/MainPage/auctions/auctions",
     },
     {
       name: "About Us",
-      path: "../MainPage/aboutUs",
+      path: "/MainPage/aboutUs",
     },
     {
       name: "Contact Us",
-      path: "../MainPage/contactUs",
+      path: "/MainPage/contactUs",
     }
   ];

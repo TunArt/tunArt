@@ -3,6 +3,8 @@ import { Button, Checkbox, Form, Input, Alert } from 'antd';
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import { auth } from "../../server/firebase/config"
 import Styles from "../styles/Login.module.css"
+import { useRouter } from 'next/router';
+import axios from 'axios';
 interface FormValues {
   email: string;
   password: string;
@@ -10,6 +12,7 @@ interface FormValues {
 }
 
 const Login: React.FC = () => {
+  const router=useRouter()
   const [form] = Form.useForm();
   const [emailTest, setEmailTest] = useState(false);
   const [passwordTest, setPasswordTest] = useState(false);
@@ -38,7 +41,12 @@ const Login: React.FC = () => {
         const{email,password}=values
         const result=await signInWithEmailAndPassword(auth ,email,
           password).then((res)=>{
-            console.log(res)
+            axios.get(`http://localhost:3000/api/users/getUser/${email}`).then((res)=>{
+              router.push({
+                pathname:'/MainPage',
+                query:{"id":res.data.id}
+              })
+            })
           })
       } catch (error) {
         
@@ -66,7 +74,7 @@ const Login: React.FC = () => {
 
   return (
     <div className={Styles.overlay}>
-      <Form 
+      <Form className={Styles.login}
         form={form}
         name="login"
         labelCol={{ span: 8 }}
@@ -75,7 +83,9 @@ const Login: React.FC = () => {
         onFinish={handleSubmit}
         onFinishFailed={handleFinishFailed}
       >
+        <h3>Email</h3>
         <Form.Item
+        className={Styles.email}
           label="Email"
           name="email"
           rules={[
@@ -85,7 +95,7 @@ const Login: React.FC = () => {
         >
           <Input />
         </Form.Item>
-
+        <h3>password</h3>
         <Form.Item
           label="Password"
           name="password"
@@ -106,7 +116,7 @@ const Login: React.FC = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className={Styles.but}>
             Submit
           </Button>
         </Form.Item>
