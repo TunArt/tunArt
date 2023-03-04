@@ -1,9 +1,9 @@
 import React,{useState} from "react";
 import  'material-icons/iconfont/material-icons.css';
-import styles from "@/styles/SideBar.module.css";
+import styles from "src/styles/SideBar.module.css";
 import Link from "next/link";
 import ChartBar from "./chartBar";
-
+import Image from "next/Image";
 const SideBar :React.FC=()=>{
   const drawerWidth=240
 const[view,setView]=useState("")
@@ -22,8 +22,7 @@ const[view,setView]=useState("")
     <aside className={styles.aside}>
       <div className={styles.top}>
         <div className={styles.logo}>
-          <img src="logo.png"/>
-          jjj
+          <Image src="/logo.png" width={500} height={500} alt='/logo.png'/>
         </div>
         <div className={styles.close} id="close-btn">
           <span  className="material-icons-sharp">close</span>
@@ -47,9 +46,9 @@ const[view,setView]=useState("")
         <span className="material-icons-sharp">insights</span>
       <h3>Analytics</h3>
         </Link>
-        <Link href="/" className={styles.link}> 
+        <Link href="/admin/Requests" className={styles.link}> 
         <span className="material-icons-sharp">mail_outline</span>
-      <h3>Messages</h3>
+      <h3>Requests</h3>
       <span className={styles.message_count}>26</span>
         </Link>
         <Link href="/" className={styles.link}> 

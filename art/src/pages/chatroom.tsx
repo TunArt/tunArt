@@ -50,8 +50,8 @@ function App(): JSX.Element {
       />
       <button onClick={sendMessage}> Send Message</button>
       <h1> Message:</h1>
-      {messageReceived.map((e: string) => {
-        return <p>{e}</p>;
+      {messageReceived.map((e: string,i:number) => {
+        return <p key={i}>{e}</p>;
       })}
     </div>
   );

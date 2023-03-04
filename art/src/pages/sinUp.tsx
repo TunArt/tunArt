@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Input, Alert, Space, Form } from "antd";
+
 import {
   UserOutlined,
   MailOutlined,
@@ -10,7 +11,8 @@ import styles from "../styles/SingUp.module.css"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../server/firebase/config"
 import { Switch } from 'antd';
-
+import axios from "axios";
+import { useRouter } from 'next/router'
 
 interface SignUpState {
     username: string;
@@ -30,6 +32,8 @@ interface SignUpState {
   }
   
 const SignUp: React.FC = () => {
+  const router = useRouter()
+
   const [form] = Form.useForm();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -38,8 +42,10 @@ const SignUp: React.FC = () => {
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const[age,setAge]=useState("");
+let know=false
   const onChange = (checked: boolean) => {
-    console.log(`switch to ${checked}`);
+    know=checked
+    console.log(know)
   };
   const validateForm = () => {
     let errors: { [key: string]: string } = {};
@@ -91,7 +97,7 @@ const SignUp: React.FC = () => {
   };
 
 
-  const handleSubmit = async(event:any) => {
+  const handleSubmit = async(event:any,know:boolean) => {
 
     event.preventDefault();
     const isValid = validateForm();
@@ -103,18 +109,49 @@ const SignUp: React.FC = () => {
           email,
           password
         )
-        if(user){
-
-          console.log(user.getIdToken())
-
-        }
-      } catch (error) {
+        if(!know){
+          console.log("user")
+        axios.post("http://localhost:3000/api/users/addUser",{
+        userName:username,
+        email: email,
+        password: password,
+        birthDate: age,
+        phoneNumber: phone,
+        }).then((res)=>{
+          axios.get(`http://localhost:3000/api/users/getUser/${email}`).then((res)=>{
+            router.push({
+              pathname:'/MainPage',
+              query:{"id":res.data.id,"type":know}
+            })
+        })
+        })
+      }
+      else {
+        console.log("artist")
+        axios.post("http://localhost:3000/api/artists/addArtist",{
+        name:username,
+        email: email,
+        password: password,
+        phoneNumber: phone,
+        birthDate: age,
+        }).then((res)=>{
+          axios.get(`http://localhost:3000/api/artists/getArtis/${email}`).then((res)=>{
+            router.push({
+              pathname:'/MainPage',
+              query:{"id":res.data.id,"type":know}
+            })
+        })
+        })
+      }
+      }
+       catch (error) {
         console.log(error)
       }
+      
       // Add your form submission logic here
-    }
-  };
-
+    ;
+  }
+}
   return (
     <div className={styles.overlay}>
       <Form form={form}  className={styles.input}>
@@ -180,7 +217,7 @@ const SignUp: React.FC = () => {
         </Space>
         </div>
         <br />
-          <Button type="primary" htmlType="submit" onClick={(event)=>{handleSubmit(event )}}>
+          <Button type="primary" htmlType="submit" onClick={(event)=>{handleSubmit(event,know )}}>
           Sign up
           </Button>
           
@@ -188,6 +225,5 @@ const SignUp: React.FC = () => {
           </Form>
           </div>
           );
-          } 
-          
-          export default SignUp;
+       }    
+   export default SignUp;
