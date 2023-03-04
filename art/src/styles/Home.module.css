@@ -23,9 +23,7 @@
 #body{
   margin: 0px;
   background-color: #1E242A;
-
   height: 100%;
-
 }
 #main{
   width: 100%;
@@ -36,12 +34,11 @@
 #box1{
   width: 630px;
   height: 625px;
-  
   background-image: url("../../public/i.png");
+  background-repeat: no-repeat;
   position: absolute;
   bottom: -100%;
   left: 30%;
-  
   animation: anim 2s forwards, anim2 3s forwards 3s;
 }
 #box1:after{
@@ -49,9 +46,10 @@
   position: absolute;
   width: 630px;
   height:625px;
+  background-repeat: no-repeat;
+
   background-image: url('../../public/i1.png');
   left: 0px;
-  
   z-index: -1;
 }
 @keyframes anim{
@@ -65,7 +63,7 @@
 @keyframes anim2{
   from{
      left:30%;
-     width: 530px; 
+     width: 530px;
   }
   to{
       width: 0px;
@@ -135,12 +133,16 @@
   to{
       top:0%;
   }
-
 }
 .info{
   position: absolute;
   bottom: 0;
   width: 100%;
-  margin-bottom:-230px ;
-
+  margin-bottom:-150% ;
+  /* margin-top: 20%; */
 }
+/* .testing{
+  height: 1000px;
+  width: au;
+  background-color: aqua;
+} */

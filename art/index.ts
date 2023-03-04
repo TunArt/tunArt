@@ -2,7 +2,6 @@ import express, { Application } from 'express';
 import * as dotenv from 'dotenv'
 import cors from 'cors';
 dotenv.config()
-// console.log(process.env);
 
 const app: Application = express();
 
@@ -16,10 +15,27 @@ app.use(express.static(__dirname + "/../client/dist"));
 
 //Require application Route modules
 import artistRoute from "./server/routes/artists"
-import event from './server/routes/events'
+import userRoute from "./server/routes/user"
+import artworkRoute from "./server/routes/artwork"
+import productRoute from "./server/routes/product"
+import paymentRoute from "./server/routes/payment";
+import bidRoute from "./server/routes/bid";
+import categoryRoute from "./server/routes/category";
+import eventRoute from './server/routes/events'
 //Add Routes to the middleware handling path, specifying the respective URL path
 app.use('/api/artists',artistRoute)
-app.use('/api/event',event)
+app.use('/api/event',eventRoute)
+app.use('/api/users',userRoute)
+app.use('/api/artworks',artworkRoute)
+app.use('/api/products',productRoute)
+app.use('/api/payments',paymentRoute)
+app.use('/api/bids',bidRoute)
+app.use('/api/categories',categoryRoute)
+
+
+
+
+
 app.listen(port, () => {
  console.log(`App listening on port ${port}`)
     })

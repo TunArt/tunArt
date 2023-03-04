@@ -38,7 +38,7 @@ function App(): JSX.Element {
    <div className={styles.app}>
       <h1 > Messages:</h1>
      <div className={styles.discussion}> {messageReceived.map((e: string) => {
-        return <p>{e}</p>;
+        return <p className={styles.oneMessage}>{e}</p>;
       })}
       </div>
       <div className={styles.footer}>

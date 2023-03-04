@@ -1,0 +1,207 @@
+.swiperContainer {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    animation:infinite;
+    margin-top: 50%;
+    margin-bottom: 2%
+  }
+
+/* .swiperContainer2 {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    animation:infinite;
+    margin-top: 0%;
+    margin-bottom: 40%
+  } */
+  
+  .swiperWrapper {
+    width: 300%;
+    height:400px;
+    display:flex;
+    
+  }
+  
+  .swiperSlide {
+    width: 15%;
+    height: 100%;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    font-weight: bold;
+    color: white;
+  }
+  
+  
+  .swiperSlide:nth-child(1) {
+  background-repeat: no-repeat;
+  background-color: #5fb3ff;
+  background-size: 100%;
+  background-image: url("https://images.saymedia-content.com/.image/c_limit%2Ccs_srgb%2Cq_auto:eco%2Cw_700/MTc2NDU3NjU4NDE5OTEzOTQx/art-for-kids-learn-about-famous-paintings-and-artists.webp");
+  
+}
+.swiperSlide:nth-child(2) {
+    background-color: #ffa85f;
+    background-image: url("https://static.standard.co.uk/s3fs-public/thumbnails/image/2019/03/05/11/sei26139543-1-0.jpg?width=968");
+    background-repeat: no-repeat;
+    background-size: 100%;
+  
+}
+
+  .swiperSlide:nth-child(3) {
+    background-color: #ffd85f;
+    background-repeat: no-repeat;
+    background-image: url("https://assets.vangoghmuseum.nl/8dcc0e42-7f19-491f-87c1-ebce180ab1cb?w=1200&format=webp&c=796f56e86b83f9d0523994aeee333094a8a46f2617eb2763927fa1b787994dd0");
+    background-size: 100%;
+  }
+  
+  .swiperSlide:nth-child(4) {
+    background-repeat: no-repeat;
+    background-color: #5fb3ff;
+    background-size: 100%;
+    background-image: url("https://images.fineartamerica.com/images-medium-large-5/starry-night-over-rhone-sebastian-pierre.jpg");
+
+  }
+  .swiperSlide:nth-child(5) {
+    background-repeat: no-repeat;
+    background-color: #5fb3ff;
+    background-size: 100%;
+    background-image: url("https://images.moneycontrol.com/static-mcnews/2021/02/The-Scream-Painting-770x433.jpg?impolicy=website&width=770&height=431");
+    
+}
+.swiperSlide:nth-child(6)
+{
+  background-color: #ff5f5f;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7hkbDAHsCI8PT_xSpqGAlY9mED5bJmi6fAAFFRn3YgYz7rCLlfg3yC-Olx34w2gwElm4&usqp=CAU");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+  .swiperSlide:nth-child(7) {
+      background-repeat: no-repeat;
+      background-color: #5fb3ff;
+    background-size: 100%;
+    background-image: url("https://www.theartist.me/wp-content/uploads/2021/02/famous-micheal-angeleo-paintings.jpg");
+    
+}
+.swiperSlide:nth-child(8) {
+    background-repeat: no-repeat;
+    background-color: #5fb3ff;
+    background-size: 100%;
+    background-image: url("https://static.standard.co.uk/s3fs-public/thumbnails/image/2018/07/19/14/paintings-london-1907header.jpg?width=1200&auto=webp&quality=75");
+
+}
+
+  
+  /* Add animation */
+  @keyframes slide {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-82%);
+    }
+  }
+  
+  /* .swiperWrapper {
+    animation: slide 10s infinite;  } */
+
+    .swiperWrapper {
+        animation: slide 50s infinite;
+      }
+      
+.test{
+    display: flex;
+    /* margin: 2%; */
+    margin-left: 5%;
+    width: 90%;
+    height: 600px;
+    /* background-color: #643107; */
+   
+}   
+.text{
+    /* display: flex; */
+    margin-top: 3%;
+    /* margin-left: 5%; */
+    width: 90%;
+    height: 90%;
+    /* background-color: #f0ece9; */
+    color:aliceblue;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 26px;
+    /* background-color: red; */
+}
+
+
+.test2{
+    /* margin: 2%; */
+    margin-left: 5%;
+    width: 90%;
+    height: 600px;
+    /* background-color: #ffa85f; */
+    color:aliceblue;
+    /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+    /* font-size: 35px; */
+    
+}  
+.image{
+    background-color: #f8f4f4;
+    display: flex;
+    width: 100%;
+    height: 95%;
+    background-image: url("https://americaneagle.online/wp-content/uploads/2017/02/1943113-white-world-map-outlines-isolated-on-black-background-abstract-vector-art-illustration.jpg");
+
+
+}
+
+.textx{
+    /* display: flex    ; */
+    /* margin: 2%; */
+    /* margin-left: 5%; */
+    width: 90%;
+    height: 90%;
+    /* background-color: #f0ece9; */
+    color:aliceblue;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 26px;
+    /* background-color: red; */
+    margin-right: -50%;
+    margin-left: 5%;
+
+}
+.text h1{
+    font-size: 60px;
+}
+.text p{
+    font-size: 22px;
+}
+
+.textx h1{
+    font-size: 60px;
+}
+.textx p{
+    font-size: 22px;
+}
+
+.image2{
+    background-color: #f8f4f4;
+    display: flex;
+    width: 100%;
+    height: 95%;
+    background-image: url("https://media.discordapp.net/attachments/989739585158389760/1081601037816828005/sellami.houssem_a_mall_basket_full_of_art_tools_and_painting_to_c9b16e84-3000-4be2-8391-4d79347f15f2.png?width=671&height=671");
+    background-size: 100%;
+margin-top: -4%;
+
+}
+.image3{
+    background-color: #f8f4f4;
+    display: flex;
+    width: 100%;
+    height: 95%;
+    background-image: url("https://media.discordapp.net/attachments/989739585158389760/1081604512034324531/sellami.houssem_image_of_3_famous_paintings_4k_dark_black_backg_eb36fc42-e26b-4952-9743-e22cb648e95e.png?width=671&height=671");
+    background-size: 100%;
+margin-top: 8%;
+
+}

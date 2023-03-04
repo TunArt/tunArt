@@ -1,4 +1,4 @@
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 :root {
@@ -90,7 +90,7 @@ body {
 
 body {
   margin: 0px;
-  background-color: #1E242A;}
+  background-color: #000000;}
 
 a {
   color: inherit;
@@ -103,5 +103,15 @@ a {
   }
 }
 
+ .swiper {
+   position: absolute; 
+   width: 1000px;
+   height: 1000px;
+  margin-top:50%; 
+} 
 
- */
+
+.flex{
+  /* display: flex;
+  flex-direction: row; */
+}
