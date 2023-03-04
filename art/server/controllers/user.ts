@@ -89,7 +89,7 @@ const getUser=async(req:Request,res:Response)=>{
   try {
     const user=await User.findOne({ where:{ email:req.params.email}})
     if (user === null) {
-      console.log('Not found!');
+      res.send(console.error("failed"))
     } else {
       res.status(200).json(user)// 'My Title'
     }

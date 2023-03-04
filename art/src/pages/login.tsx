@@ -38,25 +38,40 @@ const Login: React.FC = () => {
     console.log('Success:', values);
     if(values){
       try {
-        const{email,password}=values
-        const result=await signInWithEmailAndPassword(auth ,email,
-          password).then((res)=>{
-            axios.get(`http://localhost:3000/api/users/getUser/${email}`).then((res)=>{
-              router.push({
-                pathname:'/MainPage',
-                query:{"id":res.data.id}
-              })
-            })
-          })
+        const { email, password } = values;
+        const res = await signInWithEmailAndPassword(auth, email, password);
+        try {
+          const res = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          console.log(res.data);
+          if(!res.data){
+         throw Error('failed')
+          }
+          if (res.data.role === 'user') {
+            router.push({
+              pathname:'/MainPage',
+              query:{"id":res.data.id,type:false}
+            });
+          } else {
+            router.push({
+              pathname:'/admin',
+              query:{"id":res.data.id}
+            });
+          }
+        } catch (err) {
+          console.log('test');
+          const res = await axios.get(`http://localhost:3000/api/artists/getArtist/${email}`);
+          router.push({
+            pathname:'/MainPage',
+            query:{"id":res.data.id,type:true}
+          });
+        }
       } catch (error) {
-        
-        setInvalidCredentials(true)
-        return false
+        setInvalidCredentials(true);
+        return false;
       }
-      
     }
   };
-
+  
   const handleFinishFailed = (error: any) => {
     console.log('Error:', error);
     if (error.errorFields.some((field: any) => field.name[0] === 'email')) {

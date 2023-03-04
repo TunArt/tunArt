@@ -36,17 +36,13 @@ const MainPage =()=>{
         return <div>loading....</div>
     }
     console.log(router.query.id)
+    console.log(user)
     return(
         <div className={styles.all}>  
     <div>
             <NavBar />
-        <h1> {artists?.userName}</h1>
-        <p>this is a test for the main page.</p>
-        <p>never maind this</p>
-        <p>don't look focus at this please !</p>
-        <p>why are you still looking at these meaningless lines !!</p>
-        <p>stop it!</p>
-        <p>now !!</p>
+        <h1> {user.userName }</h1>
+       
     </div>
         </div>
     )

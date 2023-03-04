@@ -1,4 +1,9 @@
 import React,{useState} from "react"
+import { useRouter } from 'next/router'
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import  'material-icons/iconfont/material-icons.css';
+
+
 const products = [
   {
     id: 1,
@@ -36,9 +41,11 @@ const products = [
 ]
 
 export default function Example() {
+  const route=useRouter()
   const [backet,setBacket] =useState(false)
   return (
-    <div className="bg-white">
+    <div className="bg-stone-500	">
+      <span className="material-icons-sharp">shopping_cart</span>
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Products</h2>
 
@@ -46,7 +53,14 @@ export default function Example() {
           {products.map((product) => (
             <a key={product.id} href={product.href} className="group">
               <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                <img
+                <img onClick={()=>{
+                  route.push({
+                    pathname:`shop/${product.id}`,
+                  query:{"items":JSON.stringify(product),
+                }
+                  })
+
+                }}
                   src={product.imageSrc}
                   alt={product.imageAlt}
                   className="h-full w-full object-cover object-center group-hover:opacity-75"

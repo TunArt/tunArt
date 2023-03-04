@@ -44,8 +44,8 @@ const SignUp: React.FC = () => {
   const[age,setAge]=useState("");
 let know=false
   const onChange = (checked: boolean) => {
-    console.log(`switch to ${checked}`);
     know=checked
+    console.log(know)
   };
   const validateForm = () => {
     let errors: { [key: string]: string } = {};
@@ -97,7 +97,7 @@ let know=false
   };
 
 
-  const handleSubmit = async(event:any) => {
+  const handleSubmit = async(event:any,know:boolean) => {
 
     event.preventDefault();
     const isValid = validateForm();
@@ -109,7 +109,8 @@ let know=false
           email,
           password
         )
-        if(know===false){
+        if(!know){
+          console.log("user")
         axios.post("http://localhost:3000/api/users/addUser",{
         userName:username,
         email: email,
@@ -117,11 +118,16 @@ let know=false
         birthDate: age,
         phoneNumber: phone,
         }).then((res)=>{
-          console.log(res);
-          router.push("/MainPage")
+          axios.get(`http://localhost:3000/api/users/getUser/${email}`).then((res)=>{
+            router.push({
+              pathname:'/MainPage',
+              query:{"id":res.data.id,"type":know}
+            })
+        })
         })
       }
       else {
+        console.log("artist")
         axios.post("http://localhost:3000/api/artists/addArtist",{
         name:username,
         email: email,
@@ -129,17 +135,23 @@ let know=false
         phoneNumber: phone,
         birthDate: age,
         }).then((res)=>{
-          router.push("/MainPage")
+          axios.get(`http://localhost:3000/api/artists/getArtis/${email}`).then((res)=>{
+            router.push({
+              pathname:'/MainPage',
+              query:{"id":res.data.id,"type":know}
+            })
+        })
         })
       }
-      } catch (error) {
+      }
+       catch (error) {
         console.log(error)
       }
       
       // Add your form submission logic here
-    }
-  };
-
+    ;
+  }
+}
   return (
     <div className={styles.overlay}>
       <Form form={form}  className={styles.input}>
@@ -205,7 +217,7 @@ let know=false
         </Space>
         </div>
         <br />
-          <Button type="primary" htmlType="submit" onClick={(event)=>{handleSubmit(event )}}>
+          <Button type="primary" htmlType="submit" onClick={(event)=>{handleSubmit(event,know )}}>
           Sign up
           </Button>
           
@@ -213,6 +225,5 @@ let know=false
           </Form>
           </div>
           );
-          } 
-          
-          export default SignUp;
+       }    
+   export default SignUp;

@@ -84,8 +84,33 @@ const deleteArtist= async (req:Request, res:Response)=> {
         res.status(400).send(err);
       }
     }
-  
+    const getArtist=async(req:Request,res:Response)=>{
+      try {
+        const artist=await Artist.findOne({ where:{ email:req.params.email}})
+        if (artist === null) {
+          res.status(401).send( console.error("fails"));
+        } else {
+          res.status(200).json(artist)// 'My Title'
+        }
+        
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    const getArtistwithId=async(req:Request,res:Response)=>{
+      try {
+        const artist=await Artist.findOne({ where:{ id:req.params.id}})
+        if (artist === null) {
+          console.log('Not found!');
+        } else {
+          res.status(200).json(artist)// 'My Title'
+        }
+        
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
-export default {getAllArtists,addArtist,updateArtist,deleteArtist};
+export default {getAllArtists,addArtist,updateArtist,deleteArtist,getArtist,getArtistwithId};
 
 

@@ -3,6 +3,7 @@ import styles from "../../styles/Allreq.module.css"
 import Image from 'next/image'
 import { Button } from 'antd'
 import axios from 'axios'
+
 interface Props {
   image: string;
   artistId: number;
@@ -37,6 +38,7 @@ function Allrequests({ e, setRender, render }: AllRequestsProps) {
   
   return (
     <div className={styles.allRcontainer}>
+      
       <div className={styles.allR}>
         <div className={styles.image}>
           <img src={e.image} alt="failed" />
