@@ -44,7 +44,7 @@ export default function Example() {
   const route=useRouter()
   const [backet,setBacket] =useState(false)
   return (
-    <div className="bg-stone-500	">
+    <div className="bg-stone-500">
       <span className="material-icons-sharp">shopping_cart</span>
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Products</h2>
