@@ -188,6 +188,6 @@ const SignUp: React.FC = () => {
           </Form>
           </div>
           );
-          }
+          } 
           
           export default SignUp;
