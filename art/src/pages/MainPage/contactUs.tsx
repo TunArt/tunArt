@@ -6,9 +6,9 @@ import styles from "../../styles/principale.module.css"
 const contactUs=()=>{
     return(
         <div className={styles.all}>
-        <div className={styles.main}>
             <div><NavBar/></div>
-            <h1>Contact us on:</h1>
+        <div className={styles.wrapper}>
+            <h1 className={styles.titles}>Contact us on:</h1>
             <br></br>
             <ul>
                 <li><h4>Email: contact@artfolio.com</h4></li>
