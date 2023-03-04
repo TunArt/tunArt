@@ -53,7 +53,6 @@ const Home: React.FC<Props> = () => {
                 </div>
                 <div id={styles.menu}>
                   <ul>
-
                     <li>HOME</li>
                     <li>SERVICES</li>
                     <li>ABOUT</li>
@@ -70,9 +69,6 @@ const Home: React.FC<Props> = () => {
           </div>
 
         </div>
-
-
-
       </main>
 
       <div className={styles.info}>
@@ -92,6 +88,7 @@ const Home: React.FC<Props> = () => {
         </div>
       </div>
     </>
+    
   );
 };
 export default Home;
