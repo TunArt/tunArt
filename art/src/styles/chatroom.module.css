@@ -1,0 +1,46 @@
+.app{
+    /* margin-left: 20%;
+    margin-right: 20%; */
+    height: 50rem;
+    /* width: 100rem; */
+    /* background-color: black; */
+}
+
+.room{
+    margin-left: 0%;
+    height: 80%;
+
+}
+.join{
+    margin-left: 0%;
+    height: 90%;
+}
+
+.discussion{
+    /* background-color: aqua; */
+height: 90%;
+padding-top: 4%;
+    padding-left: 10%;
+    /* background-color: brown; */
+}
+.message{
+    margin-left: 10%;
+    width: 50%;
+    height: 80%;
+   
+}
+.send{
+    margin-left: 0%;
+    height: 80%;
+}
+.footer{
+    margin-top : 1%;
+    height: 5%;
+    width: auto;
+    background-color: green;
+    /* margin-left :10%; */
+    padding-left: 5%;
+}
+.onemessage {
+    background-color: black;
+}
