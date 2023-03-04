@@ -7,9 +7,9 @@ import styles from "../../../styles/principale.module.css";
 const auctions=()=>{
     return(
         <div className={styles.all}>
-        <div className={styles.main}>
             <div><NavBar/></div>
-            <h1>Welcome to Auctions room!</h1>
+        <div className={styles.wrapper}>
+            <h1 className={styles.titles}>Welcome to Auctions room!</h1>
             <h4>Were legendary piece of arts are sold!</h4>
         </div>
         </div>

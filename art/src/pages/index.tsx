@@ -76,12 +76,6 @@ const Home: React.FC<Props> = () => {
                 </div>
               </div>
             </div>
-          </div>
-
-        </div>
-
-
-
       </main>
 
       <div className={styles.info}>
