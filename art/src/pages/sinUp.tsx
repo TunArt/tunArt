@@ -13,6 +13,7 @@ import { auth } from "../../server/firebase/config"
 import { Switch } from 'antd';
 import axios from "axios";
 import { useRouter } from 'next/router'
+import { style } from "@mui/system/Stack/createStack";
 
 interface SignUpState {
     username: string;
@@ -135,7 +136,9 @@ let know=false
         phoneNumber: phone,
         birthDate: age,
         }).then((res)=>{
-          axios.get(`http://localhost:3000/api/artists/getArtis/${email}`).then((res)=>{
+          console.log(res)
+          axios.get(`http://localhost:3000/api/artists/getArtist/${email}`).then((res)=>{
+            console.log(res)
             router.push({
               pathname:'/MainPage',
               query:{"id":res.data.id,"type":know}
@@ -154,7 +157,7 @@ let know=false
 }
   return (
     <div className={styles.overlay}>
-      <Form form={form}  className={styles.input}>
+      <Form form={form} className={styles.form} >
         <Input className={styles.input}
           type="text"
           placeholder="Full Name"
@@ -201,7 +204,7 @@ let know=false
           <Alert message={errors.confirmPassword} type="error" />
         )}
         <Space>
-        <Input className={styles.input}
+        <Input 
 
           type="text"
           placeholder="Age"
@@ -217,7 +220,7 @@ let know=false
         </Space>
         </div>
         <br />
-          <Button type="primary" htmlType="submit" onClick={(event)=>{handleSubmit(event,know )}}>
+          <Button className={styles.btn} type="primary" htmlType="submit" onClick={(event)=>{handleSubmit(event,know )}}>
           Sign up
           </Button>
           

@@ -4,7 +4,11 @@ import styles from "src/styles/SideBar.module.css";
 import Link from "next/link";
 import ChartBar from "./chartBar";
 import Image from "next/Image";
+import {useRouter} from "next/router" 
 const SideBar :React.FC=()=>{
+  const route=useRouter()
+  console.log("mmmmmmmmmmm",route);
+  
   const drawerWidth=240
 const[view,setView]=useState("")
   const changeView=(option:string)=>{
@@ -16,13 +20,25 @@ const[view,setView]=useState("")
     }
     
   }
+  const userHere=()=>{
+    if (typeof window !== 'undefined') {
+      console.log(route.query.id)
+    if(!route.query.id){
+      route.push({
+        pathname:"/404"
+      })
+    }
+  }
+  }
+  userHere()
   return(
+    
     <div className={styles.sideBar}>
   <div className={styles.container}>
     <aside className={styles.aside}>
       <div className={styles.top}>
         <div className={styles.logo}>
-          <Image src="/logo.png" width={500} height={500} alt='/logo.png'/>
+          <Image src="/admin.png" width={500} height={500} alt='/logo.png'/>
         </div>
         <div className={styles.close} id="close-btn">
           <span  className="material-icons-sharp">close</span>
