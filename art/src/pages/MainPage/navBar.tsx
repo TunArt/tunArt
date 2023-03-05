@@ -37,14 +37,6 @@ export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
   return (
     <div>
-      <Head>
-        <title>Create Next Responsive Navbar With Tailwind CSS</title>
-        <meta
-          name="description"
-          content="Create Next JS Responsive Menu with Tailwind CSS"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <nav className="w-full bg-gray-800 shadow">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
