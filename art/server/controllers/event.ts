@@ -61,4 +61,5 @@ const updateEvent = (req:Request,res:Response)=>{
         
     }
 }
+
 export default {updateEvent,removeEvent,addEvent,getAllEvents}

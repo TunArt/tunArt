@@ -49,6 +49,7 @@ function Event({ events }:any) {
   }
 
   return (
+    <div className={styles.bg}>
     <section className={styles.section}>
       <div className={styles.leftBox}>
 
@@ -62,6 +63,7 @@ function Event({ events }:any) {
         ))}
       </div>
     </section>
+      </div>
   );
 }
 

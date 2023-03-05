@@ -85,7 +85,32 @@ const deleteUser= async(req:Request, res:Response)=> {
       }
     }
   
-
-export default {getAllUsers,addUser,updateUser,deleteUser};
+const getUser=async(req:Request,res:Response)=>{
+  try {
+    const user=await User.findOne({ where:{ email:req.params.email}})
+    if (user === null) {
+      res.send(console.error("failed"))
+    } else {
+      res.status(200).json(user)// 'My Title'
+    }
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+const getUserwithId=async(req:Request,res:Response)=>{
+  try {
+    const user=await User.findOne({ where:{ id:req.params.id}})
+    if (user === null) {
+      console.log('Not found!');
+    } else {
+      res.status(200).json(user)// 'My Title'
+    }
+    
+  } catch (error) {
+    
+  }
+}
+export default {getAllUsers,addUser,updateUser,deleteUser,getUser,getUserwithId};
 
 

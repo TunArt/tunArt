@@ -1,85 +1,153 @@
-// import db from '../models/index';
-// import express, { Express, Request, Response } from 'express';
-// const ArtWork = db.ArtWork
+import db from '../models/index';
+import express, { Express, Request, Response } from 'express';
+import { async } from '@firebase/util';
+const Artwork = db.artwork
 
-// //methods to get all the ArtWorks
-// const getAllArtWorks = (req:Request ,res:Response) =>{
-//     try {
-//         let  ArtWorks= ArtWork.findAll()
-//         res.status(200).send(ArtWorks)
-// }
-// catch (err){
-//     console.log(err)
-// }
-// }
+//methods to get all the artworks
+const getAllArtworks = async (req:Request ,res:Response) =>{
+    try {
+        let  artworks= await Artwork.findAll()
+        res.status(200).send(artworks)
+}
+catch (err){
+    console.log(err)
+}
+}
 
-// //  method to add  a new ArtWork
-// const addArtWork = (req: Request, res: Response) => {
-//     try {
-//       if (!req.body) {
-//         throw new Error("Request body is missing required properties.");
-//       }
-//       const ArtWork = ArtWork.create({
-//         name: req.body.name,
-//         bio: req.body.bio,
-//         email: req.body.email,
-//         password: req.body.password,
-//         picture: req.body.picture,
-//         phoneNumber: req.body.phoneNumber
-//       });
-//       res.status(201).send("ArtWork created successfully");
-//     } catch (err) {
-//       console.log(err);
-//       res.status(400).send({ error: err.message });
-//     }
-//   };
+//  method to add  a new artwork
+const addArtwork = async (req: Request, res: Response) => {
+  const {artistId,userId}=req.params
+      if (!req.body) {
+        throw new Error("Request body is missing required properties.");
+      }
+if(userId){
+  try{
+      const artwork = await Artwork.create({
+        name: req.body.name,
+        creationDate: req.body.creationDate,
+        price: req.body.price,
+        description: req.body.description,
+        auction: req.body.auction,
+        image: req.body.image,
+        verified:req.body.verified,
+        artistId: req.params.artistId,
+        categoryId: req.body.categoryId, 
+      });
+      res.status(201).send("artwork created successfully");
+    }
+     catch (err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+  }
+  else{
+    try {
+      const artwork = await Artwork.create({
+        name: req.body.name,
+        creationDate: req.body.creationDate,
+        price: req.body.price,
+        description: req.body.description,
+        auction: req.body.auction,
+        image: req.body.image,
+        verified:req.body.verified,
+        artistId: req.params.artistId,
+        categoryId: req.body.categoryId, 
+        userId: req.params.userId
+      });
+      res.status(201).send("artwork created successfully");
+    } catch (error) {
+      
+    }
+  }
+};
+  const modfyArtWork=async(req:Request,res:Response)=>{
+    try {
+      if (!req.body) {
+        throw new Error("Request body is missing required properties.");
+      }
+      await Artwork.update({
+        rating:req.body.rating,
+        comments:req.body.comments
+    }, {
+        where: {
+            id: req.params.id
+        }
+    })
+    } catch (error) {
+      
+    }
+  }
+  const acceptsArtWork=async(req:Request,res:Response)=>{
+    try {
+      if (!req.body) {
+        throw new Error("Request body is missing required properties.");
+      }
+      await Artwork.update({
+        verified:true
+    }, {
+        where: {
+            id: req.params.id
+        }
+    })
+    } catch (error) {
+      res.status(500).send("failed to add artwork")
+      
+    }
+  }
+  const AllnotV = async(req:Request,res:Response) => {
+    try {
+      const art=await  Artwork.findAll({where:
+          {verified:false}  })
+          res.status(200).json(art)
+    } 
+    catch (error) {
+        res.status(500).send("failed to add artwork")
+    }
+  }
+    // update User information in database
+   const updateArtWork= (req:Request, res:Response)=> {
+    try {
+        if (!req.body) {
+          throw new Error("Request body is missing required properties.");
+        }
 
-//    // update User information in database
-//    const updateArtWork= (req:Request, res:Response)=> {
-//     try {
-//         if (!req.body) {
-//           throw new Error("Request body is missing required properties.");
-//         }
+    const artWork =  Artwork.update({
+        name: req.body.name,
+        bio: req.body.bio,
+        email: req.body.email,
+        password: req.body.password,
+        picture: req.body.picture,
+        phoneNumber: req.body.phoneNumber
+    }, {
+        where: {
+            id: req.params.id
+        }
+    })
+    res.status(200).send("ArtWork updated successfully")
+}
+catch (err) {
+    console.log(err);
+    res.status(400).send(err);
+  }
+}
 
-//     const ArtWork =  ArtWork.update({
-//         name: req.body.name,
-//         bio: req.body.bio,
-//         email: req.body.email,
-//         password: req.body.password,
-//         picture: req.body.picture,
-//         phoneNumber: req.body.phoneNumber
-//     }, {
-//         where: {
-//             id: req.params.id
-//         }
-//     })
-//     res.status(200).send("ArtWork updated successfully")
-// }
-// catch (err) {
-//     console.log(err);
-//     res.status(400).send({ error: err.message });
-//   }
-// }
-
-// const deleteArtWork= (req:Request, res:Response)=> {
-//     try {
-//         if (!req.body) {
-//           throw new Error("Request body is missing required properties.");
-//         }
-//    const ArtWork =  ArtWork.destroy({
-//             where: {
-//                 id: req.params.id
-//             }
-//         })
-//         res.status(200).send("ArtWork deleted successfully")
-//     }
-//     catch (err) {
-//         console.log(err);
-//         res.status(400).send({ error: err.message });
-//       }
-//     }
-  
-
-// export default {getAllArtWorks,addArtWork,updateArtWork,deleteArtWork};
+const deleteArtWork= (req:Request, res:Response)=> {
+    try {
+        if (!req.body) {
+          throw new Error("Request body is missing required properties.");
+        }
+   const artWork =  Artwork.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        res.status(200).send("ArtWork deleted successfully")
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+    }
+export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
 
 

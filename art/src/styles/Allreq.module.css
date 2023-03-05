@@ -1,0 +1,49 @@
+.allRcontainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .allR {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+    padding: 1rem;
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .image {
+    grid-column: 1 / span 1;
+  }
+  
+  .name {
+    grid-column: 2 / span 2;
+
+    font-size: 300%;
+  }
+  
+  .price {
+    grid-column: 4 / span 1;
+  }
+  
+  .buttons {
+    grid-column: 3 / span 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .img {
+    max-width: 100%;
+    height: auto;
+  }
+
+.materialsymbolsoutlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+  
