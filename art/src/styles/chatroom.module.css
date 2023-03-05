@@ -24,8 +24,8 @@
   }
   
   .oneMessage {
-    background-color: #4d4c4c;
-    margin: 5px;
+    background-color: #a35710;
+    margin: 15px;
     padding: 10px;
     border-radius: 5px;
     color: #fdf9f9;
@@ -53,7 +53,7 @@
   }
   
   .button {
-    background-color: #4caf50;
+    background-color: #a35710;
     color: white;
     border: none;
     padding: 5px 10px;

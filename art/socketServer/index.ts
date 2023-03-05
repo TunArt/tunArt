@@ -30,5 +30,5 @@ console.log("send message", data);
 });
 
 server.listen(3001, () => {
-console.log("SERVER IS RUNNING");
+console.log("SERVER IS RUNNING AND LISTENING ...");
 });

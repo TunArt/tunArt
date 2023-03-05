@@ -5,12 +5,12 @@ import react, { useEffect, useState } from "react";
 const socket: Socket = io("http://localhost:3001");
 
 function App(): JSX.Element {
-  //Room State
+  // Room State
   const [room, setRoom] = useState<string>("");
 
-  // Messages States
+  // Messages State
   const [message, setMessage] = useState<string>("");
-  const [messageReceived, setMessageReceived] = useState<string[]>([]);
+  const [messageData, setMessageData] = useState<{ [key: string]: string[] }>({});
 
   const joinRoom = () => {
     if (room !== "") {
@@ -20,35 +20,47 @@ function App(): JSX.Element {
 
   const sendMessage = () => {
     if (message !== "") {
-      const arr: string[] = [...messageReceived];
-      arr.push(message);
-      setMessageReceived(arr);
+      const newMessageData = { ...messageData };
+      if (!(room in newMessageData)) {
+        newMessageData[room] = [];
+      }
+      newMessageData[room].push(message);
+      setMessageData(newMessageData);
       setMessage("");
-      socket.emit("send_message", { arr, room });
+      socket.emit("send_message", { message, room });
     }
   };
 
   useEffect(() => {
-    socket.on("receive_message", (data: { arr: string[]; message: string }) => {
-      const arr: string[] = [...data.arr];
-      arr.push(data.message);
-      setMessageReceived(arr);
+    socket.on("receive_message", (data: { message: string; room: string }) => {
+      const newMessageData = { ...messageData };
+      if (!(data.room in newMessageData)) {
+        newMessageData[data.room] = [];
+      }
+      newMessageData[data.room].push(data.message);
+      setMessageData(newMessageData);
     });
-  }, []);
+  }, [messageData]);
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  };
 
   return (
     <div className={styles.app}>
       <h1>Messages:</h1>
       <div className={styles.discussion}>
-        {messageReceived
-        .filter((message) => message !== "")
-        .map((e: string, index: number) => {
-          return (
-            <p key={index} className={styles.oneMessage}>
-              {e}
-            </p>
-          );
-        })}
+        {room in messageData &&
+          Array.isArray(messageData[room]) &&
+          messageData[room].map((e: string, index: number) => {
+            return (
+              <p key={index} className={styles.oneMessage}>
+                {e}
+              </p>
+            );
+          })}
       </div>
       <div className={styles.footer}>
         <div>
@@ -71,15 +83,19 @@ function App(): JSX.Element {
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setMessage(event.target.value);
             }}
+            onKeyDown={handleKeyPress}
+
           />
-          <button onClick={sendMessage} className={`${styles.button} ${styles.send}`}>
+          <button
+            onClick={sendMessage}
+            className={`${styles.button} ${styles.send}`}
+          >
             Send Message
           </button>
         </div>
       </div>
     </div>
   );
-  
 }
 
 export default App;
