@@ -1,7 +1,6 @@
 import styles from "../styles/chatroom.module.css";
-
 import io, { Socket } from "socket.io-client";
-import react,{ useEffect, useState } from "react";
+import react, { useEffect, useState } from "react";
 
 const socket: Socket = io("http://localhost:3001");
 
@@ -20,10 +19,13 @@ function App(): JSX.Element {
   };
 
   const sendMessage = () => {
-    const arr: string[] = [...messageReceived];
-    arr.push(message);
-    setMessageReceived(arr);
-    socket.emit("send_message", { arr, room });
+    if (message !== "") {
+      const arr: string[] = [...messageReceived];
+      arr.push(message);
+      setMessageReceived(arr);
+      setMessage("");
+      socket.emit("send_message", { arr, room });
+    }
   };
 
   useEffect(() => {
@@ -32,38 +34,52 @@ function App(): JSX.Element {
       arr.push(data.message);
       setMessageReceived(arr);
     });
-  }, [socket]);
+  }, []);
 
- return (
-   <div className={styles.app}>
-      <h1 > Messages:</h1>
-     <div className={styles.discussion}> {messageReceived.map((e: string) => {
-        return <p className={styles.oneMessage}>{e}</p>;
-      })}
+  return (
+    <div className={styles.app}>
+      <h1>Messages:</h1>
+      <div className={styles.discussion}>
+        {messageReceived
+        .filter((message) => message !== "")
+        .map((e: string, index: number) => {
+          return (
+            <p key={index} className={styles.oneMessage}>
+              {e}
+            </p>
+          );
+        })}
       </div>
       <div className={styles.footer}>
-      <input className={styles.room}
-        placeholder="Room Number..."
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setRoom(event.target.value);
-        }}
-      />
-      <button className={styles.join} onClick={joinRoom}> Join Room</button>
-      <input
-      className={styles.message} 
-        placeholder="Message..."
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setMessage(event.target.value);
-        }}
-      />
-      <button onClick={sendMessage}> Send Message</button>
-      <h1> Message:</h1>
-      {messageReceived.map((e: string) => {
-        return <p>{e}</p>;
-      })}
+        <div>
+          <input
+            className={styles.room}
+            placeholder="Room Number..."
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setRoom(event.target.value);
+            }}
+          />
+          <button className={styles.join} onClick={joinRoom}>
+            Join Room
+          </button>
+        </div>
+        <div>
+          <input
+            className={styles.message}
+            placeholder="Message..."
+            value={message}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setMessage(event.target.value);
+            }}
+          />
+          <button onClick={sendMessage} className={`${styles.button} ${styles.send}`}>
+            Send Message
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
   );
+  
 }
 
 export default App;

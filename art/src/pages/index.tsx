@@ -148,13 +148,7 @@ const Home: React.FC<Props> = () => {
 
 <div className={swipes.test}>
   
- <div className={swipes.text}> <h1>Join in, it’s free.</h1> <p> Welcome to our art website! Our platform is dedicated to showcasing the work of talented artists from around the world. We believe that art is a universal language that can bridge cultural divides and connect people from all walks of life.
-
-On our website, you will find a diverse range of art styles and mediums, including paintings, sculptures, photographs, digital art, and more. Our artists are carefully selected based on their creativity, originality, and technical skill, and we are proud to represent both emerging and established artists.
-
-Whether you are an art collector, enthusiast, or simply appreciate the beauty of art, we invite you to explore our collection and discover new artists and works that inspire you. Our website also provides a convenient platform for purchasing art, with secure transactions and worldwide shipping available.
-
-Thank you for visiting our art website, and we hope you enjoy your experience here!</p></div> 
+ <div className={swipes.text}> <h1>Join in, it’s free.</h1> <p> Welcome to our art website! We showcase talented artists from around the world, featuring a diverse range of art styles and mediums. Our carefully selected artists are both emerging and established, and our website provides a convenient platform for purchasing art with secure transactions and worldwide shipping available. Enjoy exploring our collection and discovering new artists and works that inspire you!</p></div> 
  <div className={swipes.test} >
 <div className={swipes.image}></div>
  </div>
@@ -163,13 +157,7 @@ Thank you for visiting our art website, and we hope you enjoy your experience he
 
 <div className={swipes.test}>
 <div className={swipes.image2}></div>
- <div className={swipes.textx}> <h1>Check our shop.</h1> <p>Welcome to our shop! We're thrilled to offer you a carefully curated selection of unique and high-quality products that we know you'll love. Our team has scoured the globe to bring you a range of items that embody our passion for creativity and innovation.
-
-Whether you're searching for that perfect piece of tool to add a pop of color to your work of art, or a one-of-a-kind piece of art to adorn your walls, we've got you covered. From handmade ceramics to sustainable fashion, our shop has something for everyone.
-
-At our core, we believe in supporting independent artists and designers who are pushing the boundaries of their craft. By shopping with us, you're not only getting a beautiful and unique product, but you're also supporting a community of creatives who are passionate about what they do.
-
-So take a look around, and be inspired by our collection of carefully crafted products. We can't wait to see what treasures you find!</p></div> 
+ <div className={swipes.textx}> <h1>Check our shop.</h1> <p>Explore our shop's carefully curated selection of unique and high-quality products sourced from independent artists and designers around the world. From handmade ceramics to sustainable fashion, we offer a diverse range of items that embody our passion for creativity and innovation. Shop with us and support a community of creatives who are pushing the boundaries of their craft. Start browsing now and discover the beautiful and unique products waiting for you!</p></div> 
  <div className={swipes.test} >
 
  </div>
@@ -178,13 +166,7 @@ So take a look around, and be inspired by our collection of carefully crafted pr
 
 <div className={swipes.test}>
   
- <div className={swipes.text}> <h1>Stay tuned for our weekly AUCTIONS.</h1> <p> Get ready for the excitement of our weekly auctions! Every week, we bring you a carefully curated selection of unique and rare items that are sure to delight art enthusiasts .Our auctions offer something for everyone.
-
-Our team of experts scours the globe to find the most interesting and rare items to feature in our auctions. We pride ourselves on offering a diverse range of items that you won't find anywhere else, so you never know what treasures you might uncover.
-
-Whether you're an experienced collector or just starting out, our auctions are the perfect opportunity to add something special to your collection. Plus, our easy-to-use bidding platform makes it easy to participate from anywhere in the world.
-
-So stay tuned for our weekly auctions, and don't miss your chance to bid on some of the most unique and rare items around. It's an experience you won't want to miss!</p></div> 
+ <div className={swipes.text}> <h1>Stay tuned for our weekly AUCTIONS.</h1> <p> Join our weekly auctions for a chance to bid on unique and rare items handpicked by our experts from around the world. Our auctions offer something for everyone, from experienced collectors to beginners. Don't miss out on the opportunity to add something special to your collection with our easy-to-use bidding platform. Stay tuned for our upcoming auctions and discover the treasures that await you!</p></div> 
  <div className={swipes.test} >
 <div className={swipes.image3}></div>
  </div>

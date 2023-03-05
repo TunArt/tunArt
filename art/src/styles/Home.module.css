@@ -38,6 +38,7 @@
   height: 625px;
   
   background-image: url("../../public/i.png");
+  background-repeat: no-repeat;
   position: absolute;
   bottom: -100%;
   left: 30%;
@@ -50,6 +51,7 @@
   width: 630px;
   height:625px;
   background-image: url('../../public/i1.png');
+  background-repeat: no-repeat;
   left: 0px;
   
   z-index: -1;
@@ -143,4 +145,4 @@
   width: 100%;
   margin-bottom:-150% ;
   /* margin-top: 20%; */
-}
+} 

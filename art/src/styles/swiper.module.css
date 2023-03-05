@@ -123,14 +123,14 @@
 }   
 .text{
     /* display: flex; */
-    margin-top: 3%;
+    margin-top: 4%;
     /* margin-left: 5%; */
     width: 90%;
-    height: 90%;
+    height: 100%;
     /* background-color: #f0ece9; */
     color:aliceblue;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 26px;
+    /* font-size: 100px; */
     /* background-color: red; */
 }
 
@@ -157,15 +157,13 @@
 }
 
 .textx{
-    /* display: flex    ; */
-    /* margin: 2%; */
-    /* margin-left: 5%; */
+  
     width: 90%;
     height: 90%;
     /* background-color: #f0ece9; */
     color:aliceblue;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 26px;
+    /* font-size: 30px; */
     /* background-color: red; */
     margin-right: -50%;
     margin-left: 5%;
@@ -173,26 +171,30 @@
 }
 .text h1{
     font-size: 60px;
+    color: #ff5f5f;
 }
 .text p{
-    font-size: 22px;
+    font-size: 30px;
 }
 
 .textx h1{
     font-size: 60px;
+    color: #ff5f5f;
 }
 .textx p{
-    font-size: 22px;
+    font-size: 30px;
 }
 
 .image2{
     background-color: #f8f4f4;
     display: flex;
     width: 100%;
-    height: 95%;
+    height: 100%;
     background-image: url("https://media.discordapp.net/attachments/989739585158389760/1081601037816828005/sellami.houssem_a_mall_basket_full_of_art_tools_and_painting_to_c9b16e84-3000-4be2-8391-4d79347f15f2.png?width=671&height=671");
     background-size: 100%;
-margin-top: -4%;
+    background-position-y: center ;
+
+/* margin-top: -4%; */
 
 }
 .image3{
@@ -202,6 +204,7 @@ margin-top: -4%;
     height: 95%;
     background-image: url("https://media.discordapp.net/attachments/989739585158389760/1081604512034324531/sellami.houssem_image_of_3_famous_paintings_4k_dark_black_backg_eb36fc42-e26b-4952-9743-e22cb648e95e.png?width=671&height=671");
     background-size: 100%;
+    background-position-y: center ;
 margin-top: 8%;
 
 }
