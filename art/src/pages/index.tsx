@@ -28,8 +28,10 @@ const stats = [
 ]
 
 const Home: React.FC<Props> = () => {
+ 
   const [popUp, setPopUp] = useState(false);
   const [popUpLogin, setPopUpLogin] = useState(false);
+
 
   const togglePopup = () => {
     setPopUp(!popUp);
@@ -71,7 +73,6 @@ const Home: React.FC<Props> = () => {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
       </Head>
     <div className={styles.test} >
-
       <main id={styles.body}>
        
         <div id={styles.main}>
@@ -197,6 +198,7 @@ So stay tuned for our weekly auctions, and don't miss your chance to bid on some
 </div>
 <div className={swipes.test2}> </div>
     </div>
+    
   );
 }
 
