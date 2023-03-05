@@ -141,6 +141,6 @@
   position: absolute;
   bottom: 10px;
   width: 100%;
-  margin-bottom:-230px ;
-
+  margin-bottom:-150% ;
+  /* margin-top: 20%; */
 }
