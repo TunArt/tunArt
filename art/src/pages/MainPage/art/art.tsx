@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import NavBar from "../navBar";
+import NavBar from "../../../components/navBar";
 import { TestData } from "../testData";
 import styles from "../../../styles/principale.module.css";
 import axios from "axios";

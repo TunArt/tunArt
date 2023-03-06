@@ -18,8 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     eventName: DataTypes.STRING,
     description: DataTypes.STRING,
     price: DataTypes.INTEGER,
-    eventDate: DataTypes.DATE,
-    evenetTime: DataTypes.STRING
+    image:DataTypes.STRING,
+    eventDate: DataTypes.STRING,
+    evenetTime: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Event',

@@ -74,9 +74,13 @@ const[view,setView]=useState("")
         <span className="material-icons-sharp">insights</span>
       <h3 onClick={()=>changeView("analytic")}>Analytics</h3>
       </div>
-        <div  className={styles.link}> 
+    <div  className={styles.link} onClick={()=>{
+      route.push({
+        pathname:"/admin/Requests"
+      })
+    }} > 
         <span className="material-icons-sharp">mail_outline</span>
-      <h3>Requests</h3>
+      <h3 >Requests</h3>
       <span className={styles.message_count}>26</span>
       </div>
         <div  className={styles.link}> 
