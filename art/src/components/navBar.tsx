@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-
+import Image from "next/image"
 type NavigationItem = {
   name: string;
   href: string;
@@ -19,10 +19,11 @@ export default function Example({id}:string) {
   }
   const navigation = [
     { name: 'Art Gallery', href: `/MainPage/art/art?id=${id}`, current: false },
-    { name: 'Shop', href: '#', current: false },
+    { name: 'Shop', href: `/MainPage/art/art`, current: false },
     { name: 'Auctions', href: '#', current: false },
     { name: 'Contact Us', href: '#', current: false },
     { name: 'Reports', href: '#', current: false },
+    {name:"Events",href:`/event/event?id=${id}`,current:false}
   ]
   const userNavigation = [
     { name: 'Your Profile', href: '' },
@@ -55,10 +56,15 @@ export default function Example({id}:string) {
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <img
-                        className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      <Image
+                        className="h-10 w-10 "
+                        onClick={()=>{
+                          
+                        }}
+                        src="/tunart-website-favicon-color.png"
                         alt="Your Company"
+                        width={500}
+                        height={500}
                       />
                     </div>
                     <div className="hidden md:block">

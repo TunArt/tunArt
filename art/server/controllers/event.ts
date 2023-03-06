@@ -2,25 +2,23 @@ import db from '../models/index';
 import express, { Express, Request, Response } from 'express';
 import { where } from 'sequelize';
 const Event = db.event
-const getAllEvents = (req:Request,res:Response)=>{
+const getAllEvents = async(req:Request,res:Response)=>{
     try {
-      let events =  Event.findAll()
+      let events =  await Event.findAll()
       res.status(200).json(events)
-
     } catch (error) {
         res.status(400)
-
     }
 }
-const addEvent = (req:Request, res:Response)=>{
+const addEvent = async(req:Request, res:Response)=>{
+    console.log(req)
     try{
-        let events=Event.create({
+        const events=await Event.create({
             eventName:req.body.eventName,
             description:req.body.description,
-            price:req.body.price  ,        
+            price:req.body.price  ,
             eventDate:req.body.eventDate,
             evenetTime:req.body.evenetTime,
-            
         })
         res.status(200).json(events)
     }
@@ -49,17 +47,15 @@ const updateEvent = (req:Request,res:Response)=>{
             Event.update({
                 eventName:req.body.eventName,
                 description:req.body.description,
-                price:req.body.price  ,        
+                price:req.body.price  ,
                 eventDate:req.body.eventDate,
-                evenetTime:req.body.evenetTime,  
+                evenetTime:req.body.evenetTime,
             },{
             where:{
                 id:req.params.id
             }})
         }
     } catch (error) {
-        
     }
 }
-
 export default {updateEvent,removeEvent,addEvent,getAllEvents}

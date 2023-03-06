@@ -54,6 +54,9 @@ const[view,setView]=useState("")
         <span className="material-icons-sharp">person_outline</span>
       <h3>Customers</h3>
         </Link>
+        <Link href="/event" className={styles.link}>
+          Event
+        </Link>
         <Link href="/" className={styles.link}> 
         <span className="material-icons-sharp">receipt_long</span>
       <h3>orders</h3>

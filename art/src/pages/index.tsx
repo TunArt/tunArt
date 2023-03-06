@@ -101,13 +101,13 @@ const Home: React.FC<Props> = () => {
               </div>
               <div id={styles.menu}>
                 <ul>
-                  <Link href={"../MainPage"}><li>HOME</li></Link>
+                  <Link href=""><li>HOME</li></Link>
                   <li>SERVICES</li>
-                  <Link href={"../MainPage/aboutUs"}><li>ABOUT</li></Link>
+                  <Link href="#aboutUs"><li>ABOUT</li></Link>
                   <Link href={"../MainPage/contactUs"}><li>CONTACT</li></Link>
+                </ul>
                   <button className={styles.btn} onClick={togglePopupLogin} >login</button>
                   <button onClick={togglePopup} className={styles.btn}  >signup</button>
-                </ul>
               </div>
             </div>
           </div>
@@ -157,14 +157,20 @@ const Home: React.FC<Props> = () => {
         </div>
 
 
-
-<div className={swipes.test}>
+<div id="aboutUs">
+  <div className={swipes.test}>
   
- <div className={swipes.text}> <h1>Join in, it’s free.</h1> <p> Welcome to our art website! We showcase talented artists from around the world, featuring a diverse range of art styles and mediums. Our carefully selected artists are both emerging and established, and our website provides a convenient platform for purchasing art with secure transactions and worldwide shipping available. Enjoy exploring our collection and discovering new artists and works that inspire you!</p></div> 
+   <div className={swipes.text}> <h1>Join in, it’s free.</h1> <p> Welcome to our art website! We showcase 
+    talented artists from around the world, featuring a
+     diverse range of art styles and mediums. Our carefully selected 
+     artists are both emerging and established, and our website provides 
+     a convenient platform for purchasing art with secure transactions and 
+     worldwide shipping available. Enjoy exploring our collection and discovering new artists and works that inspire you!</p></div> 
  <div className={swipes.test} >
 <div className={swipes.image}></div>
- </div>
+  </div>
  
+</div>
 </div>  
 
 <div className={swipes.test}>
