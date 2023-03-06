@@ -20,7 +20,7 @@ export default function Example({id}:string) {
   const navigation = [
     { name: 'Art Gallery', href: `/MainPage/art/art?id=${id}`, current: false },
     { name: 'Shop', href: `/shop?id=${id}`, current: false },
-    { name: 'Auctions', href: '#', current: false },
+    { name: 'Auctions', href: `/bid?${id}`, current: false },
     { name: 'Contact Us', href: '#', current: false },
     { name: 'Reports', href: '#', current: false },
     {name:"Events",href:`/event/event?id=${id}`,current:false}

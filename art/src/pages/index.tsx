@@ -83,9 +83,7 @@ const Home: React.FC<Props> = () => {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
       </Head>
       <div className={styles.test} >
-
         <main id={styles.body}>
-
           <div id={styles.main}>
             <div id={styles.box1}></div>
             <div id={styles.box2}>
