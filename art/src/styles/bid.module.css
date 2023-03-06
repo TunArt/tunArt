@@ -1,0 +1,25 @@
+.img{
+    
+    border-radius: 20px
+}
+
+.room{
+    background: antiquewhite;
+}
+
+.chat{
+width: 50%;
+}
+
+.detail{
+
+margin-left: 0%;
+position: absolute;
+margin-top: -35%;
+
+}
+
+.img1{
+    margin-top: -50%;
+    border-radius: 5%;
+}
