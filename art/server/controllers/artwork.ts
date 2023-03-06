@@ -104,6 +104,7 @@ if(userId){
         res.status(500).send("failed to add artwork")
     }
   }
+
     // update User information in database
    const updateArtWork= (req:Request, res:Response)=> {
     try {

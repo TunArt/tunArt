@@ -39,7 +39,7 @@ const MainPage =()=>{
     console.log(user)
     return(
         <div className={styles.all}>
-        <div><NavBar /></div>
+        <div><NavBar id={id} /></div>
         <div className={styles.wrapper}>
          <a className={styles.titles}>{"ArtFolio   "}</a>
         <a style={{fontFamily:'Droid Sans'}}>{": The home of art .."}</a>

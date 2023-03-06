@@ -32,7 +32,7 @@ import React from 'react';
                         <div className="relative">
                           <img
                             alt="..."
-                            src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
+                            src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
                             className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                           />
                         </div>
@@ -52,10 +52,16 @@ import React from 'react';
                                Abdelkader Hamada            </h3>
             <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold ">
              
-              <i className="fas fa-light fa-envelope"></i> abdelkaderHamada2017@gmail.com 
+              <i className="fas fa-light fa-envelope"></i> Email : abdelkaderHamada2017@gmail.com 
             </div>
-            <div className="mb-2 text-blueGray-600 mt-10">
-            <i className="fas fa-regular fa-key"></i> 18991919
+            <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
+            <i className="fas fa-regular fa-key"></i> Password : 18991919 
+            </div>
+            <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
+            <i className="fas fa-regular fa-key"></i> BirthDate : 01/04/2000
+            </div>
+            <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold">
+            <i className="fas fa-solid fa-phone"></i> PhoneNumber : 26 254 524 
             </div>
           </div>
           <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
