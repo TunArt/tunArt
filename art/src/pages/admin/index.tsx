@@ -3,10 +3,15 @@ import  'material-icons/iconfont/material-icons.css';
 import styles from "src/styles/SideBar.module.css";
 import Link from "next/link";
 import ChartBar from "./chartBar";
-import Cust from "./Cust"
-import Analytic from "./Analytic";
+
+import { useRouter } from "next/router";
 import BubbleChart from "./BubbleChart";
+import Cust from "./Cust";
+import Analytic from "./Analytic";
 const SideBar :React.FC=()=>{
+  const route=useRouter()
+  console.log("mmmmmmmmmmm",route);
+  
   const drawerWidth=240
 const[view,setView]=useState("")
   const changeView=(option:string)=>{
@@ -24,7 +29,19 @@ const[view,setView]=useState("")
     }
     
   }
+  const userHere=()=>{
+    if (typeof window !== 'undefined') {
+      console.log(route.query.id)
+    if(!route.query.id){
+      route.push({
+        pathname:"/404"
+      })
+    }
+  }
+  }
+  userHere()
   return(
+    
     <div className={styles.sideBar}>
   <div className={styles.container}>
     <aside className={styles.aside}>

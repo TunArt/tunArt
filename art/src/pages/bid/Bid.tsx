@@ -15,10 +15,12 @@ interface DetailProps {
     datetime: string,
     category: any,
     author:any
+    post?:any
   }
-const Bid: React.FC <DetailProps>= (props) => {
+const Bid: React.FC <DetailProps>= (props:DetailProps) => {
     const router=useRouter()
     console.log(router.query.img,"test");
+    const detailProps =  { ...router.query, ...props };
     return (
         <div>
        
@@ -29,7 +31,7 @@ const Bid: React.FC <DetailProps>= (props) => {
            
             
             <div>
-            <Detail post={router.query}/>
+            <Detail  {...detailProps} />
 
             </div>
         </div>

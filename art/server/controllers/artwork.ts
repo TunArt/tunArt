@@ -104,6 +104,7 @@ if(userId){
         res.status(500).send("failed to add artwork")
     }
   }
+  // const count=async(req:Request,res:Response)
 export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
 
 
