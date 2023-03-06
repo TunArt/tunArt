@@ -12,9 +12,9 @@ const getAllEvents = (req:Request,res:Response)=>{
 
     }
 }
-const addEvent = (req:Request, res:Response)=>{
+const addEvent = async(req:Request, res:Response)=>{
     try{
-        let events=Event.create({
+        let events=await Event.create({
             eventName:req.body.eventName,
             description:req.body.description,
             price:req.body.price  ,        
