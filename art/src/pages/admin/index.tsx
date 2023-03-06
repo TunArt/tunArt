@@ -4,10 +4,12 @@ import styles from "src/styles/SideBar.module.css";
 import Link from "next/link";
 import ChartBar from "./chartBar";
 
+
 import { useRouter } from "next/router";
 import BubbleChart from "./BubbleChart";
 import Cust from "./Cust";
 import Analytic from "./Analytic";
+import Image from "next/Image";
 const SideBar :React.FC=()=>{
   const route=useRouter()
   console.log("mmmmmmmmmmm",route);
@@ -47,7 +49,8 @@ const[view,setView]=useState("")
     <aside className={styles.aside}>
       <div className={styles.top}>
         <div className={styles.logo}>
-          <img src="/logo.png" width={500} height={500} alt='/logo.png'/>
+
+          <Image src="/admin.png" width={500} height={500} alt='/logo.png'/>
         </div>
         {/* <div className={styles.close} id="close-btn">
           <span  className="material-icons-sharp">close</span>
