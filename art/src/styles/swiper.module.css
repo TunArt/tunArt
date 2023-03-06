@@ -137,7 +137,7 @@ background-position-y:center ;
 
 .text h1{
     font-size: 60px;
-    color: #ff5f5f;
+    color: rgb(184, 75, 2);
 }
 .text p{
     font-size: 30px;
@@ -145,7 +145,7 @@ background-position-y:center ;
 
 .textx h1{
     font-size: 60px;
-    color: #ff5f5f;
+    color:rgb(184, 75, 2);
 }
 .textx p{
     font-size: 30px;
@@ -173,9 +173,9 @@ margin-top: 8%;
 .textxx h1{
   
     margin-top: 5%;
-    margin-left: 3%;
+    /* margin-left: 3%; */
     width: 110%;
     color:rgb(184, 75, 2);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 50px;
+    font-size: 47px;
 }

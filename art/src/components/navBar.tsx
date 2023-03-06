@@ -19,14 +19,14 @@ export default function Example({id}:string) {
   }
   const navigation = [
     { name: 'Art Gallery', href: `/MainPage/art/art?id=${id}`, current: false },
-    { name: 'Shop', href: `/MainPage/art/art`, current: false },
+    { name: 'Shop', href: `/shop?id=${id}`, current: false },
     { name: 'Auctions', href: '#', current: false },
     { name: 'Contact Us', href: '#', current: false },
     { name: 'Reports', href: '#', current: false },
     {name:"Events",href:`/event/event?id=${id}`,current:false}
   ]
   const userNavigation = [
-    { name: 'Your Profile', href: '' },
+    { name: 'Your Profile', href: '/profile/' },
     { name: 'Settings', href: '#' },
     { name: 'Sign out', href: '/' ,work:function(){
       localStorage.clear()
