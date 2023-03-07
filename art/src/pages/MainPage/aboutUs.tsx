@@ -1,6 +1,6 @@
 import React from "react";
 import NavBar from "../../components/navBar";
-import Search from "./search";
+import Search from "./search/search";
 import styles from "../../styles/principale.module.css"
 
 const aboutUs=()=>{

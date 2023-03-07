@@ -14,6 +14,17 @@ catch (err){
 }
 }
 
+//method to get one artwork (search)
+const getOneArtwork = async (req:Request ,res:Response) =>{
+  try {
+      let  artworks= await Artwork.findOne({ where: { name: req.params.name } })
+      res.status(200).send(artworks)
+}
+catch (err){
+  console.log(err)
+}
+}
+
 //  method to add  a new artwork
 const addArtwork = async (req: Request, res: Response) => {
   const {artistId,userId}=req.params
@@ -104,6 +115,6 @@ if(userId){
         res.status(500).send("failed to add artwork")
     }
   }
-export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
+export default {getAllArtworks,getOneArtwork,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
 
 

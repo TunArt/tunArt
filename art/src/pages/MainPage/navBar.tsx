@@ -30,7 +30,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
-import Search from "./search";
+import Search from "./search/search";
 
 
 export default function NavBar() {
