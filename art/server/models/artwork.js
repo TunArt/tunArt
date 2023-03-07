@@ -2,6 +2,10 @@ module.exports = (sequelize, DataTypes) => {
 
   const artwork = sequelize.define("artworks", {
     name: {type:DataTypes.STRING},
+
+    startDate: {type:DataTypes.DATE},
+    endDate: {type:DataTypes.DATE},
+
     creationDate: {type:DataTypes.DATE},
     price: {type:DataTypes.INTEGER},
     rating: {type:DataTypes.INTEGER},
@@ -10,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     image: {type:DataTypes.STRING},
     verified: {type:DataTypes.BOOLEAN , defaultValue:false},
     artistId: {type:DataTypes.INTEGER},
-    categoryId: {type:DataTypes.INTEGER},  
+    categoryId: {type:DataTypes.INTEGER}, 
+
     userId: {type:DataTypes.INTEGER}
       }  ,{timestamps:true});
       return artwork;

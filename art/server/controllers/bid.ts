@@ -4,9 +4,11 @@ const Bid = db.bid
 
 //methods to get all the bids
 
-const getAllBids = (req:Request ,res:Response) =>{
+const getAllBids = async (req:Request ,res:Response) =>{
     try {
-        let  bids= Bid.findAll()
+        let  bids=await Bid.findAll(
+          // {include:["message", "users"]}
+          )
         res.status(200).send(bids)
 }
 catch (err){

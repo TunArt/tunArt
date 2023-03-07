@@ -32,6 +32,9 @@ function App(): JSX.Element {
   };
 
   useEffect(() => {
+
+
+    
     socket.on("receive_message", (data: { message: string; room: string }) => {
       const newMessageData = { ...messageData };
       if (!(data.room in newMessageData)) {
