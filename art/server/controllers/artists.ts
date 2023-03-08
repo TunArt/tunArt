@@ -28,7 +28,8 @@ const addArtist = async (req: Request, res: Response) => {
         email: req.body.email,
         password: req.body.password,
         picture: req.body.picture,
-        phoneNumber: req.body.phoneNumber
+        phoneNumber: req.body.phoneNumber,
+        birthDate: req.body.birthDate
       });
       console.log(artist);
       res.status(201).send("artist created successfully");
@@ -51,7 +52,8 @@ const addArtist = async (req: Request, res: Response) => {
         email: req.body.email,
         password: req.body.password,
         picture: req.body.picture,
-        phoneNumber: req.body.phoneNumber
+        phoneNumber: req.body.phoneNumber,
+        birthDate: req.body.birthDate
     }, {
         where: {
             id: req.params.id
