@@ -17,9 +17,6 @@ import Swiper, { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import path from "path";
-
-interface Props { }
 
 const inter = Inter({ subsets: ["latin"] });
 const stats = [
@@ -33,8 +30,10 @@ const Home: React.FC<Props> = () => {
   const route=useRouter()
   const [popUp, setPopUp] = useState(false);
   const [popUpLogin, setPopUpLogin] = useState(false);
+  
   const isuserHere=()=>{
     if(localStorage.id ){
+      console.log(localStorage.id)
     route.push({
       pathname: '/MainPage',
       query: { "id": localStorage.id, type: true },

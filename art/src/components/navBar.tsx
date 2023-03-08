@@ -2,6 +2,7 @@ import { Fragment,useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image"
+import React from 'react'
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import  'material-icons/iconfont/material-icons.css';
 type NavigationItem = {
@@ -31,6 +32,7 @@ export default function Example(props:any) {
     { name: 'Your Profile', href: '/profile/' },
     { name: 'Settings', href: '#' },
     { name: 'Sign out', href: '/' ,work:function(){
+      console.log('test')
       localStorage.clear()
     }},
   ]
@@ -127,21 +129,14 @@ export default function Example(props:any) {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a onClick={()=>{
-                                    if(item.work!== undefined){
-                                      item.work()
-                                    }
-                                  }} 
-                                    href={item.href}
-                                
-                                    
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
-                                  >
-                                    {item.name}
-                                  </a>
+                                 <a
+                                 key={item.name}
+                                 href={item.href}
+                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                 onClick={item.work && item.work} // add onClick event handler here
+                               >
+                                 {item.name}
+                               </a>
                                 )}
                               </Menu.Item>
                             ))}

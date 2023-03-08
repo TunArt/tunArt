@@ -50,6 +50,7 @@ const Login: React.FC = () => {
           }
           if (res.data.role === 'user') {
             localStorage.setItem("id",res.data.id)
+            localStorage.setItem("email",res.data.email)
             router.push({
               pathname: '/MainPage',
               query: { "id": res.data.id, type: false }
@@ -65,6 +66,7 @@ const Login: React.FC = () => {
           console.log('test');
           const res = await axios.get(`http://localhost:3000/api/artists/getArtist/${email}`);
           localStorage.setItem("id",res.data.id)
+          localStorage.setItem("email",res.data.email)
           router.push({
             pathname: '/MainPage',
             query: { "id": res.data.id, type: true }
