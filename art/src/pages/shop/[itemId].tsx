@@ -4,30 +4,23 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/20/solid'
 import Image from "next/image";
 import Backet from "../../components/backet/backet"
-type Color = {
-  name: string
-  class: string
-  selectedClass: string
-}
 import { useRouter } from 'next/router'
 
-type Size = {
-  name: string
-  inStock: boolean
-}
 
 type Product = {
-  name: string
-  price: string
-  rating: number
-  reviewCount: number
-  href: string
-  imageSrc: string
-  imageAlt: string
-  colors: Color[]
-  sizes: Size[]
+  id: number;
+  name: string;
+  description: string;
+  rating: number;
+  comments: string;
+  price: number;
+  quantity: number;
+  brand: string;
+  picture: any;
 }
-
+const baught=(idItem:number,idUser:number)=>{
+  axios.post(``)
+}
 const product: Product = {
   rating: 3.9,
   reviewCount: 117,
@@ -47,6 +40,7 @@ function classNames(...classes: (string | undefined)[]): string {
 
 
 export default function Item() {
+  const [backetShow, setbacketShow] = useState(false)
   const route=useRouter()
   const { query } = route || {} ;
   const items = (String(query?.items));
@@ -67,7 +61,7 @@ console.log('hi')
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 hidden bg-gray-500 bg-opacity-75 transition-opacity md:block" />
+          <div className="fixed inset-0 hidden bg-gray-800 bg-opacity-75 transition-opacity md:block" />
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -98,7 +92,7 @@ console.log('hi')
 
                   <div className="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:gap-x-8">
                     <div className="aspect-w-2 aspect-h-3 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                      <img src={item.imageSrc} alt={item.imageAlt} className="object-cover object-center"/>
+                      <img src={JSON.parse(item.picture)[0]} alt={item.imageAlt} className="object-cover object-center"/>
                     </div>
                     <div className="sm:col-span-8 lg:col-span-7">
                       <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{item.name}</h2>
@@ -180,7 +174,7 @@ console.log('hi')
                           {/* Sizes */}
                           <div className="mt-10">
                             <div className="flex items-center justify-between">
-                              <h4 className="text-sm font-medium text-gray-900">Quantity : 55</h4>
+                              <h4 className="text-sm font-medium text-gray-900">Quantity : {item.quantity}</h4>
                             </div>
 
                             <RadioGroup className="mt-4">
@@ -191,8 +185,9 @@ console.log('hi')
                             </RadioGroup>
                           </div>
 
-                          <button
-                            type="submit"
+                          <button onClick={()=>{
+                            
+                          }}
                             className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                           >
                             Add to bag
@@ -204,9 +199,6 @@ console.log('hi')
                 </div>
               </Dialog.Panel>
             </Transition.Child>
-          </div>
-          <div>
-            {/* <Backet/> */}
           </div>
         </div>
       </Dialog>

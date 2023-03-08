@@ -1,4 +1,5 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
+import React,{useState}  from  'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -26,8 +27,13 @@ const products = [
   },
   // More products...
 ]
+interface Props {
+  item: {
+    name: string;
+  }
+}
 
-export default function Example() {
+export default function bucket({item}:Props) {
   const [open, setOpen] = useState(true)
 
   return (
@@ -155,3 +161,4 @@ export default function Example() {
     </Transition.Root>
   )
 }
+

@@ -1,7 +1,10 @@
-import { Fragment } from 'react'
+import { Fragment,useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image"
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import  'material-icons/iconfont/material-icons.css';
+import bucket from "../components/backet/backet"
 type NavigationItem = {
   name: string;
   href: string;
@@ -10,6 +13,7 @@ type NavigationItem = {
 
 
 export default function Example({id}:string) {
+const [showCart,setShowcart]=useState(false)
   console.log("from nav bar",id);
   const user = {
     name: 'Tom Cook',
@@ -49,6 +53,7 @@ export default function Example({id}:string) {
         ```
       */}
       <div className="min-h-full">
+        
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
             <>
@@ -59,7 +64,7 @@ export default function Example({id}:string) {
                       <Image
                         className="h-10 w-10 "
                         onClick={()=>{
-                          
+                          setShowcart(!showCart)
                         }}
                         src="/tunart-website-favicon-color.png"
                         alt="Your Company"
@@ -85,8 +90,12 @@ export default function Example({id}:string) {
                           </a>
                         ))}
                       </div>
+                      
                     </div>
                   </div>
+                      <span  className="material-icons-sharp" onClick={()=>{
+
+                      }}>shopping_cart</span>
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
@@ -96,7 +105,7 @@ export default function Example({id}:string) {
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
-
+                      {showCart && <bucket/>}
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
@@ -114,6 +123,7 @@ export default function Example({id}:string) {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
+                          
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
@@ -137,6 +147,7 @@ export default function Example({id}:string) {
                               </Menu.Item>
                             ))}
                           </Menu.Items>
+                          
                         </Transition>
                       </Menu>
                     </div>
