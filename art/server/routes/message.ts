@@ -1,6 +1,6 @@
 import express from 'express';
-const routes = express.Router()
 import Message from '../controllers/message'
+const routes = express.Router()
 
 
 routes.get('/getMessages', Message.getAllMessages)

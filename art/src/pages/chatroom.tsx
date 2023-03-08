@@ -1,6 +1,7 @@
 import styles from "../styles/chatroom.module.css";
 import io, { Socket } from "socket.io-client";
 import react, { useEffect, useState } from "react";
+import axios from "axios";
 
 const socket: Socket = io("http://localhost:3001");
 
@@ -28,13 +29,43 @@ function App(): JSX.Element {
       setMessageData(newMessageData);
       setMessage("");
       socket.emit("send_message", { message, room });
+
+             // Create new message in Sequelize
+      axios.post("http://localhost:3000/api/messages/addmessage", {
+        content:message,
+        roomNumber:room
+    
+
+        })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    }
+
+      // Message.create({ content: message, room: room });
     }
   };
 
   useEffect(() => {
 
 
+    // Fetch messages for current room
+
+    axios.get("http://localhost:3000/api/messages/addmessage")
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
     
+    
+    // Message.findAll({ where: { room: room } })
+    //   .then((messages) => {
+    //     const newMessageData = { ...messageData };
+    //     newMessageData[room] = messages.map((message) => message.content);
+    //     setMessageData(newMessageData);
+    //   })
+    //   .catch(err => console.log(err));
+
+
+
+
     socket.on("receive_message", (data: { message: string; room: string }) => {
       const newMessageData = { ...messageData };
       if (!(data.room in newMessageData)) {

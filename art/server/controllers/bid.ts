@@ -23,13 +23,11 @@ const addBid = (req: Request, res: Response) => {
         throw new Error("Request body is missing required properties.");
       }
       const bid = Bid.create({
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
+    
         currentPrice: req.body.currentPrice,
-        minPrice:req.body.minPrice,
         currentBidder: req.body.currentBidder,
-        artWorkArtistId: req.body.artWorkArtistId,
-        artWorkCategoryId: req.body.artWorkCategoryId,
+        artWorkId: req.body.artWorkId,
+    
       });
       res.status(201).send("bid created successfully");
     } catch (err) {
@@ -46,13 +44,13 @@ const addBid = (req: Request, res: Response) => {
         }
 
     const bid =  Bid.update({
-        startDate: req.body.startDate,
-        endDate: req.body.endDate,
+        // startDate: req.body.startDate,
+        // endDate: req.body.endDate,
         currentPrice: req.body.currentPrice,
-        minPrice:req.body.minPrice,
+        // minPrice:req.body.minPrice,
         currentBidder: req.body.currentBidder,
-        artWorkArtistId: req.body.artWorkArtistId,
-        artWorkCategoryId: req.body.artWorkCategoryId,
+        artWorkId: req.body.artWorkId,
+        // artWorkCategoryId: req.body.artWorkCategoryId,
     }, {
         where: {
             id: req.params.id

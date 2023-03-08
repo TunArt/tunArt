@@ -31,17 +31,21 @@ const[view,setView]=useState("")
     }
     
   }
-  const userHere=()=>{
-    if (typeof window !== 'undefined') {
-      console.log(route.query.id)
-    if(!route.query.id){
-      route.push({
-        pathname:"/404"
-      })
-    }
-  }
-  }
-  userHere()
+
+
+
+
+  // const userHere=()=>{
+  //   if (typeof window !== 'undefined') {
+  //     console.log(route.query.id)
+  //   if(!route.query.id){
+  //     route.push({
+  //       pathname:"/404"
+  //     })
+  //   }
+  // }
+  // }
+  // userHere()
   return(
     
     <div className={styles.sideBar}>
