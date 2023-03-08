@@ -119,9 +119,11 @@ let know=false
         phoneNumber: phone,
         }).then((res)=>{
           axios.get(`http://localhost:3000/api/users/getUser/${email}`).then((res)=>{
+            localStorage.setItem("id",res.data.id)
             router.push({
               pathname:'/MainPage',
               query:{"id":res.data.id,"type":know}
+
             })
         })
         })
@@ -137,6 +139,7 @@ let know=false
         }).then((res)=>{
           console.log(res)
           axios.get(`http://localhost:3000/api/artists/getArtist/${email}`).then((res)=>{
+            localStorage.setItem("id",res.data.id)
             console.log(res)
             router.push({
               pathname:'/MainPage',

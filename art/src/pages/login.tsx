@@ -40,9 +40,11 @@ const Login: React.FC = () => {
       try {
         const { email, password } = values;
         const res = await signInWithEmailAndPassword(auth, email, password);
+        
+        console.log("res:",res)
         try {
           const res = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
-          console.log(res.data);
+          console.log(res);
           if (!res.data) {
             throw Error('failed')
           }
@@ -53,6 +55,7 @@ const Login: React.FC = () => {
               query: { "id": res.data.id, type: false }
             });
           } else {
+            localStorage.setItem("id",res.data.id)
             router.push({
               pathname: '/admin',
               query: { "id": res.data.id }
