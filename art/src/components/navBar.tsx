@@ -4,7 +4,6 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image"
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import  'material-icons/iconfont/material-icons.css';
-import bucket from "../components/backet/backet"
 type NavigationItem = {
   name: string;
   href: string;
@@ -12,9 +11,8 @@ type NavigationItem = {
 };
 
 
-export default function Example({id}:string) {
-const [showCart,setShowcart]=useState(false)
-  console.log("from nav bar",id);
+export default function Example(props:any) {
+  console.log("from nav bar",props);
   const user = {
     name: 'Tom Cook',
     email: 'tom@example.com',
@@ -22,12 +20,12 @@ const [showCart,setShowcart]=useState(false)
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   }
   const navigation = [
-    { name: 'Art Gallery', href: `/MainPage/art/art?id=${id}`, current: false },
-    { name: 'Shop', href: `/shop?id=${id}`, current: false },
-    { name: 'Auctions', href: `/bid?${id}`, current: false },
+    { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
+    { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
+    { name: 'Auctions', href: `/bid?${props.id}`, current: false },
     { name: 'Contact Us', href: '#', current: false },
     { name: 'Reports', href: '#', current: false },
-    {name:"Events",href:`/event/event?id=${id}`,current:false}
+    {name:"Events",href:`/event/event?id=${props.id}`,current:false}
   ]
   const userNavigation = [
     { name: 'Your Profile', href: '/profile/' },
@@ -64,7 +62,7 @@ const [showCart,setShowcart]=useState(false)
                       <Image
                         className="h-10 w-10 "
                         onClick={()=>{
-                          setShowcart(!showCart)
+                          
                         }}
                         src="/tunart-website-favicon-color.png"
                         alt="Your Company"
@@ -94,7 +92,8 @@ const [showCart,setShowcart]=useState(false)
                     </div>
                   </div>
                       <span  className="material-icons-sharp" onClick={()=>{
-
+                    
+                    props.setShowcart(!props.showCart)
                       }}>shopping_cart</span>
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
@@ -105,7 +104,7 @@ const [showCart,setShowcart]=useState(false)
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
-                      {showCart && <bucket/>}
+                      
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>

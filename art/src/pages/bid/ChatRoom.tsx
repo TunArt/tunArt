@@ -1,14 +1,68 @@
-import { useState } from 'react';
-import styles from "src/styles/SideBar.module.css";
+import styles from "../styles/chatroom.module.css";
+import io, { Socket } from "socket.io-client";
+import react, { useEffect, useState } from "react";
 
-const ChatRoom = () => {
-  const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
 
-  const handleNewMessage = () => {
-    if (newMessage.trim() !== '') {
-      setMessages([...messages, { text: newMessage }]);
-      setNewMessage('');
+const socket: Socket = io("http://localhost:3001");
+
+function ChatRoom(): JSX.Element {
+  const Message = require('../../../server/models/message')
+  // Room State
+  const [room, setRoom] = useState<string>("");
+
+  // Messages State
+  const [message, setMessage] = useState<string>("");
+  const [messageData, setMessageData] = useState<{ [key: string]: string[] }>({});
+
+  const joinRoom = () => {
+    if (room !== "") {
+      socket.emit("join_room", room);
+    }
+  };
+
+  const sendMessage = () => {
+    if (message !== "") {
+      const newMessageData = { ...messageData };
+      if (!(room in newMessageData)) {
+        newMessageData[room] = [];
+      }
+      newMessageData[room].push(message);
+      setMessageData(newMessageData);
+      setMessage("");
+      socket.emit("send_message", { message, room });
+
+       // Create new message in Sequelize
+    Message.create({ content: message, room: room });
+    }
+  };
+
+  useEffect(() => {
+    // Fetch messages for current room
+    Message.findAll({ where: { room: room } })
+      .then((messages) => {
+        const newMessageData = { ...messageData };
+        newMessageData[room] = messages.map((message) => message.content);
+        setMessageData(newMessageData);
+      })
+      .catch(err => console.log(err));
+  
+    // Listen for new messages from Socket.IO
+    socket.on("receive_message", (data: { message: string; room: string }) => {
+      const newMessageData = { ...messageData };
+      if (!(data.room in newMessageData)) {
+        newMessageData[data.room] = [];
+      }
+      newMessageData[data.room].push(data.message);
+      setMessageData(newMessageData);
+  
+      // Create new message row in Sequelize
+      Message.create({ content: data.message, room: data.room });
+    });
+  }, [room, messageData]);
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      sendMessage();
     }
   };
 
@@ -33,13 +87,13 @@ const ChatRoom = () => {
       <div className="bg-gray-800 py-3 px-4 flex justify-between items-center">
         <input
           type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           className="flex-1 bg-gray-700 text-white rounded-md py-1 px-2 mr-4"
           placeholder="Type your message..."
         />
         <button
-          onClick={handleNewMessage}
+          onClick={sendMessage}
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded-md"
         >
           Send

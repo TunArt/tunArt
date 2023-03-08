@@ -37,4 +37,14 @@ const getAllitemforAuser = async (req:Request, res:Response) => {
     res.status(500).json({ error: 'Unable to retrieve products.' });
   }
 };
-export default { UserBought, getAllitemforAuser };
+const deleteItem=async(req:Request,res:Response)=>{
+const {userId,productId}=req.params
+try {
+  const del=await User_Product.destroy({where :{userId:userId ,productId:productId},})
+  res.status(200).json(del) 
+} catch (error) {
+  console.error(error);
+    res.status(500).json({ error: 'Unable to delete products.' });
+}
+}
+export default { UserBought, getAllitemforAuser,deleteItem };

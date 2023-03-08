@@ -26,15 +26,59 @@ db.event = require("./event.js")(Sequelize, sequelize);
 db.artwork = require("./artwork.js")(Sequelize, sequelize);
 db.payment = require("./payment.js")(Sequelize, sequelize);
 db.product = require("./product.js")(Sequelize, sequelize);
+// db.room = require("./room.js")(Sequelize, sequelize);
+db.message = require("./message.js")(Sequelize, sequelize);
+
+
+
+
+
 
 //Join tables 
-db.user_bid = require("./user_bid.js")(Sequelize, sequelize);
+// db.user_bid = require("./user_bid.js")(Sequelize, sequelize);
 db.user_event = require("./user_event.js")(Sequelize, sequelize);
 db.user_product = require("./user_product.js")(Sequelize, sequelize);
 
+
+//artwork and messages association (one-to-many relationship)
+db.artwork.hasMany(db.bid,{
+  foreignKey: "artWorkId"
+})
+db.bid.belongsTo(db.artwork,{
+  foreignKey: "artworkId"
+})
+
+
+db.artwork.hasMany(db.message,{
+  foreignKey: "artworkId"
+})
+db.message.belongsTo(db.artwork,{
+  foreignKey: "artworkId"
+})
+//bid and room association (one-to-one)
+// db.bid.hasOne(db.room,{foreignKey: "bidId"})
+
+//bid and message association (one-to-many)
+// db.bid.hasMany(db.message,{
+//   foreignKey: "bidId"
+// })
+// db.message.belongsTo(db.bid,{
+//   foreignKey: "bidId"
+// })
+
+//user and message association (one-to-many)
+
+// db.user.hasMany(db.message,{
+//   foreignKey: "userId"
+// })
+// db.message.belongsTo(db.user,{
+//   foreignKey: "userId"
+// })
+
+
 //user and bid association (many-to-many)
-db.user.belongsToMany(db.bid, { through: 'userbids', foreignKey: 'userId'});
-db.bid.belongsToMany(db.user, { through: 'userbids', foreignKey: 'bidId' });
+// db.user.belongsToMany(db.bid, { through: 'userbids', foreignKey: 'userId'});
+// db.bid.belongsToMany(db.user, { through: 'userbids', foreignKey: 'bidId' });
 
 // //user and artwork association (many-to-many)
 // db.user.belongsToMany(db.artwork, { through: 'userartworks', foreignKey: 'userId' });
@@ -81,4 +125,14 @@ db.user.hasMany(db.payment,{
   foreignKey: "userId"
 })
 
+
+db.user.hasMany(db.bid,{
+  foreignKey: "currentBidder"
+})
+db.bid.belongsTo(db.user,{
+  foreignKey: "currentBidder"
+})
+
 module.exports = db;
+
+

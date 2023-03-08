@@ -39,7 +39,6 @@ export default function Example({ items }: ProductList) {
   console.log(items)
   const router = useRouter();
   const [firstPic, setFirstPic] = useState<string>("[]");
-  
   const handleProductClick = (item: Product) => {
     router.push({
       pathname: `shop/${item.id}`,
@@ -52,7 +51,7 @@ export default function Example({ items }: ProductList) {
   return (
     <>
       <div>
-        <Navbar />
+        <Navbar/>
       </div>
       <div className="bg-stone-500">
         <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">

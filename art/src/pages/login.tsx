@@ -55,6 +55,7 @@ const Login: React.FC = () => {
               query: { "id": res.data.id, type: false }
             });
           } else {
+            localStorage.setItem("id",res.data.id)
             router.push({
               pathname: '/admin',
               query: { "id": res.data.id }

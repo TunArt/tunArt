@@ -7,9 +7,7 @@ const User = db.user
 
 const getAllUsers = async (req:Request ,res:Response) =>{
     try {
-        let  users= await User.findAll({
-          include : ['artworks']
-        })
+        let  users= await User.findAll({include : ['artworks'] })
         console.log(users)
         res.status(200).send(users)
 }
