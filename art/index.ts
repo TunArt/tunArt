@@ -35,7 +35,6 @@ app.use('/api/payments',paymentRoute)
 app.use('/api/bids',bidRoute)
 app.use('/api/categories',categoryRoute)
 app.use('/api/route',userProd)
-
 // app.use('/api/rooms',roomRoute)
 app.use('/api/messages',messageRoute)
 
