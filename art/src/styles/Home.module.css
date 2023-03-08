@@ -145,6 +145,7 @@
   bottom: 10px;
   width: 100%;
   margin-bottom:-165% ;
+
   /* margin-top: 20%; */
 }
 /* Styles for menu buttons */
@@ -157,6 +158,7 @@
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  font-size: large;
 }
 
 #menu li:hover {
@@ -173,6 +175,7 @@
   transition: all 0.2s ease-in-out;
   margin-left: 4rem;
   width: 10rem;
+  font-size: large;
 }
 
 #menu .btn:hover {
@@ -181,6 +184,9 @@
 
 /* Styles for menu container */
 #menu {
+position: sticky;
+top: 0;
+z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
