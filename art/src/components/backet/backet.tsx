@@ -1,36 +1,49 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
+import React,{useState,useEffect}  from  'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import styles from "../../styles/bucket.module.css"
+import axios from 'axios'
+interface Product {
+  name: string;
+  price: number;
+  quantity: number;
+  picture: string;
+  imageAlt: string;
+}
 
-const products = [
-  {
-    id: 1,
-    name: 'Throwback Hip Bag',
-    href: '#',
-    color: 'Salmon',
-    price: '$90.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-    imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-  },
-  {
-    id: 2,
-    name: 'Medium Stuff Satchel',
-    href: '#',
-    color: 'Blue',
-    price: '$32.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-    imageAlt:
-      'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-  },
-  // More products...
-]
+interface Props {
+  item: {
+    name: string;
+  };
+  setShowcart: (value: boolean) => void;
+  id: string;
+}
 
-export default function Example() {
+const  Bucket=(props:Props)=> {
+  const[display,setDesipaly]=useState(false)
+  const [data,setdata]=useState([])
+  const [reRender,setRerender]=useState(false)
+  console.log(props)
+  const handleDelete=(x:string,y:string)=>{
+    axios.delete(`http://localhost:3000/api/route/delete/${x}/${y}`).then((res)=>{
+      setRerender(!reRender)
+    })
+  }
+  let tPrice=0
+  const som =(x:number)=>{
+    tPrice+=x
+  }
   const [open, setOpen] = useState(true)
-
+  useEffect(()=>{
+    axios.get(`http://localhost:3000/api/route/getAll/${props.id}`)
+    .then((res)=>{
+      console.log("from backet",res.data)
+      setdata(res.data.products)
+    })
+  },[reRender])
   return (
+    <div className={styles.all}>
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
         <Transition.Child
@@ -42,7 +55,7 @@ export default function Example() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
@@ -66,7 +79,7 @@ export default function Example() {
                           <button
                             type="button"
                             className="-m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => setOpen(false)}
+                            onClick={() => props.setShowcart(false)}
                           >
                             <span className="sr-only">Close panel</span>
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -77,11 +90,12 @@ export default function Example() {
                       <div className="mt-8">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {products.map((product) => (
-                              <li key={product.id} className="flex py-6">
+                            {data.map((product,i) => {
+                              {som (product?.price*product?.quantity)}
+                           return    <li key={i} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
-                                    src={product.imageSrc}
+                                    src={(JSON.parse (product?.picture)[0])}
                                     alt={product.imageAlt}
                                     className="h-full w-full object-cover object-center"
                                   />
@@ -91,18 +105,18 @@ export default function Example() {
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
                                       <h3>
-                                        <a href={product.href}>{product.name}</a>
+                                        <a >{product?.name}</a>
                                       </h3>
-                                      <p className="ml-4">{product.price}</p>
+                                      <p className="ml-4">{product.price*product.quantity}</p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty {product.quantity}</p>
+                                    <p className="text-gray-500">Qty : {product?.quantity}</p>
 
                                     <div className="flex">
-                                      <button
-                                        type="button"
+                                      <button onClick={()=>{
+                                        handleDelete(props.id,product.id)
+                                      }}
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
                                       >
                                         Remove
@@ -111,7 +125,7 @@ export default function Example() {
                                   </div>
                                 </div>
                               </li>
-                            ))}
+})}
                           </ul>
                         </div>
                       </div>
@@ -120,7 +134,7 @@ export default function Example() {
                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>{tPrice}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
@@ -153,5 +167,8 @@ export default function Example() {
         </div>
       </Dialog>
     </Transition.Root>
+    </div>
   )
 }
+export default Bucket
+

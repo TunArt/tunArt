@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import NavBar from "../../../components/navBar";
 import { TestData } from "../testData";
 import styles from "../../../styles/principale.module.css";
@@ -10,8 +10,9 @@ import ArtList from "./artList";
 
 
 const Art=()=>{
-
     const[arr, setArr]=useState([])
+useEffect(()=>{
+    
 
    !arr.length? axios.get('http://localhost:3000/api/artworks/getArtworks')
     .then(response => {
@@ -19,6 +20,8 @@ const Art=()=>{
     setArr(response.data)
     }):undefined
     
+    
+},[])
     
 return(
     <div className={styles.all}>

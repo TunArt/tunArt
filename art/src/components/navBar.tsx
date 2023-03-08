@@ -1,7 +1,9 @@
-import { Fragment } from 'react'
+import { Fragment,useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image"
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import  'material-icons/iconfont/material-icons.css';
 type NavigationItem = {
   name: string;
   href: string;
@@ -9,8 +11,8 @@ type NavigationItem = {
 };
 
 
-export default function Example({id}:string) {
-  console.log("from nav bar",id);
+export default function Example(props:any) {
+  console.log("from nav bar",props);
   const user = {
     name: 'Tom Cook',
     email: 'tom@example.com',
@@ -18,12 +20,12 @@ export default function Example({id}:string) {
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   }
   const navigation = [
-    { name: 'Art Gallery', href: `/MainPage/art/art?id=${id}`, current: false },
-    { name: 'Shop', href: `/shop?id=${id}`, current: false },
-    { name: 'Auctions', href: `/bid?${id}`, current: false },
+    { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
+    { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
+    { name: 'Auctions', href: `/bid?${props.id}`, current: false },
     { name: 'Contact Us', href: '#', current: false },
     { name: 'Reports', href: '#', current: false },
-    {name:"Events",href:`/event/event?id=${id}`,current:false}
+    {name:"Events",href:`/event/event?id=${props.id}`,current:false}
   ]
   const userNavigation = [
     { name: 'Your Profile', href: '/profile/' },
@@ -49,6 +51,7 @@ export default function Example({id}:string) {
         ```
       */}
       <div className="min-h-full">
+        
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
             <>
@@ -85,8 +88,13 @@ export default function Example({id}:string) {
                           </a>
                         ))}
                       </div>
+                      
                     </div>
                   </div>
+                      <span  className="material-icons-sharp" onClick={()=>{
+                    
+                    props.setShowcart(!props.showCart)
+                      }}>shopping_cart</span>
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
@@ -96,7 +104,7 @@ export default function Example({id}:string) {
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
-
+                      
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
@@ -114,6 +122,7 @@ export default function Example({id}:string) {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
+                          
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
@@ -137,6 +146,7 @@ export default function Example({id}:string) {
                               </Menu.Item>
                             ))}
                           </Menu.Items>
+                          
                         </Transition>
                       </Menu>
                     </div>
