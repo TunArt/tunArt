@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Alert } from 'antd';
-import {signInWithEmailAndPassword} from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from "../../server/firebase/config"
 import Styles from "../styles/Login.module.css"
 import { useRouter } from 'next/router';
@@ -12,7 +12,7 @@ interface FormValues {
 }
 
 const Login: React.FC = () => {
-  const router=useRouter()
+  const router = useRouter()
   const [form] = Form.useForm();
   const [emailTest, setEmailTest] = useState(false);
   const [passwordTest, setPasswordTest] = useState(false);
@@ -36,33 +36,35 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (values: FormValues) => {
     console.log('Success:', values);
-    if(values){
+    if (values) {
       try {
         const { email, password } = values;
         const res = await signInWithEmailAndPassword(auth, email, password);
         try {
           const res = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
           console.log(res.data);
-          if(!res.data){
-         throw Error('failed')
+          if (!res.data) {
+            throw Error('failed')
           }
           if (res.data.role === 'user') {
+            localStorage.setItem("id",res.data.id)
             router.push({
-              pathname:'/MainPage',
-              query:{"id":res.data.id,type:false}
+              pathname: '/MainPage',
+              query: { "id": res.data.id, type: false }
             });
           } else {
             router.push({
-              pathname:'/admin',
-              query:{"id":res.data.id}
+              pathname: '/admin',
+              query: { "id": res.data.id }
             });
           }
         } catch (err) {
           console.log('test');
           const res = await axios.get(`http://localhost:3000/api/artists/getArtist/${email}`);
+          localStorage.setItem("id",res.data.id)
           router.push({
-            pathname:'/MainPage',
-            query:{"id":res.data.id,type:true}
+            pathname: '/MainPage',
+            query: { "id": res.data.id, type: true }
           });
         }
       } catch (error) {
@@ -71,7 +73,7 @@ const Login: React.FC = () => {
       }
     }
   };
-  
+
   const handleFinishFailed = (error: any) => {
     console.log('Error:', error);
     if (error.errorFields.some((field: any) => field.name[0] === 'email')) {
@@ -100,7 +102,7 @@ const Login: React.FC = () => {
       >
         <h3>Email</h3>
         <Form.Item
-        className={Styles.email}
+          className={Styles.email}
           label="Email"
           name="email"
           rules={[

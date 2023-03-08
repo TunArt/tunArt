@@ -38,6 +38,7 @@
   height: 625px;
   
   background-image: url("../../public/i.png");
+  background-repeat: no-repeat;
   position: absolute;
   bottom: -100%;
   left: 30%;
@@ -50,6 +51,7 @@
   width: 630px;
   height:625px;
   background-image: url('../../public/i1.png');
+  background-repeat: no-repeat;
   left: 0px;
   
   z-index: -1;
@@ -120,6 +122,7 @@
   margin-right: 150px;
   margin-top: 20px;
   float: right;
+  margin-top: -.5%;
 }
 #menu ul{
   list-style: none;
@@ -141,6 +144,64 @@
   position: absolute;
   bottom: 10px;
   width: 100%;
-  margin-bottom:-230px ;
+  margin-bottom:-150% ;
+    /* margin-top: 20%; */
+    background-color: #1E242A;
+}
+/* Styles for menu buttons */
+#menu li {
+  display: inline-block;
+  margin-right: 20px;
+  font-weight: bold;
+  color:bisque;
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: large;
+}
 
+#menu li:hover {
+  color: orange;
+}
+
+#menu .btn {
+  background-color: orange;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-left: 4rem;
+  width: 10rem;
+  font-size: large;
+}
+
+#menu .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for menu container */
+#menu {
+position: sticky;
+top: 0;
+z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  padding: 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+@media only screen and (max-width: 768px) {
+  #menu {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #menu li {
+    margin-bottom: 10px;
+  }
 }
