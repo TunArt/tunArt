@@ -1,6 +1,7 @@
 import db from '../models/index';
 import express, { Express, Request, Response } from 'express';
 import { async } from '@firebase/util';
+import { Rating } from '@mui/material';
 const Artwork = db.artwork
 
 //methods to get all the artworks
@@ -22,16 +23,21 @@ const addArtwork = async (req: Request, res: Response) => {
       }
 if(userId){
   try{
-      const artwork = await Artwork.create({
-        name: req.body.name,
-        creationDate: req.body.creationDate,
-        price: req.body.price,
-        description: req.body.description,
-        auction: req.body.auction,
-        image: req.body.image,
-        verified:req.body.verified,
-        artistId: req.params.artistId,
-        categoryId: req.body.categoryId, 
+    const artwork = await Artwork.create({
+      name: req.body.name,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      creationDate: req.body.creationDate,
+      price: req.body.price,
+      rating: req.body.rating,
+      description: req.body.description,
+      auction: req.body.auction,
+      image: req.body.image,
+      verified:req.body.verified,
+      artistId: req.params.artistId,
+      categoryId: req.body.categoryId, 
+      userId: req.params.userId
+
       });
       res.status(201).send("artwork created successfully");
     }
