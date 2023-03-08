@@ -1,56 +1,55 @@
-import React, { useState } from "react";
-import { TestInventories } from "../testInventories";
+import React, {useState} from "react";
 import styles from "../../../styles/principale.module.css";
+import Link from "next/link";
+import {useRouter} from "next/router"
 
+const ProductDetails=(props)=>{
 
-const ProductDetails=()=>{
     const[toggle, setToggle]= useState(false)
+    const [popUp, setPopUp] = useState(false)
+    const[children, setChildren]=useState("")
+    const route=useRouter()
+
+    //const isAuction= props.element.auction ? "Auction" :"Sell"
+    //const isForSaleOrBid = props.element.auction ? "Bid" :"Buy"
 
     const showHide=()=>{
         setToggle(!toggle);
     }
+    const Buy=()=>{
+        alert("you will be redirected to the purshesing page!")
+    }
 
-    return(
 
-        <div className={styles.all}>
-            <div className={styles.wrapper}>
-        <div className={styles.galleryDisplay}>
-        {TestInventories.map((e)=>(
-            <div className={styles.cards}>
-                <img style={{width:400, height:200}} src={e.Picture} alt="image" className={styles.imagesshop}/><br/>
-                <div>
-                <ul>{"Product Name: "+e.ProductName}</ul>
-                <ul>{"Product Brand: "+e.Brand}</ul>
-                <ul>{"Price: "+e.Price+" $"}</ul>
-                </div>
-                {toggle ?
-            <div>
-                {"Quantity: "+e.Quantity}<br/>  
-                {"Product Description: "+e.ProductDescription}<br/>
-                {"Rating: "+e.Rating+"/10"}<br/>
-                {"Shoppers Comments: "+e.Commnets}    
+function BoldText({children}) {
+    return <span style={{fontWeight: 'bold'}}>{children}</span>;
+  }
+
+    return(  
+        
+        
+                  
+                      <div className={styles.container}>
+                         <div className={styles.front} style={{ backgroundImage:`url(${props.element.picture})` }}>
+                          <div className={styles.inner}>
+							<p style={{fontFamily:"Montserrat"}}>{props.element.name}</p>
+						</div>
+					</div>
+				  	<div className={styles.back}>
+						<div className={styles.inner}>
+                    <BoldText>Product Name:</BoldText>{" "+props.element.name+" "}<br/>
+                    <BoldText>Price:</BoldText>{" "+props.element.price+" $"}<br/>
+                    <BoldText>Quantity:</BoldText>{" "+props.element.quantity}<br/>
+                    <BoldText>Brand:</BoldText>{" "+props.element.brand+" "}<br/>
+                    <BoldText>Rating:</BoldText>{" "+props.element.rating+"/5 "}<br/>
+                    <BoldText>Description:</BoldText>{" "+props.element.description}<br/>
+                    
+                    <button type="submit" onClick={Buy} className={styles.submitButton2}>Buy</button>
+             </div>
             </div>
-            :<></>
-            } 
-            <button type="submit" onClick={showHide} className={styles.submitButton}>Show More Details</button>
             </div>
-        ))}
-        </div>
-        </div>
-        </div>
+                
+                 
     )
 }
 export default ProductDetails;
-
-{/* <div id="ww_cad417927734c"
- v='1.3' loc='id' 
- a='{"t":"horizontal","lang":"en","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'>
-    Weather Data Source: 
-    <a href="https://wetterlang.de/paris_wetter_30_tage/" 
-    id="ww_cad417927734c_u" target="_blank">
-        Paris 30 tage wetter
-        </a>
-        </div>
-        <script async src="https://app1.weatherwidget.org/js/?id=ww_cad417927734c">
-
-        </script> */}

@@ -4,9 +4,9 @@ const Product = db.product
 
 //methods to get all the products
 
-const getAllProducts = (req:Request ,res:Response) =>{
+const getAllProducts = async(req:Request ,res:Response) =>{
     try {
-        let  products= Product.findAll()
+        let  products= await Product.findAll()
         res.status(200).send(products)
 }
 catch (err){

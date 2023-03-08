@@ -14,11 +14,13 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-  { name: 'Art Gallery', href: '#', current: true },
-  { name: 'Shop', href: '#', current: false },
-  { name: 'Auctions', href: '#', current: false },
-  { name: 'Contact Us', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
+  { name: 'Home', href: '/', current: false },
+  { name: 'Art Gallery', href: '/MainPage/art/art', current: false },
+  { name: 'Shop', href: '/MainPage/shop/shop', current: false },
+  { name: 'Auctions', href: '/MainPage/auctions/auctions', current: false },
+  { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
+  { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
+  
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '' },

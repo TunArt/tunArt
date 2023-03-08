@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import NavBar from "../navBar";
 import { TestData } from "../testData";
 import styles from "../../../styles/principale.module.css";
 import axios from "axios";
 import ArtList from "./artList";
 import SearchList from "../search/searchList";
+import Footer from "../footer/footer";
 
 //const dummyArt=["./img 01.jpeg", "./img 02.webp"]
 
@@ -20,12 +21,14 @@ const Art=()=>{
     const showHide=()=>{
         setToggle(!toggle);
     }
-
-   !arr.length? axios.get('http://localhost:3000/api/artworks/getArtworks')
+    useEffect(()=>{
+        axios.get('http://localhost:3000/api/artworks/getArtworks')
     .then(response => {
         console.log(response.data);
     setArr(response.data)
-    }):undefined
+    })
+    },[])
+   //!arr.length? :undefined
     
     const find=()=>{
         axios.get(`localhost:3000/getOneArtwork/${name}`)
@@ -50,12 +53,12 @@ return(
     
         <div><NavBar/></div>
     <div className={styles.wrapper}> 
-        <h1 className={styles.titles}>The Gallery:</h1>
+        <h1 className={styles.titles}>THE GALLERY</h1>
         <br></br>
         
         
         <form className={styles.search}>
-            <input type="text" placeholder="search" onChange={handleChange}></input>
+            <input type="text" placeholder="search for an artwork" onChange={handleChange}></input>
             
             <button type="submit" onClick={onClickk}><i className={"bi bi-search"}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -81,6 +84,7 @@ return(
         </div>
     }
     </div>
+    <Footer/>
     </div>
 )
 }

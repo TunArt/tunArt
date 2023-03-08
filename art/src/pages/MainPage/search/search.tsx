@@ -8,14 +8,14 @@ import SearchList from "./searchList";
 const Search=()=>{
     const[items, setItems]=useState([])
     const[toggle,setToggle]=useState(false)
-    const[name, setName]=useState("")
+    const[query, setQuery]=useState("")
 
     const showHide=()=>{
         setToggle(!toggle);
     }
 
     const find=()=>{
-        axios.get(`localhost:3000/getOneArtwork/${name}`)
+        axios.get(`http://localhost:3000/getOneArtwork/${query}`)
           .then(function (response) {
             console.log(response);
           })
@@ -32,18 +32,25 @@ const Search=()=>{
     // const filtered = filterdByName(TestData);
 
     const handleChange=(e)=>{
-        setName(e.target.value)
+        setQuery(e.target.value)
     }
 
     function onClickk(){
         showHide()
         find()
     }
+    var ArraySearch=[];
 
+    function filteredData(query){
+        ArraySearch=items.filter((e)=>{
+            e.name === query
+        })
+    }
     return(
 <>
     <div >
         <form className={styles.search}>
+
             <input type="text" placeholder="search" onChange={handleChange}></input>
             
             <button type="submit" onClick={onClickk}><i className={"bi bi-search"}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
@@ -51,7 +58,7 @@ const Search=()=>{
             </svg></i></button>
         </form>
         <div>
-            {items.map((element,index)=>(
+            {ArraySearch.map((element,index)=>(
                 <div key={index}>
                 <SearchList element={element}/>
                 </div>
@@ -62,3 +69,14 @@ const Search=()=>{
     )
 }
 export default Search;
+
+/* 
+<div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" placeholder="What are you looking for?">
+      <button type="submit" class="searchButton">
+        <i class="fa fa-search"></i>
+     </button>
+   </div>
+</div>
+*/
