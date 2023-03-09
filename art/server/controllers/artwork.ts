@@ -115,6 +115,52 @@ if(userId){
         res.status(500).send("failed to add artwork")
     }
   }
-export default {getAllArtworks,getOneArtwork,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
+
+
+    // update User information in database
+   const updateArtWork= (req:Request, res:Response)=> {
+    try {
+        if (!req.body) {
+          throw new Error("Request body is missing required properties.");
+        }
+
+    const artWork =  Artwork.update({
+        name: req.body.name,
+        bio: req.body.bio,
+        email: req.body.email,
+        password: req.body.password,
+        picture: req.body.picture,
+        phoneNumber: req.body.phoneNumber
+    }, {
+        where: {
+            id: req.params.id
+        }
+    })
+    res.status(200).send("ArtWork updated successfully")
+}
+catch (err) {
+    console.log(err);
+    res.status(400).send(err);
+  }
+}
+
+const deleteArtWork= (req:Request, res:Response)=> {
+    try {
+        if (!req.body) {
+          throw new Error("Request body is missing required properties.");
+        }
+   const artWork =  Artwork.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+        res.status(200).send("ArtWork deleted successfully")
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+    }
+export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
 
 

@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
-import NavBar from "../navBar";
+import NavBar from "../../../components/navBar";
 import { TestData } from "../testData";
 import styles from "../../../styles/principale.module.css";
 import axios from "axios";
 import ArtList from "./artList";
 import SearchList from "../search/searchList";
 import Footer from "../footer/footer";
+import {useRouter} from "next/router";
 
 //const dummyArt=["./img 01.jpeg", "./img 02.webp"]
 
@@ -17,6 +18,8 @@ const Art=()=>{
     const[items, setItems]=useState([])
     const[toggle,setToggle]=useState(false)
     const[name, setName]=useState("")
+    const route=useRouter();
+    const[page,setPage]=useState(1)
 
     const showHide=()=>{
         setToggle(!toggle);
@@ -27,8 +30,7 @@ const Art=()=>{
         console.log(response.data);
     setArr(response.data)
     })
-    },[])
-   //!arr.length? :undefined
+    },[page])
     
     const find=()=>{
         axios.get(`localhost:3000/getOneArtwork/${name}`)
@@ -48,6 +50,7 @@ const Art=()=>{
         showHide()
         find()
     }
+   
 return(
     <div className={styles.all}>
     
@@ -90,6 +93,10 @@ return(
 }
 export default Art;
 
+/*
+isLast={index === images.length - 1}
+      newLimit={() => setPage(page + 1)}
+*/
 
 // import React, {useState} from "react";
 // import NavBar from "../navBar";

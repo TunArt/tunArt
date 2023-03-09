@@ -2,6 +2,8 @@ import React,{useState} from "react"
 import { useRouter } from 'next/router'
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import  'material-icons/iconfont/material-icons.css';
+import NavBar from "../../components/navBar";
+import Footer from "../MainPage/footer/footer";
 
 
 const products = [
@@ -44,6 +46,8 @@ export default function Example() {
   const route=useRouter()
   const [backet,setBacket] =useState(false)
   return (
+    <>
+    <NavBar/>
     <div className="bg-stone-500">
       <span className="material-icons-sharp">shopping_cart</span>
       <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -72,7 +76,9 @@ export default function Example() {
           ))}
         </div>
       </div>
+        <Footer/>
     </div>
+    </>
   )
 }
 
