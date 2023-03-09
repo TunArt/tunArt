@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image"
+import { useRouter } from 'next/router'
 type NavigationItem = {
   name: string;
   href: string;
@@ -21,9 +22,10 @@ export default function Example({id}:string) {
     { name: 'Art Gallery', href: `/MainPage/art/art?id=${id}`, current: false },
     { name: 'Shop', href: `/shop?id=${id}`, current: false },
     { name: 'Auctions', href: `/bid?${id}`, current: false },
-    { name:"Events",href:`/event/event?id=${id}`,current:false}
-    { name: 'Contact Us', href: '#', current: false },
-    { name: 'Reports', href: '#', current: false },
+    { name: "Events", href:`/event/event?id=${id}`,current:false },
+    { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
+    { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
+    { name: 'Reports', href: '/MainPage/reports/', current: false },
   ]
   const userNavigation = [
     { name: 'Your Profile', href: '/profile/' },
@@ -36,6 +38,8 @@ export default function Example({id}:string) {
   function classNames(...classes:string[]) {
     return classes.filter(Boolean).join(' ')
   }
+
+  const route = useRouter();
   
   return (
     
@@ -60,7 +64,7 @@ export default function Example({id}:string) {
                       <Image
                         className="h-10 w-10 "
                         onClick={()=>{
-                          
+                          route.push("/MainPage/")
                         }}
                         src="/tunart-website-favicon-color.png"
                         alt="Your Company"

@@ -161,6 +161,6 @@ const deleteArtWork= (req:Request, res:Response)=> {
         res.status(400).send(err);
       }
     }
-export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
+export default {getAllArtworks,getOneArtwork,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
 
 
