@@ -18,9 +18,6 @@ type Product = {
   brand: string;
   picture: any;
 };
-const baught = (idItem: number, idUser: number) => {
-  axios.post(``);
-};
 const product: Product = {
   rating: 3.9,
   reviewCount: 117,
@@ -45,16 +42,16 @@ export default function Item() {
   const { query } = route || {};
   const items = String(query?.items);
   const item = JSON.parse(items);
-  console.log(item);
+  console.log("this is the item ", item);
   let quantityBought=""
   const [open, setOpen] = useState(true);
-  console.log("hi");
   const handleADD = (x: string, y: string) => {
+    console.log("this should be the user id ",x)
     axios.post(`http://localhost:3000/api/route/bought/${x}/${y}`,{
       quantityBought:quantityBought,
     }).then((res) => {
       console.log(res)
-      route.push("/MainPage");
+      route.push("/shop");
     });
   };
   return (
@@ -182,6 +179,7 @@ export default function Item() {
                                     placeholder="1"
                                     onChange={(e) => {
                                       quantityBought=e.target.value
+
                                     }}
                                   />
                                 </span>
@@ -208,7 +206,8 @@ export default function Item() {
                             <button
                               onClick={(e) => {
                                 e.preventDefault()
-                                handleADD(localStorage.id,item.id) 
+                                
+                                handleADD(window?.localStorage.id,item.id) 
                               }}
                               className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
