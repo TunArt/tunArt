@@ -50,7 +50,11 @@ function App(): JSX.Element {
           picture: "picture",
           name: "my name",
         })
-        .then((res) => console.log("axios.post", res))
+        .then((res) =>{ 
+          console.log("axios.post", res);
+         
+          
+        })
         .catch((err) => console.log(err));
     }
   };
@@ -101,7 +105,7 @@ function App(): JSX.Element {
 
   return (
     <div className={styles.app}>
-      <h1>Messages:</h1>
+      <h1>Discuss it here :</h1>
       <div className={styles.discussion}>
         {oldMessages
           .filter((e) => e.artworkId == ArtId)
@@ -120,9 +124,9 @@ function App(): JSX.Element {
 
             return (
               <div>
-                <div>
+                <div style={{"display":"flex","margin-left":"-15%"}}>
                   <img className={styles.image} src={user.picture}/>
-                  <p>{`${user.userName} said`}</p>
+                  <p style={{"margin-top":"2%","margin-left":"2%"}}>{`${user.userName}`}</p>
                 </div>
 
               <p key={index} className={styles.oneMessage}>

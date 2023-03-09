@@ -19,18 +19,27 @@
     padding-right: 10%;
     padding-left: 10%;
     flex: 1;
-    overflow-y: hidden;
+    overflow-y: fixed;
     background-color: rgb(27, 25, 25);
-    overflow: scroll;;
+    overflow: scroll;
+    display: hidden;
   }
+  .discussion::-webkit-scrollbar {
+    display: none;
+}
 
   
   .oneMessage {
     background-color: #a35710;
-    margin: 15px;
+    /* margin: 13px; */
     padding: 10px;
-    border-radius: 5px;
-    color: #fdf9f9;
+    border-radius: 30px;
+    color: #ffffff;
+    font-weight: 700;
+    width: 80%;
+    margin-left: 12%;
+    margin-top: 3%;
+
   }
   
   .footer {
@@ -76,9 +85,16 @@
     margin-left: 10px;
   }
   .image{
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
     background-image: url("https://silicondales.com/wp-content/uploads/2018/11/incognito-symbol-large-300x300.jpg");
-    background-color: wheat
-    ;
+    background-size: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-color: #1d1d1d;
+    border-radius: 70%;
+    border-color: black;
+    margin: 1%;
+    margin-bottom: -10%;
+    
    }
