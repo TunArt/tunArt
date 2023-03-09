@@ -6,6 +6,8 @@ import styles from "../../styles/principale.module.css"
 import Search from "./search/search";
 import axios from "axios"
 import { useRouter } from 'next/router';
+import Bucket from "../../components/backet/backet";
+import { loadComponents } from "next/dist/server/load-components";
 
 interface EmailParams{
     email: string;
@@ -15,14 +17,15 @@ interface DataParams{
     userName: string;
 }
 const MainPage =()=>{
+    const [showCart,setShowcart]=useState(false)
     const router=useRouter()
     const [user, setUser] = useState([])
     const [artists,setArtists]=useState([])
     const [render,setRender]=useState(false);
-    const id = router.query.id ?? router.query.id
+    const id:string = router.query.id ?? router.query.id
     console.log(router.query)
     useEffect(()=>{
-        axios.get(`http://localhost:3000/api/users/getUserId/${id}`).then((res)=>{
+        axios.get(`http://localhost:3000/api/users/getUserId/${localStorage.id}`).then((res)=>{
         setUser(res.data)
         console.log(res);
         }).then(()=>{
@@ -30,21 +33,26 @@ const MainPage =()=>{
                 console.log(res)
                 setArtists(res.data)
             })
+        }).catch((err)=>{
+            if(!localStorage.id){
+                return <h1>Please log In for Sign Up</h1>
+            }
         })
     },[id])
-    if(!id){
-        return <div>loading....</div>
-    }
-    console.log(router.query.id)
+    
+    console.log(showCart)
+    console.log(typeof( router.query.id) )
     console.log(user)
     return(
         <div className={styles.all}>
-        <div><NavBar /></div>
+            {showCart && <Bucket id={localStorage.id} setShowcart={setShowcart} />}
+        <div><NavBar id={localStorage.id} showCart={showCart} setShowcart={setShowcart}  /></div>
         <div className={styles.wrapper}>
          <a className={styles.titles}>{"ArtFolio   "}</a>
         <a style={{fontFamily:'Droid Sans'}}>{": The home of art .."}</a>
         <br></br>  
         </div>
+        
         </div>
     )
 }

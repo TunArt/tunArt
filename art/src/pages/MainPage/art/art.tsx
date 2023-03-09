@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, {useEffect, useState} from "react";
 import NavBar from "../navBar";
+=======
+import React, {useState,useEffect} from "react";
+import NavBar from "../../../components/navBar";
+>>>>>>> d77e0b3ef320de69b8e1ac8d24165aeba807492d
 import { TestData } from "../testData";
 import styles from "../../../styles/principale.module.css";
 import axios from "axios";
@@ -12,11 +17,15 @@ import Footer from "../footer/footer";
 
 
 const Art=()=>{
-
     const[arr, setArr]=useState([])
+<<<<<<< HEAD
     const[items, setItems]=useState([])
     const[toggle,setToggle]=useState(false)
     const[name, setName]=useState("")
+=======
+useEffect(()=>{
+    
+>>>>>>> d77e0b3ef320de69b8e1ac8d24165aeba807492d
 
     const showHide=()=>{
         setToggle(!toggle);
@@ -30,6 +39,7 @@ const Art=()=>{
     },[])
    //!arr.length? :undefined
     
+<<<<<<< HEAD
     const find=()=>{
         axios.get(`localhost:3000/getOneArtwork/${name}`)
           .then(function (response) {
@@ -48,6 +58,10 @@ const Art=()=>{
         showHide()
         find()
     }
+=======
+},[])
+    
+>>>>>>> d77e0b3ef320de69b8e1ac8d24165aeba807492d
 return(
     <div className={styles.all}>
     
