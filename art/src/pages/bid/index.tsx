@@ -24,7 +24,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 2,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -41,7 +41,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 3,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -58,7 +58,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 4,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -75,7 +75,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 5,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -92,7 +92,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 6,
     title: 'Boost your conversion rate',
     href: '#',
     img:
