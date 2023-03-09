@@ -1,7 +1,10 @@
 import styles from "../styles/chatroom.module.css";
 import io, { Socket } from "socket.io-client";
 import react, { useEffect, useState } from "react";
+<<<<<<< HEAD
 import axios from "axios";
+=======
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
 
 const socket: Socket = io("http://localhost:3001");
 
@@ -29,6 +32,7 @@ function App(): JSX.Element {
       setMessageData(newMessageData);
       setMessage("");
       socket.emit("send_message", { message, room });
+<<<<<<< HEAD
 
              // Create new message in Sequelize
       axios.post("http://localhost:3000/api/messages/addmessage", {
@@ -42,10 +46,13 @@ function App(): JSX.Element {
     }
 
       // Message.create({ content: message, room: room });
+=======
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
     }
   };
 
   useEffect(() => {
+<<<<<<< HEAD
 
 
     // Fetch messages for current room
@@ -76,6 +83,18 @@ function App(): JSX.Element {
     });
   }, [messageData]);
 
+=======
+    socket.on("receive_message", (data: { message: string; room: string }) => {
+      const newMessageData = { ...messageData };
+      if (!(data.room in newMessageData)) {
+        newMessageData[data.room] = [];
+      }
+      newMessageData[data.room].push(data.message);
+      setMessageData(newMessageData);
+    });
+  }, [messageData]);
+
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       sendMessage();

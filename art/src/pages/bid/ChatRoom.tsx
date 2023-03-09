@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import styles from "../styles/chatroom.module.css";
 import io, { Socket } from "socket.io-client";
 import react, { useEffect, useState } from "react";
@@ -63,6 +64,19 @@ function ChatRoom(): JSX.Element {
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       sendMessage();
+=======
+import { useState } from 'react';
+import styles from "src/styles/SideBar.module.css";
+
+const ChatRoom = () => {
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
+
+  const handleNewMessage = () => {
+    if (newMessage.trim() !== '') {
+      setMessages([...messages, { text: newMessage }]);
+      setNewMessage('');
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
     }
   };
 
@@ -87,13 +101,22 @@ function ChatRoom(): JSX.Element {
       <div className="bg-gray-800 py-3 px-4 flex justify-between items-center">
         <input
           type="text"
+<<<<<<< HEAD
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+=======
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
           className="flex-1 bg-gray-700 text-white rounded-md py-1 px-2 mr-4"
           placeholder="Type your message..."
         />
         <button
+<<<<<<< HEAD
           onClick={sendMessage}
+=======
+          onClick={handleNewMessage}
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded-md"
         >
           Send

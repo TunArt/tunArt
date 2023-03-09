@@ -47,7 +47,8 @@
     "sequelize": "^6.29.0",
     "socket.io-client": "^4.6.1",
     "swiper": "^9.1.0",
-    "typescript": "4.9.5"
+    "typescript": "4.9.5",
+    "w3-css": "^4.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",

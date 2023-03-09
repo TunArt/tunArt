@@ -2,13 +2,18 @@ import { Fragment,useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image"
+<<<<<<< HEAD
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import  'material-icons/iconfont/material-icons.css';
+=======
+import { useRouter } from 'next/router'
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
 type NavigationItem = {
   name: string;
   href: string;
   current: boolean;
 };
+<<<<<<< HEAD
 <<<<<<< HEAD
 const user = {
   name: 'Tom Cook',
@@ -61,10 +66,45 @@ export default function Example(props:any) {
   function classNames(...classes:string[]) {
     return classes.filter(Boolean).join(' ')
   }
+=======
+
+
+export default function Example({id}:string) {
+  console.log("from nav bar",id);
+  const user = {
+    name: 'Tom Cook',
+    email: 'tom@example.com',
+    imageUrl:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  }
+  const navigation = [
+    { name: 'Art Gallery', href: `/MainPage/art/art?id=${id}`, current: false },
+    { name: 'Shop', href: `/shop?id=${id}`, current: false },
+    { name: 'Auctions', href: `/bid?${id}`, current: false },
+    { name: "Events", href:`/event/event?id=${id}`,current:false },
+    { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
+    { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
+    { name: 'Reports', href: '/MainPage/reports/', current: false },
+  ]
+  const userNavigation = [
+    { name: 'Your Profile', href: '/profile/' },
+    { name: 'Settings', href: '#' },
+    { name: 'Sign out', href: '/' ,work:function(){
+      localStorage.clear()
+    }},
+  ]
+  
+  function classNames(...classes:string[]) {
+    return classes.filter(Boolean).join(' ')
+  }
+
+  const route = useRouter();
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
   
   return (
     
     <>
+    
       {/*
         This example requires updating your template:
 
@@ -85,7 +125,11 @@ export default function Example(props:any) {
                       <Image
                         className="h-10 w-10 "
                         onClick={()=>{
+<<<<<<< HEAD
                           
+=======
+                          route.push("/MainPage/")
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
                         }}
                         src="/tunart-website-favicon-color.png"
                         alt="Your Company"

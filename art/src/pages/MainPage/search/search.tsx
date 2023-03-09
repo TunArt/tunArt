@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../../styles/principale.module.css"
 import axios from "axios";
-//import TestData from "../testData"
 import SearchList from "./searchList";
-//import { elements } from "chart.js";
 
 const Search=()=>{
     const[items, setItems]=useState([])
@@ -27,8 +25,6 @@ const Search=()=>{
         // const filterdByName = (array) => {
         //     return array.filter(el => el.artName.toLowerCase().includes(query))
         // }
-    
-
     // const filtered = filterdByName(TestData);
 
     const handleChange=(e)=>{
@@ -69,14 +65,3 @@ const Search=()=>{
     )
 }
 export default Search;
-
-/* 
-<div class="wrap">
-   <div class="search">
-      <input type="text" class="searchTerm" placeholder="What are you looking for?">
-      <button type="submit" class="searchButton">
-        <i class="fa fa-search"></i>
-     </button>
-   </div>
-</div>
-*/

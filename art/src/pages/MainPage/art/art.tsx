@@ -1,16 +1,21 @@
 <<<<<<< HEAD
 import React, {useEffect, useState} from "react";
+<<<<<<< HEAD
 import NavBar from "../navBar";
 =======
 import React, {useState,useEffect} from "react";
 import NavBar from "../../../components/navBar";
 >>>>>>> d77e0b3ef320de69b8e1ac8d24165aeba807492d
+=======
+import NavBar from "../../../components/navBar";
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
 import { TestData } from "../testData";
 import styles from "../../../styles/principale.module.css";
 import axios from "axios";
 import ArtList from "./artList";
 import SearchList from "../search/searchList";
 import Footer from "../footer/footer";
+import {useRouter} from "next/router";
 
 //const dummyArt=["./img 01.jpeg", "./img 02.webp"]
 
@@ -22,10 +27,15 @@ const Art=()=>{
     const[items, setItems]=useState([])
     const[toggle,setToggle]=useState(false)
     const[name, setName]=useState("")
+<<<<<<< HEAD
 =======
 useEffect(()=>{
     
 >>>>>>> d77e0b3ef320de69b8e1ac8d24165aeba807492d
+=======
+    const route=useRouter();
+    const[page,setPage]=useState(1)
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
 
     const showHide=()=>{
         setToggle(!toggle);
@@ -36,8 +46,7 @@ useEffect(()=>{
         console.log(response.data);
     setArr(response.data)
     })
-    },[])
-   //!arr.length? :undefined
+    },[page])
     
 <<<<<<< HEAD
     const find=()=>{
@@ -58,10 +67,14 @@ useEffect(()=>{
         showHide()
         find()
     }
+<<<<<<< HEAD
 =======
 },[])
     
 >>>>>>> d77e0b3ef320de69b8e1ac8d24165aeba807492d
+=======
+   
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
 return(
     <div className={styles.all}>
     
@@ -104,6 +117,10 @@ return(
 }
 export default Art;
 
+/*
+isLast={index === images.length - 1}
+      newLimit={() => setPage(page + 1)}
+*/
 
 // import React, {useState} from "react";
 // import NavBar from "../navBar";

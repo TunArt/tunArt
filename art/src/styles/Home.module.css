@@ -144,6 +144,7 @@
   position: absolute;
   bottom: 10px;
   width: 100%;
+<<<<<<< HEAD
   margin-bottom:-165% ;
 
   /* margin-top: 20%; */
@@ -161,6 +162,24 @@
   font-size: large;
 }
 
+=======
+  margin-bottom:-170% ;
+  /* margin-top: 20%; */
+}
+/* Styles for menu buttons */
+#menu li {
+  display: inline-block;
+  margin-right: 20px;
+  font-weight: bold;
+  color:bisque;
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: large;
+}
+
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
 #menu li:hover {
   color: orange;
 }
@@ -184,6 +203,12 @@
 
 /* Styles for menu container */
 #menu {
+<<<<<<< HEAD
+=======
+position: sticky;
+top: 0;
+z-index: 1;
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
   display: flex;
   justify-content: space-between;
   align-items: center;

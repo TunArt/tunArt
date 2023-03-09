@@ -1,3 +1,5 @@
+import React from "react";
+
 const Footer = ({ height, width }) => {
 	return (
 		<div className="theFooter">

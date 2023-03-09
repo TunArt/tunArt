@@ -121,9 +121,6 @@ if(userId){
         res.status(500).send("failed to add artwork")
     }
   }
-<<<<<<< HEAD
-export default {getAllArtworks,getOneArtwork,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
-=======
 
 
     // update User information in database
@@ -170,7 +167,6 @@ const deleteArtWork= (req:Request, res:Response)=> {
         res.status(400).send(err);
       }
     }
-export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
->>>>>>> d77e0b3ef320de69b8e1ac8d24165aeba807492d
+export default {getAllArtworks,getOneArtwork,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
 
 

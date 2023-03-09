@@ -31,6 +31,7 @@ const[view,setView]=useState("")
     }
     
   }
+<<<<<<< HEAD
 
 
 
@@ -46,6 +47,19 @@ const[view,setView]=useState("")
   // }
   // }
   // userHere()
+=======
+  const userHere=()=>{
+    if (typeof window !== 'undefined') {
+      console.log(route.query.id)
+    if(!route.query.id){
+      route.push({
+        pathname:"/404"
+      })
+    }
+  }
+  }
+  userHere()
+>>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
   return(
     
     <div className={styles.sideBar}>
