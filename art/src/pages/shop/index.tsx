@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useRouter } from "next/router";
 import Navbar from "../../components/navBar";
 import axios from "axios";
 import Image from "next/image";
-
+import Bucket from "src/components/backet/backet";
 interface Product {
   id: number;
   name: string;
@@ -36,6 +36,11 @@ export async function getServerSideProps() {
 }
 
 export default function Example({ items }: ProductList) {
+  const [showCart,setShowcart]=useState(false)
+   const [user, setUser] = useState([])
+    const [artists,setArtists]=useState([])
+    const [render,setRender]=useState(false);
+    const [currentUsrId,setCurrentUserId]=useState<string>("")
   console.log(items)
   const router = useRouter();
   const [firstPic, setFirstPic] = useState<string>("[]");
@@ -45,14 +50,17 @@ export default function Example({ items }: ProductList) {
       query: { items: JSON.stringify(item) },
     });
   };
-;
+useEffect(()=>{
+  setCurrentUserId(window.localStorage.id)
+},[])
 
   console.log(firstPic)
   return (
     <>
-      <div>
-        <Navbar/>
-      </div>
+     <div className="sticky top-0 z-50">
+<Navbar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} />
+{showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
+</div>
       <div className="bg-stone-500">
         <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
           <h2 className="sr-only">Products</h2>

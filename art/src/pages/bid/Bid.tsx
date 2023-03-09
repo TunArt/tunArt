@@ -5,7 +5,7 @@ import styles from "src/styles/SideBar.module.css";
 import style from "src/styles/bid.module.css"
 import Detail from './Detail';
 import { useRouter } from 'next/router'
-
+import Navbar from '../../components/navBar'
 interface DetailProps {
     id: number,
     title: string,
@@ -25,7 +25,7 @@ const Bid: React.FC <DetailProps>= (props:DetailProps) => {
     
     return (
         <div>
-       
+       <Navbar/>
             <div >
                 <ChatRoom item={props}/>
             </div>
