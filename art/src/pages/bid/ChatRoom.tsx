@@ -1,4 +1,4 @@
-import styles from "../styles/chatroom.module.css";
+import styles from "../../styles/chatroom.module.css";
 import io, { Socket } from "socket.io-client";
 import react, { useEffect, useState } from "react";
 

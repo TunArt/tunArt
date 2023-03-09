@@ -17,9 +17,6 @@ import Swiper, { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import path from "path";
-
-interface Props { }
 
 const inter = Inter({ subsets: ["latin"] });
 const stats = [
@@ -33,8 +30,10 @@ const Home: React.FC<Props> = () => {
   const route=useRouter()
   const [popUp, setPopUp] = useState(false);
   const [popUpLogin, setPopUpLogin] = useState(false);
+  
   const isuserHere=()=>{
     if(localStorage.id ){
+      console.log(localStorage.id)
     route.push({
       pathname: '/MainPage',
       query: { "id": localStorage.id, type: true },
@@ -95,17 +94,19 @@ const Home: React.FC<Props> = () => {
           <div id={styles.box3}>
             <div id={styles.container}>
               <div id={styles.logo}>
-                <b>ART</b>
+                
               </div>
+              <div className="fixed top-0 w-full bg-black shadow-lg">
               <div id={styles.menu}>
                 <ul>
                   <Link href=""><li>HOME</li></Link>
                   <li>SERVICES</li>
                   <Link href="#aboutUs"><li>ABOUT</li></Link>
-                  <Link href={"../MainPage/contactUs"}><li>CONTACT</li></Link>
+                  <Link href={"/"}><li>CONTACT</li></Link>
                 </ul>
                   <button className={styles.btn} onClick={togglePopupLogin} >login</button>
                   <button onClick={togglePopup} className={styles.btn}  >signup</button>
+              </div>
               </div>
             </div>
           </div>

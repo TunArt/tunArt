@@ -1,15 +1,6 @@
 import React , { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Switch } from 'antd';
-import Head from 'next/head'
-import styles from '../../styles/profile.module.css'
-
-// Import the Cloudinary classes. 
-  import {fill} from "@cloudinary/url-gen/actions/resize";
-  import {CloudinaryImage} from '@cloudinary/url-gen';
-
-const myImage = new CloudinaryImage('sample', {cloudName: 'dk8yjc0ph'}).resize(fill().width(100).height(150));
-
 
 
 const ProfilePage = () => {
@@ -21,53 +12,23 @@ const ProfilePage = () => {
   const [add,setAdd] = useState(false)
   const [info,setInfo]=useState({name:"",email:"",password:"",phone:"",bio:""})
   const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",price:"",description:""})
-  const [imageSrc, setImageSrc] = useState();
-  const [uploadData, setUploadData] = useState();
+  const [image,setImage] = useState("")
+  
 
-  /**
-   * handleOnChange
-   * @description Triggers when the file input changes (ex: when a file is selected)
-   */
-
-  function handleOnChange(changeEvent:any) {
-    const reader = new FileReader();
-
-    reader.onload = function(onLoadEvent:any) {
-      setImageSrc(onLoadEvent.target.result);
-      setUploadData(undefined);
-    }
-
-    reader.readAsDataURL(changeEvent.target.files[0]);
+  const handleImage =(e:any)=>{
+    const file= e.target.files[0];
+    setFileToBase(file)
+    console.log(file)
   }
-
-  /**
-   * handleOnSubmit
-   * @description Triggers when the main form is submitted
-   */
-
-  async function handleOnSubmit(event:any) {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    const fileInput :any = Array.from(form.elements).find(name => name === 'file');
-
-    const formData = new FormData();
-
-    for ( const file of fileInput.files ) {
-      formData.append('file', file);
+  
+  const setFileToBase=(file:Blob)=>{
+    const reader :any= new FileReader();
+    reader.readAsDataURL(file)
+    reader.onload= ()=>{
+        setImage(reader.result)
     }
+  };
 
-    formData.append('upload_preset', 'my-uploads');
-
-
-    const data = await fetch('https://api.cloudinary.com/v1_1/dk8yjc0ph/image/upload', {
-      method: 'POST',
-      body: formData
-    }).then(r => r.json());
-
-    setImageSrc(data.secure_url);
-    setUploadData(data);
-  }
   const handleChange=(e:any)=>{
     console.log(e.target.value);
     setInfo({...info,[e.target.name]:e.target.value})
@@ -75,8 +36,9 @@ const ProfilePage = () => {
 
 const handleChangeCreate=(e:any)=>{
   console.log(e.target.value);
-  setInfo({...info,[e.target.name]:e.target.value})
+  setCreate({...create,[e.target.name]:e.target.value})
 }
+
 
 const onChange = (checked: boolean) => {
   console.log(`switch to ${checked}`);
@@ -115,6 +77,13 @@ const updateInfo = (id:any,body:any) => {
         })
   });
   }, []);
+
+  const submitForm=(body:Object)=>{
+      axios.post('http://localhost:3000/api/artworks/addArtwork', body)
+      .then(response=> {console.log(response)
+     })
+      .catch(err=> console.log(err))
+      }
 
 
   return (
@@ -166,7 +135,7 @@ const updateInfo = (id:any,body:any) => {
       data-te-ripple-init
       data-te-ripple-color="light">
       <b>New</b>
-    </button>
+    </button> 
   </div>
 </div>
           </div>
@@ -221,42 +190,18 @@ const updateInfo = (id:any,body:any) => {
                           <input type="number" id="input-first-name" className="form-control form-control-alternative" placeholder="DT" onChange={handleChangeCreate}/>
                         </div>
                       </div>
-                      <div className={styles.container}>
-      <Head>
-        <title>Image Uploader</title>
-        <meta name="description" content="Upload your image to Cloudinary!" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Image Uploader
-        </h1>
-
-        <p className={styles.description}>
-          Upload your image to Cloudinary!
-        </p>
-
-        <form className={styles.form} method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-          <p>
-            <input type="file" name="file" />
-          </p>
-          
-          <img src={imageSrc} />
-          
-          {imageSrc && !uploadData && (
-            <p>
-              <button>Upload Files</button>
-            </p>
-          )}
-
-          {uploadData && (
-            <code><pre>{JSON.stringify(uploadData, null, 2)}</pre></code>
-          )}
-        </form>
-      </main>
-    </div>
-                Sale <Switch defaultChecked onChange={onChange} /> Bid   
+                      <div className="col-lg-6">
+                        <div className="form-group focused">
+                          <label className="form-control-label" ></label>
+                          <input type="file" name="image" onChange={handleImage} placeholder='picture' />
+                        </div>
+                      </div>
+                      <div className="col-lg-6">
+                        <div className="form-group focused">
+                          <label className="form-control-label" ></label>
+                          Sale <Switch defaultChecked onChange={onChange} /> Bid   
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <hr className="my-4"/>
@@ -267,6 +212,7 @@ const updateInfo = (id:any,body:any) => {
                     </div>
                   </div>
                   <button
+                   onClick={submitForm}
                   id ="add"
                   type="button"
                   className="inline-block rounded-l bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
