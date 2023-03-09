@@ -96,6 +96,7 @@ const Home: React.FC<Props> = () => {
               <div id={styles.logo}>
                 
               </div>
+              <div className="fixed top-0 w-full bg-black shadow-lg">
               <div id={styles.menu}>
                 <ul>
                   <Link href=""><li>HOME</li></Link>
@@ -105,6 +106,7 @@ const Home: React.FC<Props> = () => {
                 </ul>
                   <button className={styles.btn} onClick={togglePopupLogin} >login</button>
                   <button onClick={togglePopup} className={styles.btn}  >signup</button>
+              </div>
               </div>
             </div>
           </div>

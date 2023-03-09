@@ -28,8 +28,8 @@ const MainPage =()=>{
         try{
         axios.get(`http://localhost:3000/api/users/getUser/${localStorage.email}`)
         .then((res)=>{
-            console.log(res)
-            if(!res.data) throw Error('failed')
+        console.log(res)
+        if(!res.data) {throw Error('failed')}
         setUser(res.data)
         console.log(res);
         console.log("iduser:",localStorage.id);
@@ -54,13 +54,12 @@ const MainPage =()=>{
     console.log("mmm",currentUsrId)
     return(
 
-        <div className={styles.all}>
+        <div>
             {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
         <div><NavBar id={currentUsrId} showCart={showCart} setShowcart={setShowcart}  /></div>
-        <div className={styles.wrapper}>
-         <a className={styles.titles}>{"ArtFolio   "}</a>
-        <a style={{fontFamily:'Droid Sans'}}>{": The home of art .."}</a>
-        <br></br>  
+        <div className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl md:text-6xl">ArtFolio</h1>
+            <h2 className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">The home of art ..</h2>
         </div>
         
         </div>
