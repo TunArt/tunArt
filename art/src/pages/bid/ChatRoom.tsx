@@ -47,8 +47,8 @@ function App(): JSX.Element {
         .post("http://localhost:3000/api/messages/addmessage", {
           content: message,
           artworkId: ArtId,
-          picture: "picture",
-          name: "my name",
+          name: user.userName,
+          picture: user.picture,
         })
         .then((res) =>{ 
           console.log("axios.post", res);
@@ -108,10 +108,16 @@ function App(): JSX.Element {
       <h1>Discuss it here :</h1>
       <div className={styles.discussion}>
         {oldMessages
-          .filter((e) => e.artworkId == ArtId)
+          .filter((e) => e.artworkId == ArtId )
           .map((e) => {
             return (
               <div className={styles.message} key={e.id}>
+                <img className={styles.image} src={e.picture}/>
+                 <div  style={{"margin-left":"11%","display":"block"}}> 
+                 <p style={{"font-weight":"bold","color":"white"}}>{e.name}</p>
+                 <p style={{"margin-top":"-5%"}}>{e.createdAt}</p>
+
+                </div>
                 <p className={styles.oneMessage}>{e.content}</p>
               </div>
             );
@@ -124,9 +130,9 @@ function App(): JSX.Element {
 
             return (
               <div>
-                <div style={{"display":"flex","margin-left":"-15%"}}>
+                <div style={{"marginleft":"-15%","display":"flex"}}>
                   <img className={styles.image} src={user.picture}/>
-                  <p style={{"margin-top":"2%","margin-left":"2%"}}>{`${user.userName}`}</p>
+                  <p style={{"marginleft":"2%"}}>{`${user.userName}`}</p>
                 </div>
 
               <p key={index} className={styles.oneMessage}>
