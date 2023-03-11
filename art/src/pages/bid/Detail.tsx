@@ -15,9 +15,9 @@ interface DetailProps {
 }
 
 const Detail :React.FC<DetailProps>= (props:any) => {
-  console.log('props',props)
+  // console.log('props',props)
     const router=useRouter()
-    console.log(router.query.img,"test");
+    // console.log(router.query.img,"test");
     
   return (
     <div className={styles.div}>
