@@ -19,13 +19,15 @@ interface DetailProps {
   }
 const Bid: React.FC <DetailProps>= (props:DetailProps) => {
     const router=useRouter()
-    console.log(router.query.img,"test");
+    // console.log(router.query.img,"test");
     const detailProps =  { ...router.query, ...props };
+    // console.log("propsss",props);
+    
     return (
         <div>
        <Navbar/>
             <div >
-                <ChatRoom />
+                <ChatRoom item={props}/>
             </div>
             
            
