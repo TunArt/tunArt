@@ -191,6 +191,7 @@ const Home: React.FC<Props> = () => {
       </div>
       <div className={swipes.test2}> </div>
     </div>
+    
   );
 }
 
