@@ -90,18 +90,17 @@ const onChange = (checked: boolean) => {
   console.log(`switch to ${checked}`);
 };
 
-const updateInfo = (id:any,body:any) => {
+const updateInfo = () => {
   axios
-   .put(`http://localhost:3000/api/users/updateUser/${localStorage.getItem('id')}`, body)
+   .put(`http://localhost:3000/api/users/updateUser/${localStorage.getItem('id')}`, info)
    .then(res => {
     if (!res.data) throw Error ('access denied')
-    setUp(!up);
      console.log(res.data) 
     })
     .catch(err => {
-      axios.put(`http://localhost:3000/api/artists/updateArtist/${localStorage.getItem('id')}`, body)
+      axios.put(`http://localhost:3000/api/artists/updateArtist/${localStorage.getItem('id')}`, info)
       .then(res=>{
-        setUp(!up);
+        console.log(res.data) 
       })
     })
  }
@@ -285,7 +284,7 @@ const updateInfo = (id:any,body:any) => {
 />
 <img
   alt="Image placeholder"
-  src= {user ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
+  src= {data ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
   className="rounded-circle"
   onClick={() => {
     document?.getElementById("image")?.click();
@@ -334,11 +333,11 @@ const updateInfo = (id:any,body:any) => {
                   {user ? data.userName : data.name} <span className="font-weight-light"></span>
                   </h3>
                   <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2"></i>{user ? data.birthDate : data.birthDate}
+                    <i className="ni location_pin mr-2"></i>{user ? data.birthDate : data.birthDate} years old
                   </div>
                   <div className="h5 mt-4">
                     <i className="ni business_briefcase-24 mr-2"></i>Email : {user ? data.email : data.email}
-                  </div>
+                  </div> 
                   <div>
                     <i className="ni education_hat mr-2"></i>Password : {user ? data.password : data.password}
                   </div>
