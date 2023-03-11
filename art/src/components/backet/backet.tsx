@@ -5,21 +5,24 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import styles from "../../styles/bucket.module.css"
 import axios from 'axios'
 interface Product {
-  name: string;
-  price: number;
-  quantity: number;
-  picture: string;
-  imageAlt: string;
+  name: string
+  price: number
+  quantity: number
+  picture: string
+  imageAlt: string
+}
+
+interface UserProduct {
+  quantityBought: number
 }
 
 interface Props {
   item: {
-    name: string;
-  };
-  setShowcart: (value: boolean) => void;
-  id: string;
+    name: string
+  }
+  setShowcart: (value: boolean) => void
+  id: string
 }
-
 const  Bucket=(props:Props)=> {
   const[display,setDesipaly]=useState(false)
   const [data,setdata]=useState([])
@@ -43,7 +46,7 @@ const  Bucket=(props:Props)=> {
     })
   },[reRender])
   return (
-    <div className={styles.all}>
+    <div className="z-50">
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
         <Transition.Child
@@ -91,7 +94,7 @@ const  Bucket=(props:Props)=> {
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
                             {data.map((product,i) => {
-                              {som (product?.price*product?.quantity)}
+                              {som (product?.price*product.userproducts?.quantityBought)}
                            return    <li key={i} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
@@ -107,11 +110,11 @@ const  Bucket=(props:Props)=> {
                                       <h3>
                                         <a >{product?.name}</a>
                                       </h3>
-                                      <p className="ml-4">{product.price*product.quantity}</p>
+                                      <p className="ml-4">{product.price*product.userproducts.quantityBought}</p>
                                     </div>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty : {product?.quantity}</p>
+                                    <p className="text-gray-500">QuantityBought : {product?.userproducts.quantityBought}</p>
 
                                     <div className="flex">
                                       <button onClick={()=>{

@@ -31,7 +31,7 @@ const[view,setView]=useState("")
     }
     
   }
-<<<<<<< HEAD
+
 
 
 
@@ -47,7 +47,6 @@ const[view,setView]=useState("")
   // }
   // }
   // userHere()
-=======
   const userHere=()=>{
     if (typeof window !== 'undefined') {
       console.log(route.query.id)
@@ -59,7 +58,6 @@ const[view,setView]=useState("")
   }
   }
   userHere()
->>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
   return(
     
     <div className={styles.sideBar}>
@@ -67,6 +65,7 @@ const[view,setView]=useState("")
     <aside className={styles.aside}>
       <div className={styles.top}>
         <div className={styles.logo}>
+
 
           <Image src="/admin.png" width={500} height={500} alt='/logo.png'/>
         </div>

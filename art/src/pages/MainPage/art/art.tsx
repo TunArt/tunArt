@@ -9,9 +9,17 @@ import {useRouter} from "next/router";
 import Search from "../search/search";
 import TopRated from "./topRated";
 import InfiniteScroll from "react-infinite-scroll-component";
+//const dummyArt=["./img 01.jpeg", "./img 02.webp"]
+import Bucket from "../../../components/backet/backet"
 
 
 const Art=()=>{
+    const [showCart,setShowcart]=useState(false)
+    const router=useRouter()
+    const [user, setUser] = useState([])
+    const [artists,setArtists]=useState([])
+    const [render,setRender]=useState(false);
+    const [currentUsrId,setCurrentUserId]=useState("")
     const[arr, setArr]=useState([])
     const[items, setItems]=useState([])
     const[toggle,setToggle]=useState(false);
@@ -65,6 +73,25 @@ return(
         <div><NavBar/></div>
     <div className={styles.wrapper}> 
         <h1 className={styles.titles}>THE GALLERY</h1>
+setCurrentUserId(localStorage.id)
+   !arr.length? axios.get('http://localhost:3000/api/artworks/getArtworks')
+    .then(response => {
+        console.log(response.data);
+    setArr(response.data)
+    }):undefined
+    
+    
+},[])
+    
+return(
+    <div className={styles.all}>
+    
+        <div><NavBar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} /></div>
+        {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
+    <div className={styles.wrapper}> 
+
+        <h1 className={styles.titles}>The Gallery:</h1>
+
         <br></br>
         
         <form className={styles.search}>

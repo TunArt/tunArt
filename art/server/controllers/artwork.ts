@@ -1,7 +1,7 @@
 import db from '../models/index';
 import express, { Express, Request, Response } from 'express';
-import { async } from '@firebase/util';
-import { Rating } from '@mui/material';
+import cloudinary from '../claoudinary/claoudinary';
+
 const Artwork = db.artwork
 
 //methods to get all the artworks
@@ -44,22 +44,27 @@ catch (err){
 
 //  method to add  a new artwork
 const addArtwork = async (req: Request, res: Response) => {
+  const {name, startDate,endDate, creationDate,price,rating,description,auction,image}=req.body;
   const {artistId,userId}=req.params
       if (!req.body) {
         throw new Error("Request body is missing required properties.");
       }
-if(userId){
+
   try{
+    const result = await cloudinary.uploader.upload(image,{
+      folder:'artworks'
+  })
+  console.log(req.body)
     const artwork = await Artwork.create({
-      name: req.body.name,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
-      creationDate: req.body.creationDate,
-      price: req.body.price,
-      rating: req.body.rating,
-      description: req.body.description,
-      auction: req.body.auction,
-      image: req.body.image,
+      name:req.body.name,
+      startDate:req.body.startDate,
+      endDate:req.body.endDate,
+      creationDate:req.body.creationDate,
+      price:req.body.price,
+      rating:req.body.rating,
+      description:req.body.description,
+      auction:req.body.auction,
+      image :result.secure_url,
       verified:req.body.verified,
       artistId: req.params.artistId,
       categoryId: req.body.categoryId, 
@@ -73,26 +78,9 @@ if(userId){
       res.status(400).send(err);
     }
   }
-  else{
-    try {
-      const artwork = await Artwork.create({
-        name: req.body.name,
-        creationDate: req.body.creationDate,
-        price: req.body.price,
-        description: req.body.description,
-        auction: req.body.auction,
-        image: req.body.image,
-        verified:req.body.verified,
-        artistId: req.params.artistId,
-        categoryId: req.body.categoryId, 
-        userId: req.params.userId
-      });
-      res.status(201).send("artwork created successfully");
-    } catch (error) {
-      
-    }
-  }
-};
+   
+  
+
   const modfyArtWork=async(req:Request,res:Response)=>{
     try {
       if (!req.body) {
@@ -137,7 +125,6 @@ if(userId){
         res.status(500).send("failed to add artwork")
     }
   }
-
 
     // update User information in database
    const updateArtWork= (req:Request, res:Response)=> {

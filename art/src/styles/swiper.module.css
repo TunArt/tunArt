@@ -124,7 +124,12 @@ background-position-y:center ;
     width: 100%;
     height: 95%;
     border-radius: 10px 10px 10px 10px ;
-    background-image: url("https://americaneagle.online/wp-content/uploads/2017/02/1943113-white-world-map-outlines-isolated-on-black-background-abstract-vector-art-illustration.jpg");
+    background-image: url("https://i.pinimg.com/originals/69/49/68/6949682f5594db137aaaa99fc358a065.jpg");
+    background-size: 100%;
+    background-position-y: center ;
+    margin-top: 4%;
+    background-repeat: no-repeat;
+  
   }
 
 .textx{
@@ -155,11 +160,14 @@ background-position-y:center ;
 .image2{
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 90%;
     background-image: url("https://media.discordapp.net/attachments/989739585158389760/1081601037816828005/sellami.houssem_a_mall_basket_full_of_art_tools_and_painting_to_c9b16e84-3000-4be2-8391-4d79347f15f2.png?width=671&height=671");
     background-size: 100%;
-    background-position-y: center ;
+    background-position-y: 40% ;
     border-radius: 10px 10px 10px 10px ;
+    background-repeat: no-repeat;
+
+    
 }
 
 .image3{
@@ -171,6 +179,8 @@ background-position-y:center ;
     background-position-y: center ;
     border-radius: 10px 10px 10px 10px ;
 margin-top: 8%;
+background-repeat: no-repeat;
+
 }
 
 .textxx h1{
@@ -182,3 +192,86 @@ margin-top: 8%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 47px;
 }
+
+.footer{
+   margin-top: -35rem;
+   width: 100%;
+   height: 500px; 
+   /* background-color: rgb(255, 255, 255); */
+   position: absolute;
+   display: flex;
+
+}
+.footer1{
+/* background-color: aquamarine; */
+   color: white;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   font-size: 24px;
+   font-weight: bold;
+   height: 100%;
+   width: 25%;
+   display: block;
+}
+.footer2{
+  /* background-color: rgb(221, 127, 255); */
+     color: white;
+     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     font-size: 30px;
+     font-weight: bold;
+     height: 100%;
+     width: 25%;
+     padding: 4%;
+  }
+
+  .footer2 button{
+    color: rgb(255, 0, 0);
+  }
+
+  .footer2 button:hover{
+    color: rgb(245, 160, 4);
+  }
+
+  .footer2 li{
+    color: rgb(255, 255, 255);
+    
+  }
+  .footer2 li:hover{
+    color: rgb(245, 160, 4);
+  }
+
+.footer3{
+       color: white;
+       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+       font-size: 24px;
+       font-weight: bold;
+       height: 100%;
+       width: 25%;
+    }
+    .footer4{
+         color: rgb(255, 255, 255);
+         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+         font-size: 1px;
+         font-weight: bold;
+         height: 100%;
+         width: 25%;
+         padding:2%
+        
+      }
+
+      .tx{
+        height: 50%;
+        line-height: 80%;
+        /* text-align: center  ; */
+        font-size: 90px;
+        margin-left: 15%;
+        
+      }
+
+      .im{
+        background-image: url("https://i.pinimg.com/736x/51/e2/ff/51e2ff6f08817a661b3eaf8d0a45d1e1.jpg");
+height: 50%;
+background: size 100%;
+background-repeat: no-repeat ;
+      background-size: cover;
+      background-position: center;
+      }
