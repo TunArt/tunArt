@@ -61,32 +61,33 @@ useEffect(()=>{
 <Navbar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} />
 {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
 </div>
-      <div className="bg-stone-500">
-        <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="sr-only">Products</h2>
+<div className="bg-black">
+  <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+    <h2 className="sr-only">Products</h2>
 
-          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {items.map((item) => {
-              console.log(JSON.parse(item.picture))
-             return  <div key={item.id} className="group">
-                <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                <img
-                  width={500}
-                  height={500}
-                  onClick={() => handleProductClick(item)}
-                  src={JSON.parse(item.picture)[0]} // access first URL in array
-                  alt={item.name}
-                  className="h-full w-full object-cover object-center group-hover:opacity-75"
-/>
-
-                </div>
-                <h3 className="mt-4 text-sm text-gray-700">{item.name}</h3>
-                <p className="mt-1 text-lg font-medium text-gray-900">{item.price}</p>
-              </div>
-          })}
+    <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+      {items.map((item) => {
+        console.log(item.picture)
+        return (
+          <div key={item.id} className="bg-black">
+            <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+              <img
+                width={500}
+                height={500}
+                onClick={() => handleProductClick(item)}
+                src={JSON.parse(item.picture)[0]}
+                alt={item.name}
+                className="h-full w-full object-cover object-center transition duration-500 ease-in-out transform hover:scale-105 group-hover:opacity-75"
+              />
+            </div>
+            <h3 className="mt-4 text-sm text-gray-700 text-orange-500">{item.name}</h3>
+            <p className="mt-1 text-lg font-medium text-gray-900 text-orange-500">{item.price}</p>
           </div>
-        </div>
-      </div>
-    </>
+        )
+      })}
+    </div>
+  </div>
+</div>
+</>
   );
 }

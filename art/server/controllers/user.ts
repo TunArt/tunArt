@@ -73,7 +73,7 @@ const img =  await User.update({
     picture: req.body.picture,
 }, {
     where: {
-        id: req.params.id
+        email: req.params.email
     }
 })
 res.status(200).send("user updated successfully")

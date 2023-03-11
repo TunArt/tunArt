@@ -79,7 +79,7 @@ const img =  await Artist.update({
     picture: req.body.picture,
 }, {
     where: {
-        id: req.params.id
+        email: req.params.email
     }
 })
 res.status(200).send("artist updated successfully")

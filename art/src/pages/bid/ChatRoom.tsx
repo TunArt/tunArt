@@ -1,12 +1,11 @@
-import styles from "../../styles/chatroom.module.css";
+import styles from "../styles/chatroom.module.css";
 import io, { Socket } from "socket.io-client";
 import react, { useEffect, useState } from "react";
-
+import axios from "axios";
 
 const socket: Socket = io("http://localhost:3001");
 
-function ChatRoom(): JSX.Element {
-  const Message = require('../../../server/models/message')
+function App(): JSX.Element {
   // Room State
   const [room, setRoom] = useState<string>("");
 
@@ -31,22 +30,42 @@ function ChatRoom(): JSX.Element {
       setMessage("");
       socket.emit("send_message", { message, room });
 
-       // Create new message in Sequelize
-    Message.create({ content: message, room: room });
+             // Create new message in Sequelize
+      axios.post("http://localhost:3000/api/messages/addmessage", {
+        content:message,
+        roomNumber:room
+    
+
+        })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    }
+
+      // Message.create({ content: message, room: room });
     }
   };
 
   useEffect(() => {
+
+
     // Fetch messages for current room
-    Message.findAll({ where: { room: room } })
-      .then((messages) => {
-        const newMessageData = { ...messageData };
-        newMessageData[room] = messages.map((message) => message.content);
-        setMessageData(newMessageData);
-      })
-      .catch(err => console.log(err));
-  
-    // Listen for new messages from Socket.IO
+
+    axios.get("http://localhost:3000/api/messages/addmessage")
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    
+    
+    // Message.findAll({ where: { room: room } })
+    //   .then((messages) => {
+    //     const newMessageData = { ...messageData };
+    //     newMessageData[room] = messages.map((message) => message.content);
+    //     setMessageData(newMessageData);
+    //   })
+    //   .catch(err => console.log(err));
+
+
+
+
     socket.on("receive_message", (data: { message: string; room: string }) => {
       const newMessageData = { ...messageData };
       if (!(data.room in newMessageData)) {
@@ -54,11 +73,8 @@ function ChatRoom(): JSX.Element {
       }
       newMessageData[data.room].push(data.message);
       setMessageData(newMessageData);
-  
-      // Create new message row in Sequelize
-      Message.create({ content: data.message, room: data.room });
     });
-  }, [room, messageData]);
+  }, [messageData]);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
@@ -67,41 +83,53 @@ function ChatRoom(): JSX.Element {
   };
 
   return (
-    <div className={styles.n}>
-    <div className="flex flex-col h-screen">
-      <div className="bg-gray-800 text-white py-3 px-4 flex justify-between items-center">
-        <div className="font-bold text-xl">Chat Room</div>
-        <div className="flex items-center">
-          <div className="mr-2">Username:</div>
-          <div className="bg-gray-700 text-white rounded-md py-1 px-2">John</div>
+    <div className={styles.app}>
+      <h1>Messages:</h1>
+      <div className={styles.discussion}>
+        {room in messageData &&
+          Array.isArray(messageData[room]) &&
+          messageData[room].map((e: string, index: number) => {
+            return (
+              <p key={index} className={styles.oneMessage}>
+                {e}
+              </p>
+            );
+          })}
+      </div>
+      <div className={styles.footer}>
+        <div>
+          <input
+            className={styles.room}
+            placeholder="Room Number..."
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setRoom(event.target.value);
+            }}
+          />
+          <button className={styles.join} onClick={joinRoom}>
+            Join Room
+          </button>
+        </div>
+        <div>
+          <input
+            className={styles.message}
+            placeholder="Message..."
+            value={message}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setMessage(event.target.value);
+            }}
+            onKeyDown={handleKeyPress}
+
+          />
+          <button
+            onClick={sendMessage}
+            className={`${styles.button} ${styles.send}`}
+          >
+            Send Message
+          </button>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto py-4 px-6">
-        {messages.map((message, index) => (
-          <div key={index} className="mb-4">
-            <div className="font-bold">{message.sender}</div>
-            <div>{message.text}</div>
-          </div>
-        ))}
-      </div>
-      <div className="bg-gray-800 py-3 px-4 flex justify-between items-center">
-        <input
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          className="flex-1 bg-gray-700 text-white rounded-md py-1 px-2 mr-4"
-          placeholder="Type your message..."
-        />
-        <button
-          onClick={sendMessage}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded-md"
-        >
-          Send
-        </button>
-      </div>
-    </div>
     </div>
   );
-};
+}
 
-export default ChatRoom;
+export default App;
