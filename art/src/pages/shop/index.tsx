@@ -1,3 +1,5 @@
+import Footer from "../MainPage/footer/footer";
+import styles from "../../styles/principale.module.css";
 import React, { useState,useEffect } from "react";
 import { useRouter } from "next/router";
 import Navbar from "../../components/navBar";
@@ -57,6 +59,7 @@ useEffect(()=>{
   console.log(firstPic)
   return (
     <>
+
      <div className="sticky top-0 z-50">
 <Navbar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} />
 {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
@@ -64,6 +67,7 @@ useEffect(()=>{
 <div className="bg-black">
   <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
     <h2 className="sr-only">Products</h2>
+
 
     <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
       {items.map((item) => {
@@ -83,11 +87,13 @@ useEffect(()=>{
             <h3 className="mt-4 text-sm text-gray-700 text-orange-500">{item.name}</h3>
             <p className="mt-1 text-lg font-medium text-gray-900 text-orange-500">{item.price}</p>
           </div>
+
         )
       })}
     </div>
   </div>
 </div>
+<Footer/>
 </>
   );
 }

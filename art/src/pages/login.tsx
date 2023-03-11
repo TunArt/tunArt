@@ -44,7 +44,7 @@ const Login: React.FC = () => {
         console.log("res:",res)
         try {
           const res = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
-          console.log(res);
+          console.log(res.data);
           if (!res.data) {
             throw Error('failed')
           }

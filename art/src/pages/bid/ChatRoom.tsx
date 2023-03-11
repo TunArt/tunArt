@@ -28,7 +28,7 @@ function App(): JSX.Element {
   const joinRoom = () => {
     if (room !== "") {
       socket.emit("join_room", room);
-      alert("room-joined");
+      // alert("room-joined");
     }
   };
 
@@ -74,14 +74,16 @@ function App(): JSX.Element {
         return current
       })
       .then((currentMail) => {
-        return axios.get(`http://localhost:3000/api/users/getUser/${currentMail}`).then((res) => {
+        return axios.get(`http://localhost:3000/api/users/getUser/${currentMail}`)
+        .then((res) => {
     
-          
           if(res.data==''){
-           axios.get(`http://localhost:3000/api/artists/getArtist/${currentMail}`).then((res) => {
+           axios.get(`http://localhost:3000/api/artists/getArtist/${currentMail}`)
+           .then((res) => {
             setUser(res.data);
             
-           });
+           })
+           .catch(error => console.log(error));
   
           }
           else
@@ -135,6 +137,7 @@ function App(): JSX.Element {
               </div>
             );
           })}
+          
 
         {room in messageData &&
           Array.isArray(messageData[room]) &&
@@ -158,21 +161,24 @@ function App(): JSX.Element {
       </div>
       <div className={styles.footer}>
         <div>
-          {/* <input
-            className={styles.room}
-            placeholder="Room Number..."
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setRoom(ArtId);
-            }}
-          /> */}
+            
           <button
             className={styles.join}
-            onClick={() => {
-           setRoom(ArtId);
+            onClick={setTimeout(() => {
+               setRoom(ArtId);
               joinRoom();
-            }}
+              
+
+            }, 500)}
+            
+            
+            
+          //   {() => {
+          //  setRoom(ArtId);
+          //     joinRoom();
+          //   }}
           >
-            Join
+            
           </button>
         </div>
         <div>
@@ -189,7 +195,7 @@ function App(): JSX.Element {
             onClick={() => sendMessage()}
             className={`${styles.button} ${styles.send}`}
           >
-            Send Message
+            Send
           </button>
         </div>
       </div>

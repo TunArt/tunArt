@@ -3,7 +3,7 @@ import NavBar from "../../components/navBar";
 import { navLinks } from "./link";
 import Link from "next/link";
 import styles from "../../styles/principale.module.css"
-import Search from "./search";
+import Search from "./search/search";
 import axios from "axios"
 import { useRouter } from 'next/router';
 import Bucket from "../../components/backet/backet";

@@ -1,14 +1,15 @@
 import React from "react";
 import NavBar from "../../components/navBar";
-import Search from "./search";
+import Search from "./search/search";
 import styles from "../../styles/principale.module.css"
+import Footer from "./footer/footer";
 
 const aboutUs=()=>{
 return(
     <div className={styles.all}>
         <div><NavBar/></div>
     <div className={styles.wrapper}>
-    <h1 className={styles.titles}>Who are we ?</h1>
+    <h1 className={styles.titles}>WHO ARE WE ?</h1>
     <br></br>
     <p>
         We are the country's first art website.<br/>
@@ -17,6 +18,7 @@ return(
         All through regular sell or auction for the high value pieces ...
     </p>
     </div>
+    <Footer/> 
     </div>
 )
 }
