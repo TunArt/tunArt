@@ -99,7 +99,6 @@ const addArtwork = async (req: Request, res: Response) => {
     }
   }
 
-
     // update User information in database
    const updateArtWork= (req:Request, res:Response)=> {
     try {
