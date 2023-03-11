@@ -45,7 +45,7 @@ export default function Example(props: any) {
 const route=useRouter()
   return (
 
-    <nav className="fixed top-0 w-full bg-inherit	 ">
+    <nav className="fixed top-0 w-full bg-inherit z-49	 ">
       {/*
         This example requires updating your template:
 
