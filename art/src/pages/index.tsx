@@ -94,14 +94,14 @@ const Home: React.FC<Props> = () => {
           <div id={styles.box3}>
             <div id={styles.container}>
               <div id={styles.logo}>
-                
+                <b>ART</b>
               </div>
               <div id={styles.menu}>
                 <ul>
-                  <Link href=""><li>HOME</li></Link>
+                  <Link href="/MainPage"><li>HOME</li></Link>
                   <li>SERVICES</li>
-                  <Link href="#aboutUs"><li>ABOUT</li></Link>
-                  <Link href={"/"}><li>CONTACT</li></Link>
+                  <Link href="/MainPage/aboutUs"><li>ABOUT</li></Link>
+                  <Link href={"/MainPage/contactUs"}><li>CONTACT</li></Link>
                 </ul>
                   <button className={styles.btn} onClick={togglePopupLogin} >login</button>
                   <button onClick={togglePopup} className={styles.btn}  >signup</button>

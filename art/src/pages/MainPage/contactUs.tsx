@@ -1,14 +1,15 @@
 import React from "react";
 import NavBar from "../../components/navBar";
-import Search from "./search";
+import Search from "./search/search";
 import styles from "../../styles/principale.module.css"
+import Footer from "./footer/footer";
 
 const contactUs=()=>{
     return(
         <div className={styles.all}>
             <div><NavBar/></div>
         <div className={styles.wrapper}>
-            <h1 className={styles.titles}>Contact us on:</h1>
+            <h1 className={styles.titles}>CONTACT US ON</h1>
             <br></br>
             <ul>
                 <li><h4>Email: contact@artfolio.com</h4></li>
@@ -17,6 +18,7 @@ const contactUs=()=>{
                 <li><h4>Location: 123 Legendaries street-Tunis-Republic of Tunisa</h4></li>
             </ul>
         </div>
+        <Footer/>
         </div>
     )
 }
