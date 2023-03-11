@@ -1,7 +1,8 @@
 import React , { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Switch } from 'antd';
-
+import Head from 'next/head'
+import styles from '../../styles/profile.module.css'
 
 const ProfilePage = () => {
   const [user, setUser] = useState('');
@@ -10,23 +11,68 @@ const ProfilePage = () => {
   const [inp,setInp]=useState(false)
   const[edit,setEdit] = useState(false)
   const [add,setAdd] = useState(false)
-  const [info,setInfo]=useState({name:"",email:"",password:"",phone:"",bio:""})
+  const [info,setInfo]=useState({name:"",phone:"",bio:""})
   const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",price:"",description:""})
-  const [image,setImage] = useState("")
+  const [imageSrc, setImageSrc] = useState( );
+  const [uploadData, setUploadData] = useState();
+  const [img,setImg]=useState("")
+  const [rerender,setRerender]=useState(false)
   
+/**
+   * handleOnChange
+   * @description Triggers when the file input changes (ex: when a file is selected)
+   */
 
-  const handleImage =(e:any)=>{
-    const file= e.target.files[0];
-    setFileToBase(file)
-    console.log(file)
+function handleOnChange(changeEvent:any) {
+  const reader = new FileReader();
+
+  reader.onload = function(onLoadEvent) {
+    setImageSrc(onLoadEvent.target.result);
+    setUploadData(undefined);
   }
-  
-  const setFileToBase=(file:Blob)=>{
-    const reader :any= new FileReader();
-    reader.readAsDataURL(file)
-    reader.onload= ()=>{
-        setImage(reader.result)
-    }
+  reader.readAsDataURL(changeEvent.target.files[0]);
+}
+
+/**
+ * handleOnSubmit
+ * @description Triggers when the main form is submitted
+ */
+
+async function handleOnSubmit(event:any) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const fileInput:any = Array.from(form.elements).find(({name})  => name === 'file');
+
+  const formData = new FormData();
+
+  for ( const file of fileInput.files ) {
+    formData.append('file', file);
+  }
+
+  formData.append('upload_preset', 'tunartweb');
+
+  axios
+      .post("https://api.cloudinary.com/v1_1/dk8yjc0ph/image/upload", formData)
+      .then((response) => {
+        console.log(response);
+        console.log(response.data.secure_url);
+        let imgurl = response.data.secure_url;
+        setImageSrc(response.data.secure_url);
+        console.log("img for the user", imgurl);
+        axios
+          .put(  
+            user ? `http://localhost:3000/api/users/updateImgUser/${localStorage.email}` : 
+            `http://localhost:3000/api/artists/updateImgArtist/${localStorage.email}`,
+            {
+              picture: imgurl,
+            }
+          )
+          .then((response) => {
+            console.log(response);
+            setRerender(!rerender)
+          });
+      });
   };
 
   const handleChange=(e:any)=>{
@@ -46,14 +92,14 @@ const onChange = (checked: boolean) => {
 
 const updateInfo = (id:any,body:any) => {
   axios
-   .put(`http://localhost:3000/api/users/updateUser/${localStorage.getItem('id')}`, body)
+   .put(`http://localhost:3000/api/users/updateUser/${localStorage.getItem('email')}`, body)
    .then(res => {
     if (!res.data) throw Error ('access denied')
     setUp(!up);
      console.log(res.data) 
     })
     .catch(err => {
-      axios.put(`http://localhost:3000/api/artists/updateArtist/${localStorage.getItem('id')}`, body)
+      axios.put(`http://localhost:3000/api/artists/updateArtist/${localStorage.getItem('email')}`, body)
       .then(res=>{
         setUp(!up);
       })
@@ -63,20 +109,22 @@ const updateInfo = (id:any,body:any) => {
 
   useEffect(() => {  
     console.log(localStorage.getItem('id'));
-    axios.get(`http://localhost:3000/api/users/getUserId/${localStorage.getItem('id')}`)
-      .then(res => {
+    axios.get(`http://localhost:3000/api/users/getUser/${localStorage.email}`)     
+     .then(res => {
         if (!res.data) throw Error ('access denied')
         setData(res.data);
         setUser('user')
         console.log('current user', res.data);
       })
       .catch(err => {
-    axios.get(`http://localhost:3000/api/artist/getArtistId/${localStorage.getItem('id')}`)
+    axios.get(`http://localhost:3000/api/artists/getArtist/${localStorage.email}`)
         .then(res => {
-        setData(res.data);
+        console.log("current user",res)
+        setData(res.data)
+        ;
         })
   });
-  }, []);
+  }, [rerender]);
 
   const submitForm=(body:Object)=>{
       axios.post('http://localhost:3000/api/artworks/addArtwork', body)
@@ -113,15 +161,23 @@ const updateInfo = (id:any,body:any) => {
     className="inline-flex shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
     role="group">
     <button
-      onClick={()=>{setEdit(!edit)}}
+      onClick={()=>{setEdit(!edit),setInp(false),setAdd(false)}}
       type="button"
       className="inline-block rounded-l bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
       data-te-ripple-init
       data-te-ripple-color="light">
       <b>Edit profile</b>
     </button>
-    <button
-      onClick={()=>{setInp(!inp)}}
+      {user && <button
+      onClick={()=>{setInp(!inp),setEdit(false),setAdd(false)}}
+      type="button"
+      className="inline-block bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
+      data-te-ripple-init
+      data-te-ripple-color="light">
+      <b>Favorites</b>
+    </button> }
+    {!user && <> <button
+      onClick={()=>{setInp(!inp),setEdit(false),setAdd(false)}}
       type="button"
       className="inline-block bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
       data-te-ripple-init
@@ -129,13 +185,14 @@ const updateInfo = (id:any,body:any) => {
       <b>Posts</b>
     </button>
     <button
-      onClick={()=>{setAdd(!add)}}
+      onClick={()=>{setAdd(!add),setEdit(false),setInp(false)}}
       type="button"
       className="inline-block rounded-r bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
       data-te-ripple-init
       data-te-ripple-color="light">
       <b>New</b>
-    </button> 
+    </button> </>}
+    
   </div>
 </div>
           </div>
@@ -191,10 +248,6 @@ const updateInfo = (id:any,body:any) => {
                         </div>
                       </div>
                       <div className="col-lg-6">
-                        <div className="form-group focused">
-                          <label className="form-control-label" ></label>
-                          <input type="file" name="image" onChange={handleImage} placeholder='picture' />
-                        </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="form-group focused">
@@ -221,8 +274,9 @@ const updateInfo = (id:any,body:any) => {
             <b>Add a new artwork</b>
             </button>
                 </form>}
-     </div>
-      <div>
+     </div> 
+     
+     <div>
       {edit && <div  className="container-fluid mt--7">
         <div id = "contain" className="row"> 
           <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0">
@@ -230,9 +284,23 @@ const updateInfo = (id:any,body:any) => {
               <div className="row justify-content-center">
                 <div className="col-lg-3 order-lg-2">
                   <div className="card-profile-image">
-                    <a href="#">
-                      <img alt="Image placeholder" src="https://www.w3schools.com/howto/img_avatar.png" className="rounded-circle"/>
-                    </a>
+                    <div>
+                    </div>
+                  <div className="card-profile-image">
+                    <div >
+                    <div>
+<img
+  alt="Image placeholder"
+  src= {data ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
+  className="rounded-circle"
+  onClick={() => {
+    document?.getElementById("image")?.click();
+  }}
+/>
+
+                    </div>
+                    </div>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -241,11 +309,34 @@ const updateInfo = (id:any,body:any) => {
               <div className="card-body pt-0 pt-md-4">
                 <div className="row">
                   <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">    
+                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">  
+                     
                     </div>
                   </div>
                 </div>
-                <div className="text-center">
+                <div className="text-center"> 
+                <div className="container mx-auto px-4">
+
+  <main className="max-w-lg mx-auto ">
+    <form className="flex flex-col space-y-4" method="post" onChange={(e) => { console.log(e.target.value); handleOnChange(e) }} onSubmit={handleOnSubmit}>
+      <div className="flex items-center justify-center border-2 border-dashed border-gray-400 py-4 px-6 rounded-md">
+        <input type="file" name="file" accept="image/png, image/jpg, image/gif, image/jpeg" className="hidden" id="file-input" />
+        <label htmlFor="file-input" className="cursor-pointer">
+          <span className="text-gray-700 font-medium">Select a file</span>
+        </label>
+        {imageSrc && !uploadData && (
+          <button className="ml-4 py-2 px-4 bg-purple-900 text-white font-medium rounded-md hover:bg-blue-700" id="cloud">Upload Files</button>
+        )}
+      </div>
+
+      {uploadData && (
+        <code id="code" className="bg-gray-100 py-2 px-4 rounded-md"><pre>{JSON.stringify(uploadData, null, 2)}</pre></code>
+      )}
+    </form>
+  </main>
+
+</div>
+
                   <h3>
                   {user ? data.userName : data.name} <span className="font-weight-light"></span>
                   </h3>
@@ -255,11 +346,9 @@ const updateInfo = (id:any,body:any) => {
                   <div className="h5 mt-4">
                     <i className="ni business_briefcase-24 mr-2"></i>Email : {user ? data.email : data.email}
                   </div>
-                  <div>
-                    <i className="ni education_hat mr-2"></i>Password : {user ? data.password : data.password}
-                  </div>
+                  
                   <hr className="my-4"/>
-                  <p>{data.bio}</p>
+                  <p>{data?.bio}</p>
                 </div>
               </div>
             </div>
@@ -287,20 +376,20 @@ const updateInfo = (id:any,body:any) => {
                           <input type="text" id="input-username" className="form-control form-control-alternative" placeholder="Username" onChange={handleChange}/>
                         </div>
                       </div>
-                      <div className="col-lg-6">
+                      {/* <div className="col-lg-6">
                         <div className="form-group">
                           <label className="form-control-label" >Email address</label>
                           <input type="email" id="input-email" className="form-control form-control-alternative" placeholder="Email address" onChange={handleChange}/>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="row">
-                      <div className="col-lg-6">
+                      {/* <div className="col-lg-6">
                         <div className="form-group focused">
                           <label className="form-control-label" >Password</label>
                           <input type="text" id="input-first-name" className="form-control form-control-alternative" placeholder="First name" onChange={handleChange}/>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="col-lg-6">
                         <div className="form-group focused">
                           <label className="form-control-label" >PhoneNumber</label>
