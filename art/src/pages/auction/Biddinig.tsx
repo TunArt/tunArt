@@ -7,11 +7,11 @@ function Bidding() {
   const [bid, setBid] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleBidChange = (event) => {
+  const handleBidChange = (event:any) => {
     setBid(event.target.value);
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (event:any) => {
     event.preventDefault();
 
     socket.emit("bid", { bid });
