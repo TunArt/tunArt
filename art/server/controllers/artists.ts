@@ -52,14 +52,10 @@ const addArtist = async (req: Request, res: Response) => {
     const artist =  await Artist.update({
         name: req.body.name,
         bio: req.body.bio,
-        email: req.body.email,
-        password: req.body.password,
-        picture: req.body.picture,
         phoneNumber: req.body.phoneNumber,
-        birthDate: req.body.birthDate
     }, {
         where: {
-            id: req.params.id
+            email: req.params.email
         }
     })
     res.status(200).send("artist updated successfully")
@@ -79,7 +75,7 @@ const img =  await Artist.update({
     picture: req.body.picture,
 }, {
     where: {
-        id: req.params.id
+        email: req.params.email
     }
 })
 res.status(200).send("artist updated successfully")
