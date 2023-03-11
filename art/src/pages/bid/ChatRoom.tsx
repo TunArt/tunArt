@@ -165,7 +165,7 @@ function App(): JSX.Element {
           <button
             className={styles.join}
             onClick={setTimeout(() => {
-              setRoom(ArtId);
+               setRoom(ArtId);
               joinRoom();
               
 
