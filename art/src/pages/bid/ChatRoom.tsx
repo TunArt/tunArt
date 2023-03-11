@@ -93,6 +93,7 @@ function App(): JSX.Element {
       newMessageData[data.room].push(data.message);
       setMessageData(newMessageData);
     });
+    //to fix the messages being delivered twice  
   }, [Object.keys(messageData).length]);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -113,9 +114,9 @@ function App(): JSX.Element {
             return (
               <div className={styles.message} key={e.id}>
                 <img className={styles.image} src={e.picture}/>
-                 <div  style={{"margin-left":"11%","display":"block"}}> 
-                 <p style={{"font-weight":"bold","color":"white"}}>{e.name}</p>
-                 <p style={{"margin-top":"-5%"}}>{e.createdAt}</p>
+                 <div  className={styles.littleContainer}> 
+                 <p className={styles.userName} >{e.name}</p>
+                 <p className={styles.time} >{e.createdAt}</p>
 
                 </div>
                 <p className={styles.oneMessage}>{e.content}</p>
@@ -130,9 +131,10 @@ function App(): JSX.Element {
 
             return (
               <div>
-                <div style={{"marginleft":"-15%","display":"flex"}}>
                   <img className={styles.image} src={user.picture}/>
-                  <p style={{"marginleft":"2%"}}>{`${user.userName}`}</p>
+                <div className={styles.littleContainer}>
+                  <p className={styles.userName}>{`${user.userName}`}</p>
+
                 </div>
 
               <p key={index} className={styles.oneMessage}>
@@ -154,7 +156,7 @@ function App(): JSX.Element {
           <button
             className={styles.join}
             onClick={() => {
-              ArtId && setRoom(ArtId);
+             setRoom(ArtId);
               joinRoom();
             }}
           >

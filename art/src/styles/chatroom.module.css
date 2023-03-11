@@ -37,8 +37,8 @@
     color: #ffffff;
     font-weight: 700;
     width: 80%;
-    margin-left: 12%;
-    margin-top: 3%;
+    margin-left: 8%;
+    margin-top: -3%;
 
   }
   
@@ -61,8 +61,22 @@
     flex: 1;
     margin-right: 15px;
     /* size: 1000px; */
+    color :white
   }
-  
+.littleContainer{
+    display:block;
+
+}
+
+  .userName{
+   font-weight:bold;
+   color:white;
+   font-size: 20px;
+  }
+  .time{
+    margin-top: -5%;
+    font-size: 14px;
+  }
   .button {
     background-color: #a35710;
     color: white;
@@ -96,5 +110,5 @@
     border-color: black;
     margin: 1%;
     margin-bottom: -10%;
-    
+    margin-left: -10%;
    }

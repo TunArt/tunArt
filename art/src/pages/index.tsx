@@ -159,11 +159,7 @@ const Home: React.FC<Props> = () => {
 <div id="aboutUs">
   <div className={swipes.test}>
   
-   <div className={swipes.text}> <h1>Join in, it’s free.</h1> <p> Welcome to our art website! We showcase 
-    talented artists from around the world, featuring a
-     diverse range of art styles and mediums. Our carefully selected 
-     artists are both emerging and established, and our website provides 
-     a convenient platform for purchasing art with secure transactions and 
+   <div className={swipes.text}> <h1>Join in, it’s free.</h1> <p> Welcome to our art website! We showcase talented artists from around the world, featuring a diverse range of art styles and mediums. Our carefully selected  artists are both emerging and established, and our website provides a convenient platform for purchasing art with secure transactions and 
      worldwide shipping available. Enjoy exploring our collection and discovering new artists and works that inspire you!</p></div> 
  <div className={swipes.test} >
 <div className={swipes.image}></div>
@@ -196,16 +192,65 @@ const Home: React.FC<Props> = () => {
       </div>
       <div className={swipes.test2}> </div>
       <div className={swipes.footer}>
+
+
         <div className={swipes.footer1}>
 <div className={swipes.tx}>Get <br /> in <br /> touch.</div>
 <div className={swipes.im}></div>
 
 
         </div>
-        <div className={swipes.footer2}></div>
+        <div className={swipes.footer2}>
+
+        <div style={{"width":"100%"}}>
+              <div >
+                <ul>
+                  <Link href=""><li>HOME</li></Link>
+                  <li>SERVICES</li>
+                  <Link href="#aboutUs"><li>ABOUT</li></Link>
+                  <Link href={"/"}><li>CONTACT</li></Link>
+                  <br />
+                </ul>
+                  <button  onClick={togglePopupLogin} >LOGIN</button>
+                  <br />
+                  <button onClick={togglePopup}   >REGISTER</button>
+              </div>
+              </div>
+
+
+        </div>
         <div className={swipes.footer3}></div>
-        <div className={swipes.footer4}></div>
+        <div className={swipes.footer4}><p>Thank you for visiting our art gallery website. We hope you enjoyed exploring the diverse collection of artwork on display. Our gallery is committed to showcasing the works of talented artists from around the world and providing an enriching cultural experience for our visitors.Don't forget to take advantage of the many features available on our website, including the ability to view high-quality images of our artwork, learn more about the artists and their creative processes, and purchase pieces from our collection.Stay up-to-date with our latest exhibitions and events by subscribing to our newsletter or following us on social media. We welcome your feedback and inquiries, so please don't hesitate to contact us with any questions or comments.
+Thank you for your continued support of our gallery, and we look forward to sharing more incredible works of art with you in the future.</p></div>
       </div>
+
+
+{/* 
+      <div className="container">
+    <div className="row">
+      <div className="col-md-4">
+        <h3>Social Media</h3>
+        <ul className="list-unstyled">
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+      <div className="col-md-4">
+        <h3>About Us</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse pharetra interdum blandit. Vestibulum auctor tempor augue eget venenatis. </p>
+      </div>
+      <div className="col-md-4">
+        <img src="logo.png" alt="Company Logo"/>
+      </div>
+    </div>
+  </div> */}
+
+
+
+
+
+      
     </div>
     
   );
