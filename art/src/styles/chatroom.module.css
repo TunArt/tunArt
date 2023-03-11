@@ -11,10 +11,21 @@
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
+    background-image: url("https://th.wallhaven.cc/small/j3/j3qpzq.jpg");
+background-color: #222121;
+background-repeat: no-repeat;
+    background-size: cover;
   }
   
   .discussion {
-    width: 70%;
+    background-image: url("https://i.pinimg.com/564x/e6/d7/5b/e6d75b7d94cc36bfaaabcb5eb49d4789.jpg");
+background-repeat: no-repeat;
+background-size: 100%;
+/* transform:rotate(180deg); */
+/* height: 110%; */
+margin-top: 3%;
+background-position-y: center;
+    width: 75%;
     padding-top: 3%;
     padding-right: 10%;
     padding-left: 10%;
@@ -28,9 +39,10 @@
     display: none;
 }
 
+
   
   .oneMessage {
-    background-color: #a35710;
+    background-color: #a36932;
     /* margin: 13px; */
     padding: 10px;
     border-radius: 30px;
@@ -56,21 +68,26 @@
   }
   
   .message {
-    height: auto;
-    width: 30rem;
+    height: 2.5rem  ;
+    padding: 3%;
+    width: 40rem;
     flex: 1;
-    margin-right: 15px;
+    margin-left: -5%;
+    margin-right: 2%;
     /* size: 1000px; */
-    color :white
+    color :white;
+    background-color: #a36932;
   }
 .littleContainer{
     display:block;
+    margin-left: 1%;
+    color: #1d1d1d;
 
 }
 
   .userName{
    font-weight:bold;
-   color:white;
+   color:rgb(0, 0, 0);
    font-size: 20px;
   }
   .time{
@@ -89,11 +106,27 @@
     margin: 5px 2px;
     cursor: pointer;
     border-radius: 5px;
+    height: 3rem;
+  }
+  .button:hover{
+    background-color: #a00000;  
+    color: #000000;
+  }
+  .join:hover{
+    background-color: #a00000;  
+    color: #000000;
   }
   
   .join {
-    margin-right: 10px;
+    margin-left: 20px;
+    border-radius: 100%;
+    background-color: #a35710;
+    color: #ffffff;
+    height: 50px;
+    
+    width: 50px;
   }
+
   
   .send {
     margin-left: 10px;
@@ -110,5 +143,5 @@
     border-color: black;
     margin: 1%;
     margin-bottom: -10%;
-    margin-left: -10%;
+    margin-left: -11%;
    }

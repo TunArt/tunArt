@@ -28,6 +28,7 @@ function App(): JSX.Element {
   const joinRoom = () => {
     if (room !== "") {
       socket.emit("join_room", room);
+      alert("room-joined");
     }
   };
 
@@ -47,7 +48,7 @@ function App(): JSX.Element {
         .post("http://localhost:3000/api/messages/addmessage", {
           content: message,
           artworkId: ArtId,
-          name: user.userName,
+          name: user.userName||user.name,
           picture: user.picture,
         })
         .then((res) =>{ 
@@ -64,21 +65,32 @@ function App(): JSX.Element {
       .get("http://localhost:3000/api/messages/getmessages")
       .then( (res) => {
         setOldMessages(res.data);
-        let id =  localStorage.getItem("id")
-        return id
+        let email =  localStorage.getItem("email")
+        return email
       })
       .then((current) => {
         setCurrentId(current);
-        console.log("current Id", current);
+        console.log("current Mail", current);
         return current
       })
-      .then((currentId) => {
-        return axios.get(`http://localhost:3000/api/users/getUserId/${currentId}`);
+      .then((currentMail) => {
+        return axios.get(`http://localhost:3000/api/users/getUser/${currentMail}`).then((res) => {
+    
+          
+          if(res.data==''){
+           axios.get(`http://localhost:3000/api/artists/getArtist/${currentMail}`).then((res) => {
+            setUser(res.data);
+            
+           });
+  
+          }
+          else
+          {setUser(res.data);
+          console.log("res", res);}
+        })
+        
       })
-      .then((res) => {
-        setUser(res.data);
-        console.log("res", res);
-      })
+        
 
       .catch((err) => console.log(err));
   }, []);
@@ -112,7 +124,7 @@ function App(): JSX.Element {
           .filter((e) => e.artworkId == ArtId )
           .map((e) => {
             return (
-              <div className={styles.message} key={e.id}>
+              <div  key={e.id}>
                 <img className={styles.image} src={e.picture}/>
                  <div  className={styles.littleContainer}> 
                  <p className={styles.userName} >{e.name}</p>
@@ -133,7 +145,7 @@ function App(): JSX.Element {
               <div>
                   <img className={styles.image} src={user.picture}/>
                 <div className={styles.littleContainer}>
-                  <p className={styles.userName}>{`${user.userName}`}</p>
+                  <p className={styles.userName} >{user.userName}{user.name}</p>
 
                 </div>
 
@@ -156,17 +168,17 @@ function App(): JSX.Element {
           <button
             className={styles.join}
             onClick={() => {
-             setRoom(ArtId);
+           setRoom(ArtId);
               joinRoom();
             }}
           >
-            Join Room
+            Join
           </button>
         </div>
         <div>
           <input
             className={styles.message}
-            placeholder="Message..."
+            placeholder="Type your message here ..."
             value={message}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setMessage(event.target.value);
