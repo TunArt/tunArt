@@ -24,10 +24,10 @@ const addArtwork = async (req: Request, res: Response) => {
       }
 
   try{
-    const result = await cloudinary.uploader.upload(image,{
-      folder:'artworks'
-  })
-  console.log(req.body)
+  //   const result = await cloudinary.uploader.upload(image,{
+  //     folder:'artworks'
+  // })
+  console.log("mmmmmmmm",req.body)
     const artwork = await Artwork.create({
       name:req.body.name,
       startDate:req.body.startDate,
@@ -37,7 +37,7 @@ const addArtwork = async (req: Request, res: Response) => {
       rating:req.body.rating,
       description:req.body.description,
       auction:req.body.auction,
-      image :result.secure_url,
+      // image :result.secure_url,
       verified:req.body.verified,
       artistId: req.params.artistId,
       categoryId: req.body.categoryId, 
@@ -48,7 +48,7 @@ const addArtwork = async (req: Request, res: Response) => {
     }
      catch (err) {
       console.log(err);
-      res.status(400).send(err);
+      res.status(400).json(err);
     }
   }
    
