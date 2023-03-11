@@ -96,38 +96,30 @@ function App(): JSX.Element {
             );
           })}
       </div>
-      <div className={styles.footer}>
-        <div>
-          <input
-            className={styles.room}
-            placeholder="Room Number..."
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setRoom(event.target.value);
-            }}
-          />
-          <button className={styles.join} onClick={joinRoom}>
-            Join Room
-          </button>
-        </div>
-        <div>
-          <input
-            className={styles.message}
-            placeholder="Message..."
-            value={message}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setMessage(event.target.value);
-            }}
-            onKeyDown={handleKeyPress}
-
-          />
-          <button
-            onClick={sendMessage}
-            className={`${styles.button} ${styles.send}`}
-          >
-            Send Message
-          </button>
-        </div>
+      <div className="flex-1 overflow-y-auto py-4 px-6">
+        {messages.map((message, index) => (
+          <div key={index} className="mb-4">
+            <div className="font-bold">{message.sende}</div>
+            <div>{message.text}</div>
+          </div>
+        ))}
       </div>
+      <div className="bg-gray-800 py-3 px-4 flex justify-between items-center">
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className="flex-1 bg-gray-700 text-white rounded-md py-1 px-2 mr-4"
+          placeholder="Type your message..."
+        />
+        <button
+          onClick={sendMessage}
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded-md"
+        >
+          Send
+        </button>
+      </div>
+    </div>
     </div>
   );
 }

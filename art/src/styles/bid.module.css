@@ -11,6 +11,7 @@
 width: 50%;
 }
 
+
 .detail{
 
 margin-left: 0%;
@@ -22,4 +23,17 @@ margin-top: -35%;
 .img1{
     margin-top: -50%;
     border-radius: 5%;
+    
+}
+
+.info{
+    margin-left: 70%;
+    margin-top: -35%;
+    position: absolute;
+
+}
+
+.i{
+    width: 500px;
+    height: 500px;
 }
