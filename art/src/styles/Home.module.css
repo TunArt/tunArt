@@ -145,6 +145,7 @@
   position: absolute;
   bottom: 10px;
   width: 100%;
+
   margin-bottom:-147% ;
     /* margin-top: 20%; */
     background-color: #1E242A;
@@ -185,6 +186,9 @@
 
 /* Styles for menu container */
 #menu {
+position: sticky;
+top: 0;
+z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -4,6 +4,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image"
 import React from 'react'
 import { AiOutlineShoppingCart } from "react-icons/ai";
+
 import 'material-icons/iconfont/material-icons.css';
 import { useRouter } from 'next/router'
 type NavigationItem = {
@@ -11,6 +12,8 @@ type NavigationItem = {
   href: string;
   current: boolean;
 };
+
+export default function Example({id}:string) {
 
 
 export default function Example(props: any) {
@@ -22,12 +25,14 @@ export default function Example(props: any) {
       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   }
   const navigation = [
-    { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
-    { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
-    { name: 'Auctions', href: `/bid?${props.id}`, current: false },
-    { name: 'Contact Us', href: '#', current: false },
-    { name: 'Reports', href: '#', current: false },
-    { name: "Events", href: `/event/event?id=${props.id}`, current: false }
+    { name: 'Art Gallery', href: `/MainPage/art/art?id=${id}`, current: false },
+    { name: 'Shop', href: `/shop?id=${id}`, current: false },
+    { name: 'Auctions', href: `/bid?${id}`, current: false },
+    { name: "Events", href:`/event/event?id=${id}`,current:false },
+    { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
+    { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
+    { name: 'Reports', href: '/MainPage/reports/', current: false },
+
   ]
   const userNavigation = [
     { name: 'Your Profile', href: '/profile/' },
@@ -42,10 +47,14 @@ export default function Example(props: any) {
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
   }
-const route=useRouter()
-  return (
 
-    <nav className="fixed top-0 w-full bg-inherit z-49	 ">
+  const route = useRouter();
+  
+  return (
+    
+    <>
+    
+
       {/*
         This example requires updating your template:
 
@@ -63,6 +72,7 @@ const route=useRouter()
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
+
                   <Image
                 className="h-10 w-10 cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
                 onClick={() => {
@@ -223,3 +233,58 @@ const route=useRouter()
     </nav>
   )
 }
+
+/*
+export default function Example(props:any) {}
+  
+  console.log("from nav bar",props);
+  const user = {
+    name: 'Tom Cook',
+    email: 'tom@example.com',
+    imageUrl:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  }
+  const navigation = [
+    { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
+    { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
+    { name: 'Auctions', href: `/bid?${props.id}`, current: false },
+    { name: 'Contact Us', href: '#', current: false },
+    { name: 'Reports', href: '#', current: false },
+    {name:"Events",href:`/event/event?id=${props.id}`,current:false}
+  ]
+  const userNavigation = [
+    { name: 'Your Profile', href: '/profile/' },
+    { name: 'Settings', href: '#' },
+    { name: 'Sign out', href: '/' ,work:function(){
+      localStorage.clear()
+    }},
+  ]
+  
+  function classNames(...classes:string[]) {
+    return classes.filter(Boolean).join(' ')
+  }
+
+
+
+  const user = {
+  name: 'Tom Cook',
+  email: 'tom@example.com',
+  imageUrl:
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+}
+const navigation = [
+  { name: 'Home', href: '/', current: false },
+  { name: 'Art Gallery', href: '/MainPage/art/art', current: false },
+  { name: 'Shop', href: '/MainPage/shop/shop', current: false },
+  { name: 'Auctions', href: '/MainPage/auctions/auctions', current: false },
+  { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
+  { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
+  
+]
+const userNavigation = [
+  { name: 'Your Profile', href: '' },
+  { name: 'Settings', href: '#' },
+  { name: 'Sign out', href: '/' },
+]
+
+*/

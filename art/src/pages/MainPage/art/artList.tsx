@@ -1,59 +1,15 @@
-// import React, {useState} from "react";
-// import styles from "../../../styles/principale.module.css";
-
-// const ArtList: React.FC<Props>=(props)=>{
-
-//     const[toggle, setToggle]= useState(false)
-//     const [popUp, setPopUp] = useState(false)
-
-//     const showHide=()=>{
-//         setToggle(!toggle);
-//     }
-//     const BuyPopUp=()=>{
-//         setPopUp(!popUp)
-//     }
-// const isAuction= props.element.auction ? "Auction" :"Sell"
-
-//     return(  
-//        <div>
-//           <div className={styles.galleryDisplay}>
-//             <div className={styles.cards}>
-//             <ul>
-//                 <img style={{width:400, height:200}} src={props.element.image}/>
-//             <div className={styles.cardsContainer}>
-//                 {"Art Name: "+props.element.name+" "}<br/>
-//                 {"Price: "+props.element.price+" $"}<br/>
-//                 {"Selling Type: "+isAuction}<br/>
-//             {toggle ?
-//             <div>
-//             {"Creation Date: "+props.element.creationDate+" "}<br/>
-//             {"Rating: "+props.element.rating+"/10 "}<br/>
-//             {"Description: "+props.element.description}
-//             </div>
-//             :<></>} 
-//             <button type="submit" onClick={showHide} className={styles.submitButton}>Details</button>
-//             <button type="submit" onClick={BuyPopUp} className={styles.submitButton2}>Buy</button>
-//             </div>
-//             </ul>
-//             <br/>
-//             </div>
-//         </div>
-//         </div>
-//     )
-// }
-// export default ArtList;
-
-
 import React, {useState} from "react";
 import styles from "../../../styles/principale.module.css";
 import Link from "next/link";
-import {useRouter} from "next/router"
+import {useRouter} from "next/router";
+//import { query } from "express";
 
 const ArtList=(props)=>{
 
     const[toggle, setToggle]= useState(false)
     const [popUp, setPopUp] = useState(false)
     const[children, setChildren]=useState("")
+    const[page,setPage]=useState(1);
     const route=useRouter()
 
     const isAuction= props.element.auction ? "Auction" :"Sell"
@@ -63,14 +19,17 @@ const ArtList=(props)=>{
         setToggle(!toggle);
     }
     const BuyRedirect=()=>{
+        var pathAuction ="/MainPage/auctions/auctions"
+        var pathBuy="/MainPage/art/artPurchase"
         if(props.element.auction){
             {
-                route.push("/MainPage/auctions/auctions")
+                route.push(pathAuction)
             }
         }  
         else{
-            alert("Shop cart is not ready yet!! harry up Aziz!")
-        }   
+            route.push({pathname: pathBuy,
+                query:{item:JSON.stringify(props.element)}
+        }) }  
     }
 
 
@@ -96,7 +55,6 @@ function BoldText({children}) {
                     <BoldText>Creation Date:</BoldText>{" "+props.element.creationDate+" "}<br/>
                     <BoldText>Rating:</BoldText>{" "+props.element.rating+"/10 "}<br/>
                     <BoldText>Description:</BoldText>{" "+props.element.description}<br/>
-                    
                     <button type="submit" onClick={BuyRedirect} className={styles.submitButton2}>{isForSaleOrBid}</button>
              </div>
             </div>
