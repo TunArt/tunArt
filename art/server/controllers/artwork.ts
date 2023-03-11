@@ -8,6 +8,7 @@ const Artwork = db.artwork
 const getAllArtworks = async (req:Request ,res:Response) =>{
     try {
         let  artworks= await Artwork.findAll()
+        artworks = artworks.slice(0, parseInt(req.params.count))
         res.status(200).send(artworks)
 }
 catch (err){
@@ -19,6 +20,21 @@ catch (err){
 const getOneArtwork = async (req:Request ,res:Response) =>{
   try {
       let  artworks= await Artwork.findOne({ where: { name: req.params.name } })
+      res.status(200).send(artworks)
+}
+catch (err){
+  console.log(err)
+}
+}
+
+const getTopArtworks = async (req:Request ,res:Response) =>{
+  try {
+      let  artworks= await Artwork.findAll({
+        order :[
+          ["rating", "DESC"]
+        ],
+        limit : 3
+      })
       res.status(200).send(artworks)
 }
 catch (err){
@@ -167,6 +183,6 @@ const deleteArtWork= (req:Request, res:Response)=> {
         res.status(400).send(err);
       }
     }
-export default {getAllArtworks,getOneArtwork,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
+export default {getAllArtworks,getOneArtwork,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks};
 
 

@@ -13,7 +13,7 @@ const Search=()=>{
     }
 
     const find=()=>{
-        axios.get(`http://localhost:3000/getOneArtwork/${query}`)
+        axios.get(`http://localhost:3000/api/artworks/getOneArtwork/${query}`)
           .then(function (response) {
             console.log(response);
           })

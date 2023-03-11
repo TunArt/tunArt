@@ -6,11 +6,7 @@ const Product = db.product
 
 const getAllProducts = async(req:Request ,res:Response) =>{
     try {
-<<<<<<< HEAD
-        let  products= await Product.findAll()
-=======
         const products= await Product.findAll()
->>>>>>> d77e0b3ef320de69b8e1ac8d24165aeba807492d
         res.status(200).send(products)
 }
 catch (err){

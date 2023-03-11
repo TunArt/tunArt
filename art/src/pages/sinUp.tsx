@@ -139,10 +139,7 @@ let know=false
         }).then((res)=>{
           console.log(res)
           axios.get(`http://localhost:3000/api/artists/getArtist/${email}`).then((res)=>{
-<<<<<<< HEAD
             localStorage.setItem("id",res.data.id)
-=======
->>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
             console.log(res)
             router.push({
               pathname:'/MainPage',

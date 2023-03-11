@@ -20,12 +20,16 @@ const ArtPurchase=()=>{
         route.push("/MainPage/art/artPayment")
     }
 
-    route.query.image;
+    const redirect=()=>{
+        route.push("/MainPage/art/art")
+    }
+    //route.query.image;
 
     return(
         <>
         <div className={styles.all}>
         <NavBar/>
+        <button className={styles.submitButton2} style={{marginLeft:"100px"}} onClick={redirect}>Go Back</button>
         <div className={styles.wrapper}>
             <h1 className={styles.titles}>ITEM DETAILS:</h1>
             <div className="w3-card-4" style={{width:"50%", backgroundColor:"gray", boxShadow:""}}>

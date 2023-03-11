@@ -3,15 +3,23 @@ import styles from "../../../styles/principale.module.css";
 import NavBar from "../../../components/navBar";
 import 'w3-css/w3.css';
 import Footer from "../footer/footer";
+import { useRouter } from "next/router";
 
 const Payment=()=>{
+    const route=useRouter();
+
     const paymentClick=()=>{
         alert("Payment successfull ! have a nice day :)");
+    }
+
+    const redirect=()=>{
+        route.push("/MainPage/art/artPurchase")
     }
     return(
         
         <div className={styles.all}>
             <NavBar/>
+            <button className={styles.submitButton2} style={{marginLeft:"100px"}} onClick={redirect}>Go Back</button>
         <div className={styles.wrapper}>
             <h1 className={styles.titles}>PAYMENT DETAILS:</h1>
             <form className="w3-card-4" style={{width:"600px", height:"auto", marginTop:"50px", fontFamily:"monospace", backgroundColor:"gray"}}>

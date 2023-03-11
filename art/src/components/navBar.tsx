@@ -2,75 +2,17 @@ import { Fragment,useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image"
-<<<<<<< HEAD
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import  'material-icons/iconfont/material-icons.css';
-=======
 import { useRouter } from 'next/router'
->>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
 type NavigationItem = {
   name: string;
   href: string;
   current: boolean;
 };
-<<<<<<< HEAD
-<<<<<<< HEAD
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
-const navigation = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'Art Gallery', href: '/MainPage/art/art', current: false },
-  { name: 'Shop', href: '/MainPage/shop/shop', current: false },
-  { name: 'Auctions', href: '/MainPage/auctions/auctions', current: false },
-  { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
-  { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
-  
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '/' },
-]
-=======
->>>>>>> d77e0b3ef320de69b8e1ac8d24165aeba807492d
-
-
-export default function Example(props:any) {
-  console.log("from nav bar",props);
-  const user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  }
-  const navigation = [
-    { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
-    { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
-    { name: 'Auctions', href: `/bid?${props.id}`, current: false },
-    { name: 'Contact Us', href: '#', current: false },
-    { name: 'Reports', href: '#', current: false },
-    {name:"Events",href:`/event/event?id=${props.id}`,current:false}
-  ]
-  const userNavigation = [
-    { name: 'Your Profile', href: '/profile/' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '/' ,work:function(){
-      localStorage.clear()
-    }},
-  ]
-  
-  function classNames(...classes:string[]) {
-    return classes.filter(Boolean).join(' ')
-  }
-=======
-
 
 export default function Example({id}:string) {
-  console.log("from nav bar",id);
+
   const user = {
     name: 'Tom Cook',
     email: 'tom@example.com',
@@ -99,7 +41,6 @@ export default function Example({id}:string) {
   }
 
   const route = useRouter();
->>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
   
   return (
     
@@ -125,11 +66,7 @@ export default function Example({id}:string) {
                       <Image
                         className="h-10 w-10 "
                         onClick={()=>{
-<<<<<<< HEAD
-                          
-=======
                           route.push("/MainPage/")
->>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
                         }}
                         src="/tunart-website-favicon-color.png"
                         alt="Your Company"
@@ -292,3 +229,58 @@ export default function Example({id}:string) {
     </>
   )
 }
+
+/*
+export default function Example(props:any) {}
+  
+  console.log("from nav bar",props);
+  const user = {
+    name: 'Tom Cook',
+    email: 'tom@example.com',
+    imageUrl:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  }
+  const navigation = [
+    { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
+    { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
+    { name: 'Auctions', href: `/bid?${props.id}`, current: false },
+    { name: 'Contact Us', href: '#', current: false },
+    { name: 'Reports', href: '#', current: false },
+    {name:"Events",href:`/event/event?id=${props.id}`,current:false}
+  ]
+  const userNavigation = [
+    { name: 'Your Profile', href: '/profile/' },
+    { name: 'Settings', href: '#' },
+    { name: 'Sign out', href: '/' ,work:function(){
+      localStorage.clear()
+    }},
+  ]
+  
+  function classNames(...classes:string[]) {
+    return classes.filter(Boolean).join(' ')
+  }
+
+
+
+  const user = {
+  name: 'Tom Cook',
+  email: 'tom@example.com',
+  imageUrl:
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+}
+const navigation = [
+  { name: 'Home', href: '/', current: false },
+  { name: 'Art Gallery', href: '/MainPage/art/art', current: false },
+  { name: 'Shop', href: '/MainPage/shop/shop', current: false },
+  { name: 'Auctions', href: '/MainPage/auctions/auctions', current: false },
+  { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
+  { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
+  
+]
+const userNavigation = [
+  { name: 'Your Profile', href: '' },
+  { name: 'Settings', href: '#' },
+  { name: 'Sign out', href: '/' },
+]
+
+*/

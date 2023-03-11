@@ -45,12 +45,8 @@ const MainPage =()=>{
     console.log(user)
     return(
         <div className={styles.all}>
-<<<<<<< HEAD
             {showCart && <Bucket id={localStorage.id} setShowcart={setShowcart} />}
         <div><NavBar id={localStorage.id} showCart={showCart} setShowcart={setShowcart}  /></div>
-=======
-        <div><NavBar id={id} /></div>
->>>>>>> 666d27ba48a6fcc4b2ea03af0ca3ed265922e922
         <div className={styles.wrapper}>
          <a className={styles.titles}>{"ArtFolio   "}</a>
         <a style={{fontFamily:'Droid Sans'}}>{": The home of art .."}</a>

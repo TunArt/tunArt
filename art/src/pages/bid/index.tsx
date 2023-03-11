@@ -4,6 +4,9 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 import Link from 'next/link'
 import Room from './room'
+import NavBar from '../../components/navBar'
+import Footer from '../MainPage/footer/footer'
+import styles from "../../styles/principale.module.css"
 
 const posts = [
   {
@@ -113,14 +116,17 @@ const posts = [
 
 const bids: React.FC = () => {
   return (
-    <div>
-
+    <div className={styles.all}>
+            <div><NavBar/></div>
+        <div className={styles.wrapper}>
       <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
         {posts.map((post,index) => (
       <Room post={post} index={index}/>
         ))}
       </div>
-    </div>
+      </div>
+        <Footer/>
+        </div>
 
   )
 
