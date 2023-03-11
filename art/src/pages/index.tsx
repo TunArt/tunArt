@@ -72,7 +72,7 @@ const Home: React.FC<Props> = () => {
 
 
   return (
-    <div className ="bg-black">
+    <div className="bg-black">
       <Head>
 
         <title>Create Next App</title>
@@ -96,7 +96,6 @@ const Home: React.FC<Props> = () => {
               <div id={styles.logo}>
                 
               </div>
-              <div className="fixed top-0 w-full bg-black shadow-lg">
               <div id={styles.menu}>
                 <ul>
                   <Link href=""><li>HOME</li></Link>
@@ -106,7 +105,6 @@ const Home: React.FC<Props> = () => {
                 </ul>
                   <button className={styles.btn} onClick={togglePopupLogin} >login</button>
                   <button onClick={togglePopup} className={styles.btn}  >signup</button>
-              </div>
               </div>
             </div>
           </div>
@@ -186,7 +184,7 @@ const Home: React.FC<Props> = () => {
 </div>
 
         <div className={swipes.test}>
-          <div className={swipes.textxx}> <h1>"Art is not just a product, it's a journey of self-expression and exploration."</h1> </div>
+          <div className={swipes.textxx}> <h1>Art is not just a product, it's a journey of self-expression and exploration.</h1> </div>
         </div>
 
       </div>
