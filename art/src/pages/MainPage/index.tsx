@@ -6,6 +6,8 @@ import styles from "../../styles/principale.module.css"
 import Search from "./search";
 import axios from "axios"
 import { useRouter } from 'next/router';
+import Bucket from "../../components/backet/backet";
+import { loadComponents } from "next/dist/server/load-components";
 
 interface EmailParams{
     email: string;
@@ -15,36 +17,51 @@ interface DataParams{
     userName: string;
 }
 const MainPage =()=>{
+    const [showCart,setShowcart]=useState(false)
     const router=useRouter()
     const [user, setUser] = useState([])
     const [artists,setArtists]=useState([])
     const [render,setRender]=useState(false);
-    const id = router.query.id ?? router.query.id
+    const [currentUsrId,setCurrentUserId]=useState('')
     console.log(router.query)
     useEffect(()=>{
-        axios.get(`http://localhost:3000/api/users/getUserId/${id}`).then((res)=>{
+        try{
+        axios.get(`http://localhost:3000/api/users/getUser/${localStorage.email}`)
+        .then((res)=>{
+        console.log(res)
+        if(!res.data) {throw Error('failed')}
         setUser(res.data)
         console.log(res);
-        }).then(()=>{
-            axios.get("http://localhost:3000/api/artists/getArtists").then((res)=>{
+        console.log("iduser:",localStorage.id);
+        
+        setCurrentUserId(localStorage.id)
+        }).catch((err)=>{
+            axios.get(`http://localhost:3000/api/artists/getArtist/${localStorage.email}`).then((res)=>{
                 console.log(res)
-                setArtists(res.data)
+                setCurrentUserId(localStorage.id)
+            setUser(res.data)
             })
         })
-    },[id])
-    if(!id){
-        return <div>loading....</div>
     }
-    console.log(router.query.id)
+    catch{
+        return <h1>Please Log In </h1>
+    }
+    },[])
+    
+    console.log(showCart)
+    console.log(typeof( router.query.id) )
     console.log(user)
+    console.log("mmm",currentUsrId)
     return(
-        <div className={styles.all}>
-        <div><NavBar id={id} /></div>
-        <div className={styles.wrapper}>
-         <a className={styles.titles}>{"ArtFolio   "}</a>
-        <a style={{fontFamily:'Droid Sans'}}>{": The home of art .."}</a>
-        <br></br>  
+
+        <div>
+            {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
+        <div><NavBar id={currentUsrId} showCart={showCart} setShowcart={setShowcart}  /></div>
+        <div className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl md:text-6xl">ArtFolio</h1>
+            <h2 className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">The home of art ..</h2>
         </div>
+        
         </div>
     )
 }

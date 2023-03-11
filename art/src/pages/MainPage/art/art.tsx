@@ -1,18 +1,25 @@
-import React, {useState} from "react";
-import NavBar from "../navBar";
+import React, {useState,useEffect} from "react";
+import NavBar from "../../../components/navBar";
 import { TestData } from "../testData";
 import styles from "../../../styles/principale.module.css";
 import axios from "axios";
 import ArtList from "./artList";
-
+import {useRouter}from "next/router"
 //const dummyArt=["./img 01.jpeg", "./img 02.webp"]
-
+import Bucket from "../../../components/backet/backet"
 
 
 const Art=()=>{
-
+    const [showCart,setShowcart]=useState(false)
+    const router=useRouter()
+    const [user, setUser] = useState([])
+    const [artists,setArtists]=useState([])
+    const [render,setRender]=useState(false);
+    const [currentUsrId,setCurrentUserId]=useState("")
     const[arr, setArr]=useState([])
-
+useEffect(()=>{
+    
+setCurrentUserId(localStorage.id)
    !arr.length? axios.get('http://localhost:3000/api/artworks/getArtworks')
     .then(response => {
         console.log(response.data);
@@ -20,11 +27,15 @@ const Art=()=>{
     }):undefined
     
     
+},[])
+    
 return(
     <div className={styles.all}>
     
-        <div><NavBar/></div>
+        <div><NavBar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} /></div>
+        {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
     <div className={styles.wrapper}> 
+
         <h1 className={styles.titles}>The Gallery:</h1>
         <br></br>
         <div className={styles.cols}>   

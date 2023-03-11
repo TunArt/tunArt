@@ -3,11 +3,19 @@ import  'material-icons/iconfont/material-icons.css';
 import styles from "src/styles/SideBar.module.css";
 import Link from "next/link";
 import ChartBar from "./chartBar";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 15a927ff9746f50c6fd596d3f9e119bea9bd4aeb
 
 import { useRouter } from "next/router";
 import BubbleChart from "./BubbleChart";
 import Cust from "./Cust";
 import Analytic from "./Analytic";
+<<<<<<< HEAD
+=======
+import Image from "next/Image";
+>>>>>>> 15a927ff9746f50c6fd596d3f9e119bea9bd4aeb
 const SideBar :React.FC=()=>{
   const route=useRouter()
   console.log("mmmmmmmmmmm",route);
@@ -29,6 +37,13 @@ const[view,setView]=useState("")
     }
     
   }
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> 15a927ff9746f50c6fd596d3f9e119bea9bd4aeb
   // const userHere=()=>{
   //   if (typeof window !== 'undefined') {
   //     console.log(route.query.id)
@@ -47,8 +62,13 @@ const[view,setView]=useState("")
     <aside className={styles.aside}>
       <div className={styles.top}>
         <div className={styles.logo}>
+<<<<<<< HEAD
          
           <img src="/admin.png" width={500} height={500} alt='/logo.png'/>
+=======
+
+          <Image src="/admin.png" width={500} height={500} alt='/logo.png'/>
+>>>>>>> 15a927ff9746f50c6fd596d3f9e119bea9bd4aeb
         </div>
         {/* <div className={styles.close} id="close-btn">
           <span  className="material-icons-sharp">close</span>
@@ -72,9 +92,13 @@ const[view,setView]=useState("")
         <span className="material-icons-sharp">insights</span>
       <h3 onClick={()=>changeView("analytic")}>Analytics</h3>
       </div>
-        <div  className={styles.link}> 
+    <div  className={styles.link} onClick={()=>{
+      route.push({
+        pathname:"/admin/Requests"
+      })
+    }} > 
         <span className="material-icons-sharp">mail_outline</span>
-      <h3>Requests</h3>
+      <h3 >Requests</h3>
       <span className={styles.message_count}>26</span>
       </div>
         <div  className={styles.link}> 

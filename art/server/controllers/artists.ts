@@ -1,6 +1,8 @@
 import db from '../models/index';
 import express, { Express, Request, Response } from "express";
 const Artist = db.artist
+import cloudinary from '../claoudinary/claoudinary' ;
+
 
 //methods to get all the artists
 const getAllArtists =async (req:Request ,res:Response) =>{
@@ -22,13 +24,15 @@ const addArtist = async (req: Request, res: Response) => {
       if (!req.body) {
         throw new Error("Request body is missing required properties.");
       }
+
       const artist = await Artist.create({
         name: req.body.name,
         bio: req.body.bio,
         email: req.body.email,
         password: req.body.password,
         picture: req.body.picture,
-        phoneNumber: req.body.phoneNumber
+        phoneNumber: req.body.phoneNumber,
+        birthDate: req.body.birthDate
       });
       console.log(artist);
       res.status(201).send("artist created successfully");
@@ -51,7 +55,8 @@ const addArtist = async (req: Request, res: Response) => {
         email: req.body.email,
         password: req.body.password,
         picture: req.body.picture,
-        phoneNumber: req.body.phoneNumber
+        phoneNumber: req.body.phoneNumber,
+        birthDate: req.body.birthDate
     }, {
         where: {
             id: req.params.id

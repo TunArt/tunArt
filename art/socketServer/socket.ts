@@ -1,10 +1,23 @@
-import { createServer } from "http";
-import { Server, Socket } from "socket.io";
+import http, { Server } from "http";
+import express, { Application } from "express";
+import { Server as SocketServer, Socket } from "socket.io"
+import cors from "cors"
 
-const server = createServer();
-const io = new Server(server);
+const app: Application = express();
+app.use(cors());
+
+const server: http.Server = http.createServer(app);
+
+const io: SocketServer = new SocketServer(server, {
+cors: {
+origin: "http://localhost:3002",
+methods: ["GET", "POST"],
+},
+});
 
 let highestBid = 0;
+
+
 
 io.on("connection", (socket: Socket) => {
   console.log("a user connected");
@@ -23,6 +36,6 @@ io.on("connection", (socket: Socket) => {
   });
 });
 
-server.listen(3000, () => {
-  console.log("listening on *:3000");
+server.listen(3001, () => {
+  console.log("listening on *:3001");
 });

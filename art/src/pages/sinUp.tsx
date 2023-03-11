@@ -13,8 +13,7 @@ import { auth } from "../../server/firebase/config"
 import { Switch } from 'antd';
 import axios from "axios";
 import { useRouter } from 'next/router'
-import { style } from "@mui/system/Stack/createStack";
-
+import {CloseOutlined } from "@ant-design/icons"
 interface SignUpState {
     username: string;
     email: string;
@@ -120,9 +119,12 @@ let know=false
         phoneNumber: phone,
         }).then((res)=>{
           axios.get(`http://localhost:3000/api/users/getUser/${email}`).then((res)=>{
+            localStorage.setItem("id",res.data.id)
+            localStorage.setItem("email",res.data.email)
             router.push({
               pathname:'/MainPage',
               query:{"id":res.data.id,"type":know}
+
             })
         })
         })
@@ -138,6 +140,8 @@ let know=false
         }).then((res)=>{
           console.log(res)
           axios.get(`http://localhost:3000/api/artists/getArtist/${email}`).then((res)=>{
+            localStorage.setItem("id",res.data.id)
+            localStorage.setItem("email",res.data.email)
             console.log(res)
             router.push({
               pathname:'/MainPage',
@@ -157,6 +161,9 @@ let know=false
 }
   return (
     <div className={styles.overlay}>
+      <CloseOutlined className={styles.close} onClick={()=>{
+        
+      }}/>
       <Form form={form} className={styles.form} >
         <Input className={styles.input}
           type="text"
@@ -165,7 +172,7 @@ let know=false
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        {errors.username && <Alert message={errors.username} type="error" />}
+        {errors.username && <Alert className={styles.alert} message={errors.username} type="error" />}
         <Input className={styles.input}
 
           type="email"
@@ -174,7 +181,7 @@ let know=false
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        {errors.email && <Alert message={errors.email} type="error" />}
+        {errors.email && <Alert className={styles.alert} message={errors.email} type="error" />}
         <Input className={styles.input}
 
           type="text"
@@ -183,7 +190,7 @@ let know=false
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
         />
-        {errors.phone && <Alert message={errors.phone} type="error" />}
+        {errors.phone && <Alert className={styles.alert} message={errors.phone} type="error" />}
         <Input className={styles.input}
 
           type="password"
@@ -192,7 +199,7 @@ let know=false
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {errors.password && <Alert message={errors.password} type="error" />}
+        {errors.password && <Alert  className={styles.alert} message={errors.password} type="error" />}
         <Input className={styles.input}
 
           type="password"
@@ -201,7 +208,7 @@ let know=false
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         {errors.confirmPassword && (
-          <Alert message={errors.confirmPassword} type="error" />
+          <Alert className={styles.alert} message={errors.confirmPassword} type="error" />
         )}
         <Space>
         <Input 
@@ -211,7 +218,7 @@ let know=false
           value={age}
           onChange={(e) => setAge(e.target.value)}
         />
-        {errors.age && <Alert message={errors.age} type="error" />}
+        {errors.age && <Alert className={styles.alert} message={errors.age} type="error" />}
         <div className={styles.switch}>
          <Space>
           User

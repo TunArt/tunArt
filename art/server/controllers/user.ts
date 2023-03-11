@@ -1,14 +1,13 @@
 import db from '../models/index';
 import express, { Express, Request, Response } from 'express';
+
 const User = db.user
 
 //methods to get all the users
 
 const getAllUsers = async (req:Request ,res:Response) =>{
     try {
-        let  users= await User.findAll({
-          include : ['artworks']
-        })
+        let  users= await User.findAll({include : ['artworks'] })
         console.log(users)
         res.status(200).send(users)
 }
@@ -86,6 +85,7 @@ const deleteUser= async(req:Request, res:Response)=> {
     }
   
 const getUser=async(req:Request,res:Response)=>{
+  console.log(req.headers)
   try {
     const user=await User.findOne({ where:{ email:req.params.email}})
     if (user === null) {
@@ -100,6 +100,7 @@ const getUser=async(req:Request,res:Response)=>{
 }
 const getUserwithId=async(req:Request,res:Response)=>{
   try {
+    console.log(req.headers.authorization)
     const user=await User.findOne({ where:{ id:req.params.id}})
     if (user === null) {
       console.log('Not found!');
