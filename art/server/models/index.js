@@ -43,7 +43,7 @@ db.user_Favorite=require("./user_Favorite.js")(Sequelize,sequelize)
 
 //artwork and messages association (one-to-many relationship)
 db.artwork.hasMany(db.bid,{
-  foreignKey: "artWorkId"
+  foreignKey: "artworkId"
 })
 db.bid.belongsTo(db.artwork,{
   foreignKey: "artWorkId"

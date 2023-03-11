@@ -70,6 +70,28 @@ catch (err) {
   }
 }
 
+const updateImgArtist =async(req:Request,res:Response)=>{
+  try {
+    if (!req.body) {
+      throw new Error("Request body is missing required properties.");
+    }
+const img =  await Artist.update({
+    picture: req.body.picture,
+}, {
+    where: {
+        email: req.params.email
+    }
+})
+res.status(200).send("artist updated successfully")
+}
+catch (err) {
+console.log(err);
+res.status(400).send(err);
+}
+
+  }
+
+
    // delete artist information in database
 
 const deleteArtist= async (req:Request, res:Response)=> {
@@ -116,6 +138,6 @@ const deleteArtist= async (req:Request, res:Response)=> {
       }
     }
 
-export default {getAllArtists,addArtist,updateArtist,deleteArtist,getArtist,getArtistwithId};
+export default {getAllArtists,addArtist,updateArtist,deleteArtist,getArtist,getArtistwithId,updateImgArtist};
 
 
