@@ -4,6 +4,9 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import NavBar from '../../components/navBar'
 import Link from 'next/link'
 import Room from './room'
+import NavBar from '../../components/navBar'
+import Footer from '../MainPage/footer/footer'
+import styles from "../../styles/principale.module.css"
 
 const posts = [
   {
@@ -110,6 +113,7 @@ const posts = [
   },
   // More posts...
 ]
+
 
 const Bids: React.FC = () => {
   useEffect(() => {
