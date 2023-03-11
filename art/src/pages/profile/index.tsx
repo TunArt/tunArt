@@ -135,7 +135,6 @@ const updateInfo = (id:any,body:any) => {
   console.log(artWorks)
   const submitForm=()=>{
     const formData = new FormData();
-
     formData.append("file",create.image)
     formData.append('upload_preset', 'clzrszf3');
     axios
@@ -146,7 +145,6 @@ const updateInfo = (id:any,body:any) => {
       let imgurl = response.data.secure_url;
       setImageSrc(response.data.secure_url);
       console.log("img for the user", imgurl)
-    }).then(()=>{
       axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`,  {
         name:create.name,
         startDate:create.startDate,
@@ -155,14 +153,14 @@ const updateInfo = (id:any,body:any) => {
         price:create.price,
         description:create.description,
         auction:auction ? 1:0,
-        image:imageSrc
-       })
+        image:imgurl
+      })
       .then(response=> {console.log(response)
-     })
+      })
       .catch(err=> console.log(err))
       
-
     })
+
     }
 
       
