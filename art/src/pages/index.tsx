@@ -223,27 +223,6 @@ Thank you for your continued support of our gallery, and we look forward to shar
       </div>
 
 
-{/* 
-      <div className="container">
-    <div className="row">
-      <div className="col-md-4">
-        <h3>Social Media</h3>
-        <ul className="list-unstyled">
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Instagram</a></li>
-        </ul>
-      </div>
-      <div className="col-md-4">
-        <h3>About Us</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse pharetra interdum blandit. Vestibulum auctor tempor augue eget venenatis. </p>
-      </div>
-      <div className="col-md-4">
-        <img src="logo.png" alt="Company Logo"/>
-      </div>
-    </div>
-  </div> */}
-
 
 
 

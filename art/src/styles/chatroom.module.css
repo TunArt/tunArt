@@ -16,6 +16,13 @@ background-color: #222121;
 background-repeat: no-repeat;
     background-size: cover;
   }
+  .app h1{
+ color: #a36932;
+    font-size: 30px;
+    margin-top: 2%;
+    margin-bottom: -4%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
   
   .discussion {
     background-image: url("https://i.pinimg.com/564x/e6/d7/5b/e6d75b7d94cc36bfaaabcb5eb49d4789.jpg");
@@ -23,7 +30,7 @@ background-repeat: no-repeat;
 background-size: 100%;
 /* transform:rotate(180deg); */
 /* height: 110%; */
-margin-top: 3%;
+margin-top: 4%;
 background-position-y: center;
     width: 75%;
     padding-top: 3%;
@@ -70,9 +77,9 @@ background-position-y: center;
   .message {
     height: 2.5rem  ;
     padding: 3%;
-    width: 40rem;
+    width: 35rem;
     flex: 1;
-    margin-left: -5%;
+    margin-left:   -23%;
     margin-right: 2%;
     /* size: 1000px; */
     color :white;
@@ -107,25 +114,23 @@ background-position-y: center;
     cursor: pointer;
     border-radius: 5px;
     height: 3rem;
+    border-radius: 100%;
   }
   .button:hover{
     background-color: #a00000;  
-    color: #000000;
-  }
-  .join:hover{
-    background-color: #a00000;  
-    color: #000000;
+    color: #ffffff;
   }
   
-  .join {
-    margin-left: 20px;
-    border-radius: 100%;
-    background-color: #a35710;
-    color: #ffffff;
-    height: 50px;
-    
-    width: 50px;
-  }
+  /*   
+    .join {
+      margin-left: 20px;
+      border-radius: 100%;
+      background-color: #a35710;
+      color: #ffffff;
+      height: 50px;
+      
+      width: 50px;
+    } */
 
   
   .send {
