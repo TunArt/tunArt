@@ -1,7 +1,8 @@
 import React , { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Switch } from 'antd';
-
+import Head from 'next/head'
+import styles from '../../styles/profile.module.css'
 
 const ProfilePage = () => {
   const [user, setUser] = useState('');
@@ -12,21 +13,66 @@ const ProfilePage = () => {
   const [add,setAdd] = useState(false)
   const [info,setInfo]=useState({name:"",email:"",password:"",phone:"",bio:""})
   const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",price:"",description:""})
-  const [image,setImage] = useState("")
+  const [imageSrc, setImageSrc] = useState( );
+  const [uploadData, setUploadData] = useState();
+  const [img,setImg]=useState("")
+  const [rerender,setRerender]=useState(false)
   
+/**
+   * handleOnChange
+   * @description Triggers when the file input changes (ex: when a file is selected)
+   */
 
-  const handleImage =(e:any)=>{
-    const file= e.target.files[0];
-    setFileToBase(file)
-    console.log(file)
+function handleOnChange(changeEvent:any) {
+  const reader = new FileReader();
+
+  reader.onload = function(onLoadEvent) {
+    setImageSrc(onLoadEvent.target.result);
+    setUploadData(undefined);
   }
-  
-  const setFileToBase=(file:Blob)=>{
-    const reader :any= new FileReader();
-    reader.readAsDataURL(file)
-    reader.onload= ()=>{
-        setImage(reader.result)
-    }
+  reader.readAsDataURL(changeEvent.target.files[0]);
+}
+
+/**
+ * handleOnSubmit
+ * @description Triggers when the main form is submitted
+ */
+
+async function handleOnSubmit(event:any) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const fileInput:any = Array.from(form.elements).find(({name})  => name === 'file');
+
+  const formData = new FormData();
+
+  for ( const file of fileInput.files ) {
+    formData.append('file', file);
+  }
+
+  formData.append('upload_preset', 'tunartweb');
+
+  axios
+      .post("https://api.cloudinary.com/v1_1/dk8yjc0ph/image/upload", formData)
+      .then((response) => {
+        console.log(response);
+        console.log(response.data.secure_url);
+        let imgurl = response.data.secure_url;
+        setImageSrc(response.data.secure_url);
+        console.log("img for the user", imgurl);
+        axios
+          .put(  
+            user ? `http://localhost:3000/api/users/updateImgUser/${localStorage.id}` : 
+            `http://localhost:3000/api/artists/updateImgArtist/${localStorage.id}`,
+            {
+              picture: imgurl,
+            }
+          )
+          .then((response) => {
+            console.log(response);
+            setRerender(!rerender)
+          });
+      });
   };
 
   const handleChange=(e:any)=>{
@@ -76,7 +122,7 @@ const updateInfo = (id:any,body:any) => {
         setData(res.data);
         })
   });
-  }, []);
+  }, [rerender]);
 
   const submitForm=(body:Object)=>{
       axios.post('http://localhost:3000/api/artworks/addArtwork', body)
@@ -191,10 +237,6 @@ const updateInfo = (id:any,body:any) => {
                         </div>
                       </div>
                       <div className="col-lg-6">
-                        <div className="form-group focused">
-                          <label className="form-control-label" ></label>
-                          <input type="file" name="image" onChange={handleImage} placeholder='picture' />
-                        </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="form-group focused">
@@ -230,9 +272,28 @@ const updateInfo = (id:any,body:any) => {
               <div className="row justify-content-center">
                 <div className="col-lg-3 order-lg-2">
                   <div className="card-profile-image">
-                    <a href="#">
-                      <img alt="Image placeholder" src="https://www.w3schools.com/howto/img_avatar.png" className="rounded-circle"/>
-                    </a>
+                  <div className="card-profile-image">
+                    <div >
+                    <div>
+                      
+                    <input
+  type="file"
+  name="image"
+  id="image"
+  style={{ display: "none" }}
+  onChange={handleOnChange}
+/>
+<img
+  alt="Image placeholder"
+  src= {user ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
+  className="rounded-circle"
+  onClick={() => {
+    document?.getElementById("image")?.click();
+  }}
+/>
+                    </div>
+                    </div>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -241,11 +302,34 @@ const updateInfo = (id:any,body:any) => {
               <div className="card-body pt-0 pt-md-4">
                 <div className="row">
                   <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">    
+                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">  
+                     
                     </div>
                   </div>
                 </div>
-                <div className="text-center">
+                <div className="text-center"> 
+                <div className="container mx-auto px-4">
+
+  <main className="max-w-lg mx-auto ">
+    <form className="flex flex-col space-y-4" method="post" onChange={(e) => { console.log(e.target.value); handleOnChange(e) }} onSubmit={handleOnSubmit}>
+      <div className="flex items-center justify-center border-2 border-dashed border-gray-400 py-4 px-6 rounded-md">
+        <input type="file" name="file" accept="image/png, image/jpg, image/gif, image/jpeg" className="hidden" id="file-input" />
+        <label htmlFor="file-input" className="cursor-pointer">
+          <span className="text-gray-700 font-medium">Select a file</span>
+        </label>
+        {imageSrc && !uploadData && (
+          <button className="ml-4 py-2 px-4 bg-purple-900 text-white font-medium rounded-md hover:bg-blue-700" id="cloud">Upload Files</button>
+        )}
+      </div>
+
+      {uploadData && (
+        <code id="code" className="bg-gray-100 py-2 px-4 rounded-md"><pre>{JSON.stringify(uploadData, null, 2)}</pre></code>
+      )}
+    </form>
+  </main>
+
+</div>
+
                   <h3>
                   {user ? data.userName : data.name} <span className="font-weight-light"></span>
                   </h3>

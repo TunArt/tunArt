@@ -42,7 +42,7 @@ db.user_product = require("./user_product.js")(Sequelize, sequelize);
 
 //artwork and messages association (one-to-many relationship)
 db.artwork.hasMany(db.bid,{
-  foreignKey: "artWorkId"
+  foreignKey: "artworkId"
 })
 db.bid.belongsTo(db.artwork,{
   foreignKey: "artworkId"
