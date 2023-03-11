@@ -90,7 +90,9 @@ body {
 
 body {
   margin: 0px;
-  background-color: black;}
+  background-color: black;
+
+}
 
 a {
   color: inherit;
@@ -307,7 +309,8 @@ body {
   margin: 0;
   text-align: left;
   color: #525f7f;
-  background-color: #080808;
+  background-color: #000000;
+  /* cursor: url('../../public/pngegg.png').auto; */
 }
 
 [tabindex='-1']:focus {
