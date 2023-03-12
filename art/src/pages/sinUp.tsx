@@ -31,7 +31,7 @@ interface SignUpState {
     }
   }
   
-const SignUp: React.FC = () => {
+const SignUp: React.FC = (props) => {
   const router = useRouter()
 
   const [form] = Form.useForm();
@@ -162,7 +162,7 @@ let know=false
   return (
     <div className={styles.overlay}>
       <CloseOutlined className={styles.close} onClick={()=>{
-        
+        props.togglePopup()
       }}/>
       <Form form={form} className={styles.form} >
         <Input className={styles.input}

@@ -7,8 +7,10 @@ import cloudinary from '../claoudinary/claoudinary' ;
 //methods to get all the artists
 const getAllArtists =async (req:Request ,res:Response) =>{
     try {
+      const {ArtistId}=req.params
         let artists= await Artist.findAll({
-          include : ['artworks']
+          include : ['artworks'],
+          where :{id:ArtistId}
         })
       console.log(artists)
         res.status(200).send(artists)
