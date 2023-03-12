@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from "react";
-// import { ReactDOM } from "react";
 import NavBar from "../../../components/navBar";
 import styles from "../../../styles/principale.module.css";
 import axios from "axios";
@@ -9,6 +8,7 @@ import {useRouter} from "next/router";
 import Search from "../search/search";
 import TopRated from "./topRated";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Slider from "./slider";
 
 
 const Art=()=>{
@@ -41,7 +41,7 @@ const Art=()=>{
     }
     
     const find=()=>{
-        axios.get(`localhost:3000/getOneArtwork/${name}`)
+        axios.get(`localhost:3000/api/artists/getOneArtwork/${name}`)
           .then(function (response) {
             console.log(response);
           })
@@ -74,7 +74,8 @@ return(
             </svg></i></button>
         </form>
         <h1 className={styles.titles}>TOP RATED ARTWORKS</h1>
-        <>
+        <div><Slider/></div>
+        {/* <>
         <div className={styles.cols}>
             {top.map((ele,index)=>(
                 <div className={styles.col} key={index}>
@@ -82,7 +83,7 @@ return(
                 </div>
             ))}  
         </div> 
-        </> 
+        </>  */}
         <h1 className={styles.titles}>All ARTS</h1>
         {toggle?
         <div>
@@ -116,17 +117,3 @@ return(
 )
 }
 export default Art;
-/*
- <InfiniteScroll
-          dataLength={this.state.items.length}
-          next={this.fetchMoreData}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
-        >
-          {this.state.items.map((i, index) => (
-            <div style={style} key={index}>
-              div - #{index}
-            </div>
-          ))}
-        </InfiniteScroll>
-*/
