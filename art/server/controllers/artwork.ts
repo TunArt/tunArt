@@ -8,7 +8,6 @@ const Artwork = db.artwork
 const getAllArtworks = async (req:Request ,res:Response) =>{
     try {
         let  artworks= await Artwork.findAll()
-        artworks = artworks.slice(0, parseInt(req.params.count))
         res.status(200).send(artworks)
 }
 catch (err){
@@ -16,45 +15,16 @@ catch (err){
 }
 }
 
-//method to get one artwork (search)
-const getOneArtwork = async (req:Request ,res:Response) =>{
-  try {
-      let  artworks= await Artwork.findOne({ where: { name: req.params.name } })
-      res.status(200).send(artworks)
-}
-catch (err){
-  console.log(err)
-}
-}
-
-const getTopArtworks = async (req:Request ,res:Response) =>{
-  try {
-      let  artworks= await Artwork.findAll({
-        order :[
-          ["rating", "DESC"]
-        ],
-        limit : 3
-      })
-      res.status(200).send(artworks)
-}
-catch (err){
-  console.log(err)
-}
-}
-
 //  method to add  a new artwork
 const addArtwork = async (req: Request, res: Response) => {
   const {name, startDate,endDate, creationDate,price,rating,description,auction,image}=req.body;
   const {artistId,userId}=req.params
-      if (!req.body) {
-        throw new Error("Request body is missing required properties.");
-      }
 
   try{
-    const result = await cloudinary.uploader.upload(image,{
-      folder:'artworks'
-  })
-  console.log(req.body)
+  //   const result = await cloudinary.uploader.upload(image,{
+  //     folder:'artworks'
+  // })
+  console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",req.body)
     const artwork = await Artwork.create({
       name:req.body.name,
       startDate:req.body.startDate,
@@ -64,7 +34,7 @@ const addArtwork = async (req: Request, res: Response) => {
       rating:req.body.rating,
       description:req.body.description,
       auction:req.body.auction,
-      image :result.secure_url,
+      image :req.body.image,
       verified:req.body.verified,
       artistId: req.params.artistId,
       categoryId: req.body.categoryId, 
@@ -126,6 +96,7 @@ const addArtwork = async (req: Request, res: Response) => {
     }
   }
 
+
     // update User information in database
    const updateArtWork= (req:Request, res:Response)=> {
     try {
@@ -170,6 +141,5 @@ const deleteArtWork= (req:Request, res:Response)=> {
         res.status(400).send(err);
       }
     }
-export default {getAllArtworks,getOneArtwork,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks};
-
+export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
 
