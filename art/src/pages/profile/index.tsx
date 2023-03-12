@@ -12,12 +12,13 @@ const ProfilePage = () => {
   const[edit,setEdit] = useState(false)
   const [add,setAdd] = useState(false)
   const [info,setInfo]=useState({name:"",phone:"",bio:""})
-  const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",price:"",description:""})
+  const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",image:"",price:"",description:"",})
   const [imageSrc, setImageSrc] = useState( );
   const [uploadData, setUploadData] = useState();
   const [img,setImg]=useState("")
   const [rerender,setRerender]=useState(false)
-  
+  const [auction,setauction]=useState(true)
+  const [artWorks,setArtWorks]=useState([])
 /**
    * handleOnChange
    * @description Triggers when the file input changes (ex: when a file is selected)
@@ -88,7 +89,9 @@ const handleChangeCreate=(e:any)=>{
 
 const onChange = (checked: boolean) => {
   console.log(`switch to ${checked}`);
+  setauction(checked)
 };
+console.log(create)
 
 const updateInfo = (id:any,body:any) => {
   axios
@@ -122,18 +125,46 @@ const updateInfo = (id:any,body:any) => {
         console.log("current user",res)
         setData(res.data)
         ;
+        }).then(async()=>{
+          const res=await axios.get(`http://localhost:3000/api/artists/getArtists/${localStorage.id}`)
+          setArtWorks((res.data[0]).artworks)
+          
         })
   });
   }, [rerender]);
-
-  const submitForm=(body:Object)=>{
-      axios.post('http://localhost:3000/api/artworks/addArtwork', body)
-      .then(response=> {console.log(response)
-     })
-      .catch(err=> console.log(err))
-      }
-
-
+  console.log(artWorks)
+  const submitForm=()=>{
+    try {
+      console.log("image in the submit form", create.image)
+      const formData = new FormData();
+      formData.append("file",create.image)
+      console.log(formData.get('file'));
+      axios
+        .post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.secure_url);
+          let imgurl = response.data.secure_url;
+          setImageSrc(response.data.secure_url);
+          console.log("img for the user", imgurl)
+          axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`,  {
+            name:create.name,
+            startDate:create.startDate,
+            endDate:create.endDate,
+            creationDate:create.creationDate,
+            price:create.price,
+            description:create.description,
+            auction:auction ? 1:0,
+            image:imgurl
+          })
+          .then(response=> {console.log(response)})
+        }).catch(err => console.log(err))
+    } catch {
+      alert("Sorry, the request failed. Please try again.")
+    }
+   
+  }
+      
   return (
     <div>
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -200,14 +231,27 @@ const updateInfo = (id:any,body:any) => {
         </div>
       </div>
     </div>  
-    <div id="card1">
-      {inp && <div className="card">
-  <img id="ava" src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" />
-  <h4><b>John Doe</b></h4>
-    <p>Architect & Engineer</p> 
-  <div className="container">
+    <div >
+      {inp && <div className="card flex flex-col items-center justify-center rounded-lg shadow-md hover:shadow-lg transition-shadow">
+  <img id="ava" src={data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"} alt="Avatar" className="rounded-full w-24 h-24 object-cover object-center mb-4 hover:opacity-75 transition-opacity" />
+  <h4 className="text-xl font-bold text-gray-800 hover:text-blue-500 transition-colors"><b>{data?.name}</b></h4>
+  <div className="container mx-auto grid gap-4 grid-cols-1 md:grid-cols-2">
+    {artWorks.map((e, i) => {
+      return (
+        <div key={i} className="relative rounded-lg overflow-hidden">
+          <img src={e.image} alt="" className="w-full h-full object-cover object-center rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-110" />
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-white font-bold text-lg hover:text-blue-500 transition-colors">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Check
+            </button>
+          </div>
+        </div>
+      );
+    })}
   </div>
-</div> }
+</div>
+
+ }
      </div> 
      <div>
       {add &&  <form id ="form1" className="card">
@@ -216,27 +260,32 @@ const updateInfo = (id:any,body:any) => {
                       <div className="col-lg-6">
                         <div className="form-group focused">
                           <label className="form-control-label" >name</label>
-                          <input type="text" id="input-username" className="form-control form-control-alternative" placeholder="Username" onChange={handleChangeCreate}/>
+                          <input type="text" name="name" id="input-username" className="form-control form-control-alternative" placeholder="Username" onChange={handleChangeCreate}/>
                         </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="form-group">
-                          <label className="form-control-label" >startDate</label>
-                          <input type="datetime-local" id="input-email" className="form-control form-control-alternative" placeholder="Email address" onChange={handleChangeCreate}/>
+                          <label  className="form-control-label" >startDate</label>
+                          <input name="startDate" type="datetime-local" id="input-email" className="form-control form-control-alternative" placeholder="Email address" onChange={handleChangeCreate}/>
                         </div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="form-group focused">
-                          <label className="form-control-label" >endDate</label>
-                          <input type="datetime-local" id="input-first-name" className="form-control form-control-alternative" placeholder="First name" onChange={handleChangeCreate}/>
+                          <label className="form-control-label" >end Date</label>
+                          <input  name = "endDate"type="datetime-local" id="input-first-name" className="form-control form-control-alternative" placeholder="First name" onChange={handleChangeCreate}/>
                         </div>
                       </div>
                       <div className="col-lg-6">
                         <div className="form-group focused">
-                          <label className="form-control-label" >creation date</label>
-                          <input type="date" id="input-last-name" className="form-control form-control-alternative" placeholder="Last name" onChange={handleChangeCreate}/>
+                          <label className="form-control-label" >creation Date</label>
+                          <input  name="creationDate" type="date" id="input-last-name" className="form-control form-control-alternative" placeholder="Last name" onChange={handleChangeCreate}/>
+                        </div>
+                        <div>
+                          <input type="file" name="image" title='file' id=""  onChange={(e)=>{
+                            create.image=e.target.files[0]
+                          }}/>
                         </div>
                       </div>
                     </div>
@@ -244,7 +293,7 @@ const updateInfo = (id:any,body:any) => {
                       <div className="col-lg-6">
                         <div className="form-group focused">
                           <label className="form-control-label" >price</label>
-                          <input type="number" id="input-first-name" className="form-control form-control-alternative" placeholder="DT" onChange={handleChangeCreate}/>
+                          <input name='price' type="number" id="input-first-name" className="form-control form-control-alternative" placeholder="DT" onChange={handleChangeCreate}/>
                         </div>
                       </div>
                       <div className="col-lg-6">
@@ -254,6 +303,7 @@ const updateInfo = (id:any,body:any) => {
                           <label className="form-control-label" ></label>
                           Sale <Switch defaultChecked onChange={onChange} /> Bid   
                         </div>
+                        
                       </div>
                     </div>
                   </div>
@@ -261,7 +311,7 @@ const updateInfo = (id:any,body:any) => {
                   <div className="pl-lg-4">
                     <div className="form-group focused">
                       <label>Description</label>
-                      <textarea  className="form-control form-control-alternative" placeholder="A few words about your artwork ..." onChange={handleChangeCreate}></textarea>
+                      <textarea name='description' className="form-control form-control-alternative" placeholder="A few words about your artwork ..." onChange={handleChangeCreate}></textarea>
                     </div>
                   </div>
                   <button
@@ -291,7 +341,7 @@ const updateInfo = (id:any,body:any) => {
                     <div>
 <img
   alt="Image placeholder"
-  src= {data ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
+  src= {data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
   className="rounded-circle"
   onClick={() => {
     document?.getElementById("image")?.click();

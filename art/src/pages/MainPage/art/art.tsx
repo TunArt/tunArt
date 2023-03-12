@@ -28,16 +28,16 @@ const Art=()=>{
     const[count, setCount]=useState(0)
     const route=useRouter();
 
-    const showHide=()=>{
-        setToggle(!toggle);
-    }
-    useEffect(()=>{
-        axios.get(`http://localhost:3000/api/artworks/getTopArtworks/`)
-        .then(response => {
-            console.log(response.data);
-        setTop(response.data)
-        })
-    },[])
+    // const showHide=()=>{
+    //     setToggle(!toggle);
+    // }
+    // useEffect(()=>{
+    //     axios.get(`http://localhost:3000/api/artworks/getTopArtworks/`)
+    //     .then(response => {
+    //         console.log(response.data);
+    //     setTop(response.data)
+    //     })
+    // },[])
 
     var fetchMoreData=async()=>{
            await axios.get(`http://localhost:3000/api/artworks/getArtworks/${count+2}`)
@@ -68,20 +68,7 @@ const Art=()=>{
     }
 
     
-return(
-    <div className={styles.all}>
-        <div><NavBar/></div>
-    <div className={styles.wrapper}> 
-        <h1 className={styles.titles}>THE GALLERY</h1>
-setCurrentUserId(localStorage.id)
-   !arr.length? axios.get('http://localhost:3000/api/artworks/getArtworks')
-    .then(response => {
-        console.log(response.data);
-    setArr(response.data)
-    }):undefined
-    
-    
-},[])
+
     
 return(
     <div className={styles.all}>

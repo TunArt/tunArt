@@ -108,8 +108,8 @@ const Home: React.FC<Props> = () => {
               </div>
             </div>
           </div>
-          {popUpLogin && <div className="overlay" ><Login /></div>}
-          {popUp && <div className="overlay"><SinUp /></div>}
+          {popUpLogin && <div className="overlay" ><Login togglePopupLogin={togglePopupLogin}  /></div>}
+          {popUp && <div className="overlay"><SinUp togglePopup={togglePopup} /></div>}
 
 
         </main>
