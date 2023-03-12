@@ -71,62 +71,66 @@ const Art=()=>{
 
     
 return(
-    <div className={styles.all}>
-    
-        <div><NavBar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} /></div>
-        {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
-    <div className={styles.wrapper}> 
-
-        <h1 className={styles.titles}>The Gallery:</h1>
-
-        <br></br>
-        
-        <form className={styles.search}>
-            <input type="text" placeholder="search for an artwork" onChange={handleChange}></input>
-            <button type="submit" onClick={onClickk}><i className={"bi bi-search"}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg></i></button>
-        </form>
-        <h1 className={styles.titles}>TOP RATED ARTWORKS</h1>
-        <>
-        <div className={styles.cols}>
-            {top.map((ele,index)=>(
-                <div className={styles.col} key={index}>
-                <TopRated ele={ele}/>
-                </div>
-            ))}  
-        </div> 
-        </> 
-        <h1 className={styles.titles}>All ARTS</h1>
-        {toggle?
-        <div>
-            {items.map((el,index)=>(
-                <div key={index}>
-                <Search el={el}/>
-                </div>
-            ))}  
-        </div>   
-   
-    :   
-    <InfiniteScroll
-    dataLength={arr.length}
-    next={fetchMoreData }
-    hasMore={true}
-    loader={<h4 style={{ textAlign:'center'}}>Loading...</h4>}
-  >
-        <div className={styles.cols}>   
-        {arr.map((element, index) =>(
-                <div   className={styles.col}   key={index}>
-                    <ArtList element={element} />
-                  </div>)          
-                )}
-        </div>
-        </InfiniteScroll>
-    }
-    
+    <div className="min-h-screen flex flex-col">
+  <NavBar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} />
+  {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
+  <div className="flex-grow container mx-auto">
+    <h1 className="text-4xl font-bold mb-8">The Gallery:</h1>
+    <form className="flex mb-8">
+      <input
+        className="border border-gray-300 rounded-l px-4 py-2 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-blue-600"
+        type="text"
+        placeholder="search for an artwork"
+        onChange={handleChange}
+      />
+      <button
+        className="border border-gray-300 rounded-r px-4 py-2 bg-gray-200 hover:bg-gray-300"
+        type="submit"
+        onClick={onClickk}
+      >
+        <i className="bi bi-search text-gray-600">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            className="bi bi-search"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+          </svg>
+        </i>
+      </button>
+    </form>
+    <h2 className="text-2xl font-bold mb-4">TOP RATED ARTWORKS</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+      {top.map((ele, index) => (
+        <TopRated key={index} ele={ele} />
+      ))}
     </div>
-    <Footer/>
-    </div>
+    <h2 className="text-2xl font-bold mb-4">All ARTS</h2>
+    {toggle ? (
+      <div>
+        {items.map((el, index) => (
+          <Search key={index} el={el} />
+        ))}
+      </div>
+    ) : (
+      <InfiniteScroll
+        dataLength={arr.length}
+        next={fetchMoreData}
+        hasMore={true}
+        loader={<h4 style={{ textAlign: "center" }}>Loading...</h4>}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"
+      >
+        {arr.map((element, index) => (
+          <ArtList key={index} element={element} />
+        ))}
+      </InfiniteScroll>
+    )}
+  </div>
+  <Footer width={1600} height={100} />
+</div>
 )
 }
 export default Art;
