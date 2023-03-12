@@ -14,6 +14,8 @@ origin: "http://localhost:3002",
 methods: ["GET", "POST"],
 },
 });
+let highestBid = 0;
+let highestBidder = "";
 
 io.on("connection", (socket: Socket) => {
 console.log(`User Connected: ${socket.id}`);
@@ -27,7 +29,17 @@ socket.on("send_message", (data: { arr: string[]; room: string; message: string 
 socket.to(data.room).emit("receive_message", data);
 console.log("send message", data);
 });
-});
+socket.emit("currentBid", { highestBid, highestBidder });
+
+  socket.on("bid", ({ bid, bidderName }) => {
+    if (bid > highestBid) {
+      highestBid = bid;
+      highestBidder = bidderName;
+      io.emit("newBid", { highestBid, highestBidder });
+    }
+  });
+
+
 
 server.listen(3001, () => {
 console.log("SERVER IS RUNNING AND LISTENING ...");

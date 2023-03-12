@@ -3,7 +3,7 @@ import styles from "src/styles/bid.module.css"
 
 import { useRouter } from 'next/router';
 
-
+const timestamp = new Date().toISOString(); 
 interface RoomProps {
         post: any;
         index: number;
@@ -40,6 +40,9 @@ const route=useRouter()
               </h3>
               <img src={post.img} className={styles.img} />
             </div>
+            <h5>
+            {timestamp}
+            </h5>
             <div className="relative mt-8 flex items-center gap-x-4">
               <img src={post.author.imageUrl} alt="" className="h-10 w-10 rounded-full bg-gray-50" />
               <div className="text-sm leading-6">
