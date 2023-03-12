@@ -21,10 +21,7 @@ const addArtwork = async (req: Request, res: Response) => {
   const {artistId,userId}=req.params
 
   try{
-  //   const result = await cloudinary.uploader.upload(image,{
-  //     folder:'artworks'
-  // })
-  console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",req.body)
+      console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",req.body)
     const artwork = await Artwork.create({
       name:req.body.name,
       startDate:req.body.startDate,
