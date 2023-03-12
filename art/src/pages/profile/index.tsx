@@ -134,35 +134,36 @@ const updateInfo = (id:any,body:any) => {
   }, [rerender]);
   console.log(artWorks)
   const submitForm=()=>{
-    const formData = new FormData();
-    formData.append("file",create.image)
-    formData.append('upload_preset', 'clzrszf3');
-    axios
-    .post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload", formData)
-    .then((response) => {
-      console.log(response);
-      console.log(response.data.secure_url);
-      let imgurl = response.data.secure_url;
-      setImageSrc(response.data.secure_url);
-      console.log("img for the user", imgurl)
-      axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`,  {
-        name:create.name,
-        startDate:create.startDate,
-        endDate:create.endDate,
-        creationDate:create.creationDate,
-        price:create.price,
-        description:create.description,
-        auction:auction ? 1:0,
-        image:imgurl
-      })
-      .then(response=> {console.log(response)
-      })
-      .catch(err=> console.log(err))
-      
-    })
-
+    try {
+      console.log("image in the submit form", create.image)
+      const formData = new FormData();
+      formData.append("file",create.image)
+      console.log(formData.get('file'));
+      axios
+        .post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
+        .then((response) => {
+          console.log(response);
+          console.log(response.data.secure_url);
+          let imgurl = response.data.secure_url;
+          setImageSrc(response.data.secure_url);
+          console.log("img for the user", imgurl)
+          axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`,  {
+            name:create.name,
+            startDate:create.startDate,
+            endDate:create.endDate,
+            creationDate:create.creationDate,
+            price:create.price,
+            description:create.description,
+            auction:auction ? 1:0,
+            image:imgurl
+          })
+          .then(response=> {console.log(response)})
+        }).catch(err => console.log(err))
+    } catch {
+      alert("Sorry, the request failed. Please try again.")
     }
-
+   
+  }
       
   return (
     <div>
@@ -283,7 +284,7 @@ const updateInfo = (id:any,body:any) => {
                         </div>
                         <div>
                           <input type="file" name="image" title='file' id=""  onChange={(e)=>{
-                            create.image=e.target.value
+                            create.image=e.target.files[0]
                           }}/>
                         </div>
                       </div>

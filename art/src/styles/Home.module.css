@@ -50,7 +50,6 @@
   position: absolute;
   width: 630px;
   height:625px;
-  background-color: white;
   background-image: url('../../public/i1.png');
   background-repeat: no-repeat;
   left: 0px;
@@ -145,10 +144,9 @@
   position: absolute;
   bottom: 10px;
   width: 100%;
+  margin-bottom:-165% ;
 
-  margin-bottom:-147% ;
-    /* margin-top: 20%; */
-    background-color: #1E242A;
+  /* margin-top: 20%; */
 }
 /* Styles for menu buttons */
 #menu li {
@@ -186,9 +184,6 @@
 
 /* Styles for menu container */
 #menu {
-position: sticky;
-top: 0;
-z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
