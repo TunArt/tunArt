@@ -15,7 +15,6 @@ const ProfilePage = () => {
   const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",image:"",price:"",description:"",})
   const [imageSrc, setImageSrc] = useState( );
   const [uploadData, setUploadData] = useState();
-  const [img,setImg]=useState("")
   const [rerender,setRerender]=useState(false)
   const [auction,setauction]=useState(true)
   const [artWorks,setArtWorks]=useState([])
@@ -80,6 +79,7 @@ async function handleOnSubmit(event:any) {
     console.log(e.target.value);
     setInfo({...info,[e.target.name]:e.target.value})
 }
+console.log(info)
 
 const handleChangeCreate=(e:any)=>{
   console.log(e.target.value);
@@ -93,22 +93,30 @@ const onChange = (checked: boolean) => {
 };
 console.log(create)
 
-const updateInfo = (id:any,body:any) => {
+const updateInfo = () => {
+  user ? 
   axios
-   .put(`http://localhost:3000/api/users/updateUser/${localStorage.getItem('email')}`, body)
-   .then(res => {
-    if (!res.data) throw Error ('access denied')
-    setUp(!up);
-     console.log(res.data) 
-    })
-    .catch(err => {
-      axios.put(`http://localhost:3000/api/artists/updateArtist/${localStorage.getItem('email')}`, body)
-      .then(res=>{
-        setUp(!up);
+   .put(`http://localhost:3000/api/users/updateUser/${localStorage.getItem('email')}`, 
+      {
+        userName:info.name,
+        phoneNumber:info.phone
       })
-    })
+   .then(res => {
+     console.log(res.data) 
+     setUp(!up)
+    }) 
+     :
+      axios.put(`http://localhost:3000/api/artists/updateArtist/${localStorage.getItem('email')}`, 
+         {
+          name:info.name,
+          phoneNumber:info.phone,
+          bio :info.bio
+         })
+      .then(res=>{
+        console.log(res.data)
+        setUp(!up) 
+      })
  }
-
 
   useEffect(() => {  
     console.log(localStorage.getItem('id'));
@@ -127,6 +135,7 @@ const updateInfo = (id:any,body:any) => {
         ;
         }).then(async()=>{
           const res=await axios.get(`http://localhost:3000/api/artists/getArtists/${localStorage.id}`)
+          console.log(res.data  )
           setArtWorks((res.data[0]).artworks)
           
         })
@@ -166,7 +175,7 @@ const updateInfo = (id:any,body:any) => {
   }
       
   return (
-    <div>
+    <div id = "bodyy">
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
       <div id ="current"className="media align-items-center">
                     <div className="media-body ml-2 d-none d-lg-block">
@@ -341,11 +350,9 @@ const updateInfo = (id:any,body:any) => {
                     <div>
 <img
   alt="Image placeholder"
-  src= {data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
+  id="round"
+  src= {data.picture   ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
   className="rounded-circle"
-  onClick={() => {
-    document?.getElementById("image")?.click();
-  }}
 />
 
                     </div>
@@ -388,15 +395,19 @@ const updateInfo = (id:any,body:any) => {
 </div>
 
                   <h3>
-                  {user ? data.userName : data.name} <span className="font-weight-light"></span>
+                 <b>{user ? data.userName : data.name}</b>  <span className="font-weight-light"></span>
                   </h3>
                   <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2"></i>{user ? data.birthDate : data.birthDate}
+                    <i className="ni location_pin mr-2"></i>
+                    age : <b>{user ? data.birthDate : data.birthDate} years old</b>
                   </div>
-                  <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2"></i>Email : {user ? data.email : data.email}
+                  <div className="h5 font-weight-300">
+                  <i className="ni location_pin mr-2"></i>
+                    phone : <b>{user ? data.phoneNumber : data.phoneNumber } </b> 
                   </div>
-                  
+                  <div className="h5 font-weight-300">
+                    <i className="ni location_pin mr-2"></i>Email : <b>{user ? data.email : data.email}</b>
+                  </div>
                   <hr className="my-4"/>
                   <p>{data?.bio}</p>
                 </div>
@@ -406,7 +417,7 @@ const updateInfo = (id:any,body:any) => {
           <div className="col-xl-8 order-xl-1">
             <div className="card bg-secondary shadow">
               <div className="card-header bg-white border-0">
-                <div className="row align-items-center">
+                <div className="row align-items-center" >
                   <div className="col-8">
                     <h3 className="mb-0">My account</h3>
                   </div>
@@ -416,34 +427,20 @@ const updateInfo = (id:any,body:any) => {
                 </div>
               </div>
               <div className="card-body">
-                <form>
+                <form onSubmit={updateInfo}>
                   <h6 className="heading-small text-muted mb-4">User information</h6>
                   <div className="pl-lg-4">
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="form-group focused">
                           <label className="form-control-label" >Username</label>
-                          <input type="text" id="input-username" className="form-control form-control-alternative" placeholder="Username" onChange={handleChange}/>
+                          <input name = "name" type="text" id="Enter your name .." className="form-control form-control-alternative" placeholder="Enter your name .." onChange={handleChange}/>
                         </div>
                       </div>
-                      {/* <div className="col-lg-6">
-                        <div className="form-group">
-                          <label className="form-control-label" >Email address</label>
-                          <input type="email" id="input-email" className="form-control form-control-alternative" placeholder="Email address" onChange={handleChange}/>
-                        </div>
-                      </div> */}
-                    </div>
-                    <div className="row">
-                      {/* <div className="col-lg-6">
-                        <div className="form-group focused">
-                          <label className="form-control-label" >Password</label>
-                          <input type="text" id="input-first-name" className="form-control form-control-alternative" placeholder="First name" onChange={handleChange}/>
-                        </div>
-                      </div> */}
                       <div className="col-lg-6">
                         <div className="form-group focused">
                           <label className="form-control-label" >PhoneNumber</label>
-                          <input type="text" id="input-last-name" className="form-control form-control-alternative" placeholder="Last name" onChange={handleChange}/>
+                          <input name = "phone" type="text" id="Enter your phone .." className="form-control form-control-alternative" placeholder="Enter your phoneNumber .. " onChange={handleChange}/>
                         </div>
                       </div>
                     </div>
@@ -453,10 +450,12 @@ const updateInfo = (id:any,body:any) => {
                   <div className="pl-lg-4">
                     <div className="form-group focused">
                       <label>About Me</label>
-                      <textarea  className="form-control form-control-alternative" placeholder="A few words about you ..." onChange={handleChange}></textarea>
+                      <textarea  name = "bio" className="form-control form-control-alternative" placeholder="A few words about you ..." onChange={handleChange}></textarea>
                     </div>
-                    <button className="btn btn-sm btn-primary " onClick ={updateInfo}>Update ✔</button>
-                  </div>
+                    <button className="bg-blue-900 hover:bg-blue-600 text-white font-bold py-1 px-1 rounded-full transition duration-200">
+  update your information 
+</button>
+    </div>
                 </form>
               </div>
             </div>
@@ -465,7 +464,7 @@ const updateInfo = (id:any,body:any) => {
       </div> }
       </div>
 
-<img id ="footer1" alt="Image placeholder" src="https://www.kindpng.com/picc/m/748-7485176_art-gallery-logo-png-transparent-png.png"/>
+{/* <img id ="footer1" alt="Image placeholder" src="https://www.kindpng.com/picc/m/748-7485176_art-gallery-logo-png-transparent-png.png"/> */}
 
    
     
