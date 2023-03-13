@@ -1,3 +1,4 @@
+
 const sequelize = require("sequelize");
 const env = require('dotenv').config()
 console.log(process.env.DATABASE);
@@ -38,14 +39,14 @@ db.message = require("./message.js")(Sequelize, sequelize);
 // db.user_bid = require("./user_bid.js")(Sequelize, sequelize);
 db.user_event = require("./user_event.js")(Sequelize, sequelize);
 db.user_product = require("./user_product.js")(Sequelize, sequelize);
-
+db.user_Favorite=require("./user_Favorite.js")(Sequelize,sequelize)
 
 //artwork and messages association (one-to-many relationship)
 db.artwork.hasMany(db.bid,{
-  foreignKey: "artWorkId"
+  foreignKey: "artworkId"
 })
 db.bid.belongsTo(db.artwork,{
-  foreignKey: "artworkId"
+  foreignKey: "artWorkId"
 })
 
 
@@ -91,6 +92,10 @@ db.event.belongsToMany(db.user, { through: 'userevents',foreignKey: 'eventId' })
 //user and product association (many-to-many)
 db.user.belongsToMany(db.product, { through: 'userproducts', foreignKey: 'userId' });
 db.product.belongsToMany(db.user, { through: 'userproducts', foreignKey: 'productId' });
+
+
+db.user.belongsToMany(db.artwork,{through :"userFavorite",foreignKey:'userId'})
+db.artwork.belongsToMany(db.user,{through:"userFavorite",foreignKey:'artWorkId'})
 
 //artist and artwork association (one-to-many)
 db.artwork.belongsTo(db.artist, {

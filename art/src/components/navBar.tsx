@@ -1,51 +1,67 @@
-import { Fragment,useState } from 'react'
+import { Fragment, useState,useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image"
+import React from 'react'
 import { AiOutlineShoppingCart } from "react-icons/ai";
-import  'material-icons/iconfont/material-icons.css';
+import 'material-icons/iconfont/material-icons.css';
 import { useRouter } from 'next/router'
+import axios from 'axios'
 type NavigationItem = {
   name: string;
   href: string;
   current: boolean;
 };
 
-export default function Example({id}:string) {
 
-  const user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  }
-  const navigation = [
-    { name: 'Art Gallery', href: `/MainPage/art/art?id=${id}`, current: false },
-    { name: 'Shop', href: `/shop?id=${id}`, current: false },
-    { name: 'Auctions', href: `/bid?${id}`, current: false },
-    { name: "Events", href:`/event/event?id=${id}`,current:false },
+export default function Example(props: any) {
+  const [data, setdata] = useState([])
+  const [User, setUser] = useState("")
+  //console.log("from nav bar", props);
+  useEffect(() => {  
+    console.log(localStorage.getItem('id'));
+    axios.get(`http://localhost:3000/api/users/getUser/${localStorage.email}`)     
+     .then(res => {
+        if (!res.data) throw Error ('access denied')
+        setdata(res.data)
+        setUser("user")
+        console.log('current user', res.data);
+      })
+      .catch(err => {
+    axios.get(`http://localhost:3000/api/artists/getArtist/${localStorage.email}`)
+        .then(res => {
+        console.log("current user",res)
+        setdata(res.data)
+        ;
+        })
+  });
+  }, []);
+    const navigation = [
+    { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
+    { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
+    { name: 'Auctions', href: `/bid?${props.id}`, current: false },
+    { name: "Events", href: `/event/event?id=${props.id}`, current: false },
     { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
     { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
-    { name: 'Reports', href: '/MainPage/reports/', current: false },
+    { name: 'Reports', href: '/MainPage/reports/', current: false }
   ]
   const userNavigation = [
     { name: 'Your Profile', href: '/profile/' },
     { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '/' ,work:function(){
-      localStorage.clear()
-    }},
+    {
+      name: 'Sign out', href: '/', work: function () {
+        localStorage.clear()
+      }
+    },
   ]
-  
-  function classNames(...classes:string[]) {
+
+  function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
   }
-
-  const route = useRouter();
-  
+const route=useRouter()
   return (
-    
-    <>
-    
+
+    <nav className="min-h-full">
       {/*
         This example requires updating your template:
 
@@ -54,25 +70,25 @@ export default function Example({id}:string) {
         <body class="h-full">
         ```
       */}
-      <div className="min-h-full">
-        
-        <Disclosure as="nav" className="bg-gray-800">
+      <div className="min-h-full ">
+
+        <Disclosure as="nav" className="bg-gray-700">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <Image
-                        className="h-10 w-10 "
-                        onClick={()=>{
-                          route.push("/MainPage/")
-                        }}
-                        src="/tunart-website-favicon-color.png"
-                        alt="Your Company"
-                        width={500}
-                        height={500}
-                      />
+                  <Image
+                className="h-10 w-10 cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+                onClick={() => {
+                  route.push("/MainPage")
+                }}
+                src="/tunart-website-favicon-color.png"
+                alt="Your Company"
+                width={500}
+                height={500}
+              />
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
@@ -92,13 +108,15 @@ export default function Example({id}:string) {
                           </a>
                         ))}
                       </div>
-                      
+
                     </div>
                   </div>
-                      <span  className="material-icons-sharp" onClick={()=>{
-                    
-                    props.setShowcart(!props.showCart)
-                      }}>shopping_cart</span>
+                  <div className="bg-white px-4 py-2 rounded-full shadow-md hover:bg-gray-100">
+  <span className="material-icons-sharp text-2xl text-gray-800 cursor-pointer" onClick={() => {
+    props.setShowcart(!props.showCart)
+  }}>shopping_cart</span>
+</div>
+
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <button
@@ -108,13 +126,13 @@ export default function Example({id}:string) {
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
-                      
+
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" src="https://api-private.atlassian.com/users/32c35f79f4748ebc75948b11587d3ff9/avatar" alt="" />
+                            <img className="h-8 w-8 rounded-full" src={data ? data.picture : "https://api-private.atlassian.com/users/32c35f79f4748ebc75948b11587d3ff9/avatar"} alt="" />
                           </Menu.Button>
                         </div>
                         <Transition
@@ -126,23 +144,16 @@ export default function Example({id}:string) {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          
+
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a onClick={()=>{
-                                    if(item.work!== undefined){
-                                      item.work()
-                                    }
-                                  }} 
+                                  <a
+                                    key={item.name}
                                     href={item.href}
-                                
-                                    
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'block px-4 py-2 text-sm text-gray-700'
-                                    )}
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                    onClick={item.work && item.work}
                                   >
                                     {item.name}
                                   </a>
@@ -150,7 +161,7 @@ export default function Example({id}:string) {
                               </Menu.Item>
                             ))}
                           </Menu.Items>
-                          
+
                         </Transition>
                       </Menu>
                     </div>
@@ -184,17 +195,17 @@ export default function Example({id}:string) {
                     >
                       {item.name}
                     </Disclosure.Button>
-                    
+
                   ))}
                 </div>
                 <div className="border-t border-gray-700 pt-4 pb-3">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                      <img className="h-10 w-10 rounded-full" src={data.picture} alt="" />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
+                      <div className="text-base font-medium leading-none text-white">{User ? data.userName : data.name}</div>
+                      <div className="text-sm font-medium leading-none text-gray-400">{data.email}</div>
                     </div>
                     <button
                       type="button"
@@ -206,14 +217,13 @@ export default function Example({id}:string) {
                   </div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
-                      <Disclosure.Button
+                      <a onClick={item.work && item.work}
                         key={item.name}
-                        as="a"
                         href={item.href}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
                         {item.name}
-                      </Disclosure.Button>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -226,61 +236,6 @@ export default function Example({id}:string) {
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">{/* Your content */}</div>
         </main>
       </div>
-    </>
+    </nav>
   )
 }
-
-/*
-export default function Example(props:any) {}
-  
-  console.log("from nav bar",props);
-  const user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  }
-  const navigation = [
-    { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
-    { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
-    { name: 'Auctions', href: `/bid?${props.id}`, current: false },
-    { name: 'Contact Us', href: '#', current: false },
-    { name: 'Reports', href: '#', current: false },
-    {name:"Events",href:`/event/event?id=${props.id}`,current:false}
-  ]
-  const userNavigation = [
-    { name: 'Your Profile', href: '/profile/' },
-    { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '/' ,work:function(){
-      localStorage.clear()
-    }},
-  ]
-  
-  function classNames(...classes:string[]) {
-    return classes.filter(Boolean).join(' ')
-  }
-
-
-
-  const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
-const navigation = [
-  { name: 'Home', href: '/', current: false },
-  { name: 'Art Gallery', href: '/MainPage/art/art', current: false },
-  { name: 'Shop', href: '/MainPage/shop/shop', current: false },
-  { name: 'Auctions', href: '/MainPage/auctions/auctions', current: false },
-  { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
-  { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
-  
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '/' },
-]
-
-*/

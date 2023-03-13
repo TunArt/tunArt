@@ -18,9 +18,6 @@ type Product = {
   brand: string;
   picture: any;
 };
-const baught = (idItem: number, idUser: number) => {
-  axios.post(``);
-};
 const product: Product = {
   rating: 3.9,
   reviewCount: 117,
@@ -45,16 +42,23 @@ export default function Item() {
   const { query } = route || {};
   const items = String(query?.items);
   const item = JSON.parse(items);
-  console.log(item);
+  console.log("item from [items]",item)
   let quantityBought=""
   const [open, setOpen] = useState(true);
-  console.log("hi");
+  const images=JSON.parse(item.picture)
+  // const [images,setImages]=useState()
+  const handleImageClick = (imageUrl:string) => {
+    setCurrentImage(imageUrl);
+  };
+  console.log("images for [item]",images)
+  const [currentImage, setCurrentImage] = useState(images[0]);
   const handleADD = (x: string, y: string) => {
+    console.log("this should be the user id ",x)
     axios.post(`http://localhost:3000/api/route/bought/${x}/${y}`,{
       quantityBought:quantityBought,
     }).then((res) => {
       console.log(res)
-      route.push("/MainPage");
+      route.push("/shop");
     });
   };
   return (
@@ -101,11 +105,27 @@ export default function Item() {
 
                     <div className="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:gap-x-8">
                       <div className="aspect-w-2 aspect-h-3 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                        <img
-                          src={JSON.parse(item.picture)[0]}
-                          alt={item.imageAlt}
-                          className="object-cover object-center"
-                        />
+                      <div>
+      <img src={currentImage} alt="Main image" />
+      <div className="flex flex-wrap">
+  {images.map((imageUrl) => (
+    <div
+      key={imageUrl}
+      className="w-1/3 px-2 py-2"
+      onClick={() => handleImageClick(imageUrl)}
+    >
+      <img
+        src={imageUrl}
+        alt="Thumbnail"
+        className="max-w-full max-h-full object-contain mx-auto"
+      />
+    </div>
+  ))}
+</div>
+
+
+
+    </div>
                       </div>
                       <div className="sm:col-span-8 lg:col-span-7">
                         <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">
@@ -182,6 +202,7 @@ export default function Item() {
                                     placeholder="1"
                                     onChange={(e) => {
                                       quantityBought=e.target.value
+
                                     }}
                                   />
                                 </span>
@@ -208,7 +229,8 @@ export default function Item() {
                             <button
                               onClick={(e) => {
                                 e.preventDefault()
-                                handleADD(localStorage.id,item.id) 
+                                
+                                handleADD(window?.localStorage.id,item.id) 
                               }}
                               className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >

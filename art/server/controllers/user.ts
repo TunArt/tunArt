@@ -43,17 +43,14 @@ const addUser = async(req: Request, res: Response) => {
         if (!req.body) {
           throw new Error("Request body is missing required properties.");
         }
+console.log(req.body);
 
     const user = await User.update({
         userName: req.body.userName,
-        email: req.body.email,
-        password: req.body.password,
-        birthDate: req.body.birthDate,
         phoneNumber: req.body.phoneNumber,
-        picture: req.body.picture
     }, {
         where: {
-            id: req.params.id
+            email: req.params.email
         }
     })
     res.status(200).send("user updated successfully")
@@ -63,6 +60,27 @@ catch (err) {
     res.status(400).send(err);
   }
 }
+
+const updateImgUser =async(req:Request,res:Response)=>{
+  try {
+    if (!req.body) {
+      throw new Error("Request body is missing required properties.");
+    }
+const img =  await User.update({
+    picture: req.body.picture,
+}, {
+    where: {
+        email: req.params.email
+    }
+})
+res.status(200).send("user updated successfully")
+}
+catch (err) {
+console.log(err);
+res.status(400).send(err);
+}
+  }
+
 
    // delete User information in database
 
@@ -112,6 +130,6 @@ const getUserwithId=async(req:Request,res:Response)=>{
     
   }
 }
-export default {getAllUsers,addUser,updateUser,deleteUser,getUser,getUserwithId};
+export default {getAllUsers,addUser,updateUser,deleteUser,getUser,getUserwithId,updateImgUser};
 
 

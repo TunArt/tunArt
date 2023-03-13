@@ -31,7 +31,7 @@ interface SignUpState {
     }
   }
   
-const SignUp: React.FC = () => {
+const SignUp: React.FC = (props) => {
   const router = useRouter()
 
   const [form] = Form.useForm();
@@ -120,6 +120,7 @@ let know=false
         }).then((res)=>{
           axios.get(`http://localhost:3000/api/users/getUser/${email}`).then((res)=>{
             localStorage.setItem("id",res.data.id)
+            localStorage.setItem("email",res.data.email)
             router.push({
               pathname:'/MainPage',
               query:{"id":res.data.id,"type":know}
@@ -140,6 +141,7 @@ let know=false
           console.log(res)
           axios.get(`http://localhost:3000/api/artists/getArtist/${email}`).then((res)=>{
             localStorage.setItem("id",res.data.id)
+            localStorage.setItem("email",res.data.email)
             console.log(res)
             router.push({
               pathname:'/MainPage',
@@ -160,7 +162,7 @@ let know=false
   return (
     <div className={styles.overlay}>
       <CloseOutlined className={styles.close} onClick={()=>{
-        
+        props.togglePopup()
       }}/>
       <Form form={form} className={styles.form} >
         <Input className={styles.input}

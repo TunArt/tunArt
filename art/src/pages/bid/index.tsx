@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-
+import NavBar from '../../components/navBar'
 import Link from 'next/link'
 import Room from './room'
-import NavBar from '../../components/navBar'
 import Footer from '../MainPage/footer/footer'
 import styles from "../../styles/principale.module.css"
 
@@ -27,7 +26,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 2,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -44,7 +43,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 3,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -61,7 +60,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 4,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -78,7 +77,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 5,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -95,7 +94,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 6,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -114,21 +113,29 @@ const posts = [
   // More posts...
 ]
 
-const bids: React.FC = () => {
+
+const Bids: React.FC = () => {
+  useEffect(() => {
+    const h1 = document.querySelector("h1");
+    if (h1) {
+      h1.classList.add("animate-pulse", "text-4xl", "font-bold", "text-blue-600");
+    }
+  }, []);
+
+    // your posts data here
+
   return (
-    <div className={styles.all}>
-            <div><NavBar/></div>
-        <div className={styles.wrapper}>
-      <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-        {posts.map((post,index) => (
-      <Room post={post} index={index}/>
+    <div className="bg-black">
+      <NavBar />
+      <h1 className=" text-center py-10">Welcome to the bid room</h1>
+      <div className=" mx-auto max-w-7xl grid grid-cols-1 gap-y-16 gap-x-8 border-t border-gray-200 py-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        {posts.map((post, index) => (
+          <Room key={post.id} post={post} index={index} />
         ))}
       </div>
-      </div>
-        <Footer/>
-        </div>
+      <Footer/>
+    </div>
+  );
+};
 
-  )
-
-}
-export default bids;
+export default Bids;

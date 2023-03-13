@@ -23,6 +23,7 @@ import bidRoute from "./server/routes/bid";
 import categoryRoute from "./server/routes/category";
 import eventRoute from './server/routes/events'
 import userProd from "./server/routes/user_product"
+import userFavorite from "./server/routes/user_Favorite"
 // import roomRoute from "./server/routes/room"
 import messageRoute from "./server/routes/message"
 //Add Routes to the middleware handling path, specifying the respective URL path
@@ -38,7 +39,7 @@ app.use('/api/route',userProd)
 // app.use('/api/rooms',roomRoute)
 app.use('/api/messages',messageRoute)
 
-
+app.use('/api/favorite',userFavorite)
 
 
 app.listen(port, () => {

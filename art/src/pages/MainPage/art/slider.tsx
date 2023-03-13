@@ -84,7 +84,7 @@ margin: 30,
 responsiveClass: true,
 nav: true,
 dots: true,
-autoplay: false,
+autoplay: true,
 smartSpeed: 1000,
 navClass: ["owl-prev", "owl-next"],
 navText: [
@@ -92,6 +92,12 @@ navText: [
 '',
 ],
 responsive: {
+0: {
+items: 0,
+    },
+    400: {
+        items: 0,
+            },
 1000: {
 items: 1,
 }

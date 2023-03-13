@@ -1,0 +1,57 @@
+.container {
+  display: grid;
+  width:500px;
+height: 400px;  
+
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 1rem;
+}
+
+.description {
+  margin: 4rem 0;
+  line-height: 1.5;
+}
+
+.form {
+  /* margin-top: -360px; */
+    font-size: 3em;
+    padding: 1em;
+    border: solid 1px rgb(228, 23, 23);
+  
+    margin-top: -180px;
+  }
+
+  #cloud {
+    color: white;
+    font-size: 1em;
+    background-color: blueviolet;
+    padding: .5em .8em;
+    border: none;
+    border-radius: .2em;
+  }
+
+  #code {
+    text-align: left;
+  }
+
+.footer {
+  display: flex;
+  flex: 1;
+  padding: 2rem 0;
+  border-top: 1px solid #eaeaea;
+  justify-content: center;
+  align-items: center;
+}
+

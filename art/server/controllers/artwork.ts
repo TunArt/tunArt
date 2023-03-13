@@ -1,18 +1,51 @@
 import db from '../models/index';
 import express, { Express, Request, Response } from 'express';
-import { async } from '@firebase/util';
-import { Rating } from '@mui/material';
+import cloudinary from '../claoudinary/claoudinary';
+
+
+
 const Artwork = db.artwork
+const Artist = db.artist
 
 //methods to get all the artworks
 const getAllArtworks = async (req:Request ,res:Response) =>{
     try {
         let  artworks= await Artwork.findAll()
-        artworks = artworks.slice(0, parseInt(req.params.count))
         res.status(200).send(artworks)
 }
 catch (err){
     console.log(err)
+}
+}
+
+// method to fetch to 3 ranked artworks
+const getTopArtworks = async (req:Request ,res:Response) =>{
+  try {
+      let  artworks= await Artwork.findAll({
+        order :[
+          ["rating", "DESC"]
+        ],
+        limit : 3,
+        include: Artist
+      })
+      res.status(200).send(artworks)
+}
+catch (err){
+  console.log(err)
+}
+}
+
+// methode to fetch limited artworks
+const getLimitedlArtworks = async (req:Request ,res:Response) =>{
+  try {
+      let  artworks= await Artwork.findAll({
+        include: Artist
+      })
+      artworks = artworks.slice(0, parseInt(req.params.count))
+      res.status(200).send(artworks)
+}
+catch (err){
+  console.log(err)
 }
 }
 
@@ -27,39 +60,23 @@ catch (err){
 }
 }
 
-const getTopArtworks = async (req:Request ,res:Response) =>{
-  try {
-      let  artworks= await Artwork.findAll({
-        order :[
-          ["rating", "DESC"]
-        ],
-        limit : 3
-      })
-      res.status(200).send(artworks)
-}
-catch (err){
-  console.log(err)
-}
-}
-
 //  method to add  a new artwork
 const addArtwork = async (req: Request, res: Response) => {
+  const {name, startDate,endDate, creationDate,price,rating,description,auction,image}=req.body;
   const {artistId,userId}=req.params
-      if (!req.body) {
-        throw new Error("Request body is missing required properties.");
-      }
-if(userId){
+
   try{
+      console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",req.body)
     const artwork = await Artwork.create({
-      name: req.body.name,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
-      creationDate: req.body.creationDate,
-      price: req.body.price,
-      rating: req.body.rating,
-      description: req.body.description,
-      auction: req.body.auction,
-      image: req.body.image,
+      name:req.body.name,
+      startDate:req.body.startDate,
+      endDate:req.body.endDate,
+      creationDate:req.body.creationDate,
+      price:req.body.price,
+      rating:req.body.rating,
+      description:req.body.description,
+      auction:req.body.auction,
+      image :req.body.image,
       verified:req.body.verified,
       artistId: req.params.artistId,
       categoryId: req.body.categoryId, 
@@ -73,26 +90,9 @@ if(userId){
       res.status(400).send(err);
     }
   }
-  else{
-    try {
-      const artwork = await Artwork.create({
-        name: req.body.name,
-        creationDate: req.body.creationDate,
-        price: req.body.price,
-        description: req.body.description,
-        auction: req.body.auction,
-        image: req.body.image,
-        verified:req.body.verified,
-        artistId: req.params.artistId,
-        categoryId: req.body.categoryId, 
-        userId: req.params.userId
-      });
-      res.status(201).send("artwork created successfully");
-    } catch (error) {
-      
-    }
-  }
-};
+   
+  
+
   const modfyArtWork=async(req:Request,res:Response)=>{
     try {
       if (!req.body) {
@@ -183,6 +183,16 @@ const deleteArtWork= (req:Request, res:Response)=> {
         res.status(400).send(err);
       }
     }
-export default {getAllArtworks,getOneArtwork,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks};
 
+    // method that gets artist's name
+    const getArtistName = async (req:Request ,res:Response) =>{
+      try {
+          let  artworks= await Artwork.findAll({include: Artist})
+          res.status(200).send(artworks)
+  }
+  catch (err){
+      console.log(err)
+  }
+  }
+export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks, getLimitedlArtworks, getOneArtwork, getArtistName};
 
