@@ -26,6 +26,9 @@ const Art=()=>{
     //const[top, setTop]=useState([]);
     const[count, setCount]=useState(0)
     const route=useRouter();
+useEffect(()=>{
+    setCurrentUserId(window?.localStorage.id)
+},[])
 
     
     
@@ -44,7 +47,8 @@ return(
         <div><NavBar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} /></div>
         {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
     <div className={styles.wrapper}> 
-
+<br />
+<br />
         <h1 className={styles.titles}>The Gallery:</h1>
         <br></br>
         <div>
@@ -83,7 +87,7 @@ return(
     }
     
     </div>
-    <Footer/>
+    <Footer width={1600} height={100}/>
     </div>
 )
 }

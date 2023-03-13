@@ -1,27 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Alert } from 'antd';
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from "../../server/firebase/config"
-import Styles from "../styles/Login.module.css"
-import { useRouter } from 'next/router';
+import { auth } from "../comp/config"
 import axios from 'axios';
-import {CloseOutlined } from "@ant-design/icons"
-import style from "../styles/SingUp.module.css"
-interface FormValues {
-  email: string;
-  password: string;
-  remember: boolean;
-}
-
-const Login: React.FC = (props) => {
+import styles from '../styles/login.css';
+const Login= (props) => {
   console.log(props)
-  const router = useRouter()
   const [form] = Form.useForm();
   const [emailTest, setEmailTest] = useState(false);
   const [passwordTest, setPasswordTest] = useState(false);
   const [invalidCredentials, setInvalidCredentials] = useState(false);
 
-  const validateEmail = (rule: any, value: string) => {
+  const validateEmail = (rule, value) => {
     if (value && !/^\S+@\S+\.\S+$/.test(value)) {
       return Promise.reject('Invalid email address');
     } else {
@@ -29,7 +19,7 @@ const Login: React.FC = (props) => {
     }
   };
 
-  const validatePassword = (rule: any, value: string) => {
+  const validatePassword = (rule, value) => {
     if (value && value.length < 5) {
       return Promise.reject('Password is too short');
     } else {
@@ -37,7 +27,7 @@ const Login: React.FC = (props) => {
     }
   };
 
-  const handleSubmit = async (values: FormValues) => {
+  const handleSubmit = async (values) => {
     console.log('Success:', values);
     if (values) {
       try {
@@ -48,32 +38,12 @@ const Login: React.FC = (props) => {
         try {
           const res = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
           console.log(res.data);
-          if (!res.data) {
-            throw Error('failed')
-          }
-          if (res.data.role === 'user') {
-            localStorage.setItem("id",res.data.id)
-            localStorage.setItem("email",res.data.email)
-            router.push({
-              pathname: '/MainPage',
-              query: { "id": res.data.id, type: false }
-            });
-          } else {
-            localStorage.setItem("id",res.data.id)
-            router.push({
-              pathname: '/admin',
-              query: { "id": res.data.id }
-            });
-          }
+          
         } catch (err) {
           console.log('test');
           const res = await axios.get(`http://localhost:3000/api/artists/getArtist/${email}`);
           localStorage.setItem("id",res.data.id)
           localStorage.setItem("email",res.data.email)
-          router.push({
-            pathname: '/MainPage/art/art',
-            query: { "id": res.data.id, type: true }
-          });
         }
       } catch (error) {
         setInvalidCredentials(true);
@@ -82,14 +52,14 @@ const Login: React.FC = (props) => {
     }
   };
 
-  const handleFinishFailed = (error: any) => {
+  const handleFinishFailed = (error) => {
     console.log('Error:', error);
-    if (error.errorFields.some((field: any) => field.name[0] === 'email')) {
+    if (error.errorFields.some((field) => field.name[0] === 'email')) {
       setEmailTest(true);
     } else {
       setEmailTest(false);
     }
-    if (error.errorFields.some((field: any) => field.name[0] === 'password')) {
+    if (error.errorFields.some((field) => field.name[0] === 'password')) {
       setPasswordTest(true);
     } else {
       setPasswordTest(false);
@@ -98,11 +68,8 @@ const Login: React.FC = (props) => {
   };
 
   return (
-    <div className={Styles.overlay}>
-      <CloseOutlined className={Styles.close} onClick={()=>{
-      props.togglePopupLogin()
-      }}/>
-      <Form className={Styles.login}
+    <div >
+      <Form 
         form={form}
         name="login"
         labelCol={{ span: 8 }}
@@ -113,7 +80,6 @@ const Login: React.FC = (props) => {
       >
         <h3>Email</h3>
         <Form.Item
-          className={Styles.email}
           label="Email"
           name="email"
           rules={[
@@ -144,7 +110,7 @@ const Login: React.FC = (props) => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className={Styles.but}>
+          <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>
