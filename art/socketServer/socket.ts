@@ -8,19 +8,23 @@ app.use(cors());
 
 const server: http.Server = http.createServer(app);
 
+
 const io: SocketServer = new SocketServer(server, {
 cors: {
 origin: "http://localhost:3002",
 methods: ["GET", "POST"],
-},
+}, 
 });
 
 let highestBid = 0;
-
+let interval:any;
 
 
 io.on("connection", (socket: Socket) => {
-  console.log("a user connected");
+  if (interval) clearInterval(interval);
+  console.log('User connected');
+
+  interval = setInterval(() => io.emit('serverTime', { time: new Date().getTime() }) , 1000);
 
   socket.on("bid", ({ bid }: { bid: number }) => {
     if (bid > highestBid) {
@@ -31,8 +35,9 @@ io.on("connection", (socket: Socket) => {
     }
   });
 
-  socket.on("disconnect", () => {
-    console.log("a user disconnected");
+ socket.on("disconnect", () => {
+    console.log('user disconnected');
+    clearInterval(interval);
   });
 });
 

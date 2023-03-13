@@ -18,6 +18,8 @@ const io: SocketServer = new SocketServer(server, {
     methods: ["GET", "POST"],
   },
 });
+let highestBid = 0;
+let highestBidder = "";
 
 io.on("connection", (socket: Socket) => {
   console.log(`User Connected: ${socket.id}`);
@@ -27,20 +29,28 @@ io.on("connection", (socket: Socket) => {
     console.log("join room", data);
   });
 
-  socket.on(
-    "send_message",
-    (data: { arr: string[]; room: string; message: string }) => {
-        // if we want to refactor later and get rid of the old post request 
-        // let msg = {...data, }
-        // addMessage({
-        //     ...data
-        //   })
-        
-      socket.to(data.room).emit("receive_message", data);
-      console.log("send message", data);
-    }
-  );
+socket.on("send_message", (data: { arr: string[]; room: string; message: string }) => {
+socket.to(data.room).emit("receive_message", data);
+console.log("send message", data);
 });
+
+socket.emit("currentBid", { highestBid, highestBidder });
+
+socket.on("bid", ({ bid }: { bid: number }) => {
+  if (bid > highestBid) {
+    highestBid = bid;
+    socket.emit("message", { message: `Your bid of ${bid} is the highest.` });
+  } else {
+    socket.emit("message", { message: `Sorry, your bid of ${bid} is not the highest.` });
+  }
+});
+});
+
+
+
+
+
+
 
 server.listen(3001, () => {
   console.log("SERVER IS RUNNING AND LISTENING ...");

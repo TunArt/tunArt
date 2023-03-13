@@ -54,7 +54,7 @@ const MainPage =()=>{
     console.log("mmm",currentUsrId)
     return(
 
-        <div>
+        <div className={styles.all}>
             {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
         <div><NavBar id={currentUsrId} showCart={showCart} setShowcart={setShowcart}  /></div>
         <div className="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">

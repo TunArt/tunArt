@@ -8,8 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "socket": "nodemon socketServer/index.ts",
-    "bid-socket": "nodemon socketServer/socket.ts"
+    "socket": "nodemon socketServer/index.ts"
   },
   "dependencies": {
     "@cloudinary/react": "^1.11.1",
