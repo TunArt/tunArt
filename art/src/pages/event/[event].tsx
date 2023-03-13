@@ -35,7 +35,7 @@ console.log(router)
 const qrValue='https://example.com'
   return (
     <div className="flex flex-row items-center justify-center">
-    <img className="w-1/3 mr-8 rounded-md shadow-md" src={image} alt={title} />
+    <img className="w-2/3 mr-8 rounded-md shadow-md" src={image} alt={title} />
     <div>
       <h1 className="text-3xl font-bold mb-4">{title}</h1>
       <p className="text-lg leading-relaxed mb-8">{description}</p>

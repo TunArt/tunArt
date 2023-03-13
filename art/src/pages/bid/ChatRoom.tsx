@@ -61,6 +61,12 @@ function App(): JSX.Element {
   };
 
   useEffect(() => {
+    
+  //   setTimeout(() => {
+  //    setRoom(ArtId);
+  //    joinRoom();
+  //  }, 500)
+
     axios
       .get("http://localhost:3000/api/messages/getmessages")
       .then( (res) => {
@@ -170,13 +176,7 @@ function App(): JSX.Element {
               
 
             }, 500)}
-            
-            
-            
-          //   {() => {
-          //  setRoom(ArtId);
-          //     joinRoom();
-          //   }}
+
           >
             
           </button>

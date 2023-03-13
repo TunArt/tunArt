@@ -13,7 +13,7 @@ const io: SocketServer = new SocketServer(server, {
 cors: {
 origin: "http://localhost:3002",
 methods: ["GET", "POST"],
-},
+}, 
 });
 
 let highestBid = 0;

@@ -12,7 +12,8 @@ function ResponsiveCardList() {
         id:"1",
           image:
               "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085",
-          title: "5 Easy Tips That Will Make Your Latte Art Flourish",
+          title: "Art & Coffee: A Creative Meeting for Our Artwork Show"
+          ,
           description:
               "Latte art is quite often the most attractive thing for a new barista, and latte art is an excellent gateway to the exciting world of coffee. Latte art easy to start with, but to master latte art patterns, you need a lot practice and determination. Here are my tips that helped me to improve my latte art a few years ago!",
       },
@@ -20,15 +21,15 @@ function ResponsiveCardList() {
         id:"2",
           image:
               "https://images.unsplash.com/photo-1512034400317-de97d7d6c3ed",
-          title: "Coffee Roasting Basics: Developing Flavour by Roasting",
+          title: "Brewing Ideas: A Coffee Meeting to Discuss Our Artwork Show",
           description:
-              "Caffé latte and flat white are definitely the most ordered espresso based drinks in cafés around the world but what are they really? Have you ever wondered the difference between caffé latte vs. flat white? Let's see what makes caffé latte and flat white different from each other!",
+              "Calling all artists! Grab your sketchbook and join us for a coffee-fueled brainstorming session as we plan our upcoming artwork show. This casual gathering is the perfect opportunity to connect with fellow artists and discuss ideas in a relaxed and supportive environment. Whether you're a seasoned painter or a budding artist, everyone is welcome to contribute their unique perspective. Sip on your favorite hot beverage and get ready to collaborate, brainstorm, and share your passion for art. By the end of our coffee and canvas session, we hope to have a clear plan for our show, as well as new inspiration to fuel our creative endeavors. Let's work together to make our show a success!",
       },
       {
         id:"3",
           image:
               "https://images.unsplash.com/photo-1445077100181-a33e9ac94db0",
-          title: "Latte vs. Flat White - What is the Difference?",
+          title: "Coffee & Canvas: Planning Our Artwork Show Together",
           description:
               "I bet roasting is the thing that every barista wants to know about! We can develop flavour by roasting coffee. How can we achieve the best tasting coffee? What actually happens when roasting?",
       },
@@ -36,7 +37,7 @@ function ResponsiveCardList() {
         id:"4",
           image:
               "https://images.unsplash.com/photo-1459257868276-5e65389e2722",
-          title: "Creating the Perfect Espresso Recipe",
+          title: "Java & Gallery Talk: Preparing for Our Artwork Show",
           description:
               "Espresso recipes are important in cafés in terms of consistency and flavour. How and why are the espresso recipes made and what are the things you should consider when making a recipe for espresso? Let’s dig deeper into the world of espresso!",
       },
