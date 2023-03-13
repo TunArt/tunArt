@@ -56,6 +56,7 @@ db.artwork.hasMany(db.message,{
 db.message.belongsTo(db.artwork,{
   foreignKey: "artworkId"
 })
+
 //bid and room association (one-to-one)
 // db.bid.hasOne(db.room,{foreignKey: "bidId"})
 

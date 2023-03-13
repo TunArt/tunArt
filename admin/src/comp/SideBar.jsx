@@ -105,14 +105,14 @@ const SideBar = () => {
             Data
           </Typography>
           <Item
-            title="Manage Team"
-            to="/user"
+            title="Artists"
+            to="/artist"
             icon={<PeopleOutlinedIcon />}
             selected={selected}
             setSelected={setSelected}
           />
           <Item
-            title="Contacts Information"
+            title="Users"
             to="/contacts"
             icon={<ContactsOutlinedIcon />}
             selected={selected}
