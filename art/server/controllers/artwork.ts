@@ -2,7 +2,10 @@ import db from '../models/index';
 import express, { Express, Request, Response } from 'express';
 import cloudinary from '../claoudinary/claoudinary';
 
+
+
 const Artwork = db.artwork
+const Artist = db.artist
 
 //methods to get all the artworks
 const getAllArtworks = async (req:Request ,res:Response) =>{
@@ -12,6 +15,48 @@ const getAllArtworks = async (req:Request ,res:Response) =>{
 }
 catch (err){
     console.log(err)
+}
+}
+
+// method to fetch to 3 ranked artworks
+const getTopArtworks = async (req:Request ,res:Response) =>{
+  try {
+      let  artworks= await Artwork.findAll({
+        order :[
+          ["rating", "DESC"]
+        ],
+        limit : 3,
+        include: Artist
+      })
+      res.status(200).send(artworks)
+}
+catch (err){
+  console.log(err)
+}
+}
+
+// methode to fetch limited artworks
+const getLimitedlArtworks = async (req:Request ,res:Response) =>{
+  try {
+      let  artworks= await Artwork.findAll({
+        include: Artist
+      })
+      artworks = artworks.slice(0, parseInt(req.params.count))
+      res.status(200).send(artworks)
+}
+catch (err){
+  console.log(err)
+}
+}
+
+//method to get one artwork (search)
+const getOneArtwork = async (req:Request ,res:Response) =>{
+  try {
+      let  artworks= await Artwork.findOne({ where: { name: req.params.name } })
+      res.status(200).send(artworks)
+}
+catch (err){
+  console.log(err)
 }
 }
 
@@ -138,5 +183,16 @@ const deleteArtWork= (req:Request, res:Response)=> {
         res.status(400).send(err);
       }
     }
-export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
+
+    // method that gets artist's name
+    const getArtistName = async (req:Request ,res:Response) =>{
+      try {
+          let  artworks= await Artwork.findAll({include: Artist})
+          res.status(200).send(artworks)
+  }
+  catch (err){
+      console.log(err)
+  }
+  }
+export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks, getLimitedlArtworks, getOneArtwork, getArtistName};
 
