@@ -105,7 +105,7 @@ background-position-y:center ;
    
 }   
 .text{
-    margin-top: 4%;
+    margin-top: 5%;
     width: 90%;
     height: 100%;
     color:aliceblue;
@@ -127,7 +127,7 @@ background-position-y:center ;
     background-image: url("https://i.pinimg.com/originals/69/49/68/6949682f5594db137aaaa99fc358a065.jpg");
     background-size: 100%;
     background-position-y: center ;
-    margin-top: 4%;
+    margin-top: 1%;
     background-repeat: no-repeat;
   
   }
@@ -139,7 +139,9 @@ background-position-y:center ;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin-right: -50%;
     margin-left: 5%;
-}
+    margin-top: 2%;
+
+  }
 
 .text h1{
     font-size: 60px;
@@ -264,6 +266,7 @@ background-repeat: no-repeat;
         /* text-align: center  ; */
         font-size: 90px;
         margin-left: 15%;
+        margin-top: -3%;
         
       }
 
