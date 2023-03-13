@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Switch } from 'antd';
 import Head from 'next/head'
 import styles from '../../styles/profile.module.css'
-
+import Navbar from '../../components/navBar'
 const ProfilePage = () => {
   const [user, setUser] = useState('');
   const [data,setData] = useState([])
@@ -15,6 +15,7 @@ const ProfilePage = () => {
   const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",image:"",price:"",description:"",})
   const [imageSrc, setImageSrc] = useState( );
   const [uploadData, setUploadData] = useState();
+  const [img,setImg]=useState("")
   const [rerender,setRerender]=useState(false)
   const [auction,setauction]=useState(true)
   const [artWorks,setArtWorks]=useState([])
@@ -27,7 +28,7 @@ function handleOnChange(changeEvent:any) {
   const reader = new FileReader();
 
   reader.onload = function(onLoadEvent) {
-    setImageSrc(onLoadEvent.target.result);
+    setImageSrc(onLoadEvent?.target.result);
     setUploadData(undefined);
   }
   reader.readAsDataURL(changeEvent.target.files[0]);
@@ -79,7 +80,6 @@ async function handleOnSubmit(event:any) {
     console.log(e.target.value);
     setInfo({...info,[e.target.name]:e.target.value})
 }
-console.log(info)
 
 const handleChangeCreate=(e:any)=>{
   console.log(e.target.value);
@@ -93,30 +93,22 @@ const onChange = (checked: boolean) => {
 };
 console.log(create)
 
-const updateInfo = () => {
-  user ? 
+const updateInfo = (id:any,body:any) => {
   axios
-   .put(`http://localhost:3000/api/users/updateUser/${localStorage.getItem('email')}`, 
-      {
-        userName:info.name,
-        phoneNumber:info.phone
-      })
+   .put(`http://localhost:3000/api/users/updateUser/${localStorage.getItem('email')}`, body)
    .then(res => {
+    if (!res.data) throw Error ('access denied')
+    setUp(!up);
      console.log(res.data) 
-     setUp(!up)
-    }) 
-     :
-      axios.put(`http://localhost:3000/api/artists/updateArtist/${localStorage.getItem('email')}`, 
-         {
-          name:info.name,
-          phoneNumber:info.phone,
-          bio :info.bio
-         })
+    })
+    .catch(err => {
+      axios.put(`http://localhost:3000/api/artists/updateArtist/${localStorage.getItem('email')}`, body)
       .then(res=>{
-        console.log(res.data)
-        setUp(!up) 
+        setUp(!up);
       })
+    })
  }
+
 
   useEffect(() => {  
     console.log(localStorage.getItem('id'));
@@ -135,7 +127,6 @@ const updateInfo = () => {
         ;
         }).then(async()=>{
           const res=await axios.get(`http://localhost:3000/api/artists/getArtists/${localStorage.id}`)
-          console.log(res.data  )
           setArtWorks((res.data[0]).artworks)
           
         })
@@ -175,7 +166,7 @@ const updateInfo = () => {
   }
       
   return (
-    <div id = "bodyy">
+    <div>
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
       <div id ="current"className="media align-items-center">
                     <div className="media-body ml-2 d-none d-lg-block">
@@ -350,9 +341,11 @@ const updateInfo = () => {
                     <div>
 <img
   alt="Image placeholder"
-  id="round"
-  src= {data.picture   ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
+  src= {data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
   className="rounded-circle"
+  onClick={() => {
+    document?.getElementById("image")?.click();
+  }}
 />
 
                     </div>
@@ -395,19 +388,15 @@ const updateInfo = () => {
 </div>
 
                   <h3>
-                 <b>{user ? data.userName : data.name}</b>  <span className="font-weight-light"></span>
+                  {user ? data.userName : data.name} <span className="font-weight-light"></span>
                   </h3>
                   <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2"></i>
-                    age : <b>{user ? data.birthDate : data.birthDate} years old</b>
+                    <i className="ni location_pin mr-2"></i>{user ? data.birthDate : data.birthDate}
                   </div>
-                  <div className="h5 font-weight-300">
-                  <i className="ni location_pin mr-2"></i>
-                    phone : <b>{user ? data.phoneNumber : data.phoneNumber } </b> 
+                  <div className="h5 mt-4">
+                    <i className="ni business_briefcase-24 mr-2"></i>Email : {user ? data.email : data.email}
                   </div>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2"></i>Email : <b>{user ? data.email : data.email}</b>
-                  </div>
+                  
                   <hr className="my-4"/>
                   <p>{data?.bio}</p>
                 </div>
@@ -417,7 +406,7 @@ const updateInfo = () => {
           <div className="col-xl-8 order-xl-1">
             <div className="card bg-secondary shadow">
               <div className="card-header bg-white border-0">
-                <div className="row align-items-center" >
+                <div className="row align-items-center">
                   <div className="col-8">
                     <h3 className="mb-0">My account</h3>
                   </div>
@@ -427,20 +416,34 @@ const updateInfo = () => {
                 </div>
               </div>
               <div className="card-body">
-                <form onSubmit={updateInfo}>
+                <form>
                   <h6 className="heading-small text-muted mb-4">User information</h6>
                   <div className="pl-lg-4">
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="form-group focused">
                           <label className="form-control-label" >Username</label>
-                          <input name = "name" type="text" id="Enter your name .." className="form-control form-control-alternative" placeholder="Enter your name .." onChange={handleChange}/>
+                          <input type="text" id="input-username" className="form-control form-control-alternative" placeholder="Username" onChange={handleChange}/>
                         </div>
                       </div>
+                      {/* <div className="col-lg-6">
+                        <div className="form-group">
+                          <label className="form-control-label" >Email address</label>
+                          <input type="email" id="input-email" className="form-control form-control-alternative" placeholder="Email address" onChange={handleChange}/>
+                        </div>
+                      </div> */}
+                    </div>
+                    <div className="row">
+                      {/* <div className="col-lg-6">
+                        <div className="form-group focused">
+                          <label className="form-control-label" >Password</label>
+                          <input type="text" id="input-first-name" className="form-control form-control-alternative" placeholder="First name" onChange={handleChange}/>
+                        </div>
+                      </div> */}
                       <div className="col-lg-6">
                         <div className="form-group focused">
                           <label className="form-control-label" >PhoneNumber</label>
-                          <input name = "phone" type="text" id="Enter your phone .." className="form-control form-control-alternative" placeholder="Enter your phoneNumber .. " onChange={handleChange}/>
+                          <input type="text" id="input-last-name" className="form-control form-control-alternative" placeholder="Last name" onChange={handleChange}/>
                         </div>
                       </div>
                     </div>
@@ -450,12 +453,10 @@ const updateInfo = () => {
                   <div className="pl-lg-4">
                     <div className="form-group focused">
                       <label>About Me</label>
-                      <textarea  name = "bio" className="form-control form-control-alternative" placeholder="A few words about you ..." onChange={handleChange}></textarea>
+                      <textarea  className="form-control form-control-alternative" placeholder="A few words about you ..." onChange={handleChange}></textarea>
                     </div>
-                    <button className="bg-blue-900 hover:bg-blue-600 text-white font-bold py-1 px-1 rounded-full transition duration-200">
-  update your information 
-</button>
-    </div>
+                    <button className="btn btn-sm btn-primary " onClick ={updateInfo}>Update ✔</button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -464,7 +465,7 @@ const updateInfo = () => {
       </div> }
       </div>
 
-{/* <img id ="footer1" alt="Image placeholder" src="https://www.kindpng.com/picc/m/748-7485176_art-gallery-logo-png-transparent-png.png"/> */}
+<img id ="footer1" alt="Image placeholder" src="https://www.kindpng.com/picc/m/748-7485176_art-gallery-logo-png-transparent-png.png"/>
 
    
     
