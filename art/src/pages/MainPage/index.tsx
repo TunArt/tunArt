@@ -31,6 +31,7 @@ const MainPage =()=>{
         console.log(res)
         if(!res.data) {throw Error('failed')}
         setUser(res.data)
+        setCurrentUserId(localStorage.id)
         console.log(res);
         console.log("iduser:",localStorage.id);
         
@@ -44,7 +45,7 @@ const MainPage =()=>{
         })
     }
     catch{
-        return <h1>Please Log In </h1>
+        
     }
     },[])
     
