@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Input, Alert, Space, Form } from "antd";
-
 import {
   UserOutlined,
   MailOutlined,
@@ -30,10 +29,8 @@ interface SignUpState {
       [key: string]: string;
     }
   }
-  
 const SignUp: React.FC = (props) => {
   const router = useRouter()
-
   const [form] = Form.useForm();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -50,12 +47,10 @@ let know=false
   const validateForm = () => {
     let errors: { [key: string]: string } = {};
     let isValid = true;
-
     if (!username) {
       errors.username = "Username is required";
       isValid = false;
     }
-
     if (!email) {
       errors.email = "Email is required";
       isValid = false;
@@ -63,7 +58,6 @@ let know=false
       errors.email = "Email is invalid";
       isValid = false;
     }
-
     if (!phone) {
       errors.phone = "Phone number is required";
       isValid = false;
@@ -71,17 +65,14 @@ let know=false
       errors.phone = "Phone number must be 8 digits";
       isValid = false;
     }
-
     if (!password) {
       errors.password = "Password is required";
       isValid = false;
     }
-
     if (!confirmPassword) {
       errors.confirmPassword = "Confirm password is required";
       isValid = false;
     }
-
     if (password !== confirmPassword) {
       errors.confirmPassword = "Passwords do not match";
       isValid = false;
@@ -90,18 +81,12 @@ let know=false
       errors.age = "age must be over 18 ";
       isValid=false;
     }
-
     setErrors(errors);
-
     return isValid;
   };
-
-
   const handleSubmit = async(event:any,know:boolean) => {
-
     event.preventDefault();
     const isValid = validateForm();
-
     if (isValid) {
       try {
         const {user}= await createUserWithEmailAndPassword(
@@ -124,7 +109,6 @@ let know=false
             router.push({
               pathname:'/MainPage',
               query:{"id":res.data.id,"type":know}
-
             })
         })
         })
@@ -154,7 +138,6 @@ let know=false
        catch (error) {
         console.log(error)
       }
-      
       // Add your form submission logic here
     ;
   }
@@ -174,7 +157,6 @@ let know=false
         />
         {errors.username && <Alert className={styles.alert} message={errors.username} type="error" />}
         <Input className={styles.input}
-
           type="email"
           placeholder="Email"
           prefix={<MailOutlined />}
@@ -183,7 +165,6 @@ let know=false
         />
         {errors.email && <Alert className={styles.alert} message={errors.email} type="error" />}
         <Input className={styles.input}
-
           type="text"
           placeholder="Phone Number"
           prefix={<PhoneOutlined />}
@@ -192,7 +173,6 @@ let know=false
         />
         {errors.phone && <Alert className={styles.alert} message={errors.phone} type="error" />}
         <Input className={styles.input}
-
           type="password"
           placeholder="Password"
           prefix={<LockOutlined />}
@@ -201,7 +181,6 @@ let know=false
         />
         {errors.password && <Alert  className={styles.alert} message={errors.password} type="error" />}
         <Input className={styles.input}
-
           type="password"
           placeholder="Confirm Password"
           value={confirmPassword}
@@ -211,8 +190,7 @@ let know=false
           <Alert className={styles.alert} message={errors.confirmPassword} type="error" />
         )}
         <Space>
-        <Input 
-
+        <Input
           type="text"
           placeholder="Age"
           value={age}
@@ -230,10 +208,9 @@ let know=false
           <Button className={styles.btn} type="primary" htmlType="submit" onClick={(event)=>{handleSubmit(event,know )}}>
           Sign up
           </Button>
-          
           </Space>
           </Form>
           </div>
           );
-       }    
+       }
    export default SignUp;

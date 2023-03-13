@@ -6,5 +6,5 @@ module.exports = (sequelize, DataTypes) => {
     artWorkId: {type:DataTypes.INTEGER},
       }  ,{timestamps:true});
       return bid;
-    };
+  };
     
