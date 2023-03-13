@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input, Alert } from 'antd';
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from "../comp/config"
 import axios from 'axios';
-
+import styles from '../styles/login.css';
 const Login= (props) => {
   console.log(props)
   const [form] = Form.useForm();

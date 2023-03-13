@@ -5,7 +5,7 @@ dotenv.config()
 
 const app: Application = express();
 
-const port = process.env.PORT || 3004;
+const port = process.env.PORT || 3000;
 app.use(express.static(__dirname + "/art"));
 app.use(express.json());
 app.use(cors());
