@@ -353,7 +353,7 @@ setRerender(!rerender)
           <span className="text-gray-700 font-medium">Select a file</span>
         </label>
         {imageSrc && !uploadData && (
-          <button className="ml-4 py-2 px-4 bg-purple-900 text-white font-medium rounded-md hover:bg-blue-700" id="cloud">Upload Files</button>
+          <button className="ml-4 py-2 px-4 bg-purple-900 text-white font-medium rounded-md hover:bg-blue-700" id="cloud">Upload</button>
         )}
       
 
