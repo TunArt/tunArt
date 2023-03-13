@@ -5,7 +5,7 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 import styles from "../../../styles/principale.module.css";
 import TopRated from "./topRated";
 import axios from "axios";
-import sss from "../../../styles/sliderCss.css";
+// import sss from "../../../styles/sliderCss.css";
 
 
 let productsp = [
