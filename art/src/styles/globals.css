@@ -2040,6 +2040,9 @@ margin-top: -540px;
 
 #up{
   margin-top: 120px;
+  margin-left: 40px;
+  width: 230px;
+  height:40px ;
 }
 
 #homee{
@@ -2226,4 +2229,9 @@ font-size: 60px;}
 #hello1{
   font-family:cursive;
   font-size: 20px;
+}
+
+#avaaa{
+  width: 150px;
+  height: 35px;
 }

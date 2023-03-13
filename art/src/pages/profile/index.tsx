@@ -7,7 +7,6 @@ import styles from '../../styles/profile.module.css'
 const ProfilePage = () => {
   const [user, setUser] = useState('');
   const [data,setData] = useState([])
-  const [up,setUp] = useState(false)
   const [inp,setInp]=useState(false)
   const[edit,setEdit] = useState(false)
   const [add,setAdd] = useState(false)
@@ -103,8 +102,8 @@ const updateInfo = () => {
       })
    .then(res => {
      console.log(res.data) 
-     setUp(!up)
-    }) 
+setRerender(!rerender)   
+ }) 
      :
       axios.put(`http://localhost:3000/api/artists/updateArtist/${localStorage.getItem('email')}`, 
          {
@@ -114,7 +113,7 @@ const updateInfo = () => {
          })
       .then(res=>{
         console.log(res.data)
-        setUp(!up) 
+        setRerender(!rerender)
       })
  }
 
@@ -142,6 +141,7 @@ const updateInfo = () => {
   });
   }, [rerender]);
   console.log(artWorks)
+
   const submitForm=()=>{
     try {
       console.log("image in the submit form", create.image)
@@ -185,7 +185,7 @@ const updateInfo = () => {
         <div id="homee" className="col-lg-7 col-md-10">
           <div id ="avatar2">
           <span className="avatar avatar-sm rounded-circle">
-                  <img src={data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"} alt="Avatar"/>
+                  <img id="avaaa" src={data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"} alt="Avatar"/>
                 </span>          
                   <span id ="userN" className="mb-0 text-sm  font-weight-bold">{user ? data.userName : data.name}</span>
             </div>   
@@ -324,15 +324,11 @@ const updateInfo = () => {
                   data-te-ripple-init
                   data-te-ripple-color="light">
             <b>Add a new artwork</b>
-            </button>
-                        
-                    
+            </button>         
                     </div>
-                  </div>
-                  
+                  </div>          
                 </form>}
-     </div> 
-     
+     </div>  
      <div>
       {edit && <div  className="container-fluid mt--7">
         <div id = "contain" className="row"> 
@@ -401,7 +397,7 @@ const updateInfo = () => {
         </div>
       </div>
       <div className="card-body">
-        <form onSubmit={updateInfo}>
+        <form  onSubmit={updateInfo}>
           <h6 className="heading-small text-muted mb-4">User information</h6>
           <div className="pl-lg-4">
             <div className="row">
@@ -432,17 +428,13 @@ const updateInfo = () => {
                     <div className="form-group focused">
                       <label>About Me</label>
                       <textarea  name = "bio" className="form-control form-control-alternative" placeholder="A few words about you ..." onChange={handleChange}></textarea>
-                    </div>
-                 
-    </div>
+                    </div>             
+                 </div>
                 </form>
               </div>
-              <button id ="but1" className="bg-blue-400 hover:bg-purple-300 text-white font-bold py- 2 px-4 shadow-md">
+              <button onClick = {updateInfo} id ="but1" className="bg-blue-400 hover:bg-purple-300 text-white font-bold py- 2 px-4 shadow-md">
 update your account 
 </button>
-
-
-
             </div>
             </div>
            
