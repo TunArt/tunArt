@@ -6,6 +6,7 @@ import Image from "next/image";
 import Backet from "../../components/backet/backet";
 import { useRouter } from "next/router";
 import axios from "axios";
+import navbar from "../../components/navbar/navbar"
 
 type Product = {
   id: number;
