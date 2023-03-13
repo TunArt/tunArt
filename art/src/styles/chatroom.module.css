@@ -1,18 +1,17 @@
 .app {
     /* margin-left: 50%; */
     margin-top: 1%;
-    margin-left: 50%;
-    width:50%;
+    margin-left: 1%;
+    width:30%;
     height: 900px;
-    background-color: #1d1d1d;
+    background-color: #1f1f1f;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    background-image: url("https://th.wallhaven.cc/small/j3/j3qpzq.jpg");
-background-color: #222121;
+    /* background-image: url("https://th.wallhaven.cc/small/j3/j3qpzq.jpg"); */
 background-repeat: no-repeat;
     background-size: cover;
   }
@@ -32,7 +31,7 @@ background-size: 100%;
 /* height: 110%; */
 margin-top: 4%;
 background-position-y: center;
-    width: 75%;
+    width: 100%;
     padding-top: 3%;
     padding-right: 10%;
     padding-left: 10%;
@@ -77,13 +76,13 @@ background-position-y: center;
   .message {
     height: 2.5rem  ;
     padding: 3%;
-    width: 35rem;
+    width: 25rem;
     flex: 1;
-    margin-left:   -23%;
+    margin-left: -8%;
     margin-right: 2%;
     /* size: 1000px; */
-    color :white;
-    background-color: #a36932;
+    color :rgb(0, 0, 0);
+    background-color: #ffffff;
   }
 .littleContainer{
     display:block;
@@ -102,8 +101,8 @@ background-position-y: center;
     font-size: 14px;
   }
   .button {
-    background-color: #a35710;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(7, 7, 7);
     border: none;
     padding: 5px 10px;
     text-align: center;
@@ -117,20 +116,18 @@ background-position-y: center;
     border-radius: 100%;
   }
   .button:hover{
-    background-color: #a00000;  
-    color: #ffffff;
+    background-color: #fc2323;  
+    color: #000000;
   }
-  
-  /*   
-    .join {
-      margin-left: 20px;
-      border-radius: 100%;
-      background-color: #a35710;
-      color: #ffffff;
-      height: 50px;
-      
-      width: 50px;
-    } */
+
+  .join {
+    margin-left: 20px;
+    border-radius: 100%;
+    color: #ffffff;
+    height: 50px;
+    
+    width: 50px;
+  }
 
   
   .send {

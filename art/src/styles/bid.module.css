@@ -12,17 +12,19 @@ width: 50%;
 }
 
 
-.detail{
+/* .detail{
 
 margin-left: 0%;
 position: absolute;
 margin-top: -35%;
 
-}
+} */
 
 .img1{
     margin-top: -50%;
     border-radius: 5%;
+    width: 90%;
+    margin-bottom: 40%;
     
 }
 
@@ -37,3 +39,26 @@ margin-top: -35%;
     width: 500px;
     height: 500px;
 }
+
+
+.div1{
+display: flex;
+}
+.div2 img{
+width: 90%;
+margin-left: 5%;
+}
+.div3{
+    margin-top: 6%;
+    margin-left: 1%;
+    width: 45%;
+    color: aliceblue;
+    /* background-color: brown; */
+}
+.div2{
+    margin-top: 15%;
+    margin-left: 1%;
+    display: block;
+/* background-color: brown; */
+
+    }
