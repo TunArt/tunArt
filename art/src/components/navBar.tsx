@@ -40,7 +40,7 @@ export default function Example(props: any) {
     { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
     { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
     { name: 'Auctions', href: `/bid?${props.id}`, current: false },
-    { name: "Events", href: `/event/event?id=${props.id}`, current: false },
+    { name: "Events", href: `/event`, current: false },
     { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
     { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
     { name: 'Reports', href: '/MainPage/reports/', current: false }

@@ -39,6 +39,7 @@ const addArtist = async (req: Request, res: Response) => {
       if (!req.body) {
         throw new Error("Request body is missing required properties.");
       }
+      console.log(req.body)
 
       const artist = await Artist.create({
         name: req.body.name,
