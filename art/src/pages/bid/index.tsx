@@ -118,7 +118,7 @@ const Bids: React.FC = () => {
   useEffect(() => {
     const h1 = document.querySelector("h1");
     if (h1) {
-      h1.classList.add("animate-pulse", "text-4xl", "font-bold", "text-blue-600");
+      h1.classList.add("animate-pulse", "text-4xl", "font-bold", "text-yellow-600");
     }
   }, []);
 
@@ -128,7 +128,7 @@ const Bids: React.FC = () => {
     <div className="bg-black">
       <NavBar />
       <h1 className=" text-center py-10">Welcome to the bid room</h1>
-      <div className=" mx-auto max-w-7xl grid grid-cols-1 gap-y-16 gap-x-8 border-t border-gray-200 py-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+      <div className=" mx-auto max-w-7xl grid grid-cols-1 gap-y-7 gap-x-10 py-10 sm:mt-0 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
         {posts.map((post, index) => (
           <Room key={post.id} post={post} index={index} />
         ))}
