@@ -36,19 +36,17 @@ const ArtPurchase=()=>{
                 <img src={items.image} style={{height:"300px", width:"300px", margin:"30px"}}/>
                 <div className="w3-container w3-center">
                     <ul style={{textAlign:"left",marginLeft:"20px" ,padding:"5px", backgroundColor:"darkorange" ,borderRadius:"10px",marginBottom:"5px"}}>Name:{" "+items.name}</ul>
-                    <ul style={{textAlign:"left",marginLeft:"20px",padding:"5px", backgroundColor:"darkorange" ,borderRadius:"10px", marginBottom:"5px"}}>Artist:{" "+items.artist}</ul>
-                    <ul style={{textAlign:"left",marginLeft:"20px",padding:"5px", backgroundColor:"darkorange" ,borderRadius:"10px",marginBottom:"5px"}}>Price:{" "+items.price}</ul>
+                    <ul style={{textAlign:"left",marginLeft:"20px",padding:"5px", backgroundColor:"darkorange" ,borderRadius:"10px", marginBottom:"5px"}}>Artist:{" "+items.artist.name }</ul>
+                    <ul style={{textAlign:"left",marginLeft:"20px",padding:"5px", backgroundColor:"darkorange" ,borderRadius:"10px",marginBottom:"5px"}}>Price:{" "+items.price+" $"}</ul>
                     <ul style={{textAlign:"left",marginLeft:"20px",padding:"5px", backgroundColor:"darkorange" ,borderRadius:"10px",marginBottom:"5px"}}>Creation Date:{" "+items.creationDate}</ul>
                     <ul style={{textAlign:"left",marginLeft:"20px",padding:"5px", backgroundColor:"darkorange" ,borderRadius:"10px",marginBottom:"5px"}}>Art Type:{" "+items.description}</ul>
                 </div>
                 
                 <button type="submit" className={styles.submitButton2} onClick={payment} style={{marginBottom:"20px", marginLeft:"235px"}}>Pass To Payment</button>
-            </div>
-            
+            </div>    
         </div>
         <Footer/>
-        </div>
-        
+        </div>  
         </>
     )
 }

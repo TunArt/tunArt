@@ -17,7 +17,7 @@ type NavigationItem = {
 export default function Example(props: any) {
   const [data, setdata] = useState([])
   const [User, setUser] = useState("")
-  console.log("from nav bar", props);
+  //console.log("from nav bar", props);
   useEffect(() => {  
     console.log(localStorage.getItem('id'));
     axios.get(`http://localhost:3000/api/users/getUser/${localStorage.email}`)     
@@ -40,9 +40,10 @@ export default function Example(props: any) {
     { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
     { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
     { name: 'Auctions', href: `/bid?${props.id}`, current: false },
-    { name: 'Contact Us', href: '#', current: false },
-    { name: 'Reports', href: '#', current: false },
-    { name: "Events", href: `/event/event?id=${props.id}`, current: false }
+    { name: "Events", href: `/event/event?id=${props.id}`, current: false },
+    { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
+    { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
+    { name: 'Reports', href: '/MainPage/reports/', current: false }
   ]
   const userNavigation = [
     { name: 'Your Profile', href: '/profile/' },
@@ -60,7 +61,7 @@ export default function Example(props: any) {
 const route=useRouter()
   return (
 
-    <nav className="fixed top-0 w-full bg-inherit	 ">
+    <nav className="min-h-full">
       {/*
         This example requires updating your template:
 
