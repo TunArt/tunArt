@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Switch } from 'antd';
 import Head from 'next/head'
 import styles from '../../styles/profile.module.css'
+import Navbar from  '../../components/navBar'
 
 const ProfilePage = () => {
   const [user, setUser] = useState('');
@@ -176,6 +177,7 @@ setRerender(!rerender)
       
   return (
     <div id = "bodyy">
+      <Navbar/>
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
       <div className="main-contentt">
       <div id ="bg" className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" >
@@ -183,16 +185,10 @@ setRerender(!rerender)
       <div className="container-fluid d-flex align-items-center">
       <div id = "row1" className="row">
         <div id="homee" className="col-lg-7 col-md-10">
-          <div id ="avatar2">
-          <span className="avatar avatar-sm rounded-circle">
-                  <img id="avaaa" src={data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"} alt="Avatar"/>
-                </span>          
-                  <span id ="userN" className="mb-0 text-sm  font-weight-bold">{user ? data.userName : data.name}</span>
-            </div>   
             <h1 id = "hello" className="display-2 text-white">Hello {user ? data.userName : data.name} </h1>
             <p id="hello1" className="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects . Thank you ! </p>
             <div id ="buttons" className="flex items-center justify-center">
-  <div
+  <div id="butt"
     className="inline-flex shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
     role="group">
     <button
