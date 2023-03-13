@@ -13,13 +13,13 @@ const Payment=()=>{
     }
 
     const redirect=()=>{
-        route.push("/MainPage/art/artPurchase")
+        route.push("/MainPage/art/art")
     }
     return(
         
         <div className={styles.all}>
             <NavBar/>
-            <button className={styles.submitButton2} style={{marginLeft:"100px"}} onClick={redirect}>Go Back</button>
+            <button className={styles.submitButton2} style={{marginLeft:"100px"}} onClick={redirect}>Back to Gallery</button>
         <div className={styles.wrapper}>
             <h1 className={styles.titles}>PAYMENT DETAILS:</h1>
             <form className="w3-card-4" style={{width:"600px", height:"auto", marginTop:"50px", fontFamily:"monospace", backgroundColor:"gray"}}>

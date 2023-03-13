@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import NavBar from "../../components/navBar";
+import Footer from "../MainPage/footer/footer";
 
 function ResponsiveCardList() {
     
@@ -76,6 +77,7 @@ function ResponsiveCardList() {
         </div>
     </div>
 </div>
+<Footer/>
 </>
 );
 }
