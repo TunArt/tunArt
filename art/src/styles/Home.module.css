@@ -20,19 +20,20 @@
     visibility: inherit;
     z-index: 20;
 }
+
 #body{
   margin: 0px;
-  background-color: #1E242A;
-
+  background-color: #000000;
   height: 100%;
-
 }
+
 #main{
   width: 100%;
   height: 100%;
   position:absolute;
   overflow: hidden;
 }
+
 #box1{
   width: 630px;
   height: 625px;
@@ -42,9 +43,9 @@
   position: absolute;
   bottom: -100%;
   left: 30%;
-  
   animation: anim 2s forwards, anim2 3s forwards 3s;
 }
+
 #box1:after{
   content: '';
   position: absolute;
@@ -53,17 +54,18 @@
   background-image: url('../../public/i1.png');
   background-repeat: no-repeat;
   left: 0px;
-  
-  z-index: -1;
+  z-index:-1;
 }
+
 @keyframes anim{
   from{
       bottom: -100%;
   }
   to{
-      bottom: 0%;
+      bottom: 5%;
   }
 }
+
 @keyframes anim2{
   from{
      left:30%;
@@ -74,6 +76,7 @@
       left: 50%;
   }
 }
+
 #box2{
   width: auto;
   height: auto;
@@ -136,7 +139,7 @@
       top: -100%;
   }
   to{
-      top:0%;
+      top:2%;
   }
 
 }
@@ -144,9 +147,9 @@
   position: absolute;
   bottom: 10px;
   width: 100%;
-  margin-bottom:-165% ;
+  margin-bottom:-146% ;
 
-  /* margin-top: 20%; */
+
 }
 /* Styles for menu buttons */
 #menu li {
@@ -179,7 +182,7 @@
 }
 
 #menu .btn:hover {
-  background-color: #0056b3;
+  background-color: #b30000;
 }
 
 /* Styles for menu container */
@@ -201,4 +204,10 @@
   #menu li {
     margin-bottom: 10px;
   }
+}
+.logo{
+    width: 50px;
+    height:50px;
+    margin-top: 10px;
+    margin-right: 100px;
 }

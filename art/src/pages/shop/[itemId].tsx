@@ -6,7 +6,7 @@ import Image from "next/image";
 import Backet from "../../components/backet/backet";
 import { useRouter } from "next/router";
 import axios from "axios";
-import navbar from "../../components/navbar/navbar"
+import { Alert, Space } from "antd";
 
 type Product = {
   id: number;
@@ -22,15 +22,7 @@ type Product = {
 const product: Product = {
   rating: 3.9,
   reviewCount: 117,
-  href: "#",
-  imageSrc:
-    "https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg",
-  imageAlt: "Two each of gray, white, and black shirts arranged on table.",
-  colors: [
-    { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-    { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-    { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-  ],
+
 };
 
 function classNames(...classes: (string | undefined)[]): string {
@@ -43,20 +35,21 @@ export default function Item() {
   const { query } = route || {};
   const items = String(query?.items);
   const item = JSON.parse(items);
-  console.log("item from [items]",item)
-  let quantityBought=""
+  console.log("item from [items]", item)
+  let quantityBought = ""
   const [open, setOpen] = useState(true);
-  const images=JSON.parse(item.picture)
+  const images = JSON.parse(item.picture)
+  const [err,setErr]=useState(false)
   // const [images,setImages]=useState()
-  const handleImageClick = (imageUrl:string) => {
+  const handleImageClick = (imageUrl: string) => {
     setCurrentImage(imageUrl);
   };
-  console.log("images for [item]",images)
+  console.log("images for [item]", images)
   const [currentImage, setCurrentImage] = useState(images[0]);
   const handleADD = (x: string, y: string) => {
-    console.log("this should be the user id ",x)
-    axios.post(`http://localhost:3000/api/route/bought/${x}/${y}`,{
-      quantityBought:quantityBought,
+    console.log("this should be the user id ", x)
+    axios.post(`http://localhost:3000/api/route/bought/${x}/${y}`, {
+      quantityBought: quantityBought,
     }).then((res) => {
       console.log(res)
       route.push("/shop");
@@ -106,27 +99,27 @@ export default function Item() {
 
                     <div className="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:gap-x-8">
                       <div className="aspect-w-2 aspect-h-3 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                      <div>
-      <img src={currentImage} alt="Main image" />
-      <div className="flex flex-wrap">
-  {images.map((imageUrl) => (
-    <div
-      key={imageUrl}
-      className="w-1/3 px-2 py-2"
-      onClick={() => handleImageClick(imageUrl)}
-    >
-      <img
-        src={imageUrl}
-        alt="Thumbnail"
-        className="max-w-full max-h-full object-contain mx-auto"
-      />
-    </div>
-  ))}
-</div>
+                        <div>
+                          <img src={currentImage} alt="Main image" />
+                          <div className="flex flex-wrap">
+                            {images.map((imageUrl) => (
+                              <div
+                                key={imageUrl}
+                                className="w-1/3 px-2 py-2"
+                                onClick={() => handleImageClick(imageUrl)}
+                              >
+                                <img
+                                  src={imageUrl}
+                                  alt="Thumbnail"
+                                  className="max-w-full max-h-full object-contain mx-auto"
+                                />
+                              </div>
+                            ))}
+                          </div>
 
 
 
-    </div>
+                        </div>
                       </div>
                       <div className="sm:col-span-8 lg:col-span-7">
                         <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">
@@ -202,7 +195,7 @@ export default function Item() {
                                     id=""
                                     placeholder="1"
                                     onChange={(e) => {
-                                      quantityBought=e.target.value
+                                      quantityBought = e.target.value
 
                                     }}
                                   />
@@ -227,16 +220,30 @@ export default function Item() {
                               </RadioGroup>
                             </div>
 
+                            {console.log("item.quality",typeof(parseInt(quantityBought) ))}
                             <button
                               onClick={(e) => {
                                 e.preventDefault()
                                 
-                                handleADD(window?.localStorage.id,item.id) 
+                                console.log("quantityBought",quantityBought)
+                                let Qn= parseInt(quantityBought)
+                                console.log("mmmmmmmmmmmmmmm",Qn-item.quantity)
+                                if (-Qn + (item.quantity) < 0) {
+                                  alert('test')
+                                  setErr(true)
+                                  return false
+                                }
+                                else{handleADD(window?.localStorage.id, item.id)}
+                                
                               }}
                               className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
                               Add to bag
                             </button>
+                            {err && <div>
+                              <Space direction="vertical" style={{ width: '100%' }}>
+                                    <Alert message="Sorry, we don't have enough quantity in stock" type="error" />
+                                  </Space></div>}
                           </form>
                         </section>
                       </div>

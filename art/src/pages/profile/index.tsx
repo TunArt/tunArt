@@ -167,7 +167,7 @@ setRerender(!rerender)
             auction:auction ? 1:0,
             image:imgurl
           })
-          .then(response=> {console.log(response)})
+          .then(response=> {console.log(response) , setRerender(!rerender)})
         }).catch(err => console.log(err))
     } catch {
       alert("Sorry, the request failed. Please try again.")
