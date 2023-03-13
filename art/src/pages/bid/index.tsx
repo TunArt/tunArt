@@ -133,6 +133,7 @@ const Bids: React.FC = () => {
           <Room key={post.id} post={post} index={index} />
         ))}
       </div>
+      <Footer/>
     </div>
   );
 };
