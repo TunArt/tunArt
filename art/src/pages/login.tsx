@@ -5,13 +5,16 @@ import { auth } from "../../server/firebase/config"
 import Styles from "../styles/Login.module.css"
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import {CloseOutlined } from "@ant-design/icons"
+import style from "../styles/SingUp.module.css"
 interface FormValues {
   email: string;
   password: string;
   remember: boolean;
 }
 
-const Login: React.FC = () => {
+const Login: React.FC = (props) => {
+  console.log(props)
   const router = useRouter()
   const [form] = Form.useForm();
   const [emailTest, setEmailTest] = useState(false);
@@ -44,7 +47,7 @@ const Login: React.FC = () => {
         console.log("res:",res)
         try {
           const res = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
-          console.log(res);
+          console.log(res.data);
           if (!res.data) {
             throw Error('failed')
           }
@@ -96,6 +99,9 @@ const Login: React.FC = () => {
 
   return (
     <div className={Styles.overlay}>
+      <CloseOutlined className={Styles.close} onClick={()=>{
+      props.togglePopupLogin()
+      }}/>
       <Form className={Styles.login}
         form={form}
         name="login"

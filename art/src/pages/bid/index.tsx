@@ -4,6 +4,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import NavBar from '../../components/navBar'
 import Link from 'next/link'
 import Room from './room'
+import Footer from '../MainPage/footer/footer'
+import styles from "../../styles/principale.module.css"
 
 const posts = [
   {
@@ -24,7 +26,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 2,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -41,7 +43,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 3,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -58,7 +60,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 4,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -75,7 +77,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 5,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -92,7 +94,7 @@ const posts = [
     },
   },
   {
-    id: 1,
+    id: 6,
     title: 'Boost your conversion rate',
     href: '#',
     img:
@@ -110,6 +112,7 @@ const posts = [
   },
   // More posts...
 ]
+
 
 const Bids: React.FC = () => {
   useEffect(() => {

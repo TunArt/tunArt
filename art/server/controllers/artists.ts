@@ -7,8 +7,10 @@ import cloudinary from '../claoudinary/claoudinary' ;
 //methods to get all the artists
 const getAllArtists =async (req:Request ,res:Response) =>{
     try {
+      const {ArtistId}=req.params
         let artists= await Artist.findAll({
-          include : ['artworks']
+          include : ['artworks'],
+          where :{id:ArtistId}
         })
       console.log(artists)
         res.status(200).send(artists)
@@ -52,14 +54,10 @@ const addArtist = async (req: Request, res: Response) => {
     const artist =  await Artist.update({
         name: req.body.name,
         bio: req.body.bio,
-        email: req.body.email,
-        password: req.body.password,
-        picture: req.body.picture,
         phoneNumber: req.body.phoneNumber,
-        birthDate: req.body.birthDate
     }, {
         where: {
-            id: req.params.id
+            email: req.params.email
         }
     })
     res.status(200).send("artist updated successfully")

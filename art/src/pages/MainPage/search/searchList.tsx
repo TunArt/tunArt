@@ -1,47 +1,31 @@
-import React, {useState} from "react";
+import React ,{useState}from "react";
 import styles from "../../../styles/principale.module.css";
-import Link from "next/link";
-import {useRouter} from "next/router";
-//import { query } from "express";
+import Router,{useRouter} from "next/router";
 
-const ArtList=(props)=>{
 
-    const[toggle, setToggle]= useState(false)
-    const [popUp, setPopUp] = useState(false)
-    const[children, setChildren]=useState("")
-    const[page,setPage]=useState(1);
+const SearchList=(props)=>{
+    
     const route=useRouter()
-
     const isAuction= props.element.auction ? "Auction" :"Sell"
     const isForSaleOrBid = props.element.auction ? "Bid" :"Buy"
 
-    const showHide=()=>{
-        setToggle(!toggle);
-    }
     const BuyRedirect=()=>{
-        var pathAuction ="/MainPage/auctions/auctions"
-        var pathBuy="/MainPage/art/artPurchase"
         if(props.element.auction){
             {
-                route.push(pathAuction)
+                route.push("/MainPage/auctions/auctions")
             }
         }  
         else{
-            route.push({pathname: pathBuy,
-                query:{item:JSON.stringify(props.element)}
-        }) }  
+            alert("Shop cart is not ready yet!! harry up Aziz!")
+        }   
     }
 
+    function BoldText({children}) {
+        return <span style={{fontWeight: 'bold'}}>{children}</span>;
+      }
 
-function BoldText({children}) {
-    return <span style={{fontWeight: 'bold'}}>{children}</span>;
-  }
-
-    return(  
-        
-        
-                  
-                      <div className={styles.container}>
+    return(
+        <div className={styles.container}>
                          <div className={styles.front} style={{ backgroundImage:`url(${props.element.image})` }}>
                           <div className={styles.inner}>
 							<p style={{fontFamily:"Montserrat"}}>{props.element.name}</p>
@@ -55,12 +39,11 @@ function BoldText({children}) {
                     <BoldText>Creation Date:</BoldText>{" "+props.element.creationDate+" "}<br/>
                     <BoldText>Rating:</BoldText>{" "+props.element.rating+"/10 "}<br/>
                     <BoldText>Description:</BoldText>{" "+props.element.description}<br/>
+                    
                     <button type="submit" onClick={BuyRedirect} className={styles.submitButton2}>{isForSaleOrBid}</button>
              </div>
             </div>
             </div>
-                
-                 
     )
 }
-export default ArtList;
+export default SearchList;

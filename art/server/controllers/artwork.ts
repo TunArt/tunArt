@@ -19,15 +19,9 @@ catch (err){
 const addArtwork = async (req: Request, res: Response) => {
   const {name, startDate,endDate, creationDate,price,rating,description,auction,image}=req.body;
   const {artistId,userId}=req.params
-      if (!req.body) {
-        throw new Error("Request body is missing required properties.");
-      }
 
   try{
-    const result = await cloudinary.uploader.upload(image,{
-      folder:'artworks'
-  })
-  console.log(req.body)
+      console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",req.body)
     const artwork = await Artwork.create({
       name:req.body.name,
       startDate:req.body.startDate,
@@ -37,7 +31,7 @@ const addArtwork = async (req: Request, res: Response) => {
       rating:req.body.rating,
       description:req.body.description,
       auction:req.body.auction,
-      image :result.secure_url,
+      image :req.body.image,
       verified:req.body.verified,
       artistId: req.params.artistId,
       categoryId: req.body.categoryId, 
@@ -99,6 +93,7 @@ const addArtwork = async (req: Request, res: Response) => {
     }
   }
 
+
     // update User information in database
    const updateArtWork= (req:Request, res:Response)=> {
     try {
@@ -144,5 +139,4 @@ const deleteArtWork= (req:Request, res:Response)=> {
       }
     }
 export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork};
-
 

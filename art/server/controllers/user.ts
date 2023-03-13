@@ -43,17 +43,14 @@ const addUser = async(req: Request, res: Response) => {
         if (!req.body) {
           throw new Error("Request body is missing required properties.");
         }
+console.log(req.body);
 
     const user = await User.update({
         userName: req.body.userName,
-        email: req.body.email,
-        password: req.body.password,
-        birthDate: req.body.birthDate,
         phoneNumber: req.body.phoneNumber,
-        picture: req.body.picture
     }, {
         where: {
-            id: req.params.id
+            email: req.params.email
         }
     })
     res.status(200).send("user updated successfully")
@@ -82,7 +79,6 @@ catch (err) {
 console.log(err);
 res.status(400).send(err);
 }
-
   }
 
 

@@ -61,3 +61,10 @@
 .alert {
   margin-bottom: 20px;
 }
+.close{
+  color: red;
+  position: absolute;
+  margin-left:30%;
+  margin-bottom: 23%;
+  
+}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ImageZoom from './ImageZoom';
+import ImageZoom from '../bid/ImageZoom';
 import style from "src/styles/bid.module.css"
 function index() {
   const [images, setImages] = useState([  "https://example.com/image1.jpg",  "https://example.com/image2.jpg",  "https://example.com/image3.jpg",]);
