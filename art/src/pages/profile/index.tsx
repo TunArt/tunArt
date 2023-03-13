@@ -7,7 +7,6 @@ import styles from '../../styles/profile.module.css'
 const ProfilePage = () => {
   const [user, setUser] = useState('');
   const [data,setData] = useState([])
-  const [up,setUp] = useState(false)
   const [inp,setInp]=useState(false)
   const[edit,setEdit] = useState(false)
   const [add,setAdd] = useState(false)
@@ -103,8 +102,8 @@ const updateInfo = () => {
       })
    .then(res => {
      console.log(res.data) 
-     setUp(!up)
-    }) 
+setRerender(!rerender)   
+ }) 
      :
       axios.put(`http://localhost:3000/api/artists/updateArtist/${localStorage.getItem('email')}`, 
          {
@@ -114,7 +113,7 @@ const updateInfo = () => {
          })
       .then(res=>{
         console.log(res.data)
-        setUp(!up) 
+        setRerender(!rerender)
       })
  }
 
@@ -135,13 +134,14 @@ const updateInfo = () => {
         ;
         }).then(async()=>{
           const res=await axios.get(`http://localhost:3000/api/artists/getArtists/${localStorage.id}`)
-          console.log(res.data  )
+          console.log(res.data)
           setArtWorks((res.data[0]).artworks)
           
         })
   });
   }, [rerender]);
   console.log(artWorks)
+
   const submitForm=()=>{
     try {
       console.log("image in the submit form", create.image)
@@ -177,25 +177,20 @@ const updateInfo = () => {
   return (
     <div id = "bodyy">
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-      <div id ="current"className="media align-items-center">
-                    <div className="media-body ml-2 d-none d-lg-block">
-                      <span className="mb-0 text-sm  font-weight-bold">{user ? data.userName : data.name}</span>
-                    </div>
-                  </div>
       <div className="main-contentt">
-          <div className="container-fluid">
-            <form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-              <div className="form-group mb-0">
-              </div>
-            </form>      
-      </div>
-    <div id ="head"className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" >
+      <div id ="bg" className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" >
       <span className="mask bg-gradient-default opacity-8"></span>
       <div className="container-fluid d-flex align-items-center">
-        <div id = "row1" className="row">
-        <div className="col-lg-7 col-md-10"> 
-            <h1 className="display-2 text-white">Hello {user ? data.userName : data.name} </h1>
-            <p className="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects . Thank you ! </p>
+      <div id = "row1" className="row">
+        <div id="homee" className="col-lg-7 col-md-10">
+          <div id ="avatar2">
+          <span className="avatar avatar-sm rounded-circle">
+                  <img id="avaaa" src={data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"} alt="Avatar"/>
+                </span>          
+                  <span id ="userN" className="mb-0 text-sm  font-weight-bold">{user ? data.userName : data.name}</span>
+            </div>   
+            <h1 id = "hello" className="display-2 text-white">Hello {user ? data.userName : data.name} </h1>
+            <p id="hello1" className="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects . Thank you ! </p>
             <div id ="buttons" className="flex items-center justify-center">
   <div
     className="inline-flex shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
@@ -236,21 +231,25 @@ const updateInfo = () => {
   </div>
 </div>
           </div>
-          <img id ="robot"alt="Image placeholder" src="https://www.pngall.com/wp-content/uploads/7/Paint-Color-PNG-HD-Image.png" />
         </div>
       </div>
-    </div>  
+    </div> 
     <div >
-      {inp && <div className="card flex flex-col items-center justify-center rounded-lg shadow-md hover:shadow-lg transition-shadow">
-  <img id="ava" src={data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"} alt="Avatar" className="rounded-full w-24 h-24 object-cover object-center mb-4 hover:opacity-75 transition-opacity" />
-  <h4 className="text-xl font-bold text-gray-800 hover:text-blue-500 transition-colors"><b>{data?.name}</b></h4>
-  <div className="container mx-auto grid gap-4 grid-cols-1 md:grid-cols-2">
+        {inp && <div id="card3" className="card flex flex-col items-center justify-center rounded-lg shadow-md hover:shadow-lg transition-shadow p-4">
+  <img 
+    id="ava" 
+    src={data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"} 
+    alt="Avatar" 
+    className="rounded-full w-24 h-24 object-cover object-center mb-4 hover:opacity-75 transition-opacity" 
+  />
+  <h4 id="text" className="text-2xl font-bold text-gray-800 hover:text-blue-500 transition-colors"><b>{data?.name}</b></h4>
+  <div className="container mx-auto grid gap-4 grid-cols-1 md:grid-cols-2 mt-8">
     {artWorks.map((e, i) => {
       return (
         <div key={i} className="relative rounded-lg overflow-hidden">
           <img src={e.image} alt="" className="w-full h-full object-cover object-center rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-110" />
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-white font-bold text-lg hover:text-blue-500 transition-colors">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-white font-bold text-lg hover:text-blue-500 transition-colors bg-black bg-opacity-50">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors">
               Check
             </button>
           </div>
@@ -260,11 +259,12 @@ const updateInfo = () => {
   </div>
 </div>
 
+
  }
      </div> 
      <div>
       {add &&  <form id ="form1" className="card">
-                  <div className="pl-lg-4">
+                  <div id ="form2" className="pl-lg-4">
                     <div className="row">
                       <div className="col-lg-6">
                         <div className="form-group focused">
@@ -272,7 +272,7 @@ const updateInfo = () => {
                           <input type="text" name="name" id="input-username" className="form-control form-control-alternative" placeholder="Username" onChange={handleChangeCreate}/>
                         </div>
                       </div>
-                      <div className="col-lg-6">
+                      <div  id="start" className="col-lg-6">
                         <div className="form-group">
                           <label  className="form-control-label" >startDate</label>
                           <input name="startDate" type="datetime-local" id="input-email" className="form-control form-control-alternative" placeholder="Email address" onChange={handleChangeCreate}/>
@@ -286,12 +286,12 @@ const updateInfo = () => {
                           <input  name = "endDate"type="datetime-local" id="input-first-name" className="form-control form-control-alternative" placeholder="First name" onChange={handleChangeCreate}/>
                         </div>
                       </div>
-                      <div className="col-lg-6">
+                      <div id="creation" className="col-lg-6">
                         <div className="form-group focused">
                           <label className="form-control-label" >creation Date</label>
                           <input  name="creationDate" type="date" id="input-last-name" className="form-control form-control-alternative" placeholder="Last name" onChange={handleChangeCreate}/>
                         </div>
-                        <div>
+                        <div id="iiimg" >
                           <input type="file" name="image" title='file' id=""  onChange={(e)=>{
                             create.image=e.target.files[0]
                           }}/>
@@ -299,26 +299,19 @@ const updateInfo = () => {
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col-lg-6">
+                      <div id="pricee" className="col-lg-6">
                         <div className="form-group focused">
                           <label className="form-control-label" >price</label>
                           <input name='price' type="number" id="input-first-name" className="form-control form-control-alternative" placeholder="DT" onChange={handleChangeCreate}/>
                         </div>
                       </div>
-                      <div className="col-lg-6">
-                      </div>
-                      <div className="col-lg-6">
-                        <div className="form-group focused">
+                        <div id="switch"  className="form-group focused">
                           <label className="form-control-label" ></label>
                           Sale <Switch defaultChecked onChange={onChange} /> Bid   
                         </div>
-                        
-                      </div>
-                    </div>
-                  </div>
-                  <hr className="my-4"/>
-                  <div className="pl-lg-4">
-                    <div className="form-group focused">
+
+                        <div  className="pl-lg-4">
+                    <div id="desc" className="form-group focused">
                       <label>Description</label>
                       <textarea name='description' className="form-control form-control-alternative" placeholder="A few words about your artwork ..." onChange={handleChangeCreate}></textarea>
                     </div>
@@ -331,110 +324,94 @@ const updateInfo = () => {
                   data-te-ripple-init
                   data-te-ripple-color="light">
             <b>Add a new artwork</b>
-            </button>
+            </button>         
+                    </div>
+                  </div>          
                 </form>}
-     </div> 
-     
+     </div>  
      <div>
       {edit && <div  className="container-fluid mt--7">
         <div id = "contain" className="row"> 
-          <div className="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-            <div className="card card-profile shadow">
+        <div  className="container mx-auto px-4">
+            <div id="sha" className="card card-profile shadow">
               <div className="row justify-content-center">
-                <div className="col-lg-3 order-lg-2">
                   <div className="card-profile-image">
-                    <div>
-                    </div>
-                  <div className="card-profile-image">
-                    <div >
-                    <div>
-<img
-  alt="Image placeholder"
-  id="round"
-  src= {data.picture   ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
-  className="rounded-circle"
-/>
-
-                    </div>
-                    </div>
+                   
+                     <img
+                    alt="Image placeholder" 
+                    id="round"
+                    src= {data.picture   ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
+                    className="rounded-circle"
+                      />
                   </div>
-                  </div>
-                </div>
               </div>
-              <div className="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-              </div>
-              <div className="card-body pt-0 pt-md-4">
-                <div className="row">
-                  <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">  
-                     
-                    </div>
-                  </div>
-                </div>
-                <div className="text-center"> 
-                <div className="container mx-auto px-4">
-
-  <main className="max-w-lg mx-auto ">
-    <form className="flex flex-col space-y-4" method="post" onChange={(e) => { console.log(e.target.value); handleOnChange(e) }} onSubmit={handleOnSubmit}>
-      <div className="flex items-center justify-center border-2 border-dashed border-gray-400 py-4 px-6 rounded-md">
+              <div id="shaa" className="card-body pt-0 pt-md-4">
+                  <form  method="post" onChange={(e) => { console.log(e.target.value); handleOnChange(e) }} onSubmit={handleOnSubmit}>
+      <div id="up" className="flex items-center justify-center border-2 border-dashed border-gray-400 py-4 px-6 rounded-md">
         <input type="file" name="file" accept="image/png, image/jpg, image/gif, image/jpeg" className="hidden" id="file-input" />
         <label htmlFor="file-input" className="cursor-pointer">
           <span className="text-gray-700 font-medium">Select a file</span>
         </label>
         {imageSrc && !uploadData && (
-          <button className="ml-4 py-2 px-4 bg-purple-900 text-white font-medium rounded-md hover:bg-blue-700" id="cloud">Upload Files</button>
+          <button className="ml-4 py-2 px-4 bg-purple-900 text-white font-medium rounded-md hover:bg-blue-700" id="cloud">Upload</button>
         )}
-      </div>
+      
 
       {uploadData && (
         <code id="code" className="bg-gray-100 py-2 px-4 rounded-md"><pre>{JSON.stringify(uploadData, null, 2)}</pre></code>
       )}
-    </form>
-  </main>
-
 </div>
-
-                  <h3>
-                 <b>{user ? data.userName : data.name}</b>  <span className="font-weight-light"></span>
-                  </h3>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2"></i>
-                    age : <b>{user ? data.birthDate : data.birthDate} years old</b>
+  <div id="naame" className="mt-8">
+    <h3 id="user5" className="text-3xl font-bold">
+      <b>{user ? data.userName : data.name}</b>
+      <span className="font-weight-light"></span>
+    </h3>
+    <div className="h5 font-weight-400 flex items-center">
+      <i className="ni location_pin mr-2"></i>
+      age : <b>{user ? data.birthDate : data.birthDate} years old</b>
+    </div>
+    <div className="h5 font-weight-400 flex items-center">
+      <i className="ni location_pin mr-2"></i>
+      phone : <b>{user ? data.phoneNumber : data.phoneNumber }</b> 
+    </div>
+    <div className="h5 font-weight-400 flex items-center">
+      <i className="ni location_pin mr-2"></i>
+      Email : <b>{user ? data.email : data.email}</b>
+    </div>
+    <hr className="my-4" />
+    <p>{data?.bio}</p>
+  </div>
+  </form>
                   </div>
-                  <div className="h5 font-weight-300">
-                  <i className="ni location_pin mr-2"></i>
-                    phone : <b>{user ? data.phoneNumber : data.phoneNumber } </b> 
                   </div>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2"></i>Email : <b>{user ? data.email : data.email}</b>
-                  </div>
-                  <hr className="my-4"/>
-                  <p>{data?.bio}</p>
-                </div>
-              </div>
-            </div>
+  <div  className="col-xl-8 order-xl-1 mt-8">
+    <div id="settingss" className="card bg-secondary shadow">
+      <div  className="card-header bg-white border-0">
+        <div className="row align-items-center">
+          <div  className="col-8">
+            <h3 className="mb-0">My account</h3>
           </div>
-          <div className="col-xl-8 order-xl-1">
-            <div className="card bg-secondary shadow">
-              <div className="card-header bg-white border-0">
-                <div className="row align-items-center" >
-                  <div className="col-8">
-                    <h3 className="mb-0">My account</h3>
-                  </div>
-                  <div className="col-4 text-right">
-                    <a href="#!" className="btn btn-sm btn-primary">Settings</a>
-                  </div>
-                </div>
-              </div>
-              <div className="card-body">
-                <form onSubmit={updateInfo}>
-                  <h6 className="heading-small text-muted mb-4">User information</h6>
-                  <div className="pl-lg-4">
-                    <div className="row">
-                      <div className="col-lg-6">
-                        <div className="form-group focused">
-                          <label className="form-control-label" >Username</label>
-                          <input name = "name" type="text" id="Enter your name .." className="form-control form-control-alternative" placeholder="Enter your name .." onChange={handleChange}/>
+          <div id ="set" className="col-4 text-right">
+            <a href="#!" className="btn btn-sm btn-primary">Settings</a>
+          </div>
+        </div>
+      </div>
+      <div className="card-body">
+        <form  onSubmit={updateInfo}>
+          <h6 className="heading-small text-muted mb-4">User information</h6>
+          <div className="pl-lg-4">
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="form-group focused">
+                  <label className="form-control-label">Username</label>
+                  <input
+                    name="name"
+                    type="text"
+                    id="Enter your name .."
+                    className="form-control form-control-alternative"
+                    placeholder="Enter your name .."
+                    onChange={handleChange}
+                  />
                         </div>
                       </div>
                       <div className="col-lg-6">
@@ -451,17 +428,20 @@ const updateInfo = () => {
                     <div className="form-group focused">
                       <label>About Me</label>
                       <textarea  name = "bio" className="form-control form-control-alternative" placeholder="A few words about you ..." onChange={handleChange}></textarea>
-                    </div>
-                    <button className="bg-blue-900 hover:bg-blue-600 text-white font-bold py-1 px-1 rounded-full transition duration-200">
-  update your information 
-</button>
-    </div>
+                    </div>             
+                 </div>
                 </form>
               </div>
+              <button onClick = {updateInfo} id ="but1" className="bg-blue-400 hover:bg-purple-300 text-white font-bold py- 2 px-4 shadow-md">
+update your account 
+</button>
+            </div>
+            </div>
+           
             </div>
           </div>
-        </div>
-      </div> }
+          </div>
+       }
       </div>
 
 {/* <img id ="footer1" alt="Image placeholder" src="https://www.kindpng.com/picc/m/748-7485176_art-gallery-logo-png-transparent-png.png"/> */}
