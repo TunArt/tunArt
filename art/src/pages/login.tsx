@@ -71,7 +71,7 @@ const Login: React.FC = (props) => {
           localStorage.setItem("id",res.data.id)
           localStorage.setItem("email",res.data.email)
           router.push({
-            pathname: '/MainPage',
+            pathname: '/MainPage/art/art',
             query: { "id": res.data.id, type: true }
           });
         }
