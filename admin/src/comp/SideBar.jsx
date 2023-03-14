@@ -16,7 +16,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-
+import AddchartIcon from '@mui/icons-material/Addchart';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -120,6 +120,21 @@ const SideBar = () => {
           />
        
           <Typography
+            variant="h6"
+            color={colors.grey[300]}
+            sx={{ m: "15px 0 5px 20px" }}
+          >
+            Art Works
+          </Typography>
+        
+          <Item
+            title="Verifacation"
+            to="/requests"
+            icon={<AddchartIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+       <Typography
             variant="h6"
             color={colors.grey[300]}
             sx={{ m: "15px 0 5px 20px" }}
