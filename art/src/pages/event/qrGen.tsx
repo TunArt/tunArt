@@ -29,34 +29,16 @@ function App(){
             <p>"Thank you for attending our events. <br /> We hope that you and your guests <br /> enjoy the event and have a great time! <br /> We're always striving to make event <br /> planning easier and more enjoyable, <br /> so please don't hesitate to reach <br /> out to us with any feedback <br /> or suggestions for how we can <br /> improve your experience. <br /> Cheers!"</p>
             </div>
         </div>
-        <footer>
-            <div><img src="/logoPage" alt="" /></div>
-            <div>
 
 
-            <div className={swipes.footer2}>
-
-<div style={{"width":"100%"}}>
-      <div >
-        <ul>
-          <Link href=""><li>HOME</li></Link>
+    <footer className={styles.footer}>
+        <ul className={styles.navfooter}>
+          <li><Link href="">HOME</Link></li>
           <li>SERVICES</li>
-          <Link href="#aboutUs"><li>ABOUT</li></Link>
-          <Link href={"/"}><li>CONTACT</li></Link>
-          <br />
+          <li><Link href="#aboutUs">ABOUT</Link></li>
+          <li><Link href={"/"}>CONTACT</Link></li>
         </ul>
-         
-      </div>
-      </div>
-
-
-</div>
-
-
-
-
-            </div>
-        </footer>
+   </footer>
         </div>
     )
 }
