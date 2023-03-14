@@ -1,23 +1,25 @@
 .app {
     /* margin-left: 50%; */
+    /* background-image: url("https://i.pinimg.com/originals/fc/38/d7/fc38d7ced66129e26f5d651a089e4ad2.jpg"); */
+    background-color: black;
     margin-top: -2.5%;
     margin-left: 1%;
     width:30%;
-    height: 800px;
-    margin-bottom: 10%;
+    height: 750px;
     background-color: #1f1f1f;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding-top:20px;
+    padding-left:5px;
     box-sizing: border-box;
-    /* background-image: url("https://th.wallhaven.cc/small/j3/j3qpzq.jpg"); */
 background-repeat: no-repeat;
     background-size: cover;
+    margin-right:0.5%
   }
   .app h1{
- color: #a36932;
+ color: white;
     font-size: 25px;
     margin-top: -4.4%;
     margin-bottom: -4%;
@@ -25,11 +27,10 @@ background-repeat: no-repeat;
   }
   
   .discussion {
-    background-image: url("https://i.pinimg.com/564x/e6/d7/5b/e6d75b7d94cc36bfaaabcb5eb49d4789.jpg");
+    /* background-image: url("https://i.pinimg.com/originals/fc/38/d7/fc38d7ced66129e26f5d651a089e4ad2.jpg"); */
 background-repeat: no-repeat;
 background-size: 100%;
-/* transform:rotate(180deg); */
-/* height: 110%; */
+background-color: black;
 margin-top: 3%;
 background-position-y: center;
 margin-bottom: -5%;
@@ -44,13 +45,13 @@ margin-bottom: -5%;
     display: hidden;
   }
   .discussion::-webkit-scrollbar {
-    display: none;
+    display:none;
 }
 
-
-  
   .oneMessage {
-    background-color: #a36932;
+    background-image: linear-gradient(blue,darkblue);
+    
+    ;
     /* margin: 13px; */
     padding: 5px;
     border-radius: 30px;
@@ -78,27 +79,27 @@ margin-bottom: -5%;
   .message {
     height: 2.5rem  ;
     padding: 3%;
-    width: 20rem;
+    width: 25rem;
     flex: 1;
-    margin-left: -8%;
+    margin-left: -11%;
     margin-right: 2%;
     /* size: 1000px; */
     color :rgb(0, 0, 0);
-    background-color: #ffffff;
+    background-color:white;
   }
 .littleContainer{
     display:block;
     margin-left: 1%;
     margin-bottom: 4%;
-    color: #1d1d1d;
+    color: white;
 
 }
 
   .userName{
    font-weight:bold;
-   color:rgb(0, 0, 0);
+   color:white;
    font-size: 20px;
-   margin-bottom: 1.5%;
+   margin-bottom: 2.5%;
   }
   .time{
     margin-top: -5%;
