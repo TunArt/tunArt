@@ -1,13 +1,13 @@
 import db from '../models/index';
 import { Request, Response } from 'express';
-const User_Product = db.artist_product;
-const User = db.user;
+const Artist_Product = db.artist_product;
+const Artist = db.artist;
 const Product = db.product;
-const UserBought = async (req: Request, res: Response): Promise<void> => {
+const ArtistBought = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { userId, productId } = req.params;
-    const UP = await User_Product.create({
-      userId: userId,
+    const { ArtistId, productId } = req.params;
+    const UP = await Artist_Product.create({
+      artistId: ArtistId,
       productId: productId,
       quantityBought: req.body.quantityBought,
     });
@@ -17,34 +17,34 @@ const UserBought = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-const getAllitemforAuser = async (req:Request, res:Response) => {
+const getAllitemforAArtist = async (req:Request, res:Response) => {
+  console.log(req.params.artistId)
   try {
-    const { userId } = req.params;
-    const user = await User.findByPk(userId, {
-  
+    const { artistId } = req.params;
+    const artist = await Artist.findByPk(artistId, {
       include: [
         {
           model: Product,
-          through: { model: db.user_product },
-          include: [{ model: User, through: { model: db.user_product } }],
+          through: { model: db.artist_product },
+          include: [{ model: Artist, through: { model: db.artist_product } }],
         },
       ],
     });
-    console.log(user.dataValues)
-    res.status(200).json(user.dataValues);
+    console.log(artist.dataValues)
+    res.status(200).json(artist.dataValues);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Unable to retrieve products.' });
   }
 };
 const deleteItem=async(req:Request,res:Response)=>{
-const {userId,productId}=req.params
+const {ArtistId,productId}=req.params
 try {
-  const del=await User_Product.destroy({where :{userId:userId ,productId:productId},})
+  const del=await Artist_Product.destroy({where :{artistId:ArtistId ,productId:productId},})
   res.status(200).json(del) 
 } catch (error) {
   console.error(error);
     res.status(500).json({ error: 'Unable to delete products.' });
 }
 }
-export default { UserBought, getAllitemforAuser,deleteItem };
+export default { ArtistBought, getAllitemforAArtist,deleteItem };

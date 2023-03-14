@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState,useEffect } from "react";
 import { Dialog, RadioGroup, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
@@ -31,6 +31,7 @@ function classNames(...classes: (string | undefined)[]): string {
 
 export default function Item() {
   const [backetShow, setbacketShow] = useState(false);
+  const [user,setuser]=useState<boolean>(false)
   const route = useRouter();
   const { query } = route || {};
   const items = String(query?.items);
@@ -48,13 +49,20 @@ export default function Item() {
   const [currentImage, setCurrentImage] = useState(images[0]);
   const handleADD = (x: string, y: string) => {
     console.log("this should be the user id ", x)
-    axios.post(`http://localhost:3000/api/route/bought/${x}/${y}`, {
+    axios.post( user ?`http://localhost:3000/api/route/bought/${x}/${y}`: `http://localhost:3000/api/artistb/productB/${x}/${y}`, {
       quantityBought: quantityBought,
     }).then((res) => {
       console.log(res)
       route.push("/shop");
     });
   };
+  useEffect(()=>{
+    axios.get(`/api/users/getUser/${localStorage.email}`)
+    .then((res)=>{
+      if(res.data) setuser(true)
+      else setuser(false)
+    })
+  },[])
   return (
     <Transition show={true}>
       <Transition.Child as={"div"}>

@@ -26,9 +26,11 @@ import userProd from "./server/routes/user_product"
 import userFavorite from "./server/routes/user_Favorite"
 // import roomRoute from "./server/routes/room"
 import messageRoute from "./server/routes/message"
+import artistProduct from './server/routes/artist_product'
 //Add Routes to the middleware handling path, specifying the respective URL path
 app.use('/api/artists',artistRoute)
 app.use('/api/event',eventRoute)
+app.use("/api/artistb",artistProduct)
 app.use('/api/users',userRoute)
 app.use('/api/artworks',artworkRoute)
 app.use('/api/products',productRoute)
@@ -38,7 +40,6 @@ app.use('/api/categories',categoryRoute)
 app.use('/api/route',userProd)
 // app.use('/api/rooms',roomRoute)
 app.use('/api/messages',messageRoute)
-
 app.use('/api/favorite',userFavorite)
 
 

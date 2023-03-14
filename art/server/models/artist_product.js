@@ -1,11 +1,12 @@
 // it's a join table for many-to-many association between user and product .
+const { DataTypes } = require('sequelize');
 
 'use strict';
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class UserProduct extends Model {
+  class ArtistProduct extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
