@@ -46,7 +46,7 @@ const [data,setData]=useState("")
     <div className="max-w-md mx-auto mt-8 p-6 border rounded-lg">
       <form onSubmit={handleFormSubmit} className="space-y-4">
        <div>Start </div>     
-        <div>Current Bid:</div>
+        <div>Current Bid:{bid}</div>
         <div className="flex flex-col">
           <label htmlFor="bid-amount" className="text-lg font-medium mb-2">
             Bid amount:
