@@ -1,5 +1,6 @@
 import db from '../models/index';
 import express, { Express, Request, Response } from 'express';
+import { where } from 'sequelize';
 const Product = db.product
 
 //methods to get all the products
@@ -85,8 +86,20 @@ const deleteProduct= (req:Request, res:Response)=> {
         res.status(400).send(err);
       }
     }
-  
+const seller= async(req:Request,res:Response)=>{
+  try {
+    const product=Product.update({
+      quantity:req.body.quantity},
+     { where: {
+        id: req.params.id
+    }
+    })
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
 
-export default {getAllProducts,addProduct,updateProduct,deleteProduct};
+export default {getAllProducts,addProduct,updateProduct,deleteProduct,seller};
 
 

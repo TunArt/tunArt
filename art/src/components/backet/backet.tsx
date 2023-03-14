@@ -27,10 +27,14 @@ const  Bucket=(props:Props)=> {
   const[display,setDesipaly]=useState(false)
   const [data,setdata]=useState([])
   const [reRender,setRerender]=useState(false)
-  console.log(props)
-  const handleDelete=(x:string,y:string)=>{
-    axios.delete(`http://localhost:3000/api/route/delete/${x}/${y}`).then((res)=>{
+  console.log("props",props)
+  const handleDelete= async(x:string,y:string)=>{
+    alert("me")
+    await axios.delete(`http://localhost:3000/api/route/delete/${x}/${y}`).then((res)=>{
+      console.log("hala",res)
       setRerender(!reRender)
+    }).catch((err)=>{
+      console.log(err)
     })
   }
   let tPrice=0
@@ -45,7 +49,21 @@ const  Bucket=(props:Props)=> {
       setdata(res.data.products)
     })
   },[reRender])
-  return (
+  const seller = () => {
+    data.map( (e, i) => {
+       try {
+       axios.put(`http://localhost:3000/api/products/soled/${e.id}`, {
+          quantity: -(e?.userproducts.quantityBought) + e?.quantity,}).then((res)=>{
+            console.log(res);
+            handleDelete(e.userproducts.userId, e.userproducts.productId);
+          })
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  };
+
+  return (  
     <div className="z-50">
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -141,12 +159,11 @@ const  Bucket=(props:Props)=> {
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
-                        <a
-                          href="#"
+                        <button onClick={seller}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
                           Checkout
-                        </a>
+                        </button>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>

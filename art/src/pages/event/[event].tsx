@@ -16,48 +16,36 @@ interface contextType {
 
 function Event() {
   const router = useRouter()
-
+console.log(router)
   function getProps() {
     const {
-      query: { countryCode, date, fixed, global, localName, name, type }
+      query: { title, image, description }
     } = router
+    console.log()
 
     const test = {
-      countryCode,
-      date,
-      fixed, 
-      global,
-      localName,
-      name,
-      type
+      title, image, description 
     }
 
     return test
   }
 
-  const { countryCode,
-    date,
-    fixed, 
-    global,
-    localName,
-    name,
-    type } = getProps()
-    const value= { countryCode:countryCode,
-      date:date,
-      fixed:fixed, 
-      global:global,
-      localName:localName,
-      name:name,
-      type:type }
+  const { title, image, description } = getProps()
+    const value= { title, image, description  }
 const qrValue='https://example.com'
   return (
+    <div className="flex flex-row items-center justify-center">
+    <img className="w-2/3 mr-8 rounded-md shadow-md" src={image} alt={title} />
     <div>
-      <h1>{name}</h1>
-      <h2>in {date}</h2>
-      <MyQRCode value={MyQRCode(value)}/>
-      <Button>Apply</Button>
-
+      <h1 className="text-3xl font-bold mb-4">{title}</h1>
+      <p className="text-lg leading-relaxed mb-8">{description}</p>
+      <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded-md shadow-md transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        Apply Now
+      </button>
     </div>
+  </div>
+  
+
   )
 }
 
