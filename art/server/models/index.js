@@ -97,6 +97,8 @@ db.product.belongsToMany(db.user, { through: 'userproducts', foreignKey: 'produc
 db.user.belongsToMany(db.artwork,{through :"userFavorite",foreignKey:'userId'})
 db.artwork.belongsToMany(db.user,{through:"userFavorite",foreignKey:'artWorkId'})
 
+db.artist.belongsToMany(db.product,{through:"artistproducts",foreignKey:"artistId"})
+db.product.belongsToMany(db.artist,{through:"artistproducts",foreignKey:"productId"})
 //artist and artwork association (one-to-many)
 db.artwork.belongsTo(db.artist, {
   foreignKey: "artistId"

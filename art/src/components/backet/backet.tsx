@@ -4,6 +4,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import styles from "../../styles/bucket.module.css"
 import axios from 'axios'
+import { useRouter } from 'next/router'
 interface Product {
   name: string
   price: number
@@ -24,6 +25,7 @@ interface Props {
   id: string
 }
 const  Bucket=(props:Props)=> {
+  const route=useRouter()
   const[display,setDesipaly]=useState(false)
   const [data,setdata]=useState([])
   const [reRender,setRerender]=useState(false)
@@ -49,21 +51,32 @@ const  Bucket=(props:Props)=> {
       setdata(res.data.products)
     })
   },[reRender])
-  const seller = () => {
-    data.map( (e, i) => {
-       try {
-       axios.put(`http://localhost:3000/api/products/soled/${e.id}`, {
-          quantity: -(e?.userproducts.quantityBought) + e?.quantity,}).then((res)=>{
-            console.log(res);
-            handleDelete(e.userproducts.userId, e.userproducts.productId);
-          })
-      } catch (error) {
-        console.error(error);
-      }
-    });
-  };
-
-  return (  
+  const seller =async () => {
+    try {
+      const res = await axios.post('http://localhost:3000/api/payments/pay', {
+        amount: tPrice * 100,
+      });
+      route.push({ pathname: res.data.result.link });
+  
+      await Promise.all(
+        data.map(async (e) => {
+          const { id, userproducts, quantity } = e;
+          const updatedQuantity = quantity - userproducts.quantityBought;
+  
+          await axios.put(`http://localhost:3000/api/products/soled/${id}`, {
+            quantity: updatedQuantity,
+          });
+          handleDelete(userproducts.userId, userproducts.productId);
+        })
+      );
+  
+      return true;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
+    return (  
     <div className="z-50">
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
