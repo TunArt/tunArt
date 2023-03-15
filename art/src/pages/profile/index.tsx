@@ -11,7 +11,9 @@ const ProfilePage = () => {
   const [inp,setInp]=useState(false)
   const[edit,setEdit] = useState(false)
   const [add,setAdd] = useState(false)
+  const [artwork,setArtwork]=useState(false)
   const [info,setInfo]=useState({name:"",phone:"",bio:""})
+  const [art,setArt]=useState({name:"",startDate:"",endDate:"",creationDate:"",price:"",description:""})
   const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",image:"",price:"",description:"",})
   const [imageSrc, setImageSrc] = useState( );
   const [uploadData, setUploadData] = useState();
@@ -75,6 +77,7 @@ async function handleOnSubmit(event:any) {
       });
   };
 
+
   const handleChange=(e:any)=>{
     console.log(e.target.value);
     setInfo({...info,[e.target.name]:e.target.value})
@@ -84,6 +87,11 @@ console.log(info)
 const handleChangeCreate=(e:any)=>{
   console.log(e.target.value);
   setCreate({...create,[e.target.name]:e.target.value})
+}
+
+const handleChangeArt=(e:any)=>{
+  console.log(e.target.value);
+  setArt({...art,[e.target.name]:e.target.value})
 }
 
 
@@ -116,6 +124,21 @@ setRerender(!rerender)
         console.log(res.data)
         setRerender(!rerender)
       })
+ }
+
+ const updateArtwork =(id:any)=>{
+  axios.put(`http://localhost:3000/api/artworks/updateArtwork/${id}`,{
+        name: art.name,
+        startDate:art.startDate,
+        endDate:art.endDate,
+        creationDate:art.creationDate,
+        price:art.price,
+        description: art.description, 
+  })
+    .then(res=>{
+      console.log(res.data);
+       setRerender(!rerender)
+    })
  }
 
   useEffect(() => {  
@@ -167,40 +190,41 @@ setRerender(!rerender)
             auction:auction ? 1:0,
             image:imgurl
           })
-          .then(response=> {console.log(response) , setRerender(!rerender)})
+          .then(response=> {console.log(response)})
         }).catch(err => console.log(err))
     } catch {
       alert("Sorry, the request failed. Please try again.")
     }
    
-  }
+  } 
       
   return (
     <div id = "bodyy">
       <Navbar/>
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
       <div className="main-contentt">
-      <div id ="bg" className="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" >
-      <span className="mask bg-gradient-default opacity-8"></span>
+      <div id ="bg" className="header pb-3 pt-5 pt-lg-8 d-flex align-items-center" >
+      <span className="mask bg-black opacity-9"></span>
       <div className="container-fluid d-flex align-items-center">
       <div id = "row1" className="row">
         <div id="homee" className="col-lg-7 col-md-10">
             <h1 id = "hello" className="display-2 text-white">Hello {user ? data.userName : data.name} </h1>
             <p id="hello1" className="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects . Thank you ! </p>
             <div id ="buttons" className="flex items-center justify-center">
-  <div id="butt"
+  <div
     className="inline-flex shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
     role="group">
     <button
-      onClick={()=>{setEdit(!edit),setInp(false),setAdd(false)}}
+      onClick={()=>{setEdit(!edit),setInp(false),setAdd(false),setArtwork(false)}}
       type="button"
+      id="myButton"
       className="inline-block rounded-l bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
       data-te-ripple-init
       data-te-ripple-color="light">
       <b>Edit profile</b>
     </button>
       {user && <button
-      onClick={()=>{setInp(!inp),setEdit(false),setAdd(false)}}
+      onClick={()=>{setInp(!inp),setEdit(false),setAdd(false),setArtwork(false)}}
       type="button"
       className="inline-block bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
       data-te-ripple-init
@@ -208,7 +232,7 @@ setRerender(!rerender)
       <b>Favorites</b>
     </button> }
     {!user && <> <button
-      onClick={()=>{setInp(!inp),setEdit(false),setAdd(false)}}
+      onClick={()=>{setInp(!inp),setEdit(false),setAdd(false),setArtwork(false)}}
       type="button"
       className="inline-block bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
       data-te-ripple-init
@@ -216,7 +240,7 @@ setRerender(!rerender)
       <b>Posts</b>
     </button>
     <button
-      onClick={()=>{setAdd(!add),setEdit(false),setInp(false)}}
+      onClick={()=>{setAdd(!add),setEdit(false),setInp(false),setArtwork(false)}}
       type="button"
       className="inline-block rounded-r bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
       data-te-ripple-init
@@ -232,93 +256,137 @@ setRerender(!rerender)
     </div> 
     <div >
         {inp && <div id="card3" className="card flex flex-col items-center justify-center rounded-lg shadow-md hover:shadow-lg transition-shadow p-4">
-  <img 
-    id="ava" 
-    src={data.picture ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"} 
-    alt="Avatar" 
-    className="rounded-full w-24 h-24 object-cover object-center mb-4 hover:opacity-75 transition-opacity" 
-  />
-  <h4 id="text" className="text-2xl font-bold text-gray-800 hover:text-blue-500 transition-colors"><b>{data?.name}</b></h4>
-  <div className="container mx-auto grid gap-4 grid-cols-1 md:grid-cols-2 mt-8">
+          <div id="container5">
+          <h4 id="text" className="text-2xl font-bold text-orange-700 hover:text-orange-500 transition-colors"><b>All posts</b></h4>
+  <div className="container grid gap-1  md:grid-cols-3 mt-3">
     {artWorks.map((e, i) => {
       return (
-        <div key={i} className="relative rounded-lg overflow-hidden">
-          <img src={e.image} alt="" className="w-full h-full object-cover object-center rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-110" />
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-white font-bold text-lg hover:text-blue-500 transition-colors bg-black bg-opacity-50">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors">
+        <div id="cheeck" key={i} className="relative rounded-lg overflow-hidden">
+          <img id ="img22" src={e.image} alt="" className="w-full h-full object-cover object-center rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-110" />
+          <div id ="check" className="absolute inset-0 flex flex-col justify-center items-center text-white font-bold text-lg hover:text-orange-500 transition-colors bg-black bg-opacity-50">
+            <button id="check6" className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition-colors">
               Check
             </button>
-          </div>
+            </div>
+            <div>
+            <button id="check7"className="bg-black-500 hover:bg-black-700 text-white font-bold py-2 px-4 rounded transition-colors"  onClick={()=>{setArtwork(!artwork),setInp(false),setEdit(false),setAdd(false)}}>
+              <img src="https://cdn-icons-png.flaticon.com/512/1987/1987925.png" alt="" />
+            </button>
+            </div>  
         </div>
       );
     })}
   </div>
 </div>
-
-
+          </div>
  }
-     </div> 
+     </div>
      <div>
-      {add &&  <form id ="form1" className="card">
+     {artwork &&  <form id ="form1" className="card bg-secondary shadow">
                   <div id ="form2" className="pl-lg-4">
                     <div className="row">
-                      <div className="col-lg-6">
-                        <div className="form-group focused">
-                          <label className="form-control-label" >name</label>
-                          <input type="text" name="name" id="input-username" className="form-control form-control-alternative" placeholder="Username" onChange={handleChangeCreate}/>
-                        </div>
-                      </div>
-                      <div  id="start" className="col-lg-6">
-                        <div className="form-group">
-                          <label  className="form-control-label" >startDate</label>
-                          <input name="startDate" type="datetime-local" id="input-email" className="form-control form-control-alternative" placeholder="Email address" onChange={handleChangeCreate}/>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-lg-6">
-                        <div className="form-group focused">
-                          <label className="form-control-label" >end Date</label>
-                          <input  name = "endDate"type="datetime-local" id="input-first-name" className="form-control form-control-alternative" placeholder="First name" onChange={handleChangeCreate}/>
-                        </div>
-                      </div>
+                    <div className="relative z-0 w-full mb-8">
+                    <label id="label5" htmlFor="name" className=" text-orange-300  " > name</label>
+    <input type="text" name="name" placeholder="update your name" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 focus:outline-none text-gray-100 focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChangeArt}/>
+  </div>
+  <div className="relative z-0 w-full mb-8">
+  <label  htmlFor="start date" className=" text-orange-300  " > start date</label>
+    <input type="datetime-local" name="startDate" placeholder="update the start date" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChangeArt}  />
+  </div>
+                    </div>  
+                    <div className="relative z-0 w-full mb-8">
+                    <label  htmlFor="end date" className=" text-orange-300  " > end date</label>
+    <input type="datetime-local" name="endDate" placeholder="update the end date" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChangeArt}/>
+  </div>
                       <div id="creation" className="col-lg-6">
-                        <div className="form-group focused">
-                          <label className="form-control-label" >creation Date</label>
-                          <input  name="creationDate" type="date" id="input-last-name" className="form-control form-control-alternative" placeholder="Last name" onChange={handleChangeCreate}/>
-                        </div>
-                        <div id="iiimg" >
+                        <div className="relative z-0 w-full mb-8">
+                        <label id="label7" htmlFor="creation date" className=" text-orange-300  " > creation date</label>
+    <input id ="creation" type="date" name="creationDate" placeholder="update the creation date" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChangeArt}/>
+  </div>
+                      </div>
+                   
+                    <div className="row">
+                    <div className="relative z-0 w-full mb-8">
+                    <label  htmlFor="price" className=" text-orange-300 " > price</label>
+    <input type="number" name="price" placeholder="update the price" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChangeArt}/>
+  </div>
+                        <div  className="pl-lg-4">
+                    <div id="descri" className="form-group focused">
+                    <label  htmlFor="description" className=" text-orange-300 " > description</label>
+                      <textarea name='description' className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300" placeholder="update your words about your artwork ..." onChange={handleChangeArt}></textarea>
+                    </div>
+                  </div>
+                  <div className="col-4 text-right"></div>
+                  <button
+                   onClick={updateArtwork}
+                  id ="add"
+                  type="button"
+                  className="btn btn-sm btn-primary">
+            <b>update your artwork</b>
+            </button>         
+                    </div>
+                  </div>          
+                </form>} 
+     </div>
+     <div>
+      {add &&  <form id ="form1" className="card bg-secondary shadow">
+                  <div id ="form2" className="pl-lg-4">
+                    <div className="row">
+                    <div className="relative z-0 w-full mb-8">
+                    <label id="label5" htmlFor="name" className=" text-orange-300  " > name</label>
+    <input type="text" name="name" placeholder="Enter your name" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 focus:outline-none text-gray-100 focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChangeCreate}/>
+  </div>
+  <div className="relative z-0 w-full mb-8">
+  <label  htmlFor="start date" className=" text-orange-300  " > start date</label>
+    <input type="datetime-local" name="startDate" placeholder="Enter the start date" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChangeCreate}  />
+  </div>
+                    </div>  
+                    <div className="relative z-0 w-full mb-8">
+                    <label  htmlFor="end date" className=" text-orange-300  " > end date</label>
+    <input type="datetime-local" name="endDate" placeholder="Enter the end date" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChangeCreate}/>
+  </div>
+                      <div id="creation" className="col-lg-6">
+                        <div className="relative z-0 w-full mb-8">
+                        <label id="label7" htmlFor="creation date" className=" text-orange-300  " > creation date</label>
+    <input id ="creation" type="date" name="creationDate" placeholder="Enter the creation date" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChangeCreate}/>
+  </div>
+                      </div>
+                    <div className="row">
+                    <div className="relative z-0 w-full mb-8">
+                    <label  htmlFor="price" className=" text-orange-300 " > price</label>
+    <input type="number" name="price" placeholder="Enter the price" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChangeCreate}/>
+  <div id="switch" className="form-group focused bg-transparent text-orange-500">
+  <label id="label" className="form-control-label"></label>
+  Sale <Switch defaultChecked onChange={onChange} /> Bid
+</div>
+  </div>
+  <div id="iiimg" >
                           <input type="file" name="image" title='file' id=""  onChange={(e)=>{
                             create.image=e.target.files[0]
                           }}/>
                         </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div id="pricee" className="col-lg-6">
-                        <div className="form-group focused">
-                          <label className="form-control-label" >price</label>
-                          <input name='price' type="number" id="input-first-name" className="form-control form-control-alternative" placeholder="DT" onChange={handleChangeCreate}/>
-                        </div>
-                      </div>
-                        <div id="switch"  className="form-group focused">
-                          <label className="form-control-label" ></label>
-                          Sale <Switch defaultChecked onChange={onChange} /> Bid   
-                        </div>
-
                         <div  className="pl-lg-4">
                     <div id="desc" className="form-group focused">
-                      <label>Description</label>
-                      <textarea name='description' className="form-control form-control-alternative" placeholder="A few words about your artwork ..." onChange={handleChangeCreate}></textarea>
+                    <label  htmlFor="description" className=" text-orange-300 " > description</label>
+                      <textarea name='description' className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300" placeholder="A few words about your artwork ..." onChange={handleChangeCreate}></textarea>
                     </div>
                   </div>
+                  <div className="col-4 text-right"></div>
                   <button
                    onClick={submitForm}
                   id ="add"
                   type="button"
-                  className="inline-block rounded-l bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
-                  data-te-ripple-init
-                  data-te-ripple-color="light">
+                  className="btn btn-sm btn-primary">
             <b>Add a new artwork</b>
             </button>         
                     </div>
@@ -326,19 +394,17 @@ setRerender(!rerender)
                 </form>}
      </div>  
      <div>
-      {edit && <div  className="container-fluid mt--7">
-        <div id = "contain" className="row"> 
-        <div  className="container mx-auto px-4">
-            <div id="sha" className="card card-profile shadow">
+     <div id="sha" className="card card-profile shadow">
               <div className="row justify-content-center">
                   <div className="card-profile-image">
                    
-                     <img
-                    alt="Image placeholder" 
-                    id="round"
-                    src= {data.picture   ? data.picture : "https://www.w3schools.com/howto/img_avatar.png"}
-                    className="rounded-circle"
-                      />
+                  <img
+  alt="Image placeholder"
+  id="round"
+  className="h-40 w-40 rounded-full object-cover object-center border-4 border-gray-200 hover:border-blue-500"
+  src={data.picture ? data.picture : 'https://www.w3schools.com/howto/img_avatar.png'}
+/>
+
                   </div>
               </div>
               <div id="shaa" className="card-body pt-0 pt-md-4">
@@ -346,7 +412,7 @@ setRerender(!rerender)
       <div id="up" className="flex items-center justify-center border-2 border-dashed border-gray-400 py-4 px-6 rounded-md">
         <input type="file" name="file" accept="image/png, image/jpg, image/gif, image/jpeg" className="hidden" id="file-input" />
         <label htmlFor="file-input" className="cursor-pointer">
-          <span className="text-gray-700 font-medium">Select a file</span>
+          <span id="select" className="text-gray-700 font-medium">Select a file</span>
         </label>
         {imageSrc && !uploadData && (
           <button className="ml-4 py-2 px-4 bg-purple-900 text-white font-medium rounded-md hover:bg-blue-700" id="cloud">Upload</button>
@@ -357,78 +423,74 @@ setRerender(!rerender)
         <code id="code" className="bg-gray-100 py-2 px-4 rounded-md"><pre>{JSON.stringify(uploadData, null, 2)}</pre></code>
       )}
 </div>
-  <div id="naame" className="mt-8">
-    <h3 id="user5" className="text-3xl font-bold">
+  <div  id="naame" className="mt-8">
+    <h3  id="nameP"  className="text-3xl font-bold">
       <b>{user ? data.userName : data.name}</b>
       <span className="font-weight-light"></span>
     </h3>
-    <div className="h5 font-weight-400 flex items-center">
-      <i className="ni location_pin mr-2"></i>
+    <div id="label" className="h5 font-weight-400 flex items-center">
+      <i  className="ni location_pin mr-2"></i>
       age : <b>{user ? data.birthDate : data.birthDate} years old</b>
     </div>
-    <div className="h5 font-weight-400 flex items-center">
-      <i className="ni location_pin mr-2"></i>
+    <div id="label" className="h5 font-weight-400 flex items-center">
+      <i  className="ni location_pin mr-2"></i>
       phone : <b>{user ? data.phoneNumber : data.phoneNumber }</b> 
     </div>
-    <div className="h5 font-weight-400 flex items-center">
-      <i className="ni location_pin mr-2"></i>
+    <div id="label" className="h5 font-weight-400 flex items-center">
+      <i  className="ni location_pin mr-2"></i>
       Email : <b>{user ? data.email : data.email}</b>
     </div>
-    <hr className="my-4" />
-    <p>{data?.bio}</p>
+    <hr className="my-3"/>
+    <p  >{data?.bio}</p>
   </div>
   </form>
                   </div>
                   </div>
+      {edit && <div  className="container-fluid mt--7">
+        <div id = "contain" className="row"> 
+        <div  className="container mx-auto px-4">
   <div  className="col-xl-8 order-xl-1 mt-8">
     <div id="settingss" className="card bg-secondary shadow">
-      <div  className="card-header bg-white border-0">
+      <div id="setting" className="card-header bg-white border-0">
         <div className="row align-items-center">
           <div  className="col-8">
             <h3 className="mb-0">My account</h3>
           </div>
           <div id ="set" className="col-4 text-right">
-            <a href="#!" className="btn btn-sm btn-primary">Settings</a>
+            <a  className="btn btn-sm btn-primary">Settings</a>
           </div>
         </div>
       </div>
       <div className="card-body">
         <form  onSubmit={updateInfo}>
-          <h6 className="heading-small text-muted mb-4">User information</h6>
+          <h6 id="label1" className="heading-small text-muted mb-4">User information</h6>
           <div className="pl-lg-4">
             <div className="row">
               <div className="col-lg-6">
-                <div className="form-group focused">
-                  <label className="form-control-label">Username</label>
-                  <input
-                    name="name"
-                    type="text"
-                    id="Enter your name .."
-                    className="form-control form-control-alternative"
-                    placeholder="Enter your name .."
-                    onChange={handleChange}
-                  />
-                        </div>
+              <div className="relative z-0 w-full mb-8">
+    <input type="text" name="name" placeholder="Enter your name" className="pt-3 pb-2 block w-full  mt-0 bg-transparent text-gray-100 border-1 border-b-2 focus:outline-none focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChange}/>
+  </div>
                       </div>
                       <div className="col-lg-6">
-                        <div className="form-group focused">
-                          <label className="form-control-label" >PhoneNumber</label>
-                          <input name = "phone" type="text" id="Enter your phone .." className="form-control form-control-alternative" placeholder="Enter your phoneNumber .. " onChange={handleChange}/>
-                        </div>
+                      <div className="relative z-0 w-full mb-8">
+    <input type="text" name="phone" placeholder="Enter your phone number" className="pt-3 pb-2 block w-full text-gray-100 mt-0 bg-transparent border-1 border-b-2 focus:outline-none focus:ring-0 focus:border-white border-white-300"
+ onChange={handleChange}/>
+  </div>
                       </div>
                     </div>
                   </div>
                   <hr className="my-4"/>
-                  <h6 className="heading-small text-muted mb-4">About me</h6>
+                  <h6 id="label1" className="heading-small text-muted mb-4">About me</h6>
                   <div className="pl-lg-4">
-                    <div className="form-group focused">
-                      <label>About Me</label>
-                      <textarea  name = "bio" className="form-control form-control-alternative" placeholder="A few words about you ..." onChange={handleChange}></textarea>
+                    <div className="relative z-0 w-full mb-8">
+                      <textarea  name = "bio" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300" placeholder="A few words about you ..." onChange={handleChange}></textarea>
                     </div>             
                  </div>
                 </form>
               </div>
-              <button onClick = {updateInfo} id ="but1" className="bg-blue-400 hover:bg-purple-300 text-white font-bold py- 2 px-4 shadow-md">
+              <div className="col-4 text-right"></div>
+              <button onClick = {updateInfo} id ="but1" className="btn btn-sm btn-primary">
 update your account 
 </button>
             </div>
@@ -439,11 +501,6 @@ update your account
           </div>
        }
       </div>
-
-{/* <img id ="footer1" alt="Image placeholder" src="https://www.kindpng.com/picc/m/748-7485176_art-gallery-logo-png-transparent-png.png"/> */}
-
-   
-    
   </div>
 </div> 
 
