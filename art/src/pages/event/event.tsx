@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import axios from "axios";
 import { useEffect, useState } from "react";
 import NavBar from "../../components/navBar";
@@ -86,5 +85,3 @@ function ResponsiveCardList() {
 
 
 export default ResponsiveCardList;
-=======
->>>>>>> f1a5c54346748c81173f7f0a1ed6ef2dd79a35fb

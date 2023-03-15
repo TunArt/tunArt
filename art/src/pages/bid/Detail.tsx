@@ -24,10 +24,7 @@ const Detail :React.FC<DetailProps>= (props:any) => {
     <div className={styles.detail}>
         {/* <img className={styles.img1} src={props.img}  /> */}
         <div  className={styles.img1}> 
-          <ImageZoom
-        src={props.img}
-        alt="img"
-      /></div>
+          <ImageZoom src={props.image} style={{width:"200px", height:"200px"}} alt="img" /></div>
        
         {/* <div className={styles.info}>
           <div className="relative z-10 rounded-full bg-gray-50 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">{props.title}</div>

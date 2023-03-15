@@ -13,7 +13,7 @@ const Payment=()=>{
     }
 
     const redirect=()=>{
-        route.push("/MainPage/art/art")
+        route.push("/MainPage/art/art/")
     }
     return(
         

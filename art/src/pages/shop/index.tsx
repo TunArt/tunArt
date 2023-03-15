@@ -58,7 +58,7 @@ useEffect(()=>{
 
   console.log(firstPic)
   return (
-    <>
+    <div>
 
      <div className="sticky top-0 z-50">
 <Navbar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} />
@@ -118,6 +118,6 @@ useEffect(()=>{
   </div>
 </div>
 <Footer/>
-</>
+</div>
   );
 }

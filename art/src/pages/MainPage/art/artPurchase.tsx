@@ -17,16 +17,16 @@ const ArtPurchase=()=>{
 
    
     function payment(){
-        route.push("/MainPage/art/artPayment")
+        route.push("/MainPage/art/artPayment/")
     }
 
     const redirect=()=>{
-        route.push("/MainPage/art/art")
+        route.push("/MainPage/art/art/")
     }
     //route.query.image;
 
     return(
-        <>
+    
         <div className={styles.all}>
         <NavBar/>
         <button className={styles.submitButton2} style={{marginLeft:"100px"}} onClick={redirect}>Go Back</button>
@@ -47,7 +47,7 @@ const ArtPurchase=()=>{
         </div>
         <Footer/>
         </div>  
-        </>
+       
     )
 }
 export default ArtPurchase;

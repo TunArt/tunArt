@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import styles from "../../../styles/principale.module.css";
+import style from "../../../styles/newArt.module.css";
 import TopRated from "./topRated";
 import axios from "axios";
 // import sss from "../../../styles/sliderCss.css";
@@ -124,19 +125,19 @@ animateIn={true}
 {...options}
 >
 {top && top.length > 0
-? <div className={styles.cols}>
-{top.map((ele,index)=>(
-    <div className={styles.col} key={index}>
-    <TopRated ele={ele}/>
-    </div>
-))}  
-</div> 
+    ? <div className={style.container}>
+        {top.map((ele,index)=>(
+            <div  key={index}>
+                <TopRated ele={ele}/>
+            </div>
+        ))}  
+        </div> 
 : ""}
 </OwlCarousel>
-</ul>
+        </ul>
+    </div>
 </div>
-</div>
-);
+    );
 };
 export default Slider;
         
