@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Dialog, RadioGroup, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
@@ -7,6 +7,10 @@ import Backet from "../../components/backet/backet";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Alert, Space } from "antd";
+import { AiFillStar } from 'react-icons/ai'
+import { AiOutlineStar } from 'react-icons/ai'
+import StarRatingComponent from 'react-star-rating-component';
+
 
 type Product = {
   id: number;
@@ -20,7 +24,7 @@ type Product = {
   picture: any;
 };
 const product: Product = {
-  rating: 3.9,
+  rating: 4,
   reviewCount: 117,
 
 };
@@ -31,6 +35,7 @@ function classNames(...classes: (string | undefined)[]): string {
 
 export default function Item() {
   const [backetShow, setbacketShow] = useState(false);
+  const [user, setuser] = useState<boolean>(false)
   const route = useRouter();
   const { query } = route || {};
   const items = String(query?.items);
@@ -38,23 +43,39 @@ export default function Item() {
   console.log("item from [items]", item)
   let quantityBought = ""
   const [open, setOpen] = useState(true);
+
+  const [rating, setRating] = useState(0);
+
+  const onStarClick = (nextValue:any, prevValue:any, name:any) => {
+    setRating(nextValue);
+    
+    // add code to submit the review to the backend
+  };
   const images = JSON.parse(item.picture)
-  const [err,setErr]=useState(false)
+  const [err, setErr] = useState(false)
   // const [images,setImages]=useState()
   const handleImageClick = (imageUrl: string) => {
     setCurrentImage(imageUrl);
   };
+  
   console.log("images for [item]", images)
   const [currentImage, setCurrentImage] = useState(images[0]);
   const handleADD = (x: string, y: string) => {
     console.log("this should be the user id ", x)
-    axios.post(`http://localhost:3000/api/route/bought/${x}/${y}`, {
+    axios.post(user ? `http://localhost:3000/api/route/bought/${x}/${y}` : `http://localhost:3000/api/artistb/productB/${x}/${y}`, {
       quantityBought: quantityBought,
     }).then((res) => {
       console.log(res)
       route.push("/shop");
     });
   };
+  useEffect(() => {
+    axios.get(`/api/users/getUser/${localStorage.email}`)
+      .then((res) => {
+        if (res.data) setuser(true)
+        else setuser(false)
+      })
+  }, [])
   return (
     <Transition show={true}>
       <Transition.Child as={"div"}>
@@ -138,33 +159,26 @@ export default function Item() {
 
                           {/* Reviews */}
                           <div className="mt-6">
-                            <h4 className="sr-only">Reviews</h4>
-                            <div className="flex items-center">
-                              <div className="flex items-center">
-                                {[0, 1, 2, 3, 4].map((rating) => (
-                                  <StarIcon
-                                    key={rating}
-                                    className={classNames(
-                                      product.rating > rating
-                                        ? "text-gray-900"
-                                        : "text-gray-200",
-                                      "h-5 w-5 flex-shrink-0"
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                ))}
-                              </div>
-                              <p className="sr-only">
-                                {product.rating} out of 5 stars
-                              </p>
-                              <a
-                                href="#"
-                                className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                              >
-                                {product.reviewCount} reviews
-                              </a>
-                            </div>
-                          </div>
+      <h4 className="sr-only">Reviews</h4>
+      <div className="flex items-center">
+        <div className="flex items-center">
+          <StarRatingComponent
+            name="product-rating"
+            value={rating}
+            onStarClick={onStarClick}
+          />
+        </div>
+        <p className="sr-only">{rating} out of 5 stars</p>
+        <a
+          href="#"
+          className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
+        >
+          {product.reviewCount} reviews
+        </a>
+      </div>
+    </div>
+
+
                         </section>
 
                         <section
@@ -220,21 +234,21 @@ export default function Item() {
                               </RadioGroup>
                             </div>
 
-                            {console.log("item.quality",typeof(parseInt(quantityBought) ))}
+                            {console.log("item.quality", typeof (parseInt(quantityBought)))}
                             <button
                               onClick={(e) => {
                                 e.preventDefault()
-                                
-                                console.log("quantityBought",quantityBought)
-                                let Qn= parseInt(quantityBought)
-                                console.log("mmmmmmmmmmmmmmm",Qn-item.quantity)
+
+                                console.log("quantityBought", quantityBought)
+                                let Qn = parseInt(quantityBought)
+                                console.log("mmmmmmmmmmmmmmm", Qn - item.quantity)
                                 if (-Qn + (item.quantity) < 0) {
                                   alert('test')
                                   setErr(true)
                                   return false
                                 }
-                                else{handleADD(window?.localStorage.id, item.id)}
-                                
+                                else { handleADD(window?.localStorage.id, item.id) }
+
                               }}
                               className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
@@ -242,8 +256,8 @@ export default function Item() {
                             </button>
                             {err && <div>
                               <Space direction="vertical" style={{ width: '100%' }}>
-                                    <Alert message="Sorry, we don't have enough quantity in stock" type="error" />
-                                  </Space></div>}
+                                <Alert message="Sorry, we don't have enough quantity in stock" type="error" />
+                              </Space></div>}
                           </form>
                         </section>
                       </div>

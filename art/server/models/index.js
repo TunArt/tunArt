@@ -40,7 +40,7 @@ db.message = require("./message.js")(Sequelize, sequelize);
 db.user_event = require("./user_event.js")(Sequelize, sequelize);
 db.user_product = require("./user_product.js")(Sequelize, sequelize);
 db.user_Favorite=require("./user_Favorite.js")(Sequelize,sequelize)
-
+db.artist_product=require("./artist_product")(Sequelize,sequelize)
 //artwork and messages association (one-to-many relationship)
 db.artwork.hasMany(db.bid,{
   foreignKey: "artworkId"
@@ -98,6 +98,8 @@ db.product.belongsToMany(db.user, { through: 'userproducts', foreignKey: 'produc
 db.user.belongsToMany(db.artwork,{through :"userFavorite",foreignKey:'userId'})
 db.artwork.belongsToMany(db.user,{through:"userFavorite",foreignKey:'artWorkId'})
 
+db.artist.belongsToMany(db.product,{through:"artistproducts"})
+db.product.belongsToMany(db.artist,{through:"artistproducts"})
 //artist and artwork association (one-to-many)
 db.artwork.belongsTo(db.artist, {
   foreignKey: "artistId"
