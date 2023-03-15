@@ -72,15 +72,15 @@ const handleBid = useCallback((chunk:item) => {
     
     }
     setUpdate(!update)
-    socket.emit("bid",  bid )
       axios.post("http://localhost:3000/api/bids/addBid",{
       "currentBidder":localStorage.id,
       "currentPrice": price,
       "artWorkId":props.id
-    }).then((result)=>{
+    }
+    ).then((result)=>{
     console.log("done")
     }).catch((err)=>console.log(err));
-
+    socket.emit("bid",  bid )
     // if(!data){
     //   socket.emit("bid", { bid })
     //   axios.post("http://localhost:3000/api/bids/addBid",{

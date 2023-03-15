@@ -6,8 +6,8 @@ import Link from "next/link";
 import styles from "src/styles/Home.module.css";
 import swipes from "src/styles/swiper.module.css"
 import SinUp from './sinUp'
-import Image from "next/image";
 import Login from './login';
+import Image from "next/image";
 import axios from 'axios';
 import {useRouter} from "next/router"
 interface Props { }
