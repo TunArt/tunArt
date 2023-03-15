@@ -142,17 +142,13 @@ const addArtwork = async (req: Request, res: Response) => {
     // update User information in database
    const updateArtWork= (req:Request, res:Response)=> {
     try {
-        if (!req.body) {
-          throw new Error("Request body is missing required properties.");
-        }
-
     const artWork =  Artwork.update({
         name: req.body.name,
-        bio: req.body.bio,
-        email: req.body.email,
-        password: req.body.password,
-        picture: req.body.picture,
-        phoneNumber: req.body.phoneNumber
+        startDate:req.body.startDate,
+        endDate:req.body.endDate,
+        creationDate:req.body.creationDate,
+        price:req.body.price,
+        description: req.body.description,
     }, {
         where: {
             id: req.params.id
@@ -194,5 +190,5 @@ const deleteArtWork= (req:Request, res:Response)=> {
       console.log(err)
   }
   }
-export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks, getLimitedlArtworks, getOneArtwork, getArtistName};
+export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks, getLimitedlArtworks, getOneArtwork, getArtistName,updateArtWork,deleteArtWork};
 
