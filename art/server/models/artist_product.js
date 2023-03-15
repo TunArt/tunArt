@@ -15,10 +15,22 @@ module.exports = (sequelize, DataTypes) => {
   }
   
   ArtistProduct.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    quantityBought: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
     artistId:DataTypes.INTEGER,
     productId:DataTypes.INTEGER,
-    quantityBought:DataTypes.INTEGER,
-  }, {
+    state:{
+      type:DataTypes.STRING,
+      defaultValue:'pending'
+    }
+    }, {
     sequelize,
     modelName: 'ArtistProduct',
   });

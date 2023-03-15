@@ -1,5 +1,6 @@
 import db from '../models/index';
 import { Request, Response } from 'express';
+import { Op } from "sequelize"
 const Artist_Product = db.artist_product;
 const Artist = db.artist;
 const Product = db.product;
@@ -47,4 +48,26 @@ try {
     res.status(500).json({ error: 'Unable to delete products.' });
 }
 }
-export default { ArtistBought, getAllitemforAArtist,deleteItem };
+
+const update = async (req: Request, res: Response) => {
+  try {
+    const { newState } = req.body;
+    const { id } = req.params;
+    const upda = await Artist_Product.update(
+      { state: newState },
+      {
+        where: {
+          artistId: id,
+          [Op.or]: [{ state: 'failed' }, { state: 'peding' }] // use [Op.or] to specify OR condition
+        }
+      }
+    );
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+};
+
+
+export default { ArtistBought, getAllitemforAArtist,deleteItem,update };

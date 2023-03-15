@@ -5,15 +5,24 @@ const PaymentSuccess: React.FC = () => {
    const [show,Setshow]= useState(false)
     const route=useRouter() 
     const {payment_id}=route.query
-    console.log(payment_id)
     useEffect(()=>{
+      console.log(payment_id)
         axios.post(`http://localhost:3000/api/payments/verif/${payment_id}`)
         .then((res)=>{
             console.log(res.data)
-            if(res.data.result.status === "SUCCESS") {Setshow(true)}
-            else  Setshow(false)
+            if(res.data.result.status === "SUCCESS") {
+              axios.put(`http://localhost:3000/api/artistb/productUpDate/${localStorage.id}`,{
+                state:"succes"
+              })
+              Setshow(true) 
+            }
+            else  {
+              axios.put(`http://localhost:3000/api/artistb/productUpDate/${localStorage.id}`,{
+                state:"failed"
+              })
+              Setshow(false)}
         })
-    },[])
+    },[payment_id])
   return (
     <>
     { show && <div className="bg-gray-100 h-screen">
