@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+
 import { Button, Checkbox, Form, Input, Alert } from 'antd';
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from "../comp/config"
 import axios from 'axios';
 import styles from '../styles/login.css';
-const Login= (props) => {
-  console.log(props)
+const Login= () => {
   const [form] = Form.useForm();
   const [emailTest, setEmailTest] = useState(false);
   const [passwordTest, setPasswordTest] = useState(false);
@@ -38,12 +38,11 @@ const Login= (props) => {
         try {
           const res = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
           console.log(res.data);
+          if(res.data.role === "admin"){window.location.href="/Dashboard"}
+
           
         } catch (err) {
-          console.log('test');
-          const res = await axios.get(`http://localhost:3000/api/artists/getArtist/${email}`);
-          localStorage.setItem("id",res.data.id)
-          localStorage.setItem("email",res.data.email)
+        console.log(err)  
         }
       } catch (error) {
         setInvalidCredentials(true);
