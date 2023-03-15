@@ -12,5 +12,5 @@ routes.post('/addArtwork/:artistId',Artwork.addArtwork)
 routes.get('/notVArtWorks', Artwork.AllnotV)
 routes.put("/acceptsTheArtWork/:id",Artwork.acceptsArtWork)
 routes.put("/updateArtwork/:id",Artwork.updateArtWork)
-routes.delete("deleteArtwork/:id",Artwork.deleteArtWork)
+routes.delete("/deleteArtwork/:id",Artwork.deleteArtWork)
 export default routes

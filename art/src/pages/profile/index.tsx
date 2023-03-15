@@ -126,8 +126,8 @@ setRerender(!rerender)
       })
  }
 
- const updateArtwork =(id:any)=>{
-  axios.put(`http://localhost:3000/api/artworks/updateArtwork/${id}`,{
+ const updateArtwork =()=>{
+  axios.put(`http://localhost:3000/api/artworks/updateArtwork/${artWorks[0].artistId}`,{
         name: art.name,
         startDate:art.startDate,
         endDate:art.endDate,
@@ -140,6 +140,17 @@ setRerender(!rerender)
        setRerender(!rerender)
     })
  }
+ console.log(art);
+
+ const deleteArtwork=()=>{
+  axios.delete(`http://localhost:3000/api/artworks/deleteArtwork/${artWorks[0].id}`)
+  .then(res=>{
+    console.log(res.data);
+     setRerender(!rerender)
+  })
+ }
+ 
+ 
 
   useEffect(() => {  
     console.log(localStorage.getItem('id'));
@@ -158,7 +169,7 @@ setRerender(!rerender)
         ;
         }).then(async()=>{
           const res=await axios.get(`http://localhost:3000/api/artists/getArtists/${localStorage.id}`)
-          console.log(res.data)
+          console.log("artist work",(res.data[0]).artworks)
           setArtWorks((res.data[0]).artworks)
           
         })
@@ -197,7 +208,7 @@ setRerender(!rerender)
     }
    
   } 
-      
+  console.log(artWorks,"hello artwork")
   return (
     <div id = "bodyy">
       <Navbar/>
@@ -257,9 +268,10 @@ setRerender(!rerender)
     <div >
         {inp && <div id="card3" className="card flex flex-col items-center justify-center rounded-lg shadow-md hover:shadow-lg transition-shadow p-4">
           <div id="container5">
-          <h4 id="text" className="text-2xl font-bold text-orange-700 hover:text-orange-500 transition-colors"><b>All posts</b></h4>
   <div className="container grid gap-1  md:grid-cols-3 mt-3">
-    {artWorks.map((e, i) => {
+    {artWorks.length ? <div>   
+      <h4 id="text" className="text-2xl font-bold text-orange-700 hover:text-orange-500 transition-colors"><b>All posts</b></h4>
+      {artWorks.map((e, i) => {
       return (
         <div id="cheeck" key={i} className="relative rounded-lg overflow-hidden">
           <img id ="img22" src={e.image} alt="" className="w-full h-full object-cover object-center rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-110" />
@@ -272,10 +284,16 @@ setRerender(!rerender)
             <button id="check7"className="bg-black-500 hover:bg-black-700 text-white font-bold py-2 px-4 rounded transition-colors"  onClick={()=>{setArtwork(!artwork),setInp(false),setEdit(false),setAdd(false)}}>
               <img src="https://cdn-icons-png.flaticon.com/512/1987/1987925.png" alt="" />
             </button>
+            <button id="check8"className="bg-black-500 hover:bg-black-700 text-white font-bold py-2 px-4 rounded transition-colors"  onClick={deleteArtwork}>
+              <img src="/icons10.png" alt="" />
+            </button>
             </div>  
         </div>
       );
     })}
+    </div> : <div id="not">Not found !!!</div>
+     }
+    
   </div>
 </div>
           </div>

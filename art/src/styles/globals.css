@@ -1676,13 +1676,22 @@ font-size: 60px;}
 #check7{
   width: 75px;
   height: 20px;
-  margin-left: 85px;
+  margin-left: 75px;
+}
+#check8{
+  margin-left: -20px;
+  width: 75px;
+  height: 20px;
 }
 
 #haya{
   background-color: red;
 }
 
+#not{
+  color: red;
+  height: 300px;
+}
 #descri{
   margin-top: 40px;
   margin-left: -20px;
