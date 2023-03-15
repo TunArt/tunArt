@@ -51,15 +51,14 @@ try {
 
 const update = async (req: Request, res: Response) => {
   try {
-    const { newState } = req.body;
+    const { state } = req.body;
     const { id } = req.params;
     const upda = await Artist_Product.update(
-      { state: newState },
+      { state: state },
       {
         where: {
-          artistId: id,
-          [Op.or]: [{ state: 'failed' }, { state: 'peding' }] // use [Op.or] to specify OR condition
-        }
+          productId: id, 
+         }
       }
     );
     res.sendStatus(200);

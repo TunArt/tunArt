@@ -46,6 +46,9 @@ const Bucket = (props: Props) => {
       route.push('/404')
     })
   }
+  const x=data.filter((e)=>{  console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',e) 
+     return  (e.artistproducts.state) !=="succes"})
+     console.log("test",x)
   let tPrice = 0
   const som = (x: number) => {
     tPrice += x
@@ -82,20 +85,6 @@ const Bucket = (props: Props) => {
         amount: tPrice * 100,
       });
       route.push({ pathname: res.data.result.link });
-
-      await Promise.all(
-        data.map(async (e) => {
-          console.log(e)
-          const { id, userpro, quantity } = e;
-          const updatedQuantity = quantity - userproducts.quantityBought;
-
-          await axios.put(`http://localhost:3000/api/products/soled/${id}`, {
-            quantity: updatedQuantity,
-          });
-          handleDelete(userproducts.userId, userproducts.productId);
-        })
-      );
-
       return true;
     } catch (error) {
       console.error(error);
@@ -150,9 +139,7 @@ const Bucket = (props: Props) => {
                         <div className="mt-8">
                           <div className="flow-root">
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
-                              { data.filter((product)=>{ console.log("filter ",product)
-                                return  product.artistproducts.state!=="success"})
-                              .map((product, i) => {
+                              { x.map((product, i) => {
                                 console.log("product", product)
                                 { som(product?.price * (product.userproducts?.quantityBought ? product.userproducts?.quantityBought : product.artistproducts.quantityBought)) }
 
