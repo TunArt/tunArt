@@ -1378,12 +1378,26 @@ width: 190px;
   animation-fill-mode: forwards;
 }
 
-#text {
-  margin-top: -60px;
+#text22 {
+  margin-top: -200px;
   padding: 40px;
   margin-left: 380px;
   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 30px;
+  width: 230px;
+}
+
+#h33{
+margin-left: 380px;
+width: 400px;
+font-size: 32px;
+font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+color: rgb(146, 96, 3);
+}
+
+#no{
+width: 190px;
+margin-left: 350px;
 }
 
 #form1{

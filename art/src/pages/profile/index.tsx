@@ -270,7 +270,7 @@ setRerender(!rerender)
           <div id="container5">
   <div className="container grid gap-1  md:grid-cols-3 mt-3">
     {artWorks.length ? <div>   
-      <h4 id="text" className="text-2xl font-bold text-orange-700 hover:text-orange-500 transition-colors"><b>All posts</b></h4>
+      <h4 id="text22" className="text-2xl font-bold text-orange-700 hover:text-orange-500 transition-colors"><b>All posts</b></h4>
       {artWorks.map((e, i) => {
       return (
         <div id="cheeck" key={i} className="relative rounded-lg overflow-hidden">
@@ -291,7 +291,8 @@ setRerender(!rerender)
         </div>
       );
     })}
-    </div> : <div id="not">Not found !!!</div>
+    </div> : <div><img id="no" src="/nooo.png" alt=""/>
+    <h3 id="h33">no items</h3></div> 
      }
     
   </div>
