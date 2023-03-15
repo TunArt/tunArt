@@ -252,14 +252,14 @@ strong {
 
 a {
   text-decoration: none;
-  color: #e4e25e;
+  color: #b4b4b1;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
 
 a:hover {
   text-decoration: none;
-  color: #233dd2;
+  color: #d28c23;
 }
 
 a:not([href]):not([tabindex]) {

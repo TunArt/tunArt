@@ -26,10 +26,10 @@ function App(): JSX.Element {
   // console.log("item id",ArtId);
 
   const joinRoom = () => {
-    if (room !== "") {
-      socket.emit("join_room", room);
-      // alert("room-joined");
-    }
+    // if (room !== "") {
+    //   socket.emit("join_room", room);
+    //   // alert("room-joined");
+    // }
   };
 
   const sendMessage = () => {
@@ -62,10 +62,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     
-  //   setTimeout(() => {
-  //    setRoom(ArtId);
-  //    joinRoom();
-  //  }, 500)
+
 
     axios
       .get("http://localhost:3000/api/messages/getmessages")
@@ -158,7 +155,7 @@ function App(): JSX.Element {
 
                 </div>
 
-              <p key={index} className={styles.oneMessage}>
+              <p key={index} className={styles.oneMessage} style={{"margin-top":"-5%"}}>
                 {e}
               </p>
               </div>
