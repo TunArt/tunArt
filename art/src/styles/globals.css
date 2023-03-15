@@ -99,6 +99,10 @@ a {
   background-color: blue;
 margin-left: -41rem;}
 
+body{
+  background-color: rgb(0, 0, 0);
+
+}
 
 /* body{
   background-color: beige;
@@ -469,6 +473,7 @@ a>code {
   margin-left: auto;
   padding-right: 15px;
   padding-left: 15px;
+  /* margin-top: -10px; */
 }
 
 @media (min-width: 576px) {

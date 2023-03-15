@@ -5,7 +5,7 @@ const ResponsiveImageZoom = ({ src, alt }:any) => {
   return (
     <div className="relative w-full h-0" style={{ paddingBottom: "100%" }}>
       <ImageZoom
-        className="absolute top-0 left-1 w-full h-full object-cover"
+        className="absolute top-7 left-1 w-full h-full object-cover"
         {...{
           smallImage: {
             alt: alt,
