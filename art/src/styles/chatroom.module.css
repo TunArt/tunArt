@@ -46,7 +46,8 @@ margin-bottom:-2.5%;
     display: hidden;
     position: relative;
     border-radius: 5%;
-    scroll-behavior:auto
+    scroll-behavior:auto;
+    z-index:-1;
   }
   .discussion::-webkit-scrollbar {
     display:none;
