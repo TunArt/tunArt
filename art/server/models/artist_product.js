@@ -1,11 +1,12 @@
 // it's a join table for many-to-many association between user and product .
+const { DataTypes } = require('sequelize');
 
 'use strict';
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class UserProduct extends Model {
+  class ArtistProduct extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,9 +14,7 @@ module.exports = (sequelize, DataTypes) => {
      */
   }
   
-  UserProduct.init({
-    userId:DataTypes.INTEGER,
-    productId:DataTypes.INTEGER,
+  ArtistProduct.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -25,13 +24,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0
     },
+    artistId:DataTypes.INTEGER,
+    productId:DataTypes.INTEGER,
     state:{
       type:DataTypes.STRING,
       defaultValue:'pending'
     }
-  }, {
+    }, {
     sequelize,
-    modelName: 'UserProduct',
+    modelName: 'ArtistProduct',
   });
-  return UserProduct;
+  return ArtistProduct;
 };
