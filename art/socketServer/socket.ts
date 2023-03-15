@@ -21,26 +21,13 @@ let interval:any;
 
 
 io.on("connection", (socket: Socket) => {
-  if (interval) clearInterval(interval);
-  console.log('User connected');
-
-  interval = setInterval(() => io.emit('serverTime', { time: new Date().getTime() }) , 1000);
-
-  socket.on("bid", ({ bid }: { bid: number }) => {
-    if (bid > highestBid) {
-      highestBid = bid;
-      socket.emit("message", { message: `Your bid of ${bid} is the highest.` });
-    } else {
-      socket.emit("message", { message: `Sorry, your bid of ${bid} is not the highest.` });
-    }
-  });
-
- socket.on("disconnect", () => {
-    console.log('user disconnected');
-    clearInterval(interval);
+  socket.on("bid", ( bid : { currentBidder:number;currentPrice:number;artWorkId:number }) => {
+    console.log('this is the bid from the server',bid)
+    socket.emit("currentBid",bid);
+   
   });
 });
 
-server.listen(3001, () => {
-  console.log("listening on *:3001");
+server.listen(3006, () => {
+  console.log("listening on *:3006");
 });

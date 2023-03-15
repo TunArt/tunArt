@@ -30,24 +30,22 @@ io.on("connection", (socket: Socket) => {
   });
 
 socket.on("send_message", (data: { arr: string[]; room: string; message: string }) => {
+  console.log("send message", data);
 socket.to(data.room).emit("receive_message", data);
-console.log("send message", data);
-});
-
-socket.emit("currentBid", { highestBid, highestBidder });
-
-socket.on("bid", ({ bid }: { bid: number }) => {
-  if (bid > highestBid) {
-    highestBid = bid;
-    socket.emit("message", { message: `Your bid of ${bid} is the highest.` });
-  } else {
-    socket.emit("message", { message: `Sorry, your bid of ${bid} is not the highest.` });
-  }
-});
 });
 
 
 
+// socket.on("bid", ( bid : { currentBidder:number;currentPrice:number;artWorkId:number }) => {
+//   console.log('this is the bid from the server',bid)
+//   socket.emit("currentBid",bid);
+ 
+// });
+
+})
+// currentBidder:{type:DataTypes.INTEGER},
+//     currentPrice: {type:DataTypes.INTEGER},
+//     artWorkId:
 
 
 

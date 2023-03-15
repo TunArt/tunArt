@@ -12,7 +12,7 @@ import Pie from "./comp/Pie";
 import Bar from "./comp/Bar";
 import Line from "./comp/Line";
 import Geography from "./comp/Geography";
-// import Login from "./comp/Login.jsx";
+import Requests from "./comp/Requests.jsx"
 function App() {
 const [theme,colorMode]=useMode();
 
@@ -23,9 +23,8 @@ const [theme,colorMode]=useMode();
     <SideBar/>
     <main className="content">
       <Topbar/>
-      <Routes>
-      {/* <Route path="/" element={<Login/>}/> */}
-        <Route path="/" element={<Dashboard/>}/>
+      <Routes> 
+        <Route path="/Dashboard" element={<Dashboard/>}/>
         <Route path="/calendar" element={<Calendar/>}/>
         <Route path="/artist" element={<User/>}/>
         <Route path="/contacts" element={<Contacts/>}/>
@@ -33,6 +32,7 @@ const [theme,colorMode]=useMode();
         <Route path="/bar" element={<Bar/>}/>
         <Route path="/line" element={<Line/>}/>
         <Route path="/geography" element={<Geography/>}/>
+        <Route path="/requests" element={<Requests/>}/>
       </Routes>
     </main>
   </div>

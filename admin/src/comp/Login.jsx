@@ -1,15 +1,15 @@
-// import React, { useState } from 'react';
-// import { Button, Checkbox, Form, Input, Alert } from 'antd';
-// import { signInWithEmailAndPassword } from 'firebase/auth'
-// import { auth } from "../comp/config"
-// import axios from 'axios';
-// import styles from '../styles/login.css';
-// const Login= (props) => {
-//   console.log(props)
-//   const [form] = Form.useForm();
-//   const [emailTest, setEmailTest] = useState(false);
-//   const [passwordTest, setPasswordTest] = useState(false);
-//   const [invalidCredentials, setInvalidCredentials] = useState(false);
+import React, { useState } from 'react';
+
+import { Button, Checkbox, Form, Input, Alert } from 'antd';
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from "../comp/config"
+import axios from 'axios';
+import styles from '../styles/login.css';
+const Login= () => {
+  const [form] = Form.useForm();
+  const [emailTest, setEmailTest] = useState(false);
+  const [passwordTest, setPasswordTest] = useState(false);
+  const [invalidCredentials, setInvalidCredentials] = useState(false);
 
 //   const validateEmail = (rule, value) => {
 //     if (value && !/^\S+@\S+\.\S+$/.test(value)) {
@@ -34,23 +34,22 @@
 //         const { email, password } = values;
 //         const res = await signInWithEmailAndPassword(auth, email, password);
         
-//         console.log("res:",res)
-//         try {
-//           const res = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
-//           console.log(res.data);
+        console.log("res:",res)
+        try {
+          const res = await axios.get(`http://localhost:3000/api/users/getUser/${email}`);
+          console.log(res.data);
+          if(res.data.role === "admin"){window.location.href="/Dashboard"}
+
           
-//         } catch (err) {
-//           console.log('test');
-//           const res = await axios.get(`http://localhost:3000/api/artists/getArtist/${email}`);
-//           localStorage.setItem("id",res.data.id)
-//           localStorage.setItem("email",res.data.email)
-//         }
-//       } catch (error) {
-//         setInvalidCredentials(true);
-//         return false;
-//       }
-//     }
-//   };
+        } catch (err) {
+        console.log(err)  
+        }
+      } catch (error) {
+        setInvalidCredentials(true);
+        return false;
+      }
+    }
+  };
 
 //   const handleFinishFailed = (error) => {
 //     console.log('Error:', error);

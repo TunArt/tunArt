@@ -138,6 +138,17 @@ const addArtwork = async (req: Request, res: Response) => {
     }
   }
 
+  const AllArtworks = async(req:Request,res:Response) => {
+    try {
+      const art=await  Artwork.findAll({where:
+          {verified:true}  })
+          res.status(200).json(art)
+    } 
+    catch (error) {
+        res.status(500).send("failed to add artwork")
+    }
+  }
+
 
     // update User information in database
    const updateArtWork= (req:Request, res:Response)=> {
@@ -194,5 +205,5 @@ const deleteArtWork= (req:Request, res:Response)=> {
       console.log(err)
   }
   }
-export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks, getLimitedlArtworks, getOneArtwork, getArtistName};
+export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks, getLimitedlArtworks, getOneArtwork, getArtistName,AllArtworks};
 
