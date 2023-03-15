@@ -1,18 +1,11 @@
 
 .app{
-    /* padding:100px; */
     margin-top:-3%;
    
-    background-color: white;
     width:100%;
     height:46rem;
-    /* background-image: url(https://c1.wallpaperflare.com/path/802/669/276/architecture-blank-box-clean-9a1f4b3e4a180cf4e124ee3d0d1c4141.jpg); */
-    /* background-image: url(https://r4.wallpaperflare.com/wallpaper/339/179/774/digital-art-low-poly-artwork-minimalism-wallpaper-7836ad3840b03c28007c615ef852941a.jpg); */
-        /* background-image: url(https://th.wallhaven.cc/small/1k/1k2pe1.jpg); */
-        /* background-image: url(https://c1.wallpaperflare.com/path/69/980/896/texture-structure-wall-background-973732e49fa6b21175f810d985cabc5b.jpg); */
- background: rgb(142,142,142);
-background: linear-gradient(90deg, rgba(142,142,142,1) 5%, rgba(255,255,255,1) 81%);
-/* background-position-y: 50%; */
+  
+ 
     background-size: cover;
     background-repeat: no-repeat;
     overflow-x:hidden ;
@@ -23,12 +16,12 @@ background: linear-gradient(90deg, rgba(142,142,142,1) 5%, rgba(255,255,255,1) 8
 
 .title{
     /* color:rgb(196, 173, 135); */
-    color:black;
+    color:rgb(255, 153, 58);
     font-size:45px;
     text-align: center;
     margin-left: -1.5%;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
-    background-color: rgb(179, 178, 178);
+    /* background-color: rgb(179, 178, 178); */
 width: 21%;
 height: 17.5%;
 text-align: center;
@@ -39,13 +32,13 @@ opacity: 80%;
 
 }
 .title2{
-  color:rgb(0, 0, 0);
+    color:rgb(255, 153, 58);
   font-size:50px;
  /* text-align: end; */
-margin-top: -6.8%;
+margin-top: -22.8%;
 margin-left: 69%;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-background-color: rgb(218, 218, 218);
+/* background-color: rgb(218, 218, 218); */
 width: 23%;
 text-align: center;
 opacity: 85%;
@@ -58,7 +51,9 @@ border-radius: 5%;
     margin-bottom: 7%;
 margin-left:  42%;
 border-style: outset;
-border-width: 8px;
+border-width: 8px ;
+border-color: rgb(168, 165, 165);
+
 }
 
 .app p{
@@ -80,17 +75,17 @@ border-width: 8px;
 .img2{
     height: 19rem;
     width: 15rem;
-    margin-top: -27%;
+    margin-top: -29.5%;
     margin-left: 11.1%;
 }
 
-.img3{
+/* .img3{
     height: 3rem;
     width:13rem;
     margin-top: -20.8%;
     margin-left: 12%;
     display: hidden;
-}
+} */
 
 .footer {
     width:100%;
