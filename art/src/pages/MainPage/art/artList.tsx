@@ -11,16 +11,15 @@ const ArtList=(props)=>{
     const[children, setChildren]=useState("")
     const[page,setPage]=useState(1);
     const route=useRouter()
-
+console.log('ele',props.element)
     const isAuction= props.element.auction ? "Auction" :"Sell"
     const isForSaleOrBid = props.element.auction ? "Bid" :"Buy"
-
     const showHide=()=>{
         setToggle(!toggle);
     }
     const BuyRedirect=()=>{
-        var pathAuction ="/MainPage/auctions/auctions"
-        var pathBuy="/MainPage/art/artPurchase"
+        var pathAuction ="/bid/"
+        var pathBuy="/MainPage/art/artPurchase2/"
         if(props.element.auction){
             {
                 route.push(pathAuction)
@@ -49,18 +48,31 @@ function BoldText({children}) {
 					</div>
 				  	<div className={styles.back}>
 						<div className={styles.inner}>
-                    <BoldText>Art Name:</BoldText>{" "+props.element.name+" "}<br/>
+                    <BoldText>Art Name:</BoldText>{" "+props.element.name}<br/>
                     <BoldText>Price:</BoldText>{" "+props.element.price+" $"}<br/>
                     <BoldText>Selling Type:</BoldText>{" "+isAuction}<br/>
-                    <BoldText>Creation Date:</BoldText>{" "+props.element.creationDate+" "}<br/>
+                    <BoldText>Artist Name:</BoldText><a href="/admin">{" "+props.element.artist.name}</a><br/>
                     <BoldText>Rating:</BoldText>{" "+props.element.rating+"/10 "}<br/>
                     <BoldText>Description:</BoldText>{" "+props.element.description}<br/>
                     <button type="submit" onClick={BuyRedirect} className={styles.submitButton2}>{isForSaleOrBid}</button>
              </div>
             </div>
-            </div>
-                
-                 
+            </div>               
     )
 }
 export default ArtList;
+
+
+/*
+   <div class="box">
+      <div class="image-box">
+        <img src="https://cdns-images.dzcdn.net/images/artist/f2df383c765474945e449f3f6274b29e/500x500.jpg" alt="smash into pieces">
+      </div>
+      <div class="content">
+        <h2>smash into pieces</h2>
+        <p>a music band Swedish of alternative rock and metal alternative from Örebro. The Apocalypse DJ is the band mascot.</p>
+        <a href="https://www.smashintopieces.com/">read more</a>
+      </div>
+    </div>
+
+*/

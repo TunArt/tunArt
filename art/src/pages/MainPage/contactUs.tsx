@@ -12,10 +12,10 @@ const contactUs=()=>{
             <h1 className={styles.titles}>CONTACT US ON</h1>
             <br></br>
             <ul>
-                <li><h4>Email: contact@artfolio.com</h4></li>
-                <li><h4>Phone Number: +216 33 333 333</h4></li>
-                <li><h4>Fax: +216 44 444 444</h4></li>
-                <li><h4>Location: 123 Legendaries street-Tunis-Republic of Tunisa</h4></li>
+                <li>Email: contact@artfolio.com</li>
+                <li>Phone Number: +216 33 333 333</li>
+                <li>Fax: +216 44 444 444</li>
+                <li>Location: 123 Legendaries street-Tunis-Republic of Tunisa</li>
             </ul>
         </div>
         <Footer/>
