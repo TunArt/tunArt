@@ -27,6 +27,14 @@ const Bids: React.FC = (props) => {
     }
   }, []);
 
+  useEffect(()=>{
+    axios.get("http://localhost:3000/api/artworks/getBidArtworks/")
+    .then(response =>{
+    console.log(response.data);
+    setArts(response.data)
+  })
+  },[])
+
     // your posts data here
 console.log('pg',props.data)
 console.log(typeof(props));

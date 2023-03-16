@@ -37,13 +37,13 @@ export default function Example(props: any) {
   });
   }, []);
     const navigation = [
-    { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}`, current: false },
-    { name: 'Shop', href: `/shop?id=${props.id}`, current: false },
-    { name: 'Auctions', href: `/bid?${props.id}`, current: false },
-    { name: "Events", href: `/event`, current: false },
+    { name: 'Art Gallery', href: `/MainPage/art/art?id=${props.id}/`, current: false },
+    { name: 'Shop', href: `/shop?id=${props.id}/`, current: false },
+    { name: 'Auctions', href: `/bid?${props.id}/`, current: false },
+    { name: "Events", href: `/event/`, current: false },
     { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
     { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
-    { name: 'Reports', href: '/MainPage/reports/', current: false }
+    { name: 'Reports', href: '/MainPage/Reports/reports/', current: false }
   ]
   const userNavigation = [
     { name: 'Your Profile', href: '/profile/' },
@@ -75,7 +75,7 @@ const route=useRouter()
         <Disclosure as="nav" className="bg-gray-1000">
           {({ open }) => (
             <>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="mx-auto max-w-7xl px-4 mb-5 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">

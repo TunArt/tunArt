@@ -200,10 +200,10 @@ const Home: React.FC<Props> = () => {
         <div style={{"width":"100%"}}>
               <div >
                 <ul>
-                  <Link href=""><li>HOME</li></Link>
+                  <Link href="/MainPage"><li>HOME</li></Link>
                   <li>SERVICES</li>
-                  <Link href="#aboutUs"><li>ABOUT</li></Link>
-                  <Link href={"/"}><li>CONTACT</li></Link>
+                  <Link href="/mainPage/aboutUs"><li>ABOUT</li></Link>
+                  <Link href={"/MainPage/contactUs"}><li>CONTACT</li></Link>
                   <br />
                 </ul>
                   <button  onClick={togglePopupLogin} >LOGIN</button>
