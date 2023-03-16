@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import styles from "../../../styles/principale.module.css";
+//import styles from "../../../styles/principale.module.css";
 import style from "../../../styles/newArt.module.css";
 import TopRated from "./topRated";
 import axios from "axios";

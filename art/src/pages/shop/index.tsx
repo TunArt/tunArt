@@ -6,6 +6,7 @@ import Navbar from "../../components/navBar";
 import axios from "axios";
 import Image from "next/image";
 import Bucket from "src/components/backet/backet";
+import { json } from "sequelize";
 interface Product {
   id: number;
   name: string;
@@ -41,11 +42,11 @@ export default function Example({ items }: ProductList) {
   const [showCart,setShowcart]=useState(false)
    const [user, setUser] = useState([])
     const [artists,setArtists]=useState([])
-    const [render,setRender]=useState(false);
+    const [render,setRender]=useState(false); 
     const [currentUsrId,setCurrentUserId]=useState<string>("")
   console.log(items)
   const router = useRouter();
-  const [firstPic, setFirstPic] = useState<string>("[]");
+  
   const handleProductClick = (item: Product) => {
     router.push({
       pathname: `shop/${item.id}`,
@@ -56,67 +57,88 @@ useEffect(()=>{
   setCurrentUserId(window.localStorage.id)
 },[])
 
-  console.log(firstPic)
   return (
-    <div>
-
-     <div className="sticky top-0 z-50">
+    <>
+    {!items && <div> loading....</div>}
+    {items && <>     
+    <div className="sticky top-0 z-50"> 
 <Navbar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} />
 {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
+
+</div> 
+<div className="pt-10	 bg-gray-800">
+  <h1 className="text-center text-2xl font-bold text-blue-500">All Products</h1>
 </div>
-<div className="bg-black">
-  <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-    <h2 className="sr-only">Products</h2>
-
-
-    <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-      {items.map((item) => {
-        console.log(item.picture)
-        console.log('item',item);
-        
-        return (
-          <div key={item.id} className="bg-black">
-            <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-              {item.quantity && <img
-                width={500}
-                height={500}
-                onClick={() => handleProductClick(item)}
-                src={JSON.parse(item.picture)[0]} 
-                {console.warn(xhr.responseText)}
-                alt={item.name}
-                className="h-full w-full object-cover object-center transition duration-500 ease-in-out transform hover:scale-105 group-hover:opacity-75"
-              />}
-{!item.quantity &&  <div>
-            <div className={styles.product}>
-            <img
-                width={500}
-                height={500}
-                onClick={() => handleProductClick(item)}
-                src={JSON.parse(item.picture)[0]}
-                alt={item.name}
-                className="h-full w-full object-cover object-center transition duration-500 ease-in-out transform hover:scale-105 group-hover:opacity-75"
-              />
-  <div className={styles.productoverlay}>
-    <div className={styles.outofstock}>Out of stock</div>
-  </div>
+<div className="flex flex-wrap items-center  overflow-x-auto overflow-y-hidden py-10 justify-center   bg-gray-800 text-white">
+	<a rel="noopener noreferrer" href="#" className="flex items-center flex-shrink-0 px-5 py-3 space-x-2text-white">
+		<svg width={16} height={16} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+			<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+		</svg>
+		<span>Start Up</span>
+	</a>
+	<a rel="noopener noreferrer" href="#" className="flex items-center flex-shrink-0 px-5 py-3 space-x-2 rounded-t-lg text-white">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+			<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+			<path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+		</svg>
+		<span>Tools</span>
+	</a>
+	<a rel="noopener noreferrer" href="#" className="flex items-center flex-shrink-0 px-5 py-3 space-x-2  text-white">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+			<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+		</svg>
+		<span>Best rated</span>
+	</a>s
 </div>
+<div className="mx-auto grid max-w-6xl grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+{items.map((item,i)=>{
+return (
 
-              
-            </div>}
-            
-             
-            </div>
-      
-            <h3 className="mt-4 text-sm text-gray-700 text-orange-500">{item.name}</h3>
-            <p className="mt-1 text-lg font-medium text-gray-900 text-orange-500">{item.price}</p>
+  <section className="py-10 bg-transparent	" key={i} onClick={()=>{
+    handleProductClick(item)
+  }}>
+      <article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+      <a href="#">
+        <div className="relative flex items-end overflow-hidden rounded-xl">
+          <img src={(JSON.parse(item.picture)[0])} alt="Hotel Photo" />
+          <div className="flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-1.5 text-white duration-100 hover:bg-blue-600">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-4 w-4">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+            </svg>
+
+            <button className="text-sm">Add to cart</button>
           </div>
-          
+        </div>
 
-        )
-      })}
-    </div>
-  </div>
-</div>
+        <div className="mt-1 p-2">
+          <h2 className="text-slate-700">{item.name}</h2>
+          <p className="mt-1 text-sm text-slate-400">{item.brand}</p>
+
+          <div className="mt-3 flex items-end justify-between">
+              <p className="text-lg font-bold text-blue-500">{item.price}DT</p>
+
+            <div className="flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-1.5 text-white duration-100 hover:bg-blue-600">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-4 w-4">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+              </svg>
+
+              <button className="text-sm">Add to cart</button>
+            </div>
+          </div>
+        </div>
+      </a>
+    </article>
+</section>
+)
+
+})}
+          </div>
+</> }
+ 
+
+
+
+
 <Footer/>
 </div>
   );

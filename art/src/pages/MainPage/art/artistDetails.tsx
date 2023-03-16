@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styles from "../../../styles/principale.module.css";
+import style from "../../../styles/newArt.module.css";
 import NavBar from "../../../components/navBar";
 import Footer from "../footer/footer";
 import { useRouter } from 'next/router';
@@ -35,26 +36,61 @@ const ArtistDetails=()=>{
         })    
     },[])
 
+    // const BuyRedirect=()=>{
+    //     var pathAuction ="/bid/"
+    //     var pathBuy="/MainPage/art/artPurchase2/"
+    //     if(props.element.auction){
+    //         {
+    //             route.push(pathAuction)
+    //         }
+    //     }  
+    //     else{
+    //         route.push({pathname: pathBuy,
+    //             query:{item:JSON.stringify(props.element)}
+    //     }) }  
+    // }
+
+
+function BoldText({children}) {
+    return <span style={{fontWeight: 'bold'}}>{children}</span>;
+  }
+
+  console.log("data ==> ", imgs);
+  
     return(
         <>
         <div className={styles.all}>
             <NavBar/>
             <p className={styles.titles}>Artist Details</p>
             <img src={details.picture} style={{height:"200px", width:"200px", marginLeft:"100px", alignContent:"center"}}/>
-            <ul style={{marginLeft:"100px"}}>{details.name}</ul>
-            <ul style={{marginLeft:"100px"}}>{details.bio}</ul>
-            <ul style={{marginLeft:"100px"}}>{details.email}</ul>
-            <ul style={{marginLeft:"100px"}}>{details.birthDate}</ul>
-            <ul style={{marginLeft:"100px"}}>{details.id}</ul>
+            <ul style={{marginLeft:"100px", color:"white"}}>{"Name: "+details.name}</ul>
+            <ul style={{marginLeft:"100px",color:"white"}}>{"Bio: "+details.bio}</ul>
+            <ul style={{marginLeft:"100px",color:"white"}}>{"E-mail: "+details.email}</ul>
+            <ul style={{marginLeft:"100px",color:"white"}}>{"Date of Birth: "+details.birthDate}</ul>
+            <ul style={{marginLeft:"100px",color:"white"}}>{"Artist's ID: "+details.id}</ul>
         </div>
         <h1>Some of the artits's artworks</h1>
-        <div className={styles.cols}>
+        <div className={style.all}>
+        
+        <div className={style.Container}>
             {imgs.map((ele)=>(  
-                <div className={styles.col} >
-                    <img src={ele.image} style={{width:"200px", height:"200px"}}/>
+                <div>
+                <div className={style.box}>
+                <div className={style.imageBox}>
+                  <img src={ele.image} alt="pic"/>
                 </div>
+                <div className={style.content}>
+                  <h2><BoldText>Art Name:</BoldText>{" "+ele.name}<br/></h2>  
+                  <p><BoldText>Artist Name:</BoldText>{" "+ele.artist.name}<br/></p>
+                  <p><BoldText>Price:</BoldText>{" "+ele.price+" $"}<br/></p>
+                  <p><button  className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded" style={{marginRight:"80px", marginTop:"40px"}}>BUY</button></p>
+                </div>
+              </div>
+              </div>
             ))}
             
+        </div>
+        
         </div>
             <br/><br/>
         <Footer/>

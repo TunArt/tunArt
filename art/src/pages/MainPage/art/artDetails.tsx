@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import style from "../../../styles/newArt.module.css";
-import styles from "../../../styles/principale.module.css";
+//import styles from "../../../styles/principale.module.css";
 import Link from "next/link";
 import {useRouter} from "next/router";
 //import { query } from "express";
