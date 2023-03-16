@@ -10,7 +10,11 @@ const Artist = db.artist
 //methods to get all the artworks
 const getAllArtworks = async (req:Request ,res:Response) =>{
     try {
-        let  artworks= await Artwork.findAll()
+        let  artworks= await Artwork.findAll({
+          where: {
+            verified:true
+          }
+        })
         res.status(200).send(artworks)
 }
 catch (err){
@@ -26,7 +30,8 @@ const getTopArtworks = async (req:Request ,res:Response) =>{
           ["rating", "DESC"]
         ],
         limit : 3,
-        include: Artist
+        include: Artist,
+        verified:true
       })
       res.status(200).send(artworks)
 }
@@ -39,6 +44,7 @@ catch (err){
 const getLimitedlArtworks = async (req:Request ,res:Response) =>{
   try {
       let  artworks= await Artwork.findAll({
+        where: {verified: true},
         include: Artist
       })
       artworks = artworks.slice(0, parseInt(req.params.count))
@@ -52,7 +58,10 @@ catch (err){
 //method to get one artwork (search)
 const getOneArtwork = async (req:Request ,res:Response) =>{
   try {
-      let  artworks= await Artwork.findOne({ where: { name: req.params.name } })
+      let  artworks= await Artwork.findOne({ 
+        where: { name: req.params.name },
+        verified:true
+      })
       res.status(200).send(artworks)
 }
 catch (err){
@@ -180,15 +189,45 @@ const deleteArtWork= (req:Request, res:Response)=> {
       }
     }
 
-    // method that gets artist's name
-    const getArtistName = async (req:Request ,res:Response) =>{
-      try {
-          let  artworks= await Artwork.findAll({include: Artist})
-          res.status(200).send(artworks)
+  //methode to get some of artist's artworks
+  const getSomeArtworks = async (req:Request ,res:Response) =>{
+    try {
+        let  artworks= await Artwork.findAll({
+          include: Artist,
+          where:{
+            artistid: req.params.id
+          },
+          order :[
+            ["rating", "DESC"]
+          ],
+          limit : 3,
+          
+          
+        })
+        res.status(200).send(artworks)
   }
   catch (err){
-      console.log(err)
+    console.log(err)
   }
   }
-export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks, getLimitedlArtworks, getOneArtwork, getArtistName,updateArtWork,deleteArtWork};
+
+  //method to get all for bidding artworks
+  const getBidArtworks = async (req:Request ,res:Response) =>{
+    try {
+        let  artworks= await Artwork.findAll({
+          include: Artist,
+          where:{
+           auction:true,
+           verified: true
+          }
+          
+        })
+        res.status(200).send(artworks)
+  }
+  catch (err){
+    console.log(err)
+  }
+  }
+  
+export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks, getLimitedlArtworks, getOneArtwork, getSomeArtworks, getBidArtworks, updateArtWork, deleteArtWork};
 
