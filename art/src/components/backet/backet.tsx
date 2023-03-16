@@ -5,6 +5,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import styles from "../../styles/bucket.module.css"
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { async } from '@firebase/util'
 interface Product {
   name: string
   price: number
@@ -48,7 +49,13 @@ const Bucket = (props: Props) => {
   }
   const x=data.filter((e)=>{  console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',e) 
      return  (e.artistproducts.state) !=="succes"})
+     const y= data.filter((e)=>{
+      console.log("yooooooooooooooooooooo",e);
+      
+      return (e.artistproducts.state )==="succes"
+    })
      console.log("test",x)
+     console.log("hala bi3yal",y)
   let tPrice = 0
   const som = (x: number) => {
     tPrice += x
@@ -83,7 +90,16 @@ const Bucket = (props: Props) => {
     try {
       const res = await axios.post('http://localhost:3000/api/payments/pay', {
         amount: tPrice * 100,
-      });
+      })
+      x.map(async(e,i)=>{
+        console.log(i,e)
+         await axios.put(`http://localhost:3000/api/products/soled/${e.artistproducts.productId}`,{
+          quantity:e.quantity - e.artistproducts.quantityBought
+
+        }).then((res)=>{console.log(res);
+        })
+      })
+
       route.push({ pathname: res.data.result.link });
       return true;
     } catch (error) {
