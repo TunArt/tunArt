@@ -4,14 +4,15 @@ import ImageZoom from './ImageZoom';
 import styles from "src/styles/bid.module.css"
 import { url } from 'inspector';
 interface DetailProps {
-  id: number,
-  title: string,
-  href: string,
-  img: string,
-  date: string,
-  datetime: string,
-  category: any,
-  author:any
+  name: string,
+  startDate: Date,
+  endDate: Date,
+  creationDate: Date,
+  price: number,
+  rating: number,
+  description: string,
+  auction: boolean,
+  image: string,
 }
 
 const Detail :React.FC<DetailProps>= (props:any) => {
@@ -24,7 +25,10 @@ const Detail :React.FC<DetailProps>= (props:any) => {
     <div className={styles.detail}>
         {/* <img className={styles.img1} src={props.img}  /> */}
         <div  className={styles.img1}> 
-          <ImageZoom src={props.image} style={{width:"200px", height:"200px"}} alt="img" /></div>
+          <ImageZoom
+        src={props.image}
+        alt="img"
+      /></div>
        
         {/* <div className={styles.info}>
           <div className="relative z-10 rounded-full bg-gray-50 py-1.5 px-3 font-medium text-gray-600 hover:bg-gray-100">{props.title}</div>

@@ -3,6 +3,8 @@ import { Box } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../theme";
 //import { mockDataContacts } from "../data/mockData";
+import {  Typography } from "@mui/material";
+import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import Header from "../components/Header";
 import { useTheme } from "@mui/material";
 import axios from "axios"
@@ -27,24 +29,12 @@ const Contacts = () => {
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "registrarId", headerName: "Registrar ID" },
+    // { field: "registrarId", headerName: "Registrar ID" },
     {
-      field: "name",
+      field: "userName",
       headerName: "Name",
       flex: 1,
       cellClassName: "name-column--cell",
-    },
-    {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
-    },
-    {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
     },
     {
       field: "email",
@@ -52,27 +42,53 @@ const Contacts = () => {
       flex: 1,
     },
     {
-      field: "address",
-      headerName: "Address",
+      field: "birthDate",
+      headerName: "BirthDate",
       flex: 1,
     },
     {
-      field: "city",
-      headerName: "City",
+      field: "phoneNumber",
+      headerName: "PhoneNumber",
       flex: 1,
     },
+ 
+  
     {
-      field: "zipCode",
-      headerName: "Zip Code",
+      field: "accessLevel",
+      headerName: "Access Level",
       flex: 1,
-    },
+      renderCell: () => {
+        return (
+          <Box
+            width="60%"
+            m="0 auto"
+            p="5px"
+            display="flex"
+            justifyContent="center"
+            backgroundColor={
+              // access === "admin"
+                 colors.greenAccent[600]
+                //: access === "manager"
+                // ? colors.greenAccent[700]
+                // : colors.greenAccent[700]
+            }
+            borderRadius="4px"
+          >
+                <LockOpenOutlinedIcon />
+            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
+             User
+            </Typography>
+          </Box>
+              );
+            },
+          },
   ];
 
   return (
     <Box m="20px">
       <Header
-        title="CONTACTS"
-        subtitle="List of Contacts for Future Reference"
+        title="USERS"
+        subtitle="Managing the User Members"
       />
       <Box
         m="40px 0 0 0"

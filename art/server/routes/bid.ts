@@ -6,5 +6,6 @@ routes.get('/getBids', Bid.getAllBids)
 routes.post('/addBid', Bid.addBid)
 routes.put('/updateBid/:id', Bid.updateBid)
 routes.delete('/deleteBid/:id', Bid.deleteBid)
+routes.get('/getAll/:id',Bid.getAll)
 
 export default routes

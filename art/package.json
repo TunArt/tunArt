@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "socket": "nodemon socketServer/index.ts"
+    "socket": "nodemon socketServer/index.ts",
+    "socket2": "nodemon socketServer/socket.ts"
   },
   "dependencies": {
     "@cloudinary/react": "^1.11.1",
@@ -62,6 +63,7 @@
     "sequelize": "^6.29.0",
     "socket.io-client": "^4.6.1",
     "swiper": "^9.1.0",
+    "timer-component": "^1.0.3",
     "typescript": "4.9.5",
     "w3-css": "^4.1.0"
   },
