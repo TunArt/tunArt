@@ -14,10 +14,10 @@ const Detailimg :React.FC<DetailProps>= (props:any) => {
   return (
       <div className="group relative">
               <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"/>
-                <a href={props.href}>
+                {/* <a href={props.href}>
                   <span className="absolute inset-0" />
-                  {props.name}
-                </a>
+                  {props.title}
+                </a> */}
                 </div>
   )
 }

@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 const socket: Socket = io("http://localhost:3001");
 
 function App(): JSX.Element {
+ 
+
   // Room State
   const [room, setRoom] = useState<string>("");
 
@@ -61,7 +63,6 @@ function App(): JSX.Element {
   };
 
   useEffect(() => {
-    
 
 
     axios

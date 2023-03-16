@@ -15,6 +15,17 @@ catch (err){
     console.log(err)
 }
 }
+const getAll = async (req:Request ,res:Response) =>{
+  try {
+      let  bids=await Bid.findAll({where:{artWorkId:req.params.id}}
+        // {include:["message", "users"]}
+        )
+      res.status(200).send(bids)
+}
+catch (err){
+  console.log(err)
+}
+}
 
 //  method to add  a new bid
 const addBid = (req: Request, res: Response) => {
@@ -85,6 +96,6 @@ const deleteBid= (req:Request, res:Response)=> {
     }
   
 
-export default {getAllBids,addBid,updateBid,deleteBid};
+export default {getAllBids,addBid,updateBid,deleteBid,getAll};
 
 

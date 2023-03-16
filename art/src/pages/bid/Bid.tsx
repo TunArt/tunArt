@@ -11,19 +11,19 @@ import timeStyle from "../../styles/time.module.css"
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import Timer from '../../components/Timer.tsx';
 interface DetailProps {
-    id: number,
-    title: string,
-    href: string,
-    img: string,
-    date: string,
-    datetime: string,
-    category: any,
-    author:any
-    post?:any
-  }
+    name: string,
+    startDate: Date,
+    endDate: Date,
+    creationDate: Date,
+    price: number,
+    rating: number,
+    description: string,
+    auction: boolean,
+    image: string,
+}
 const Bid: React.FC <DetailProps>= (props:DetailProps) => {
     const router=useRouter()
-    // console.log(router.query.img,"test");
+     console.log(router.query.img,"test");
     const detailProps =  { ...router.query, ...props };
     // console.log("propsss",props);
 

@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid , GridToolbar} from "@mui/x-data-grid";
 import { tokens } from "../theme";
 //import { mockDataTeam } from "../data/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
@@ -34,27 +34,36 @@ const User = () => {
       cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
+      field: "bio",
+      headerName: "Bio",
+     // type: "number",
       headerAlign: "left",
       align: "left",
-    },
-    {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
     },
     {
       field: "email",
       headerName: "Email",
       flex: 1,
     },
+   {
+      field: "phoneNumber",
+      headerName: "Phone Number",
+      flex: 1,
+    },
+    // {
+    //   field: "age",
+    //   headerName: "Age",
+    //   type: "number",
+    //   headerAlign: "left",
+    //   align: "left",
+    // },
+  
+ 
     {
       field: "accessLevel",
       headerName: "Access Level",
       flex: 1,
-      renderCell: ({ row: { access } }) => {
+      renderCell: () => {
         return (
           <Box
             width="60%"
@@ -63,19 +72,20 @@ const User = () => {
             display="flex"
             justifyContent="center"
             backgroundColor={
-              access === "admin"
-                ? colors.greenAccent[600]
-                : access === "manager"
-                ? colors.greenAccent[700]
-                : colors.greenAccent[700]
+              // access === "admin"
+                 colors.greenAccent[600]
+                //: access === "manager"
+                // ? colors.greenAccent[700]
+                // : colors.greenAccent[700]
             }
             borderRadius="4px"
           >
-            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
+            {/* {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
             {access === "manager" && <SecurityOutlinedIcon />}
-            {access === "user" && <LockOpenOutlinedIcon />}
+            {access === "user" && <LockOpenOutlinedIcon />} */}
+             <AdminPanelSettingsOutlinedIcon />
             <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {access}
+             Artist
             </Typography>
           </Box>
         );
@@ -85,8 +95,8 @@ const User = () => {
 
   return (
     <Box m="20px">
-      <Header title="TEAM" subtitle="Managing the Team Members" />
-      <Box
+      <Header title="ARTIST" subtitle="Managing the Artist Members" />
+   <Box
         m="40px 0 0 0"
         height="75vh"
         sx={{
@@ -113,9 +123,12 @@ const User = () => {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+          },
         }}
       >
-        <DataGrid checkboxSelection rows={data} columns={columns} />
+        <DataGrid checkboxSelection rows={data} columns={columns}  components={{ Toolbar: GridToolbar }}/>
       </Box>
     </Box>
   );

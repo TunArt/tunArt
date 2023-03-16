@@ -16,12 +16,15 @@ const io: SocketServer = new SocketServer(server, {
 let highestBid = 0;
 let highestBidder = "";
 io.on("connect", (socket: Socket) => {
+
+io.on("connect", (socket: Socket) => {
   console.log(`User Connected: ${socket.id}`);
   // socket.on("send", (str: string) => {
   //   console.log(str);
   //   socket.emit("recieve", str)
   //   socket.broadcast.emit("recieve", str)
   // })
+  
   socket.on("bid", ( bid : { currentBidder:number;currentPrice:number;artWorkId:number }) => {
     console.log('this is the bid from the server',bid)
     socket.emit("currentBid",bid);
