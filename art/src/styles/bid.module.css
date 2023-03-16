@@ -1,3 +1,4 @@
+
 .img{
     
     border-radius: 20px
@@ -49,17 +50,31 @@ display: flex;
 width: 90%;
 margin-left: 5%;
 }
+.div2{
+    margin-top: 15%;
+    margin-left: 1%;
+    display: block;
+    /* background-color: brown; */
+    
+}
 .div3{
-    margin-top: 6%;
+    margin-top: -1%;
     margin-left: 1%;
     width: 45%;
     color: aliceblue;
     /* background-color: brown; */
 }
-.div2{
-    margin-top: 15%;
-    margin-left: 1%;
-    display: block;
-/* background-color: brown; */
 
-    }
+
+
+   #bidform{
+    width: 70%;
+   }
+
+   #price{
+    width: 30%;
+    margin-left: 2%;
+    border: 1px solid #ccc;
+margin-top: 5%;
+border-radius: 10px;
+   }

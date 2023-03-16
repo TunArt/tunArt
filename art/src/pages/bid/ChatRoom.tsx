@@ -26,10 +26,10 @@ function App(): JSX.Element {
   // console.log("item id",ArtId);
 
   const joinRoom = () => {
-    // if (room !== "") {
-    //   socket.emit("join_room", room);
-    //   // alert("room-joined");
-    // }
+    if (room !== "") {
+      socket.emit("join_room", room);
+      // alert("room-joined");
+    }
   };
 
   const sendMessage = () => {
