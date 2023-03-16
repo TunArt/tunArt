@@ -58,7 +58,7 @@ useEffect(()=>{
 },[])
 
   return (
-    <>
+  <div>
     {!items && <div> loading....</div>}
     {items && <>     
     <div className="sticky top-0 z-50"> 
