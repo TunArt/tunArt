@@ -36,7 +36,7 @@ const Bid: React.FC <DetailProps>= (props:DetailProps) => {
        <Navbar/>
             <div className={style.div1}>
                 <div className={style.div2}>
-            <Detail  {...detailProps} />
+            {/* <Detail  {...detailProps} /> */}
              {/* <Bidding/> */}
 
                 </div>

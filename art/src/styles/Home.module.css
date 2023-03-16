@@ -63,7 +63,7 @@
       bottom: -100%;
   }
   to{
-      bottom: 5%;
+      bottom:   -10%;
   }
 }
 
@@ -148,7 +148,7 @@
   position: absolute;
   bottom: 10px;
   width: 100%;
-  margin-bottom:-164% ;
+  margin-bottom:-185% ;
 
 
 }

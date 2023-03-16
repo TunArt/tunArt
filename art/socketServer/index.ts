@@ -15,7 +15,6 @@ const io: SocketServer = new SocketServer(server, {
 });
 let highestBid = 0;
 let highestBidder = "";
-io.on("connect", (socket: Socket) => {
 
 io.on("connect", (socket: Socket) => {
   console.log(`User Connected: ${socket.id}`);
@@ -44,4 +43,4 @@ socket.to(data.room).emit("receive_message", data);
 //     artWorkId:
 server.listen(3001, () => {
   console.log("SERVER IS RUNNING AND LISTENING ...");
-});
+})
