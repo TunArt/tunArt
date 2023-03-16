@@ -94,15 +94,17 @@ const Home: React.FC<Props> = () => {
           <div id={styles.box3}>
             <div id={styles.container}>
               <div id={styles.menu}>
+                <div><img className={styles.logo} src="\tunart-website-favicon-color.png" alt="Logo" /></div>
                 <ul>
-                  <li><img className={styles.logo} src="\tunart-website-favicon-color.png" alt="Logo" /></li>
+                 
                   <Link href="/MainPage"><li>HOME</li></Link>
                   <li>SERVICES</li>
                   <Link href="/MainPage/aboutUs"><li>ABOUT</li></Link>
                   <Link href={"/MainPage/contactUs"}><li className={styles.contact}>CONTACT</li></Link>
                 </ul>
+                <div style={{marginLeft:"-5%", display:"flex"}}>
                   <button className={styles.btn} onClick={togglePopupLogin} >login</button>
-                  <button onClick={togglePopup} className={styles.btn}  >signup</button>
+                  <button onClick={togglePopup} className={styles.btn}  >signup</button></div>
               </div>
             </div>
           </div>
