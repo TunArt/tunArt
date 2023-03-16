@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from "react";
 import NavBar from "../../../components/navBar";
 import styles from "../../../styles/principale.module.css";
+import style from "../../../styles/newArt.module.css";
 import axios from "axios";
 import ArtList from "./artList";
 import Footer from "../footer/footer";
@@ -10,6 +11,9 @@ import Search from "../search/search";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Slider from "./slider";
 import Bucket from "../../../components/backet/backet"
+import ArtDetails from "./artDetails";
+import Slider2 from "./slider/slider2";
+
 
 
 const Art=()=>{
@@ -26,6 +30,7 @@ const Art=()=>{
     //const[top, setTop]=useState([]);
     const[count, setCount]=useState(0)
     const route=useRouter();
+
 useEffect(()=>{
     setCurrentUserId(window?.localStorage.id)
 },[])
@@ -33,7 +38,7 @@ useEffect(()=>{
     
     
     var fetchMoreData=async()=>{
-           await axios.get(`http://localhost:3000/api/artworks/getLimitedArtworks/${count+2}`)
+           await axios.get(`http://localhost:3000/api/artworks/getLimitedArtworks/${count+2}/`)
         .then(response => {
             console.log(response.data);
             setCount(count + 2)
@@ -42,15 +47,15 @@ useEffect(()=>{
     }
     
 return(
+    <>
     <div className={styles.all}>
     
         <div><NavBar id={currentUsrId} showCart={showCart} setShowcart={setShowcart} /></div>
         {showCart && <Bucket id={currentUsrId} setShowcart={setShowcart} />}
-    <div className={styles.wrapper}> 
+    <div className={style.box}> 
 <br />
 <br />
-        <h1 className={styles.titles}>The Gallery:</h1>
-        <br></br>
+        <h1 className={styles.titles}>THE GALLERY</h1>
         <div>
                 <Search />  
         </div>   
@@ -76,10 +81,10 @@ return(
     hasMore={true}
     loader={<h4 style={{ textAlign:'center'}}>Loading...</h4>}
   >
-        <div className={styles.cols}>   
+        <div className={style.container}>   
         {arr.map((element, index) =>(
-                <div   className={styles.col}   key={index}>
-                    <ArtList element={element} />
+                <div      key={index}>
+                    <ArtDetails element={element} />
                   </div>)          
                 )}
         </div>
@@ -87,8 +92,10 @@ return(
     }
     
     </div>
-    <Footer width={1600} height={100}/>
+    
     </div>
+    <Footer/>
+    </>
 )
 }
 export default Art;
