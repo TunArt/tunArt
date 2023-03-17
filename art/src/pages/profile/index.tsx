@@ -5,8 +5,6 @@ import Head from 'next/head'
 import styles from '../../styles/profile.module.css'
 import Navbar from  '../../components/navBar'
 
-type SwitchValue = 'sale' | 'bid';
-
 
 const ProfilePage = () => {
   const [user, setUser] = useState('');
@@ -23,7 +21,6 @@ const ProfilePage = () => {
   const [rerender,setRerender]=useState(false)
   const [auction,setauction]=useState(true)
   const [artWorks,setArtWorks]=useState([])
-  const [switchValue, setSwitchValue] = useState<SwitchValue>('sale');
 
 
 /**
