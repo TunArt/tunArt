@@ -21,7 +21,7 @@ const ProfilePage = () => {
   const [auction,setauction]=useState(true)
   const [payment,setPayment]=useState(false)
   const [artWorks,setArtWorks]=useState([])
-
+const [url,setUrl]=useState("")
 /**
    * handleOnChange
    * @description Triggers when the file input changes (ex: when a file is selected)
@@ -210,48 +210,76 @@ setRerender(!rerender)
   //   }
    
   // } 
-
-  const submitForm = () => {
-    try {
-      const formData = new FormData();
-      for (let i = 0; i < create.image.length; i++) {
-        formData.append("files", create.image[i]);
-        console.log("meerrrrrrrrrrrrrr",create.image[i])
-      }
-      axios.post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
-        .then((response) => {
-          console.log(response);
-          console.log(response.data.secure_url);
-          let imgurl = response.data.secure_url;
-          setImageSrc(response.data.secure_url);
-          console.log("img for the user", imgurl)
-          axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`, {
-            name: create.name,
-            startDate: create.startDate,
-            endDate: create.endDate,
-            creationDate: create.creationDate,
-            price: create.price,
-            description: create.description,
-            auction: auction ? 1 : 0,
-            images: response.data.urls
-          })
-            .then(response => { console.log(response) })
-        }).catch(err => console.log(err))
-    } catch {
-      alert("Sorry, the request failed. Please try again.")
-    }
-  }
+  const submitForm = (file:FormData) => {
+    console.log("from submitForm",url);
+    
+      axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`, {
+        name: create.name,
+        startDate: create.startDate,
+        endDate: create.endDate,
+        creationDate: create.creationDate,
+        price: create.price,
+        description: create.description,
+        auction: auction ? 1 : 0,
+        image: JSON.stringify (url),
+      })
+      .then(response => { console.log(response) })
+    .catch(err => console.log(err))
+  } 
   
-  const handleInputChange = (event) => {
+  
+  const uploadImage = (event) => {
     const files = event.target.files;
-    setCreate((prevState) => ({
-      ...prevState,
-      image: files,
-    }));
+    if (files.length === 1) {
+      uploadSignedImage(files[0]);
+    } else {
+      const images = [];
+      for (let i = 0; i < files.length; i++) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          images.push(event.target.result);
+          if (images.length === files.length) {
+            uploadImages(images);
+          }
+        };
+        reader.readAsDataURL(files[i]);
+      }
+    }
   };
   
+  const uploadSignedImage = (file:any) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const imageData = event.target.result;
+      axios
+        .post("http://localhost:3000/api/images/uploadImg", {
+          image: imageData,
+        })
+        .then((response) => {
+          setUrl(response.data);
+          alert("Image uploaded successfully");
+        })
+        .catch((err) => console.log(err));
+    };
+    reader.readAsDataURL(file);
+  };
+  
+  const uploadImages = (images:any) => {
+    axios
+      .post("http://localhost:3000/api/images/uploadImgs", {
+        images: images,
+      })
+      .then((response) => {
+        setUrl(response.data);
+        alert("Images uploaded successfully");
+      })
+      .catch((err) => console.log(err));
+  };
+  
+
   
   
+  console.log('urllllllllllllllllllllllllllllll',url)
   
   
   
@@ -329,9 +357,10 @@ setRerender(!rerender)
     {artWorks.length ? <div>   
       <h4 id="text22" className="text-2xl font-bold text-orange-700 hover:text-orange-500 transition-colors"><b>All posts</b></h4>
       {artWorks.map((e, i) => {
+        console.log(e)
       return (
         <div id="cheeck" key={i} className="relative rounded-lg overflow-hidden">
-          <img id ="img22" src={e.image} alt="" className="w-full h-full object-cover object-center rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-110" />
+          <img id ="img22" src={JSON.parse(e.image)[0]} alt="" className="w-full h-full object-cover object-center rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-110" />
           <div id ="check" className="absolute inset-0 flex flex-col justify-center items-center text-white font-bold text-lg hover:text-orange-500 transition-colors bg-black bg-opacity-50">
             <button id="check6" className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition-colors">
               Check
@@ -449,7 +478,7 @@ setRerender(!rerender)
   
   
   <div id="iiimg" >
-                <input type="file" name="image" multiple onChange={(event)=> {handleInputChange(event)}} />
+                <input type="file" name="image" multiple onChange={(event)=> {uploadImage(event)}} />
 
                         </div>
                         <div  className="pl-lg-4">
