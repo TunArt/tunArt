@@ -10,24 +10,20 @@ import { Alert, Space } from "antd";
 import { AiFillStar } from 'react-icons/ai'
 import { AiOutlineStar } from 'react-icons/ai'
 import StarRatingComponent from 'react-star-rating-component';
-
-
+import {Button} from "antd"
 type Product = {
   id: number;
   name: string;
   description: string;
   rating: number;
+  reviewCount:number;
   comments: string;
   price: number;
   quantity: number;
   brand: string;
   picture: any;
 };
-const product: Product = {
-  rating: 4,
-  reviewCount: 117,
 
-};
 
 function classNames(...classes: (string | undefined)[]): string {
   return classes.filter(Boolean).join(" ");
@@ -37,14 +33,26 @@ export default function Item() {
   const [backetShow, setbacketShow] = useState(false);
   const [user, setuser] = useState<boolean>(false)
   const route = useRouter();
+  console.log("route",route)
   const { query } = route || {};
-  const items = String(query?.items);
-  const item = JSON.parse(items);
-  console.log("item from [items]", item)
+  const items = query;
+  const item = items
+  console.log("item from [items]", items)
   let quantityBought = ""
   const [open, setOpen] = useState(true);
 
+  useEffect(() => {
+    axios.get(`http://localhost:3000/api/users/getUser/${localStorage.email}`)
+      .then((res) => {
+        console.log('testttttttttt',res)
+        if (res.data) setuser(true)
+        else setuser(false)
+      }).catch((err)=>{
+         console.log(err)
+      })
+  }, [])
   const [rating, setRating] = useState(0);
+  console.log(rating)
 
   const onStarClick = (nextValue:any, prevValue:any, name:any) => {
     setRating(nextValue);
@@ -57,6 +65,8 @@ export default function Item() {
   const handleImageClick = (imageUrl: string) => {
     setCurrentImage(imageUrl);
   };
+
+
   
   console.log("images for [item]", images)
   const [currentImage, setCurrentImage] = useState(images[0]);
@@ -69,13 +79,14 @@ export default function Item() {
       route.push("/shop");
     });
   };
-  useEffect(() => {
-    axios.get(`/api/users/getUser/${localStorage.email}`)
-      .then((res) => {
-        if (res.data) setuser(true)
-        else setuser(false)
-      })
-  }, [])
+ const avg=(x:string,y:string)=>{
+  let n=parseInt(x)
+  let m=parseInt(y)
+  console.log('n',n)
+  console.log("m",m);
+  if(n===0 || m ===0 ) return 0 
+  return (n/m)
+ }
   return (
     <Transition show={true}>
       <Transition.Child as={"div"}>
@@ -159,23 +170,35 @@ export default function Item() {
 
                           {/* Reviews */}
                           <div className="mt-6">
-      <h4 className="sr-only">Reviews</h4>
+      <button className="sr-only" onClick={()=>{
+        alert('hi')
+      }}>Reviews</button>
       <div className="flex items-center">
         <div className="flex items-center">
           <StarRatingComponent
             name="product-rating"
             value={rating}
             onStarClick={onStarClick}
-          />
+            />
         </div>
-        <p className="sr-only">{rating} out of 5 stars</p>
-        <a
-          href="#"
+        
+   
+       
+        <p
+          
           className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
         >
-          {product.reviewCount} reviews
-        </a>
+         Reviews made   {item.reviewCount} 
+        </p>
       </div>
+      <Button className="text-black" onClick={()=>{
+        axios.put(`http://localhost:3000/api/products/rating/${item.id}`,{
+          rating:parseInt (item?.rating)+rating,
+          reviewCount:++item.reviewCount
+        }).then((res)=>{
+          console.log(res)
+        })
+      }}>Reviews it</Button>
     </div>
 
 
@@ -192,10 +215,8 @@ export default function Item() {
                           <form>
                             {/* Colors */}
                             <div>
-                              <h4 className="text-sm font-medium text-gray-900">
-                                Color
-                              </h4>
-
+                            <p className=" text-black	">{avg((item.rating),(item.reviewCount))}  out of 5 stars</p>
+{console.log("item.rating",avg((item.rating),(item.reviewCount)))}
                               <RadioGroup className="mt-4">
                                 <RadioGroup.Label className="sr-only">
                                   {" "}
@@ -241,9 +262,9 @@ export default function Item() {
 
                                 console.log("quantityBought", quantityBought)
                                 let Qn = parseInt(quantityBought)
-                                console.log("mmmmmmmmmmmmmmm", Qn - item.quantity)
-                                if (-Qn + (item.quantity) < 0) {
-                                  alert('test')
+                                console.log("mmmmmmmmmmmmmmm",  item.quantity - Qn)
+                                if ( (item.quantity)-Qn  < 0) {
+                                
                                   setErr(true)
                                   return false
                                 }

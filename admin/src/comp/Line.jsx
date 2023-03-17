@@ -1,128 +1,108 @@
-import { useEffect,useState } from "react";
-import { Box } from "@mui/material";
-import Header from "../components/Header";
-import { ResponsiveLine } from "@nivo/line";
-import { useTheme } from "@mui/material";
-import { tokens } from "../theme";
-import { mockLineData as data } from "../data/mockData";
+import React, { useState, useEffect } from "react";
+import { Line } from "react-chartjs-2";
 import axios from "axios";
-const Line = ({ isCustomLineColors = false, isDashboard = false }) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-    const fetchingData=()=>{
-      axios.get()
+import Box from "@mui/material/Box";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  registerables,
+
+  ChartConfiguration,
+  LineController,
+  LineElement,
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+
+  LineController,
+  LineElement,
+  PointElement,
+  ...registerables
+);
+
+const ChartLine = () => {
+  const [chartData, setChartData] = useState({ labels: [], data: [] });
+  const [name, setName] = useState([]);
+  const [price, setPrice] = useState([]);
+  useEffect(() => {
+    fetchingData();
+  }, []);
+  const fetchingData = async function () {
+    let labels = [];
+    let data = [];
+    try {
+      const result = await axios.get("http://localhost:3000/api/products/getProducts");
+      console.log(result);
+      for (const dataObj of result.data) {
+        data.push(dataObj.price);
+        labels.push(dataObj.name);
+
+      }
+      console.log("filtred data", labels, data);
+      setChartData({ labels: labels, data: data });
+
+    } catch (err) {
+      console.log(err);
     }
-    useEffect(fetchingData,[])
-  return (
-    <Box m="20px">
-      <Header title="Line Chart" subtitle="Simple Line Chart" />
-      <Box height="75vh">
-      <ResponsiveLine
-      data={data}
-      theme={{
-        axis: {
-          domain: {
-            line: {
-              stroke: colors.grey[100],
-            },
-          },
-          legend: {
-            text: {
-              fill: colors.grey[100],
-            },
-          },
-          ticks: {
-            line: {
-              stroke: colors.grey[100],
-              strokeWidth: 1,
-            },
-            text: {
-              fill: colors.grey[100],
-            },
-          },
-        },
-        legends: {
-          text: {
-            fill: colors.grey[100],
-          },
-        },
-        tooltip: {
-          container: {
-            color: colors.primary[500],
-          },
-        },
-      }}
-      colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }} // added
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-      xScale={{ type: "point" }}
-      yScale={{
-        type: "linear",
-        min: "auto",
-        max: "auto",
-        stacked: true,
-        reverse: false,
-      }}
-      yFormat=" >-.2f"
-      curve="catmullRom"
-      axisTop={null}
-      axisRight={null}
-      axisBottom={{
-        orient: "bottom",
-        tickSize: 0,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: isDashboard ? undefined : "transportation", // added
-        legendOffset: 36,
-        legendPosition: "middle",
-      }}
-      axisLeft={{
-        orient: "left",
-        tickValues: 5, // added
-        tickSize: 3,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: isDashboard ? undefined : "count", // added
-        legendOffset: -40,
-        legendPosition: "middle",
-      }}
-      enableGridX={false}
-      enableGridY={false}
-      pointSize={8}
-      pointColor={{ theme: "background" }}
-      pointBorderWidth={2}
-      pointBorderColor={{ from: "serieColor" }}
-      pointLabelYOffset={-12}
-      useMesh={true}
-      legends={[
+  };
+  const data = {
+    labels: chartData.labels,
+    datasets: [
+      {
+        label: "level of price",
+        data: chartData.data,
+        backgroundColor: "rgb(75, 192, 192)",
+        borderWidth: 4,
+        tension: 0.4,
+        borderColor: "rgb(75, 192, 192)",
+      },
+    ],
+  };
+  const options = {
+    responsive: true,
+    title: { text: "Product", display: true },
+    scales: {
+
+      yAxes: [
         {
-          anchor: "bottom-right",
-          direction: "column",
-          justify: false,
-          translateX: 100,
-          translateY: 0,
-          itemsSpacing: 0,
-          itemDirection: "left-to-right",
-          itemWidth: 80,
-          itemHeight: 20,
-          itemOpacity: 0.75,
-          symbolSize: 12,
-          symbolShape: "circle",
-          symbolBorderColor: "rgba(0, 0, 0, .5)",
-          effects: [
-            {
-              on: "hover",
-              style: {
-                itemBackground: "rgba(0, 0, 0, .03)",
-                itemOpacity: 1,
-              },
-            },
-          ],
+          min: 1,
+          max: 80,
         },
-      ]}
-    />
-      </Box>
-    </Box>
+      ],
+      xAxes: [
+        {
+          gridLines: {
+            display: false,
+          },
+        },
+      ],
+    },
+  };
+
+  return (
+    <div>
+      {/* <Box
+        sx={{
+          marginTop: 40,
+          marginLeft: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          bgcolor: "background.default",
+          boxShadow: 4,
+          borderRadius: 1,
+          padding: 4,
+          margin: "0px 0px",
+        }}
+      > */}
+        <Line data={data} options={options} />
+      {/* </Box> */}
+    </div>
   );
 };
-
-export default Line;
+export default ChartLine;

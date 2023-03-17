@@ -1,8 +1,8 @@
 import React from 'react'
 import NavBar from '../components/navBar'
-import styles from '../styles/aboutAs.module.css'
+import styles from '../styles/aboutUs.module.css'
 
-const aboutAs = () => {
+const aboutUs = () => {
   return (
     <div>
         <NavBar/>
@@ -21,4 +21,4 @@ const aboutAs = () => {
   )
 }
 
-export default aboutAs;
+export default aboutUs;
