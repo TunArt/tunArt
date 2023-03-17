@@ -98,7 +98,7 @@ const Home: React.FC<Props> = () => {
                   <li><img className={styles.logo} src="\tunart-website-favicon-color.png" alt="Logo" /></li>
                   <Link href="/MainPage"><li>HOME</li></Link>
                   <li>SERVICES</li>
-                  <Link href="/MainPage/aboutUs"><li>ABOUT</li></Link>
+                  <Link href="/aboutUs"><li>ABOUT</li></Link>
                   <Link href={"/MainPage/contactUs"}><li className={styles.contact}>CONTACT</li></Link>
                 </ul>
                   <button className={styles.btn} onClick={togglePopupLogin} >login</button>
