@@ -4,7 +4,7 @@ import { Switch } from 'antd';
 import Head from 'next/head'
 import styles from '../../styles/profile.module.css'
 import Navbar from  '../../components/navBar'
-
+import PaymentHisto from  "../../components/paymentHisto"
 const ProfilePage = () => {
   const [user, setUser] = useState('');
   const [data,setData] = useState([])
@@ -14,12 +14,14 @@ const ProfilePage = () => {
   const [artwork,setArtwork]=useState(false)
   const [info,setInfo]=useState({name:"",phone:"",bio:""})
   const [art,setArt]=useState({name:"",startDate:"",endDate:"",creationDate:"",price:"",description:""})
-  const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",image:"",price:"",description:"",})
+  const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",image:[],price:"",description:"",})
   const [imageSrc, setImageSrc] = useState( );
   const [uploadData, setUploadData] = useState();
   const [rerender,setRerender]=useState(false)
   const [auction,setauction]=useState(true)
+  const [payment,setPayment]=useState(false)
   const [artWorks,setArtWorks]=useState([])
+
 /**
    * handleOnChange
    * @description Triggers when the file input changes (ex: when a file is selected)
@@ -214,6 +216,7 @@ setRerender(!rerender)
       const formData = new FormData();
       for (let i = 0; i < create.image.length; i++) {
         formData.append("files", create.image[i]);
+        console.log("meerrrrrrrrrrrrrr",create.image[i])
       }
       axios.post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
         .then((response) => {
@@ -238,6 +241,14 @@ setRerender(!rerender)
       alert("Sorry, the request failed. Please try again.")
     }
   }
+  
+  const handleInputChange = (event) => {
+    const files = event.target.files;
+    setCreate((prevState) => ({
+      ...prevState,
+      image: files,
+    }));
+  };
   
   
   
@@ -286,6 +297,7 @@ setRerender(!rerender)
       data-te-ripple-color="light">
       <b>Posts</b>
     </button>
+
     <button
       onClick={()=>{setAdd(!add),setEdit(false),setInp(false),setArtwork(false)}}
       type="button"
@@ -295,6 +307,13 @@ setRerender(!rerender)
       <b>New</b>
     </button> </>}
     
+    <button onClick={()=>{
+      setPayment(!payment)
+    }}
+          className="inline-block rounded-r bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
+
+    >Payment Histories</button>
+    
   </div>
 </div>
           </div>
@@ -302,6 +321,8 @@ setRerender(!rerender)
       </div>
     </div> 
     <div >
+      {payment && < PaymentHisto user={user} id={localStorage.id} />}
+
         {inp && <div id="card3" className="card flex flex-col items-center justify-center rounded-lg shadow-md hover:shadow-lg transition-shadow p-4">
           <div id="container5">
   <div className="container grid gap-1  md:grid-cols-3 mt-3">
@@ -428,9 +449,8 @@ setRerender(!rerender)
   
   
   <div id="iiimg" >
-                          <input type="file" name="image" title='file' id=""  onChange={(e)=>{
-                            create.image=e.target.files[0]
-                          }}/>
+                <input type="file" name="image" multiple onChange={(event)=> {handleInputChange(event)}} />
+
                         </div>
                         <div  className="pl-lg-4">
                     <div id="desc" className="form-group focused">

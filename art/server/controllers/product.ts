@@ -88,18 +88,33 @@ const deleteProduct= (req:Request, res:Response)=> {
     }
 const seller= async(req:Request,res:Response)=>{
   try {
-    const product=Product.update({
+    console.log(req.params.id)
+    const product=await Product.update({
       quantity:req.body.quantity},
      { where: {
         id: req.params.id
     }
     })
+    res.send("great")
   } catch (error) {
     console.log(error);
     
   }
 }
+const raing =async(req:Request,res:Response)=>{
+  try {
+    await Product.update({
+    rating:req.body.rating,
+    reviewCount:req.body.reviewCount
+  },
+    {where :{id:req.params.id}}
+    )
+    res.send("rated")
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-export default {getAllProducts,addProduct,updateProduct,deleteProduct,seller};
+export default {getAllProducts,addProduct,updateProduct,deleteProduct,seller,raing};
 
 

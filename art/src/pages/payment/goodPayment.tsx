@@ -5,22 +5,57 @@ const PaymentSuccess: React.FC = () => {
    const [show,Setshow]= useState(false)
     const route=useRouter() 
     const {payment_id}=route.query
+    const [user, setuser] = useState(false)
+    const [data,setdata]=useState([])
+  useEffect(() => {
+    axios.get(`/api/users/getUser/${localStorage.email}`)
+      .then((res) => {
+        setuser(true)
+
+      }).catch((err) => {
+        setuser(false)
+      })
+    user ?
+      axios.get(`http://localhost:3000/api/route/getAll/${localStorage.id}`)
+        .then((res) => {
+          console.log("from payment user", res.data)
+          setdata(res.data.products)
+        })
+        .catch((err) => {
+          route.push({ pathname: '/404' })
+        }) :
+      axios.get(`http://localhost:3000/api/artistb/artistBought/${localStorage.id}`)
+        .then((res) => {
+          console.log("from payment artist", res.data.products)
+          setdata(res.data.products)
+        })
+  }, [])
+
     useEffect(()=>{
       console.log(payment_id)
         axios.post(`http://localhost:3000/api/payments/verif/${payment_id}`)
         .then((res)=>{
             console.log(res.data)
             if(res.data.result.status === "SUCCESS") {
-              axios.put(`http://localhost:3000/api/artistb/productUpDate/${localStorage.id}`,{
-                state:"succes"
+              data.map((e,i)=>{
+                axios.put(`http://localhost:3000/api/artistb/productUpDate/${e.id}`,{
+                  state:"succes"
+                }).then((res)=>{
+                  console.log(res)
+                })
               })
               Setshow(true) 
             }
             else  {
-              axios.put(`http://localhost:3000/api/artistb/productUpDate/${localStorage.id}`,{
-                state:"failed"
+              data.map((e,i)=>{
+                axios.put(`http://localhost:3000/api/artistb/productUpDate/${e.id}`,{
+                  state:"failed"
+                }).then((res)=>{
+                  console.log(res)
+                })
               })
-              Setshow(false)}
+              Setshow(false)
+            }
         })
     },[payment_id])
   return (
