@@ -3,7 +3,7 @@ import ImageZoom from "react-image-magnify";
 
 const ResponsiveImageZoom = ({ src, alt }:any) => {
   return (
-    <div className="relative w-full h-0" style={{ paddingBottom: "450px",width:"400px", height:"200px", marginTop: "40px"}}>
+    <div className="relative w-full h-0" style={{ paddingBottom: "0px",width:"350px", height:"200px", marginTop: "0px"}}>
       <ImageZoom
         className="absolute left-1 top-6 w-full h-full object-cover"
         {...{
@@ -18,7 +18,7 @@ const ResponsiveImageZoom = ({ src, alt }:any) => {
             height: 1200,
           },
           enlargedImageContainerDimensions: {
-            width: "350%",
+            width: "290%",
             height: "190%",
           },
           isHintEnabled: true,
