@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 const socket: Socket = io("http://localhost:3001");
 
 function App(): JSX.Element {
+ 
+
   // Room State
   const [room, setRoom] = useState<string>("");
 
@@ -26,10 +28,10 @@ function App(): JSX.Element {
   // console.log("item id",ArtId);
 
   const joinRoom = () => {
-    // if (room !== "") {
-    //   socket.emit("join_room", room);
-    //   // alert("room-joined");
-    // }
+    if (room !== "") {
+      socket.emit("join_room", room);
+      // alert("room-joined");
+    }
   };
 
   const sendMessage = () => {
@@ -61,7 +63,6 @@ function App(): JSX.Element {
   };
 
   useEffect(() => {
-    
 
 
     axios

@@ -25,10 +25,7 @@ function BoldText({children}) {
     return <span style={{fontWeight: 'bold'}}>{children}</span>;
   }
 
-    return(  
-        
-        
-                  
+    return(            
                       <div className={styles.container}>
                          <div className={styles.front} style={{ backgroundImage:`url(${props.element.picture})` }}>
                           <div className={styles.inner}>

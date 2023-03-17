@@ -4,6 +4,7 @@ import Artwork from '../controllers/artwork'
 
 
 routes.get('/getArtworks', Artwork.getAllArtworks)
+routes.get('/getAllVerified', Artwork.AllArtworks)
 routes.get('/getTopArtworks', Artwork.getTopArtworks)
 routes.get('/getLimitedArtworks/:count', Artwork.getLimitedlArtworks)
 routes.get('/getOneArtwork/:name', Artwork.getOneArtwork)

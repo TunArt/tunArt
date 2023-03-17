@@ -26,7 +26,7 @@ const [theme,colorMode]=useMode();
       <Routes> 
         <Route path="/Dashboard" element={<Dashboard/>}/>
         <Route path="/calendar" element={<Calendar/>}/>
-        <Route path="/user" element={<User/>}/>
+        <Route path="/artist" element={<User/>}/>
         <Route path="/contacts" element={<Contacts/>}/>
         <Route path="/pie" element={<Pie/>}/>
         <Route path="/bar" element={<Bar/>}/>

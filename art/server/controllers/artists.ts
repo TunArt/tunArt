@@ -20,6 +20,19 @@ catch (err){
     console.log(err)
 }
 }
+const getArtists =async (req:Request ,res:Response) =>{
+  try {
+   
+      let artists= await Artist.findAll({
+        include : ['artworks'],
+      })
+    console.log(artists)
+      res.status(200).send(artists)
+}
+catch (err){
+  console.log(err)
+}
+}
 
 //  method to add  a new artist
 const addArtist = async (req: Request, res: Response) => {
