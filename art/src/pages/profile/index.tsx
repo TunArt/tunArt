@@ -449,7 +449,7 @@ setRerender(!rerender)
   
   
   <div id="iiimg" >
-    <input type="file" name="image" multiple onChange={(event)=> {handleInputChange(event)}} />
+                <input type="file" name="image" multiple onChange={(event)=> {handleInputChange(event)}} />
 
                         </div>
                         <div  className="pl-lg-4">
