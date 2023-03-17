@@ -20,20 +20,20 @@ export async function getServerSideProps() {
 const Bids: React.FC = (props) => {
   const route=useRouter() 
   
-  useEffect(() => {
-    const h1 = document.querySelector("h1");
-    if (h1) {
-      h1.classList.add("animate-pulse", "text-4xl", "font-bold", "text-yellow-600");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const h1 = document.querySelector("h1");
+  //   if (h1) {
+  //     h1.classList.add("animate-pulse", "text-4xl", "font-bold", "text-yellow-600");
+  //   }
+  // }, []);
 
-  useEffect(()=>{
-    axios.get("http://localhost:3000/api/artworks/getBidArtworks/")
-    .then(response =>{
-    console.log(response.data);
-    setArts(response.data)
-  })
-  },[])
+  // useEffect(()=>{
+  //   axios.get("http://localhost:3000/api/artworks/getBidArtworks/")
+  //   .then(response =>{
+  //   console.log(response.data);
+  //   setArts(response.data)
+  // })
+  // },[])
 
     // your posts data here
 console.log('pg',props.data)
