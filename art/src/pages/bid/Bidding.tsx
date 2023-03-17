@@ -1,16 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import io, { Socket } from "socket.io-client";
 import axios from "axios";
-import { useRouter } from 'next/router'
-
+import Timer from "timer-component";
 const socket: Socket = io("http://localhost:3001");
-
 interface item {
   currentBidder: number;
   currentPrice: number;
   artWorkId: number;
 }
-
 interface bids {
   name: string;
   startDate: Date;
@@ -22,10 +19,8 @@ interface bids {
   auction: boolean;
   image: string;
 }
-
 const Bidding: React.FC<bids> = (props: any) => {
   // console.log('item',props)
-  const route = useRouter()
   const [update, setUpdate] = useState(false);
 const [currentBidder,setCurrentBidder]=useState("")
   const [bid, setBid] = useState({});
@@ -36,16 +31,6 @@ const [currentBidder,setCurrentBidder]=useState("")
   socket.on("connect", () => {
     console.log('id',socket.id); // x8WIv7-mJelg7on_ALbx
   })
-
-  if(timeReached && data[data.length-1].id===localStorage.id){
-    const seller = async () => {
-      try {
-        const res = await axios.post('http://localhost:3000/api/payments/pay', {
-          amount: data[data.length-1].currentPrice*100,
-        });
-        route.push({ pathname: res.data.result.link });
-  }
- 
   const fetchingData = () => {
     axios
       .get("http://localhost:3000/api/bids/getAll/" + props.id)
@@ -55,24 +40,18 @@ const [currentBidder,setCurrentBidder]=useState("")
       })
       .catch((err) => console.log(err));
   };
-
   useEffect(() => {
     fetchingData();
   }, []);
-
-  
   const handleBid = useCallback((chunk: item) => {
     console.log("chunk is the client", chunk);
     setMessage(chunk.currentPrice);
   }, []);
-
   const handleBidChange = (event: any) => {
     setPrice(event.target.value);
   };
-
   const handleFormSubmit = (event: any) => {
     event.preventDefault();
-
 console.log('ccc',currentBidder)
     const bid: item = {
       currentBidder: +localStorage.id,
@@ -84,14 +63,12 @@ console.log('ccc',currentBidder)
        message+
           (message* 10) / 100 && !timeReached
     );
-   
     if (
       Number(price) >
         message+
           (message* 10) / 100 &&
       !timeReached
     ) {
-
       setUpdate(!update);
       axios
         .post("http://localhost:3000/api/bids/addBid", {
@@ -109,26 +86,20 @@ console.log('ccc',currentBidder)
           console.log(bid, "after");
         });
     }
-
   };
-
   useEffect(() => {
-  
     socket.on("currentBid", handleBid);
-
     // return () => {
     //   socket.off("currentBid", handleBid);
     // };
   }, [update,message]);
+  // console.log("message",message)
   return (
     <div>
-      
-
       <div className="max-w-md mx-auto mt-8 p-6 border rounded-lg">
         <form onSubmit={handleFormSubmit} className="space-y-4">
           <div>Title:{props.name}</div>
           <div>startDate :{props.startDate}</div>
-
           <div>End date :{props.endDate}</div>
           <hr />
           {/* <div>Current Bid:{data[data.length-1].currentPrice}</div> */}
@@ -156,5 +127,4 @@ console.log('ccc',currentBidder)
     </div>
   );
 };
-
 export default Bidding;

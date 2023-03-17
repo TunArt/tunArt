@@ -8,5 +8,5 @@ routes.post('/addProduct', Product.addProduct)
 routes.put('/updateProduct/:id', Product.updateProduct)
 routes.delete('/deleteProduct/:id', Product.deleteProduct)
 routes.put("/soled/:id",Product.seller)
-
+routes.put("/rating/:id",Product.raing)
 export default routes

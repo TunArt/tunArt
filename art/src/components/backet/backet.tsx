@@ -5,6 +5,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import styles from "../../styles/bucket.module.css"
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { async } from '@firebase/util'
 interface Product {
   name: string
   price: number
@@ -46,6 +47,15 @@ const Bucket = (props: Props) => {
       route.push('/404')
     })
   }
+  const x=data.filter((e)=>{  console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',e) 
+     return  (e.artistproducts.state) !=="succes"})
+     const y= data.filter((e)=>{
+      console.log("yooooooooooooooooooooo",e);
+      
+      return (e.artistproducts.state )==="succes"
+    })
+     console.log("test",x)
+     console.log("hala bi3yal",y)
   let tPrice = 0
   const som = (x: number) => {
     tPrice += x
@@ -80,22 +90,17 @@ const Bucket = (props: Props) => {
     try {
       const res = await axios.post('http://localhost:3000/api/payments/pay', {
         amount: tPrice * 100,
-      });
-      route.push({ pathname: res.data.result.link });
+      })
+      x.map(async(e,i)=>{
+        console.log(i,e)
+         await axios.put(`http://localhost:3000/api/products/soled/${e.artistproducts.productId}`,{
+          quantity:e.quantity - e.artistproducts.quantityBought
 
-      await Promise.all(
-        data.map(async (e) => {
-          console.log(e)
-          const { id, userpro, quantity } = e;
-          const updatedQuantity = quantity - userproducts.quantityBought;
-
-          await axios.put(`http://localhost:3000/api/products/soled/${id}`, {
-            quantity: updatedQuantity,
-          });
-          handleDelete(userproducts.userId, userproducts.productId);
+        }).then((res)=>{console.log(res);
         })
-      );
+      })
 
+      route.push({ pathname: res.data.result.link });
       return true;
     } catch (error) {
       console.error(error);
@@ -150,9 +155,7 @@ const Bucket = (props: Props) => {
                         <div className="mt-8">
                           <div className="flow-root">
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
-                              { data.filter((product)=>{ console.log("filter ",product)
-                                return  product.artistproducts.state!=="success"})
-                              .map((product, i) => {
+                              { x.map((product, i) => {
                                 console.log("product", product)
                                 { som(product?.price * (product.userproducts?.quantityBought ? product.userproducts?.quantityBought : product.artistproducts.quantityBought)) }
 

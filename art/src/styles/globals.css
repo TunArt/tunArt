@@ -80,6 +80,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  /* background-color: black; */
 }
 
 
@@ -101,8 +102,10 @@ margin-left: -41rem;}
 
 body{
   background-color: rgb(0, 0, 0);
-  height: 1250px;
+  height: 100%;
+  overflow-x: hidden;
 }
+
 
 
 /* body{
@@ -416,6 +419,7 @@ a>code {
   margin-left: auto;
   padding-right: 15px;
   padding-left: 15px;
+  /* margin-top: -10px; */
 }
 
 #container5{
@@ -1285,7 +1289,7 @@ text-decoration-color: rgb(8, 0, 255);
 font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; }
 
  #settingss{
-  margin-top: -140px;
+  margin-top: 10%;
   width: 900px;
   margin-left: -160px;
   height: 520px;

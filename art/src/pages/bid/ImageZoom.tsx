@@ -5,7 +5,7 @@ const ResponsiveImageZoom = ({ src, alt }:any) => {
   return (
     <div className="relative w-full h-0" style={{ paddingBottom: "450px",width:"400px", height:"200px", marginTop: "40px"}}>
       <ImageZoom
-        className="absolute top-0 left-1 w-full h-full object-cover"
+        className="absolute left-1 top-6 w-full h-full object-cover"
         {...{
           smallImage: {
             alt: alt,
@@ -18,8 +18,8 @@ const ResponsiveImageZoom = ({ src, alt }:any) => {
             height: 1200,
           },
           enlargedImageContainerDimensions: {
-            width: "300%",
-            height: "250%",
+            width: "350%",
+            height: "190%",
           },
           isHintEnabled: true,
         }} 
