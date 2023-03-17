@@ -18,7 +18,7 @@ const ResponsiveImageZoom = ({ src, alt }:any) => {
             height: 1200,
           },
           enlargedImageContainerDimensions: {
-            width: "290%",
+            width: "330%",
             height: "190%",
           },
           isHintEnabled: true,
