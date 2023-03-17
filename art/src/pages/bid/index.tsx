@@ -7,38 +7,33 @@ import Room from './room'
 import Footer from '../MainPage/footer/footer'
 import styles from "../../styles/principale.module.css"
 import { useRouter } from 'next/router';
-
+import axios from 'axios'
 export async function getServerSideProps() {
   const res=await fetch("http://localhost:3000/api/artworks/getAllVerified")
  const data=await res.json()
  console
   return {
-    props: {data}, 
+    props: {data},
   }
 };
-
 const Bids: React.FC = (props) => {
-  const route=useRouter() 
-  
+  const route=useRouter()
   useEffect(() => {
     const h1 = document.querySelector("h1");
     if (h1) {
       h1.classList.add("animate-pulse", "text-4xl", "font-bold", "text-yellow-600");
     }
   }, []);
-
-  useEffect(()=>{
-    axios.get("http://localhost:3000/api/artworks/getBidArtworks/")
-    .then(response =>{
-    console.log(response.data);
-    setArts(response.data)
-  })
-  },[])
-
+  // useEffect(()=>{
+  //   axios.get("http://localhost:3000/api/artworks/getBidArtworks/")
+  //   .then(response =>{
+  //   console.log(response.data);
+  //   setArts(response.data)
+  // })
+  // },[])
     // your posts data here
 console.log('pg',props.data)
 console.log(typeof(props));
-
   return (
     // <div className="bg-black">
     //   <NavBar />
@@ -57,17 +52,14 @@ console.log(typeof(props));
     {/* <h1 className="text-4xl font-bold text-orange-600 mb-8 mt-10 text-center transition duration-500 ease-in-out transform hover:text-blue-600">
   Welcome to Our Events
 </h1> */}
-
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {props.data.map((post) => (
                 <div key={post.title} className="bg-white shadow overflow-hidden rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
                     <img
                         className="w-full h-48 object-cover"
-                        src={post.image}    
+                        src={post.image}
                         alt={post.title}
                     />
-
                     <div className="px-6 py-4">
                         <h3 className="text-lg font-medium text-gray-900 mb-2">
                             {post.price}dt
@@ -91,5 +83,4 @@ console.log(typeof(props));
 </>
   );
 };
-
 export default Bids;

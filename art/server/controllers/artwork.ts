@@ -240,5 +240,5 @@ const deleteArtWork= (req:Request, res:Response)=> {
   }
   }
   
-export default {getAllArtworks,addArtwork,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks, getLimitedlArtworks, getOneArtwork, getSomeArtworks, getBidArtworks, updateArtWork, deleteArtWork};
+export default {getAllArtworks,addArtwork,AllArtworks,AllnotV,modfyArtWork,acceptsArtWork, getTopArtworks, getLimitedlArtworks, getOneArtwork, getSomeArtworks, getBidArtworks, updateArtWork, deleteArtWork};
 

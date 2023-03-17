@@ -168,6 +168,6 @@ const deleteArtist= async (req:Request, res:Response)=> {
   }
   
 
-export default {getAllArtists,addArtist,updateArtist,deleteArtist,getArtist,getArtistwithId,updateImgArtist};
+export default {getAllArtists,addArtist,updateArtist,deleteArtist,getArtist,getArtists,getArtistwithId,updateImgArtist};
 
 

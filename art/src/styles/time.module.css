@@ -1,0 +1,40 @@
+#timer{
+  margin-top: -2.5%;
+  margin-bottom: -3%;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    /* background-color: aliceblue; */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    align-items: center;
+    z-index: -1;
+    /* margin: 10%; */
+       } 
+.countdown{
+  /* width: 100rem; */
+  z-index: -1;
+
+}
+.App{
+display:flex;
+padding:10%;
+width:100%;
+z-index: -1;
+margin-left: -8.5%;
+}
+.time{
+  margin: -10%;
+  font-size: 50px;
+  text-align: center;
+}
+
+.timeWrapper{
+  /* margin-left: 10%; */
+}
+
+.t{
+  margin-left: 8%;
+  text-align: center;
+}

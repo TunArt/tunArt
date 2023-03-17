@@ -188,6 +188,6 @@ return (
 
 
 <Footer/>
-</div>
+</>
   );
 }
