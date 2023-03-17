@@ -4,7 +4,7 @@ import Artist from '../controllers/artists'
 
 
 routes.get('/getArtists/:ArtistId', Artist.getAllArtists)
-routes.get('/getArtists', Artist.getArtists)
+routes.get('/getArtists', Artist.getArtist)
 routes.post('/addArtist', Artist.addArtist)
 routes.put('/updateArtist/:email', Artist.updateArtist)
 routes.put('/updateImgArtist/:email', Artist.updateImgArtist)
