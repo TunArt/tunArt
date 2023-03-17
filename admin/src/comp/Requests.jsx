@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios';
 import Allrequests from './requests/Allrequests.jsx';
-
+import "../App.css"
   
 function Requests() {
   const [render,setRender]=useState(false)
@@ -13,7 +13,8 @@ function Requests() {
       
     },[render])
   return (
-    <div>
+    <div className='grid-container'>
+      
         {artWorks?.map((e,i)=>{
             return <Allrequests key={i} e={e} setRender={setRender} render={render} />
         })}
