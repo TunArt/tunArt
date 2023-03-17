@@ -1,7 +1,8 @@
 import db from '../models/index';
 import express, { Express, Request, Response } from "express";
-const Artist = db.artist
 import cloudinary from '../claoudinary/claoudinary' ;
+const Artist = db.artist
+const Artwork = db.artwork;
 
 
 //methods to get all the artists
@@ -17,6 +18,19 @@ const getAllArtists =async (req:Request ,res:Response) =>{
 }
 catch (err){
     console.log(err)
+}
+}
+const getArtists =async (req:Request ,res:Response) =>{
+  try {
+   
+      let artists= await Artist.findAll({
+        include : ['artworks'],
+      })
+    console.log(artists)
+      res.status(200).send(artists)
+}
+catch (err){
+  console.log(err)
 }
 }
 
@@ -137,6 +151,23 @@ const deleteArtist= async (req:Request, res:Response)=> {
       }
     }
 
-export default {getAllArtists,addArtist,updateArtist,deleteArtist,getArtist,getArtistwithId,updateImgArtist};
+    // method to get some of the artist's artworks
+    const getSomeArtworks =async (req:Request ,res:Response) =>{
+      try {
+        const {ArtistId}=req.params
+          let artists= await Artist.findAll({
+            include : ['artworks'],
+            where :{id:ArtistId}
+          })
+        console.log(artists)
+          res.status(200).send(artists)
+  }
+  catch (err){
+      console.log(err)
+  }
+  }
+  
+
+export default {getAllArtists,addArtist,updateArtist,deleteArtist,getArtist,getArtists,getArtistwithId,updateImgArtist};
 
 

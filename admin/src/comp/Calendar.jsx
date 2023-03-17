@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import { formatDate } from '@fullcalendar/core'
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -15,11 +15,25 @@ import {
 } from "@mui/material";
 import Header from "../components/Header";
 import { tokens } from "../theme";
+import axios from "axios";
 
 const Calendar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [currentEvents, setCurrentEvents] = useState([]);
+  const [data, setData] = useState([]);
+  const fetchingData = () => {
+    axios
+      .get("http://localhost:3000/api/event/getAll")
+      .then((result) => {
+        console.log(result.data)
+        setData(result.data);
+      })
+      .catch((err) => console.log(err));
+  };
+  useEffect(() => {
+    fetchingData();
+  }, []);
 
   const handleDateClick = (selected) => {
     const title = prompt("Please enter a new title for your event");
@@ -119,7 +133,7 @@ console.log("calendar");
               {
                 id: "5123",
                 title: "Timed event",
-                date: "2022-09-28",
+                date: "evenetTime",
               },
             ]}
           />

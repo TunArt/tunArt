@@ -1,12 +1,9 @@
 
 .app{
     margin-top:-3%;
-   
-    width:100%;
+     width:100%;
     height:46rem;
-  
- 
-    background-size: cover;
+      background-size: cover;
     background-repeat: no-repeat;
     overflow-x:hidden ;
 }
@@ -35,11 +32,11 @@ opacity: 80%;
     color:rgb(255, 153, 58);
   font-size:50px;
  /* text-align: end; */
-margin-top: -22.8%;
-margin-left: 69%;
+margin-top: -22.6%;
+margin-left: 67.5%;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 /* background-color: rgb(218, 218, 218); */
-width: 23%;
+width: 25%;
 text-align: center;
 opacity: 85%;
 border-radius: 5%;
@@ -48,8 +45,9 @@ border-radius: 5%;
 
 .qr{
     margin-top: 3%;
-    margin-bottom: 7%;
-margin-left:  42%;
+    /* margin-bottom: 7%; */
+margin-left:  41%;
+/* margin */
 border-style: outset;
 border-width: 8px ;
 border-color: rgb(168, 165, 165);
@@ -68,24 +66,17 @@ border-color: rgb(168, 165, 165);
 .img1{
     width:18%;
     height:auto;
-    margin-top:-34%;
+    margin-top:-30%;
     margin-left:9%;
 
 }
 .img2{
-    height: 19rem;
-    width: 15rem;
-    margin-top: -29.5%;
-    margin-left: 11.1%;
+    height: 17rem;
+    width: 13.5rem;
+    margin-top: -30.2%;
+    margin-left: 10.9%;
 }
 
-/* .img3{
-    height: 3rem;
-    width:13rem;
-    margin-top: -20.8%;
-    margin-left: 12%;
-    display: hidden;
-} */
 
 .footer {
     width:100%;

@@ -30,7 +30,7 @@ const ProfilePage = () => {
    * handleOnChange
    * @description Triggers when the file input changes (ex: when a file is selected)
    */
-
+console.log(art)
 function handleOnChange(changeEvent:any) {
   const reader = new FileReader();
 
@@ -184,37 +184,73 @@ setRerender(!rerender)
   }, [rerender]);
   console.log(artWorks)
 
-  const submitForm=()=>{
+  // const submitForm=()=>{
+  //   try {
+  //     console.log("image in the submit form", create.image)
+  //     const formData = new FormData();
+  //     formData.append("file",create.image)
+  //     console.log(formData.get('file'));
+  //     axios
+  //       .post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
+  //       .then((response) => {
+  //         console.log(response);
+  //         console.log(response.data.secure_url);
+  //         let imgurl = response.data.secure_url;
+  //         setImageSrc(response.data.secure_url);
+  //         console.log("img for the user", imgurl)
+  //         axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`,  {
+  //           name:create.name,
+  //           startDate:create.startDate,
+  //           endDate:create.endDate,
+  //           creationDate:create.creationDate,
+  //           price:create.price,
+  //           description:create.description,
+  //           auction:auction ? 1:0,
+  //           image:imgurl
+  //         })
+  //         .then(response=> {console.log(response)})
+  //       }).catch(err => console.log(err))
+  //   } catch {
+  //     alert("Sorry, the request failed. Please try again.")
+  //   }
+   
+  // } 
+
+  const submitForm = () => {
     try {
-      console.log("image in the submit form", create.image)
       const formData = new FormData();
-      formData.append("file",create.image)
-      console.log(formData.get('file'));
-      axios
-        .post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
+      for (let i = 0; i < create.image.length; i++) {
+        formData.append("files", create.image[i]);
+      }
+      axios.post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
         .then((response) => {
           console.log(response);
           console.log(response.data.secure_url);
           let imgurl = response.data.secure_url;
           setImageSrc(response.data.secure_url);
           console.log("img for the user", imgurl)
-          axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`,  {
-            name:create.name,
-            startDate:create.startDate,
-            endDate:create.endDate,
-            creationDate:create.creationDate,
-            price:create.price,
-            description:create.description,
-            auction:auction ? 1:0,
-            image:imgurl
+          axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`, {
+            name: create.name,
+            startDate: create.startDate,
+            endDate: create.endDate,
+            creationDate: create.creationDate,
+            price: create.price,
+            description: create.description,
+            auction: auction ? 1 : 0,
+            images: response.data.urls
           })
-          .then(response=> {console.log(response)})
+            .then(response => { console.log(response) })
         }).catch(err => console.log(err))
     } catch {
       alert("Sorry, the request failed. Please try again.")
     }
-   
-  } 
+  }
+  
+  
+  
+  
+  
+  
   console.log(artWorks,"hello artwork")
   return (
     <div id = "bodyy">
@@ -396,6 +432,8 @@ setRerender(!rerender)
   Sale <Switch defaultChecked onChange={onChange} /> Bid
 </div>
   </div>
+  
+  
   <div id="iiimg" >
                           <input type="file" name="image" title='file' id=""  onChange={(e)=>{
                             create.image=e.target.files[0]
@@ -414,7 +452,9 @@ setRerender(!rerender)
                   type="button"
                   className="btn btn-sm btn-primary">
             <b>Add a new artwork</b>
-            </button>         
+            </button>      
+
+
                     </div>
                   </div>          
                 </form>}
