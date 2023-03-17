@@ -14,7 +14,7 @@ const ProfilePage = () => {
   const [artwork,setArtwork]=useState(false)
   const [info,setInfo]=useState({name:"",phone:"",bio:""})
   const [art,setArt]=useState({name:"",startDate:"",endDate:"",creationDate:"",price:"",description:""})
-  const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",image:"",price:"",description:"",})
+  const [create,setCreate] = useState({name:"",startDate:"",endDate:"",creationDate:"",image:[],price:"",description:"",})
   const [imageSrc, setImageSrc] = useState( );
   const [uploadData, setUploadData] = useState();
   const [rerender,setRerender]=useState(false)
@@ -216,6 +216,7 @@ setRerender(!rerender)
       const formData = new FormData();
       for (let i = 0; i < create.image.length; i++) {
         formData.append("files", create.image[i]);
+        console.log("meerrrrrrrrrrrrrr",create.image[i])
       }
       axios.post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
         .then((response) => {
@@ -240,6 +241,14 @@ setRerender(!rerender)
       alert("Sorry, the request failed. Please try again.")
     }
   }
+  
+  const handleInputChange = (event) => {
+    const files = event.target.files;
+    setCreate((prevState) => ({
+      ...prevState,
+      image: files,
+    }));
+  };
   
   
   
@@ -440,9 +449,8 @@ setRerender(!rerender)
   
   
   <div id="iiimg" >
-                          <input type="file" name="image" title='file' id=""  onChange={(e)=>{
-                            create.image=e.target.files[0]
-                          }}/>
+    <input type="file" name="image" multiple onChange={(event)=> {handleInputChange(event)}} />
+
                         </div>
                         <div  className="pl-lg-4">
                     <div id="desc" className="form-group focused">
