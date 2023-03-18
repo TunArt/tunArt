@@ -34,10 +34,13 @@ const Bid: React.FC <DetailProps>= (props:DetailProps) => {
     return (
         <div>
        <Navbar/>
+       <div>
+        <h1 style={{color:"orange",fontSize:"30px",textAlign:"center",marginBottom:"3%",marginTop:"-3%"}}>Welcome to our auctions</h1>
+</div>
             <div className={style.div1}>
                 <div className={style.div2}>
+
             <Detail  {...detailProps} />
-             {/* <Bidding/> */}
 
                 </div>
                 <div className={style.div3}>

@@ -3,6 +3,8 @@ import io, { Socket } from "socket.io-client";
 import react, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import moment from "moment";
+
 
 const socket: Socket = io("http://localhost:3001");
 
@@ -124,7 +126,6 @@ function App(): JSX.Element {
 
   return (
     <div className={styles.app}>
-      <h1>Discuss it here :</h1>
       <div className={styles.discussion}>
         {oldMessages
           .filter((e) => e.artworkId == ArtId )
@@ -134,8 +135,7 @@ function App(): JSX.Element {
                 <img className={styles.image} src={e.picture}/>
                  <div  className={styles.littleContainer}> 
                  <p className={styles.userName} >{e.name}</p>
-                 <p className={styles.time} >{e.createdAt}</p>
-
+                 <p className={styles.time}>{moment(e.createdAt).startOf('minute').fromNow()}</p>
                 </div>
                 <p className={styles.oneMessage}>{e.content}</p>
               </div>
@@ -153,12 +153,13 @@ function App(): JSX.Element {
                   <img className={styles.image} src={user.picture}/>
                 <div className={styles.littleContainer}>
                   <p className={styles.userName} >{user.userName}{user.name}</p>
-
+                  <p className={styles.time}>{moment(e.createdAt).startOf('minute').fromNow()}</p>
                 </div>
 
-              <p key={index} className={styles.oneMessage} style={{"margin-top":"-5%"}}>
+              <p key={index} className={styles.oneMessage} >
                 {e}
               </p>
+
               </div>
             );
           })}
@@ -169,10 +170,8 @@ function App(): JSX.Element {
           <button
             className={styles.join}
             onClick={setTimeout(() => {
-               setRoom(ArtId);
+              setRoom(ArtId);
               joinRoom();
-              
-
             }, 500)}
 
           >

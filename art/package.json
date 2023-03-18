@@ -42,6 +42,7 @@
     "framer-motion": "^10.3.0",
     "material-design-icons-iconfont": "^6.7.0",
     "material-icons": "^1.13.1",
+    "moment": "^2.29.4",
     "mysql2": "^3.2.0",
     "next": "13.2.1",
     "next-themes": "^0.2.1",
