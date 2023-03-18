@@ -181,68 +181,68 @@ setRerender(!rerender)
   }, [rerender]);
   console.log(artWorks)
 
-  // const submitForm=()=>{
-  //   try {
-  //     console.log("image in the submit form", create.image)
-  //     const formData = new FormData();
-  //     formData.append("file",create.image)
-  //     console.log(formData.get('file'));
-  //     axios
-  //       .post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
-  //       .then((response) => {
-  //         console.log(response);
-  //         console.log(response.data.secure_url);
-  //         let imgurl = response.data.secure_url;
-  //         setImageSrc(response.data.secure_url);
-  //         console.log("img for the user", imgurl)
-  //         axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`,  {
-  //           name:create.name,
-  //           startDate:create.startDate,
-  //           endDate:create.endDate,
-  //           creationDate:create.creationDate,
-  //           price:create.price,
-  //           description:create.description,
-  //           auction:auction ? 1:0,
-  //           image:imgurl
-  //         })
-  //         .then(response=> {console.log(response)})
-  //       }).catch(err => console.log(err))
-  //   } catch {
-  //     alert("Sorry, the request failed. Please try again.")
-  //   }
-   
-  // } 
-
-  const submitForm = () => {
+  const submitForm=()=>{
     try {
+      console.log("image in the submit form", create.image)
       const formData = new FormData();
-      for (let i = 0; i < create.image.length; i++) {
-        formData.append("files", create.image[i]);
-        console.log("meerrrrrrrrrrrrrr",create.image[i])
-      }
-      axios.post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
+      formData.append("file",create.image)
+      console.log(formData.get('file'));
+      axios
+        .post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
         .then((response) => {
           console.log(response);
           console.log(response.data.secure_url);
           let imgurl = response.data.secure_url;
           setImageSrc(response.data.secure_url);
           console.log("img for the user", imgurl)
-          axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`, {
-            name: create.name,
-            startDate: create.startDate,
-            endDate: create.endDate,
-            creationDate: create.creationDate,
-            price: create.price,
-            description: create.description,
-            auction: auction ? 1 : 0,
-            images: response.data.urls
+          axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`,  {
+            name:create.name,
+            startDate:create.startDate,
+            endDate:create.endDate,
+            creationDate:create.creationDate,
+            price:create.price,
+            description:create.description,
+            auction:auction ? 1:0,
+            image:imgurl
           })
-            .then(response => { console.log(response) })
+          .then(response=> {console.log(response) , setRerender(!rerender)})
         }).catch(err => console.log(err))
     } catch {
       alert("Sorry, the request failed. Please try again.")
     }
+   
   }
+
+  // const submitForm = () => {
+  //   try {
+  //     const formData = new FormData();
+  //     for (let i = 0; i < create.image.length; i++) {
+  //       formData.append("files", create.image[i]);
+  //       console.log("meerrrrrrrrrrrrrr",create.image[i])
+  //     }
+  //     axios.post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
+  //       .then((response) => {
+  //         console.log(response);
+  //         console.log(response.data.secure_url);
+  //         let imgurl = response.data.secure_url;
+  //         setImageSrc(response.data.secure_url);
+  //         console.log("img for the user", imgurl)
+  //         axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`, {
+  //           name: create.name,
+  //           startDate: create.startDate,
+  //           endDate: create.endDate,
+  //           creationDate: create.creationDate,
+  //           price: create.price,
+  //           description: create.description,
+  //           auction: auction ? 1 : 0,
+  //           images: response.data.urls
+  //         })
+  //           .then(response => { console.log(response) })
+  //       }).catch(err => console.log(err))
+  //   } catch {
+  //     alert("Sorry, the request failed. Please try again.")
+  //   }
+  // }
   
   const handleInputChange = (event) => {
     const files = event.target.files;
@@ -450,9 +450,10 @@ setRerender(!rerender)
   </div>
   
   
-  <div id="iiimg" >
-                <input type="file" name="image" multiple onChange={(event)=> {handleInputChange(event)}} />
-
+ <div id="iiimg" >
+                          <input type="file" name="image" title='file' id=""  onChange={(e)=>{
+                            create.image=e.target.files[0]
+                          }}/>
                         </div>
                         <div  className="pl-lg-4">
                     <div id="desc" className="form-group focused">

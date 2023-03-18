@@ -423,7 +423,7 @@ a>code {
 }
 
 #container5{
-  margin-top: -80px;
+  margin-top: -60px;
 }
 
 @media (min-width: 576px) {
@@ -1253,7 +1253,7 @@ text-decoration-color: rgb(8, 0, 255);
 }
 
 #buttons {
-  margin-left: -450px;
+  margin-left: -90px;
 }
 
 
@@ -1289,7 +1289,7 @@ text-decoration-color: rgb(8, 0, 255);
 font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; }
 
  #settingss{
-  margin-top: 10%;
+  margin-top: -19%;
   width: 900px;
   margin-left: -160px;
   height: 520px;
@@ -1365,14 +1365,14 @@ width: 190px;
   flex-direction: column;
   word-wrap: break-word;
   background-color: black !important;
-  border: solid 1px whitesmoke;
+  border: solid 1px rgb(248, 246, 245);
   opacity: 70%;
-  margin-top: -500px;
+  margin-top: -560px;
   width: 1000px;
-  height: 600px;
+  height: 550px;
   margin-left: 60px;
   padding: 29px;
-  border-radius: 10px;
+  border-radius: 4px;
   animation-name: fadeIn;
   animation-duration: 1s;
   animation-timing-function: ease;
@@ -1405,10 +1405,10 @@ margin-left: 350px;
 }
 
 #form1{
-  margin-top: -32%;
+  margin-top: -33%;
   margin-left: 5%;
-  width: 900px;
-  height: 680px;
+  width: 950px;
+  height: 650px;
   position: relative;
   animation-name: fadeIn;
   animation-duration: 1s;
@@ -1443,7 +1443,7 @@ margin-left: 350px;
 
 #desc{
   width: 460px;
-  margin-top: 160px;
+  margin-top: 110px;
   margin-left: -26px;
 }
 
@@ -1574,7 +1574,7 @@ margin-left: 350px;
   height: 30px;
   margin-left: 670px;
   border-radius: 5px;
-  margin-top: -270px;
+  margin-top: -340px;
 }
 
 #add:hover {
@@ -1678,7 +1678,7 @@ font-size: 60px;}
 
 #check {
   width: 275px;
-  height: 168px;
+  height: 160px;
 }
 
 #cheeck{
