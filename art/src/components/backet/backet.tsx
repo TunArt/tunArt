@@ -5,7 +5,6 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import styles from "../../styles/bucket.module.css"
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { async } from '@firebase/util'
 interface Product {
   name: string
   price: number
@@ -85,10 +84,12 @@ const Bucket = (props: Props) => {
           setdata(res.data.products)
         })
   }, [reRender])
+console.log('tprice',typeof(tPrice));
 
   const seller = async () => {
     try {
       const res = await axios.post('http://localhost:3000/api/payments/pay', {
+        url:"http://localhost:3002/payment/goodPayment",
         amount: tPrice * 100,
       })
       x.map(async(e,i)=>{

@@ -89,7 +89,7 @@ const payload ={
     "amount": req.body.amount,
     "accept_card": "true",
     "session_timeout_secs": 1200,
-    "success_link": "http://localhost:3002/payment/goodPayment",
+    "success_link": req.body.url,
     "fail_link": "http://localhost:3002/404",
     "developer_tracking_id": "f78f1859-edb5-4abf-b27b-f0a01d404340"
 }

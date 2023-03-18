@@ -2,16 +2,16 @@ import express, { Application } from 'express';
 import * as dotenv from 'dotenv'
 import cors from 'cors';
 dotenv.config()
-
+import bodyParser from 'body-parser'
 const app: Application = express();
 
 const port = process.env.PORT || 3000;
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.use(express.static(__dirname + "/art"));
 app.use(express.json());
 app.use(cors());
-app.use(express.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/../client/dist"));
-
 
 //Require application Route modules
 import artistRoute from "./server/routes/artists"
@@ -27,6 +27,7 @@ import userFavorite from "./server/routes/user_Favorite"
 // import roomRoute from "./server/routes/room"
 import messageRoute from "./server/routes/message"
 import artistProduct from './server/routes/artist_product'
+import imgaes from './server/routes/uploadImage'
 //Add Routes to the middleware handling path, specifying the respective URL path
 app.use('/api/artists',artistRoute)
 app.use('/api/event',eventRoute)
@@ -41,7 +42,7 @@ app.use('/api/route',userProd)
 // app.use('/api/rooms',roomRoute)
 app.use('/api/messages',messageRoute)
 app.use('/api/favorite',userFavorite)
-
+app.use('/api/images',imgaes)
 
 app.listen(port, () => {
  console.log(`App listening on port ${port}`)
