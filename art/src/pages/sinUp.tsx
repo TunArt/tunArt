@@ -39,7 +39,7 @@ const SignUp: React.FC = (props) => {
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const[age,setAge]=useState("");
-let know=false
+let know=true
   const onChange = (checked: boolean) => {
     know=checked
     console.log(know)
