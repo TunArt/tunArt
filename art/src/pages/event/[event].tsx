@@ -53,6 +53,7 @@ console.log(router.query)
       <div>
         <h1 className="text-3xl font-bold mb-4">{title}</h1>
         <p className="text-lg leading-relaxed mb-8">{description}</p>
+        <p className="text-lg leading-relaxed mb-8">price :  {prix} DT</p>
         <button onClick={() => {
           seller(prix)
         }}
