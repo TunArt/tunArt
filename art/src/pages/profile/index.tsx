@@ -185,37 +185,7 @@ setRerender(!rerender)
   }, [rerender]);
   console.log(artWorks)
 
-  // const submitForm=()=>{
-  //   try {
-  //     console.log("image in the submit form", create.image)
-  //     const formData = new FormData();
-  //     formData.append("file",create.image)
-  //     console.log(formData.get('file'));
-  //     axios
-  //       .post("https://api.cloudinary.com/v1_1/dp54rkywx/image/upload?upload_preset=clzrszf3", formData)
-  //       .then((response) => {
-  //         console.log(response);
-  //         console.log(response.data.secure_url);
-  //         let imgurl = response.data.secure_url;
-  //         setImageSrc(response.data.secure_url);
-  //         console.log("img for the user", imgurl)
-  //         axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`,  {
-  //           name:create.name,
-  //           startDate:create.startDate,
-  //           endDate:create.endDate,
-  //           creationDate:create.creationDate,
-  //           price:create.price,
-  //           description:create.description,
-  //           auction:auction ? 1:0,
-  //           image:imgurl
-  //         })
-  //         .then(response=> {console.log(response)})
-  //       }).catch(err => console.log(err))
-  //   } catch {
-  //     alert("Sorry, the request failed. Please try again.")
-  //   }
-   
-  // } 
+  
   const submitForm = (file:FormData) => {
     console.log("from submitForm",url);
       axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`, {
@@ -310,7 +280,7 @@ setRerender(!rerender)
     className="inline-flex shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
     role="group">
     <button
-      onClick={()=>{setEdit(!edit),setInp(false),setAdd(false),setArtwork(false)}}
+      onClick={()=>{setEdit(!edit),setInp(false),setAdd(false),setArtwork(false),setPayment(false)}}
       type="button"
       id="myButton"
       className="inline-block rounded-l bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
@@ -319,7 +289,7 @@ setRerender(!rerender)
       <b>Edit profile</b>
     </button>
       {user && <button
-      onClick={()=>{setInp(!inp),setEdit(false),setAdd(false),setArtwork(false)}}
+      onClick={()=>{setInp(!inp),setEdit(false),setAdd(false),setArtwork(false),setPayment(false)}}
       type="button"
       className="inline-block bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
       data-te-ripple-init
@@ -327,7 +297,7 @@ setRerender(!rerender)
       <b>Favorites</b>
     </button> }
     {!user && <> <button
-      onClick={()=>{setInp(!inp),setEdit(false),setAdd(false),setArtwork(false)}}
+      onClick={()=>{setInp(!inp),setEdit(false),setAdd(false),setArtwork(false),setPayment(false)}}
       type="button"
       className="inline-block bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
       data-te-ripple-init
@@ -336,7 +306,7 @@ setRerender(!rerender)
     </button>
 
     <button
-      onClick={()=>{setAdd(!add),setEdit(false),setInp(false),setArtwork(false)}}
+      onClick={()=>{setAdd(!add),setEdit(false),setInp(false),setArtwork(false),setPayment(false)}}
       type="button"
       className="inline-block rounded-r bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
       data-te-ripple-init
@@ -345,21 +315,21 @@ setRerender(!rerender)
     </button> </>}
     
     <button onClick={()=>{
-      setPayment(!payment)
+      setPayment(!payment),setEdit(false),setInp(false),setArtwork(false),setAdd(false)
     }}
           className="inline-block rounded-r bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-primary-600 focus:bg-primary-600 focus:outline-none focus:ring-0 active:bg-primary-700"
 
     >Payment Histories</button>
-    
   </div>
 </div>
+<div>
+          {payment && <div>< PaymentHisto user={user} id={localStorage.id} /></div> }
+          </div>
           </div>
         </div>
       </div>
     </div> 
     <div >
-      {payment && < PaymentHisto user={user} id={localStorage.id} />}
-
         {inp && <div id="card3" className="card flex flex-col items-center justify-center rounded-lg shadow-md hover:shadow-lg transition-shadow p-4">
           <div id="container5">
   <div className="container grid gap-1  md:grid-cols-3 mt-3">
@@ -369,7 +339,7 @@ setRerender(!rerender)
         console.log(e)
       return (
         <div id="cheeck" key={i} className="relative rounded-lg overflow-hidden">
-          <img id ="img22" src={JSON.parse(e.image)[0]} alt="" className="w-full h-full object-cover object-center rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-110" />
+          <img id ="img22" src={JSON.parse(e.image)[0].length===1 ? JSON.parse(e.image) : JSON.parse(e.image)[0] } alt="" className="w-full h-full object-cover object-center rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-110" />
           <div id ="check" className="absolute inset-0 flex flex-col justify-center items-center text-white font-bold text-lg hover:text-orange-500 transition-colors bg-black bg-opacity-50">
             <button id="check6" className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition-colors">
               Check
@@ -622,6 +592,7 @@ update your account
           </div>
           </div>
        }
+      
       </div>
   </div>
 </div> 

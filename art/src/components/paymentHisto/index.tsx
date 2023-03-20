@@ -36,7 +36,6 @@ console.log(paymentData)
   {paymentData.map((e,i)=>{
     return (
       <div className={styles.paymentitem} key={i}>
-        <h1>{e.name}</h1>
         <img src={(JSON.parse(e?.picture)[0])} alt="" />
         <h2>{e.brand}</h2>
         <p>{e.price}</p>
