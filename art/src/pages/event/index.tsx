@@ -2,12 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import NavBar from "../../components/navBar";
 import { useRouter } from 'next/router';
-import { query } from "express";
 
 function ResponsiveCardList() {
     const route=useRouter()
     
-    const [posts, setPosts] = useState<Array<{id:string,image: string, title: string, description: string}>>( [
+    const [posts, setPosts] = useState<Array<{id:string,image: string, title: string, description: string,prix:string}>>( [
       {
         id:"1",
           image:
@@ -16,6 +15,7 @@ function ResponsiveCardList() {
           ,
           description:
               "Latte art is quite often the most attractive thing for a new barista, and latte art is an excellent gateway to the exciting world of coffee. Latte art easy to start with, but to master latte art patterns, you need a lot practice and determination. Here are my tips that helped me to improve my latte art a few years ago!",
+            prix:"15",
       },
       {
         id:"2",
@@ -24,7 +24,8 @@ function ResponsiveCardList() {
           title: "Brewing Ideas: A Coffee Meeting to Discuss Our Artwork Show",
           description:
               "Calling all artists! Grab your sketchbook and join us for a coffee-fueled brainstorming session as we plan our upcoming artwork show. This casual gathering is the perfect opportunity to connect with fellow artists and discuss ideas in a relaxed and supportive environment. Whether you're a seasoned painter or a budding artist, everyone is welcome to contribute their unique perspective. Sip on your favorite hot beverage and get ready to collaborate, brainstorm, and share your passion for art. By the end of our coffee and canvas session, we hope to have a clear plan for our show, as well as new inspiration to fuel our creative endeavors. Let's work together to make our show a success!",
-      },
+              prix:"15",
+            },
       {
         id:"3",
           image:
@@ -32,7 +33,8 @@ function ResponsiveCardList() {
           title: "Coffee & Canvas: Planning Our Artwork Show Together",
           description:
               "I bet roasting is the thing that every barista wants to know about! We can develop flavour by roasting coffee. How can we achieve the best tasting coffee? What actually happens when roasting?",
-      },
+              prix:"15",
+            },
       {
         id:"4",
           image:
@@ -40,7 +42,8 @@ function ResponsiveCardList() {
           title: "Java & Gallery Talk: Preparing for Our Artwork Show",
           description:
               "Espresso recipes are important in cafés in terms of consistency and flavour. How and why are the espresso recipes made and what are the things you should consider when making a recipe for espresso? Let’s dig deeper into the world of espresso!",
-      },
+              prix:"15",
+            },
   ] );
     useEffect(()=>{
       axios.get("http://localhost:3000/api/event/getAll").then((res)=>{

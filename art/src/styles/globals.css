@@ -1308,7 +1308,7 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; }
  #sha {
   width:400px;
   height: 450px;
-margin-left: 1110px;
+margin-left: 1010px;
 margin-top: -880px;
 position: relative;
 border: solid 2px #b1b5b5;
@@ -1348,9 +1348,8 @@ width: 190px;
 }
 
 #round{
-  width: 160px;
-  height: 140px;
-  transition: all 0.2s ease-in-out;
+  width: 150px;
+  height: 150px;
   border: 2px solid #ccc;
 }
 
@@ -1360,26 +1359,25 @@ width: 190px;
 }
 
 #card3{
-   position: relative;
-  display: flex;
-  flex-direction: column;
-  word-wrap: break-word;
-  background-color: black !important;
-  border: solid 1px rgb(248, 246, 245);
-  opacity: 70%;
-  margin-top: -560px;
-  width: 1000px;
-  height: 550px;
-  margin-left: 60px;
-  padding: 29px;
-  border-radius: 4px;
-  animation-name: fadeIn;
-  animation-duration: 1s;
-  animation-timing-function: ease;
-  animation-delay: 0s;
-  animation-iteration-count: 1;
-  animation-direction: normal;
-  animation-fill-mode: forwards;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto auto;
+ word-wrap: break-word;
+ background-color: black !important;
+ opacity: 70%;
+ margin-top: -550px;
+ width: 900px;
+ height: 550px;
+ margin-left: 60px;
+ padding: 29px;
+ border-radius: 10px;
+ animation-name: fadeIn;
+ animation-duration: 1s;
+ animation-timing-function: ease;
+ animation-delay: 0s;
+ animation-iteration-count: 1;
+ animation-direction: normal;
+ animation-fill-mode: forwards;
 }
 
 #text22 {
@@ -1392,7 +1390,7 @@ width: 190px;
 }
 
 #h33{
-margin-left: 380px;
+margin-left: 335px;
 width: 400px;
 font-size: 32px;
 font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -1401,14 +1399,14 @@ color: rgb(146, 96, 3);
 
 #no{
 width: 190px;
-margin-left: 350px;
+margin-left: 300px;
 }
 
 #form1{
-  margin-top: -33%;
+  margin-top: -36%;
   margin-left: 5%;
-  width: 950px;
-  height: 650px;
+  width: 900px;
+  height: 550px;
   position: relative;
   animation-name: fadeIn;
   animation-duration: 1s;
@@ -1608,6 +1606,7 @@ font-size: 60px;}
   animation-iteration-count: 1;
   animation-direction: normal;
   animation-fill-mode: forwards;
+  margin-right: -8px;
 }
 
 #sha:hover {
@@ -1622,6 +1621,7 @@ font-size: 60px;}
   animation-iteration-count: 1;
   animation-direction: normal;
   animation-fill-mode: forwards;
+  
 }
 
 @keyframes fadeIn {
@@ -1764,4 +1764,7 @@ font-size: 60px;}
 #setting{
   height: 55px;
 }
+
+
+
 

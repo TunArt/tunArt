@@ -1,10 +1,13 @@
 .paymentcontainer {
-    display: flex;
-    flex-wrap: wrap;
+  display: grid;
+   grid-template-columns: auto auto auto;
     gap: 20px;
     justify-content: center;
-    background-color: #f2f2f2;
+    background-color: #000000;
     padding: 20px;
+    width: 560px; 
+    margin-bottom: -280px;  
+    height: 250px;
   }
 
   /* Style each payment item */
@@ -45,7 +48,7 @@
   /* Style the payment item price */
   .paymentitem p {
     font-size: 16px;
-    color: green;
+    color: rgb(200, 154, 5);
     margin-bottom: 0;
     transition: color 0.2s ease-in-out;
   }
