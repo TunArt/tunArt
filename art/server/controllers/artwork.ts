@@ -12,7 +12,7 @@ const getAllArtworks = async (req:Request ,res:Response) =>{
     try {
         let  artworks= await Artwork.findAll({
           where: {
-            verified:true
+            verified:1
           }
         })
         res.status(200).send(artworks)
@@ -31,7 +31,7 @@ const getTopArtworks = async (req:Request ,res:Response) =>{
         ],
         limit : 3,
         include: Artist,
-        verified:true
+        where :{verified:1}
       })
       res.status(200).send(artworks)
 }
@@ -44,7 +44,7 @@ catch (err){
 const getLimitedlArtworks = async (req:Request ,res:Response) =>{
   try {
       let  artworks= await Artwork.findAll({
-        where: {verified: true},
+        where:{verified:1},
         include: Artist
       })
       artworks = artworks.slice(0, parseInt(req.params.count))
@@ -60,7 +60,7 @@ const getOneArtwork = async (req:Request ,res:Response) =>{
   try {
       let  artworks= await Artwork.findOne({ 
         where: { name: req.params.name },
-        verified:true
+        verified:1
       })
       res.status(200).send(artworks)
 }
@@ -125,7 +125,7 @@ const addArtwork = async (req: Request, res: Response) => {
         throw new Error("Request body is missing required properties.");
       }
       await Artwork.update({
-        verified:true
+        verified:1
     }, {
         where: {
             id: req.params.id
@@ -150,7 +150,7 @@ const addArtwork = async (req: Request, res: Response) => {
   const AllArtworks = async(req:Request,res:Response) => {
     try {
       const art=await  Artwork.findAll({where:
-          {verified:true}  })
+          {verified:1}  })
           res.status(200).json(art)
     } 
     catch (error) {
@@ -206,7 +206,9 @@ const deleteArtWork= (req:Request, res:Response)=> {
         let  artworks= await Artwork.findAll({
           include: Artist,
           where:{
-            artistid: req.params.id
+            artistid: req.params.id,
+            verified:1
+
           },
           order :[
             ["rating", "DESC"]
@@ -228,8 +230,8 @@ const deleteArtWork= (req:Request, res:Response)=> {
         let  artworks= await Artwork.findAll({
           include: Artist,
           where:{
-           auction:true,
-           verified: true
+           auction:1,
+           verified: 1
           }
           
         })

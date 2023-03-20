@@ -15,7 +15,6 @@ const ArtistDetails=()=>{
     const data = String(query?.data)
     const items = JSON.parse(data);
     //console.log("item ===> ",items);
-
     const[details, setDetails]=useState([])
     //const[id, setId]=useState(null)
     const[imgs, setImg]=useState([])
@@ -35,6 +34,7 @@ const ArtistDetails=()=>{
         setImg(response.data)
         })    
     },[])
+    
 
     // const BuyRedirect=()=>{
     //     var pathAuction ="/bid/"
