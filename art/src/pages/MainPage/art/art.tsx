@@ -55,10 +55,10 @@ return(
     <div className={style.box}> 
 <br />
 <br />
-        <h1 className={styles.titles}>THE GALLERY</h1>
+        {/* <h1 className={styles.titles}>THE GALLERY</h1>
         <div>
                 <Search />  
-        </div>   
+        </div>    */}
    
         <h1 className={styles.titles}>TOP RATED ARTWORKS</h1>
         <div><Slider/></div>

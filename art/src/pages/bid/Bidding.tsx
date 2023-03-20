@@ -103,7 +103,7 @@ console.log('ccc',currentBidder)
           
           {/* <div>Current Bid:{data[data.length-1].currentPrice}</div> */}
           {/* <div>Current Bid:{message}</div> */}
-          <div id={style.price} style={{width:"22rem"}}>Current Bid:   {message}</div>
+          <div id={style.price} style={{width:"22rem"}}>Current Bid:{message}</div>
           <div className="flex flex-col">
             <label htmlFor="bid-amount" className="text-lg font-medium mb-2">
               Bid amount:

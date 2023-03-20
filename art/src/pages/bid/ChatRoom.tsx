@@ -36,7 +36,7 @@ function App(): JSX.Element {
     }
   };
 
-  const sendMessage = () => {
+  const sendMessage = (us:string,pic:string,n:string) => {
     if (message !== "") {
       const newMessageData = { ...messageData };
       if (!(room in newMessageData)) {
@@ -45,8 +45,11 @@ function App(): JSX.Element {
       newMessageData[room].push(message);
       setMessageData(newMessageData);
       setMessage("");
-      socket.emit("send_message", { message, room});
-
+      socket.emit("send_message", {
+        message,
+        room,
+        person: { name: user.userName || user.name, picture: user.picture },
+      });
       // Create new message in Sequelize
       axios
         .post("http://localhost:3000/api/messages/addmessage", {
@@ -147,23 +150,24 @@ function App(): JSX.Element {
           Array.isArray(messageData[room]) &&
           messageData[room].map((e: string, index: number) => {
             console.log("element", e);
-
+            const messageUser = { name:user.userName || user.name, picture:user.picture };
+            // if the message sender is the current user, display the current user's picture and name,
+            // otherwise, display "Other User" and an empty picture
+          
             return (
               <div>
-                  <img className={styles.image} src={user.picture}/>
+                <img className={styles.image} src={messageUser.picture}/>
                 <div className={styles.littleContainer}>
-                  <p className={styles.userName} >{user.userName}{user.name}</p>
+                  <p className={styles.userName}>{messageUser.name}</p>
                   <p className={styles.time}>{moment(e.createdAt).startOf('minute').fromNow()}</p>
                 </div>
-
-              <p key={index} className={styles.oneMessage} >
-                {e}
-              </p>
-
+                <p key={index} className={styles.oneMessage} >
+                  {e}
+                </p>
               </div>
             );
           })}
-      </div>:,
+      </div>
       <div className={styles.footer}>
         <div>
             
