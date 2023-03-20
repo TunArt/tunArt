@@ -35,7 +35,6 @@ const Bid: React.FC <DetailProps>= (props:DetailProps) => {
         <div>
        <Navbar/>
        <div>
-        <h1 style={{color:"orange",fontSize:"30px",textAlign:"center",marginBottom:"3%",marginTop:"-3%"}}>Welcome to our auctions</h1>
 </div>
             <div className={style.div1}>
                 <div className={style.div2}>
@@ -51,7 +50,7 @@ const Bid: React.FC <DetailProps>= (props:DetailProps) => {
 
              <div style={{display:"flex"}}> 
 
-                        <div id={style.bidform}><Bidding/></div>
+                        <div id={style.bidform}><Bidding {...detailProps}/></div>
 
                         <div id={style.price}>
 

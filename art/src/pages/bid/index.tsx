@@ -52,6 +52,8 @@ console.log(typeof(props));
     // </div>
     <>
     <NavBar/>
+    <h1 style={{color:"orange",fontSize:"30px",textAlign:"center",marginTop:"-3%"}}>Welcome to our auctions</h1>
+
     <div className="min-h-screen bg-black-100 py-8">
     <div className="max-w-7xl mx-auto px-4 lg:px-8">
     {/* <h1 className="text-4xl font-bold text-orange-600 mb-8 mt-10 text-center transition duration-500 ease-in-out transform hover:text-blue-600">

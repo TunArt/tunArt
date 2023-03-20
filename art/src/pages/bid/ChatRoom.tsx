@@ -163,7 +163,7 @@ function App(): JSX.Element {
               </div>
             );
           })}
-      </div>
+      </div>:,
       <div className={styles.footer}>
         <div>
             

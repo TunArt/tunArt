@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import io, { Socket } from "socket.io-client";
 import axios from "axios";
 import Timer from "timer-component";
+import style from "../../styles/bid.module.css"
 const socket: Socket = io("http://localhost:3001");
 interface item {
   currentBidder: number;
@@ -98,12 +99,11 @@ console.log('ccc',currentBidder)
     <div>
       <div className="max-w-md mx-auto mt-8 p-6 border rounded-lg">
         <form onSubmit={handleFormSubmit} className="space-y-4">
-          <div>Title:{props.name}</div>
-          <div>startDate :{props.startDate}</div>
-          <div>End date :{props.endDate}</div>
-          <hr />
+          <div >Title:      {props.name}</div>
+          
           {/* <div>Current Bid:{data[data.length-1].currentPrice}</div> */}
-          <div>Current Bid:{message}</div>
+          {/* <div>Current Bid:{message}</div> */}
+          <div id={style.price} style={{width:"22rem"}}>Current Bid:   {message}</div>
           <div className="flex flex-col">
             <label htmlFor="bid-amount" className="text-lg font-medium mb-2">
               Bid amount:
@@ -123,6 +123,7 @@ console.log('ccc',currentBidder)
             Submit Bid
           </button>
         </form>
+        {/* <div id={style.price}>Current Bid:{message}</div> */}
       </div>
     </div>
   );
