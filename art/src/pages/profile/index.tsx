@@ -6,7 +6,11 @@ import styles from '../../styles/profile.module.css'
 import Navbar from  '../../components/navBar'
 
 import PaymentHisto from  "../../components/paymentHisto"
+import { Alert, Space } from 'antd';
+import swal from 'sweetalert';
+
 const ProfilePage = () => {
+  const [alertS, setalertS] = useState(false)
   const [user, setUser] = useState('');
   const [data,setData] = useState([])
   const [inp,setInp]=useState(false)
@@ -184,18 +188,20 @@ setRerender(!rerender)
   
   const submitForm = (file:FormData) => {
     console.log("from submitForm",url);
-    
       axios.post(`http://localhost:3000/api/artworks/addArtwork/${localStorage.id}`, {
         name: create.name,
-        startDate: create.startDate,
-        endDate: create.endDate,
+        startDate: create.startDate ? create.startDate :new Date() ,
+        endDate: create.endDate ? create.endDate :new Date() ,
         creationDate: create.creationDate,
         price: create.price,
         description: create.description,
         auction: auction ? 1 : 0,
         image: JSON.stringify (url),
       })
-      .then(response => { console.log(response) })
+      .then(response => { 
+        swal("Good job!", "the Post is added!", "success");
+
+        console.log(response) })
     .catch(err => console.log(err))
   } 
   
@@ -228,8 +234,9 @@ setRerender(!rerender)
           image: imageData,
         })
         .then((response) => {
+
           setUrl(response.data);
-          alert("Image uploaded successfully");
+
         })
         .catch((err) => console.log(err));
     };
@@ -242,8 +249,8 @@ setRerender(!rerender)
         images: images,
       })
       .then((response) => {
+
         setUrl(response.data);
-        alert("Images uploaded successfully");
       })
       .catch((err) => console.log(err));
   };
@@ -415,21 +422,26 @@ setRerender(!rerender)
                   <div id ="form2" className="pl-lg-4">
                     <div className="row">
                     <div className="relative z-0 w-full mb-8">
-                    <label id="label5" htmlFor="name" className=" text-orange-300  " > name</label>
-    <input type="text" name="name" placeholder="Enter your artwork's name" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 focus:outline-none text-gray-100 focus:ring-0 focus:border-white border-white-300"
+                    <label id="label5" htmlFor="name" className=" text-orange-300  " > Title</label>
+    <input type="text" name="name" placeholder="Enter your name" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 focus:outline-none text-gray-100 focus:ring-0 focus:border-white border-white-300"
+
  onChange={handleChangeCreate}/>
   </div>
-  <div className="relative z-0 w-full mb-8">
+  
+                    </div>  
+    {auction && <>
+      <div className="relative z-0 w-full mb-8">
   <label  htmlFor="start date" className=" text-orange-300  " > start date</label>
     <input type="datetime-local" name="startDate" placeholder="Enter the start date" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300"
  onChange={handleChangeCreate}  />
-  </div>
-                    </div>  
-                    <div className="relative z-0 w-full mb-8">
+  <div className="relative z-0 w-full mb-8">
                     <label  htmlFor="end date" className=" text-orange-300  " > end date</label>
     <input type="datetime-local" name="endDate" placeholder="Enter the end date" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 text-gray-100 focus:outline-none focus:ring-0 focus:border-white border-white-300"
  onChange={handleChangeCreate}/>
   </div>
+  </div>
+    </>}
+                   
                       <div id="creation" className="col-lg-6">
                         <div className="relative z-0 w-full mb-8">
                         <label id="label7" htmlFor="creation date" className=" text-orange-300  " > creation date</label>

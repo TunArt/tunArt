@@ -8,6 +8,7 @@ function Requests() {
   const [artWorks, setartWorks] = useState([])
     useEffect(()=>{
      axios.get("http://localhost:3000/api/artworks/notVArtWorks").then((res)=>{
+      console.log("from admin",res.data)
         setartWorks(res?.data)
       });
       

@@ -6,7 +6,9 @@ import {useRouter} from "next/router";
 //import { query } from "express";
 
 const ArtDetails=(props)=>{
-
+console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",props);
+const fistPic=(Array.isArray(JSON.parse(props.element.image))? JSON.parse(props.element.image)[0]: JSON.parse (props.element.image))
+console.log("pic",typeof(fistPic));
     const[toggle, setToggle]= useState(false)
     const [popUp, setPopUp] = useState(false)
     const[children, setChildren]=useState("")
@@ -38,11 +40,10 @@ function BoldText({children}) {
   }
 
   return(
-        
         <div >
     <div className={style.box}>
       <div className={style.imageBox}>
-        <img src={props.element.image} alt="pic"/>
+        <img src={fistPic} alt="pic"/>
       </div>
       <div className={style.content}>
         <h2><BoldText>Art Name:</BoldText>{" "+props.element.name}<br/></h2>  
