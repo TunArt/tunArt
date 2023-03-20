@@ -42,7 +42,7 @@ export default function Example(props: any) {
     { name: 'Auctions', href: `/bid?${props.id}/`, current: false },
     { name: "Events", href: `/event/`, current: false },
     { name: 'Contact Us', href: '/MainPage/contactUs/', current: false },
-    { name: 'About Us', href: '/MainPage/aboutUs/', current: false },
+    { name: 'About Us', href: '/aboutUs/', current: false },
     { name: 'Reports', href: '/MainPage/Reports/reports/', current: false }
   ]
   const userNavigation = [

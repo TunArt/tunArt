@@ -4,6 +4,7 @@ import { Switch } from 'antd';
 import Head from 'next/head'
 import styles from '../../styles/profile.module.css'
 import Navbar from  '../../components/navBar'
+
 import PaymentHisto from  "../../components/paymentHisto"
 import { Alert, Space } from 'antd';
 import swal from 'sweetalert';
@@ -105,6 +106,7 @@ const onChange = (checked: boolean) => {
   console.log(`switch to ${checked}`);
   setauction(checked)
 };
+
 console.log(create)
 
 const updateInfo = () => {
@@ -399,7 +401,7 @@ setRerender(!rerender)
                     <div className="row">
                     <div className="relative z-0 w-full mb-8">
                     <label id="label5" htmlFor="name" className=" text-orange-300  " > name</label>
-    <input type="text" name="name" placeholder="update your name" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 focus:outline-none text-gray-100 focus:ring-0 focus:border-white border-white-300"
+    <input type="text" name="name" placeholder="update your artwork's name" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 focus:outline-none text-gray-100 focus:ring-0 focus:border-white border-white-300"
  onChange={handleChangeArt}/>
   </div>
   <div className="relative z-0 w-full mb-8">
@@ -452,6 +454,7 @@ setRerender(!rerender)
                     <div className="relative z-0 w-full mb-8">
                     <label id="label5" htmlFor="name" className=" text-orange-300  " > Title</label>
     <input type="text" name="name" placeholder="Enter your name" className="pt-3 pb-2 block w-full  mt-0 bg-transparent border-1 border-b-2 focus:outline-none text-gray-100 focus:ring-0 focus:border-white border-white-300"
+
  onChange={handleChangeCreate}/>
   </div>
   

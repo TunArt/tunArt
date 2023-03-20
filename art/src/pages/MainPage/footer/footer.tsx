@@ -11,7 +11,7 @@ const Footer = ({ height, width }) => {
 				</a>{" "}
 				<span className="mx-6 text-sm">&copy; 2023</span>
                  <span className="mx-6 text-sm"><a href="/MainPage/contactUs" >Contact Us</a></span>
-                <span><a href="/MainPage/aboutUs/" >About Us</a></span>
+                <span><a href="/aboutUs/" >About Us</a></span>
 			</h1>
 		</footer>
         </div>
