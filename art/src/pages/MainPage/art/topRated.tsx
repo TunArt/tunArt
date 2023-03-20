@@ -12,8 +12,8 @@ const TopRated=(props)=>{
     const[children, setChildren]=useState("")
     const[page,setPage]=useState(1);
     const route=useRouter()
-
-    const isAuction= props.ele.auction ? "Auction" :"Sell"
+const fistPic=(Array.isArray(JSON.parse(props.ele.image))? JSON.parse(props.ele.image)[0]: JSON.parse (props.ele.image))    
+const isAuction= props.ele.auction ? "Auction" :"Sell"
     const isForSaleOrBid = props.ele.auction ? "Bid" :"Buy"
 
     const showHide=()=>{
@@ -42,7 +42,7 @@ function BoldText({children}) {
         
         <div className={style.box}>
           <div className={style.imageBox}>
-            <img src={props.ele.image} alt="pic"/>
+            <img src={fistPic} alt="pic"/>
           </div>
           <div className={style.content}>
             <h2><BoldText>Art Name:</BoldText>{" "+props.ele.name}<br/></h2>  

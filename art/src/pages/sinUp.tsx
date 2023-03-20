@@ -107,7 +107,7 @@ let know=true
             localStorage.setItem("id",res.data.id)
             localStorage.setItem("email",res.data.email)
             router.push({
-              pathname:'/MainPage',
+              pathname:'/MainPage/art/art',
               query:{"id":res.data.id,"type":know}
             })
         })
@@ -128,7 +128,7 @@ let know=true
             localStorage.setItem("email",res.data.email)
             console.log(res)
             router.push({
-              pathname:'/MainPage',
+              pathname:'/MainPage/art/art',
               query:{"id":res.data.id,"type":know}
             })
         })

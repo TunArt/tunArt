@@ -66,7 +66,7 @@ console.log(typeof(props));
                 <div key={post.title} className="bg-white shadow overflow-hidden rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
                     <img
                         className="w-full h-48 object-cover"
-                        src={post.image}    
+                        src={JSON.parse (post.image)[0].length===1 ? JSON.parse (post.image) :JSON.parse (post.image)[0]}    
                         alt={post.title}
                     />
 

@@ -26,7 +26,7 @@ const Detail :React.FC<DetailProps>= (props:any) => {
         {/* <img className={styles.img1} src={props.img}  /> */}
         <div  className={styles.img1}> 
           <ImageZoom
-        src={props.image}
+        src={JSON.parse (props.image)[0].length===1 ? JSON.parse (props.image) :JSON.parse (props.image)[0]}
         alt="img"
       /></div>
        

@@ -35,7 +35,7 @@ const Home: React.FC<Props> = () => {
     if(localStorage.id ){
       console.log(localStorage.id)
     route.push({
-      pathname: '/MainPage',
+      pathname: '/MainPage/art/art',
       query: { "id": localStorage.id, type: true },
     })
     }
