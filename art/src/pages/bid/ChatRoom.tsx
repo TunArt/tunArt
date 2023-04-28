@@ -192,6 +192,7 @@ function App(): JSX.Element {
             }}
             onKeyDown={handleKeyPress}
           />
+          {/* here we go again */}
           <button
             onClick={() => sendMessage()}
             className={`${styles.button} ${styles.send}`}

@@ -52,7 +52,13 @@ console.log(e)
       <CardMedia
         component="img"
         height="194"
-        image={JSON.parse( e.image)[0]}
+
+
+
+
+
+
+        image={JSON.parse (e.image)[0].length===1 ? JSON.parse (e.image) :JSON.parse (e.image)[0]}
         alt="Paella dish"
       />
       <CardContent>
